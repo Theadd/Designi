@@ -57,11 +57,13 @@ public:
         selectFileTreeA.setBounds(120, 5, 20, 20);
         selectFileTreeA.setName("selectFileTreeA");
         selectFileTreeA.setButtonText("A");
+		selectFileTreeA.setTooltip("File browser remembers two locations, A and B. Use these buttons to switch between them.");
         addAndMakeVisible(&selectFileTreeA);
 
 		selectFileTreeB.setBounds(140, 5, 20, 20);
         selectFileTreeB.setName("selectFileTreeB");
         selectFileTreeB.setButtonText("B");
+		selectFileTreeB.setTooltip("File browser remembers two locations, A and B. Use these buttons to switch between them.");
         addAndMakeVisible(&selectFileTreeB);
 
 		resized();
@@ -135,7 +137,7 @@ private:
 
 };
 
-class HelpPanel : public Component
+class HelpPanel : public Component//, private Timer
 {
 public:
 	
@@ -147,28 +149,34 @@ public:
 		resizableEdgeComponent = nullptr;
 		componentBoundsConstrainer = nullptr;
 		componentBoundsConstrainer = new ComponentBoundsConstrainer();
-		componentBoundsConstrainer->setMinimumSize(50, 90);
+		componentBoundsConstrainer->setMinimumSize(50, 60);
+		componentBoundsConstrainer->setMaximumHeight(200);
 		addAndMakeVisible(resizableEdgeComponent = new ResizableEdgeComponent(this, componentBoundsConstrainer, ResizableEdgeComponent::topEdge));
 		//set colours for HelpPanelHeader
-		helpPanelHeader.setColour(Label::backgroundColourId, Colours::transparentBlack);
+		helpPanelHeader.setColour(Label::backgroundColourId, Colours::red);
         helpPanelHeader.setColour(Label::textColourId, Colour::fromString("70FFFFFF"));
 		//set colours for help Label
-		help.setColour(Label::backgroundColourId, Colours::transparentBlack);
+		help.setColour(Label::backgroundColourId, Colours::darkblue);
         help.setColour(Label::textColourId, Colour::fromString("70FFFFFF"));
 
 		helpPanelHeader.setText("Help", NotificationType());
-		help.setText("<html>Move your mouse over the interface element that you would like more info about.</html>", NotificationType());
+		help.setText("Move your mouse over the interface element that you would like more info about.", NotificationType());
+		help.setJustificationType(Justification::topLeft);
 		
 
 		addAndMakeVisible(&helpPanelHeader);
 		addAndMakeVisible(&help);
 
+		tooltipWindow = new TooltipWindow(&help, 0);
+
+		
 	}
 
 	~HelpPanel()
 	{
 		resizableEdgeComponent = nullptr;
 		componentBoundsConstrainer = nullptr;
+		tooltipWindow = nullptr;
 	}
 
 	void resized()
@@ -176,8 +184,13 @@ public:
 
 		Rectangle<int> r = this->getLocalBounds();
 
+		if (resizableEdgeComponent != nullptr)
+			resizableEdgeComponent->setBounds(0, 0,  r.getWidth(), 5);
+
 		helpPanelHeader.setBounds(0, 5, r.getWidth(), 30);
-		help.setBoundsInset(BorderSize<int> (0, 30, 0, 0));
+		help.setBoundsInset(BorderSize<int> (35, 0, 0, 0));
+
+		DBG("Resized HelpPanel");
 	}
 
 	void paint (Graphics& g)
@@ -189,13 +202,37 @@ public:
 	void hide() { _isHidden = true; }
 	bool isVisible() { return !_isHidden; }
 
+	/*void mouseEnter (const MouseEvent &event)
+	{
+		String tooltip;
+		TooltipWindow a;
+
+		try {
+			tooltip = (static_cast<SettableTooltipClient> (event.originalComponent))->getTooltip();
+		} catch (...) {
+			tooltip = "";
+		}
+		
+		DBG("TOOLTIP!");
+		DBG(tooltip);
+
+		if (tooltip.isNotEmpty())
+			help.setText(tooltip, NotificationType());
+		else
+			help.setText("Move your mouse over the interface element that you would like more info about.", NotificationType());
+
+	}*/
 
 private:
 	ScopedPointer <ResizableEdgeComponent> resizableEdgeComponent;
 	ScopedPointer <ComponentBoundsConstrainer> componentBoundsConstrainer;
+	ScopedPointer <TooltipWindow> tooltipWindow;
 	Label helpPanelHeader;
 	Label help;
 	bool _isHidden;
+	
+	//From juce_TooltipWindow
+
 };
 
 class LeftPanelContainer : public Component, public DragAndDropContainer
@@ -220,8 +257,8 @@ public:
 		tabbedComponent->addTab("Project Explorer", Colours::transparentBlack, fileBrowserTab, false);
 
 		helpPanel = nullptr;
-		helpPanel = new HelpPanel();
-
+		addAndMakeVisible(helpPanel = new HelpPanel());
+		//getTopLevelComponent()->addMouseListener(helpPanel, true);
 
 
 		DBG("four");
@@ -269,7 +306,7 @@ public:
 		if (helpPanel != nullptr) {
 			if (helpPanel->isVisible()) {
 				helpPanelVisible = true;
-				helpPanel->setBounds(0, r.getHeight() - helpPanel->getHeight(), r.getWidth(), helpPanel->getHeight());
+				helpPanel->setBounds(0, r.getHeight() - helpPanel->getHeight(), r.getWidth() - 5, helpPanel->getHeight());
 				DBG("HelpPanel Bounds:");
 				DBG(helpPanel->getBounds().toString());
 			}
@@ -286,6 +323,12 @@ public:
 		}
 
     }
+
+	void childBoundsChanged (Component *child)
+	{
+		if (child == helpPanel)
+			resized();
+	}
 
 private:
 	ScopedPointer <TabbedComponent> tabbedComponent;
