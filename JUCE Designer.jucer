@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="R3ehq3" name="JUCE Designer" projectType="guiapp" version="2.0.0"
+              bundleIdentifier="io.github.Theadd" jucerVersion="3.0.0" defines=""
+              userNotes="https://github.com/Theadd/JUCE-Designer">
+  <MAINGROUP id="DchWjp" name="JUCE Designer">
+    <GROUP id="{4DA873A5-1CD7-B3EE-C91A-A71EFEFD4243}" name="Source">
+      <GROUP id="{C9618E64-C7AC-8630-B754-8A531AFF8D4A}" name="Styles">
+        <FILE id="aKhYcE" name="Default.cpp" compile="1" resource="0" file="Source/Styles/Default.cpp"/>
+        <FILE id="RQ1u6g" name="Default.h" compile="0" resource="0" file="Source/Styles/Default.h"/>
+      </GROUP>
+      <GROUP id="{91FEA6B6-3B4B-9080-5F5C-93BA955508E8}" name="Layouts">
+        <FILE id="gsa6IR" name="MainLayout.cpp" compile="1" resource="0" file="Source/Layouts/MainLayout.cpp"/>
+      </GROUP>
+      <FILE id="PH6jHb" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
+    </GROUP>
+  </MAINGROUP>
+  <MODULES>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_gui_audio" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_cryptography" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_video" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_opengl" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="1"/>
+  </MODULES>
+  <EXPORTFORMATS>
+    <VS2010 targetFolder="Builds/VisualStudio2010" libraryType="1" juceFolder="..\JUCE\modules">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
+                       isDebug="1" optimisation="1" targetName="JUCE Designer"/>
+        <CONFIGURATION name="Release" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
+                       isDebug="0" optimisation="2" targetName="JUCE Designer"/>
+      </CONFIGURATIONS>
+    </VS2010>
+  </EXPORTFORMATS>
+  <JUCEOPTIONS/>
+</JUCERPROJECT>
