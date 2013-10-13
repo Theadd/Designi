@@ -137,11 +137,11 @@ private:
 
 };
 
-class HelpPanel : public Component//, private Timer
+class HelpPanel : public Component, private Timer
 {
 public:
-	
-	HelpPanel()
+
+	HelpPanel() : lastComponentUnderMouse (nullptr)
 	{
 		setName("HelpPanel");
 		setBounds(0, 0, 150, 90);
@@ -159,24 +159,24 @@ public:
 		help.setColour(Label::backgroundColourId, Colours::darkblue);
         help.setColour(Label::textColourId, Colour::fromString("70FFFFFF"));
 
+		defaultTooltip = "Move your mouse over the interface element that you would like more info about.";
 		helpPanelHeader.setText("Help", NotificationType());
-		help.setText("Move your mouse over the interface element that you would like more info about.", NotificationType());
+		help.setText(defaultTooltip, NotificationType());
 		help.setJustificationType(Justification::topLeft);
 		
 
 		addAndMakeVisible(&helpPanelHeader);
 		addAndMakeVisible(&help);
 
-		tooltipWindow = new TooltipWindow(&help, 0);
-
-		
+		//From juce_TooltipWindow
+		if (Desktop::getInstance().getMainMouseSource().canHover())
+			startTimer (123);
 	}
 
 	~HelpPanel()
 	{
 		resizableEdgeComponent = nullptr;
 		componentBoundsConstrainer = nullptr;
-		tooltipWindow = nullptr;
 	}
 
 	void resized()
@@ -189,8 +189,6 @@ public:
 
 		helpPanelHeader.setBounds(0, 5, r.getWidth(), 30);
 		help.setBoundsInset(BorderSize<int> (35, 0, 0, 0));
-
-		DBG("Resized HelpPanel");
 	}
 
 	void paint (Graphics& g)
@@ -202,37 +200,56 @@ public:
 	void hide() { _isHidden = true; }
 	bool isVisible() { return !_isHidden; }
 
-	/*void mouseEnter (const MouseEvent &event)
+	String getTipFor (Component* const c)
 	{
-		String tooltip;
-		TooltipWindow a;
-
-		try {
-			tooltip = (static_cast<SettableTooltipClient> (event.originalComponent))->getTooltip();
-		} catch (...) {
-			tooltip = "";
+		if (c != nullptr
+			 && Process::isForegroundProcess()
+			 && ! ModifierKeys::getCurrentModifiers().isAnyMouseButtonDown())
+		{
+			if (TooltipClient* const ttc = dynamic_cast <TooltipClient*> (c))
+				if (! c->isCurrentlyBlockedByAnotherModalComponent())
+					return ttc->getTooltip();
 		}
-		
-		DBG("TOOLTIP!");
-		DBG(tooltip);
 
-		if (tooltip.isNotEmpty())
-			help.setText(tooltip, NotificationType());
-		else
-			help.setText("Move your mouse over the interface element that you would like more info about.", NotificationType());
+		return String::empty;
+	}
 
-	}*/
+	void timerCallback()
+	{
+		Desktop& desktop = Desktop::getInstance();
+		const MouseInputSource mouseSource (desktop.getMainMouseSource());
+
+		Component* const newComp = mouseSource.isMouse() ? mouseSource.getComponentUnderMouse() : nullptr;
+		const String newTip (getTipFor (newComp));
+		const bool tipChanged = (newTip != lastTipUnderMouse || newComp != lastComponentUnderMouse);
+		lastComponentUnderMouse = newComp;
+		lastTipUnderMouse = newTip;
+
+		if (newComp == nullptr || newTip.isEmpty())
+		{
+			help.setText(defaultTooltip, NotificationType());
+		}
+		else if (tipChanged)
+		{
+			help.setText(newTip, NotificationType());
+		}
+
+		if (newTip.isNotEmpty() && newTip != tipShowing)
+			help.setText(newTip, NotificationType());
+	}
 
 private:
 	ScopedPointer <ResizableEdgeComponent> resizableEdgeComponent;
 	ScopedPointer <ComponentBoundsConstrainer> componentBoundsConstrainer;
-	ScopedPointer <TooltipWindow> tooltipWindow;
 	Label helpPanelHeader;
 	Label help;
 	bool _isHidden;
+	String defaultTooltip;
 	
-	//From juce_TooltipWindow
+    Component* lastComponentUnderMouse;
+    String tipShowing, lastTipUnderMouse;
 
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (HelpPanel)
 };
 
 class LeftPanelContainer : public Component, public DragAndDropContainer
