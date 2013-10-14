@@ -9,7 +9,7 @@
 */
 
 #include "../../JuceLibraryCode/JuceHeader.h"
-//#include "../Styles/Default.h"
+//#include "../Globals.h"
 
 class ProjectFileFilter : public FileFilter
 {
@@ -85,6 +85,12 @@ public:
 		g.fillAll (Colour((uint8) 49, (uint8) 124, (uint8) 205));
 	}
 
+	void setBrowserMouseListener(MouseListener *listener)
+	{
+		selectFileTreeA.addMouseListener(listener, false);
+		selectFileTreeB.addMouseListener(listener, false);
+	}
+
 private:
     Label projectNameLabel;
     TextButton selectFileTreeA;
@@ -107,29 +113,52 @@ public:
         directoryList->setDirectory (folder, true, true);
         thread.startThread (3);
 		DBG("three");
-        fileTreeComp = nullptr;
+        fileTreeCompA = nullptr;
+		fileTreeCompB = nullptr;
 
-        addAndMakeVisible (fileTreeComp = new FileTreeComponent (*directoryList));
+        addAndMakeVisible (fileTreeCompA = new FileTreeComponent (*directoryList));
+		addAndMakeVisible (fileTreeCompB = new FileTreeComponent (*directoryList));
+		fileTreeCompB->setVisible(false);
 		addAndMakeVisible (&fileBrowserTabHeader);
+		//ADD this to the mouse listeners of "A" and "B" buttons.
+		fileBrowserTabHeader.setBrowserMouseListener(this);
+
 	}
 
 	~FileBrowserTab() {
-		fileTreeComp = nullptr;
+		fileTreeCompA = nullptr;
+		fileTreeCompB = nullptr;
         directoryList = nullptr; // (need to make sure this is deleted before the TimeSliceThread)
 		projectFileFilter = nullptr;
 	}
 
 	void resized() {
-		if (fileTreeComp != nullptr)
-			fileTreeComp->setBoundsInset (BorderSize<int> (30, 5, 5, 5));
+		if (fileTreeCompA != nullptr)
+			fileTreeCompA->setBoundsInset (BorderSize<int> (30, 5, 5, 5));
+		if (fileTreeCompB != nullptr)
+			fileTreeCompB->setBoundsInset (BorderSize<int> (30, 5, 5, 5));
 
 		fileBrowserTabHeader.setBounds(0, 0, this->getWidth(), 30);
 		DBG("Resized FileBrowserTab");
 	}
 
+	void mouseUp (const MouseEvent &event)
+	{
+		if (event.mouseWasClicked()) {
+			if (event.eventComponent->getName().equalsIgnoreCase("selectFileTreeA")) {
+				fileTreeCompA->setVisible(true);
+				fileTreeCompB->setVisible(false);
+			} else if (event.eventComponent->getName().equalsIgnoreCase("selectFileTreeB")) {
+				fileTreeCompA->setVisible(false);
+				fileTreeCompB->setVisible(true);
+			}
+		}
+	}
+
 
 private:
-	ScopedPointer <FileTreeComponent> fileTreeComp;
+	ScopedPointer <FileTreeComponent> fileTreeCompA;
+	ScopedPointer <FileTreeComponent> fileTreeCompB;
     ScopedPointer <DirectoryContentsList> directoryList;
 	ScopedPointer <ProjectFileFilter> projectFileFilter;
     TimeSliceThread thread;
@@ -153,11 +182,11 @@ public:
 		componentBoundsConstrainer->setMaximumHeight(200);
 		addAndMakeVisible(resizableEdgeComponent = new ResizableEdgeComponent(this, componentBoundsConstrainer, ResizableEdgeComponent::topEdge));
 		//set colours for HelpPanelHeader
-		helpPanelHeader.setColour(Label::backgroundColourId, Colours::red);
-        helpPanelHeader.setColour(Label::textColourId, Colour::fromString("70FFFFFF"));
+		//helpPanelHeader.setColour(Label::backgroundColourId, Layout::getColourFor(LayoutColourIds::headerBackgroundColour));
+        //helpPanelHeader.setColour(Label::textColourId, Layout::getColourFor(LayoutColourIds::headerTextColour));
 		//set colours for help Label
-		help.setColour(Label::backgroundColourId, Colours::darkblue);
-        help.setColour(Label::textColourId, Colour::fromString("70FFFFFF"));
+		//help.setColour(Label::backgroundColourId, Colours::darkblue);
+        //help.setColour(Label::textColourId, Colour::fromString("70FFFFFF"));
 
 		defaultTooltip = "Move your mouse over the interface element that you would like more info about.";
 		helpPanelHeader.setText("Help", NotificationType());
@@ -191,10 +220,10 @@ public:
 		help.setBoundsInset(BorderSize<int> (35, 0, 0, 0));
 	}
 
-	void paint (Graphics& g)
+	/*void paint (Graphics& g)
 	{
 		g.fillAll (Colour((uint8) 49, (uint8) 124, (uint8) 205));
-	}
+	}*/
 
 	void show() { _isHidden = false; }
 	void hide() { _isHidden = true; }

@@ -12,6 +12,7 @@
       <GROUP id="{91FEA6B6-3B4B-9080-5F5C-93BA955508E8}" name="Layouts">
         <FILE id="gsa6IR" name="MainLayout.cpp" compile="1" resource="0" file="Source/Layouts/MainLayout.cpp"/>
       </GROUP>
+      <FILE id="MIPbpq" name="Globals.h" compile="0" resource="0" file="Source/Globals.h"/>
       <FILE id="PH6jHb" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
     </GROUP>
   </MAINGROUP>

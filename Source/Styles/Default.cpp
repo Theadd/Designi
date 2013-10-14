@@ -8,4 +8,15 @@
   ==============================================================================
 */
 
+#include "../../JuceLibraryCode/JuceHeader.h"
 #include "Default.h"
+
+JUCEDesignerLookAndFeel::JUCEDesignerLookAndFeel()
+{
+
+}
+
+JUCEDesignerLookAndFeel::~JUCEDesignerLookAndFeel()
+{
+
+}
