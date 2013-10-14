@@ -14,6 +14,9 @@
     <Filter Include="JUCE Designer\Source\Layouts">
       <UniqueIdentifier>{D1C067F8-4108-8747-229F-0212CCED88B8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="JUCE Designer\Source\Layouts\MainLayout">
+      <UniqueIdentifier>{F811085C-0CF9-F1CB-CD8A-44666E4063DF}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Juce Modules">
       <UniqueIdentifier>{422C46B7-0467-2DB0-BF3C-16DFCAFD69AC}</UniqueIdentifier>
     </Filter>
@@ -307,8 +310,14 @@
     <ClCompile Include="..\..\Source\Styles\Default.cpp">
       <Filter>JUCE Designer\Source\Styles</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Layouts\MainLayout.cpp">
+    <ClCompile Include="..\..\Source\Layouts\MainWindow.cpp">
       <Filter>JUCE Designer\Source\Layouts</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Layouts\MainLayout\MainLayout.cpp">
+      <Filter>JUCE Designer\Source\Layouts\MainLayout</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Layouts\MainLayout\LeftPanelContainer.cpp">
+      <Filter>JUCE Designer\Source\Layouts\MainLayout</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\Main.cpp">
       <Filter>JUCE Designer\Source</Filter>
@@ -1481,6 +1490,12 @@
   <ItemGroup>
     <ClInclude Include="..\..\Source\Styles\Default.h">
       <Filter>JUCE Designer\Source\Styles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Layouts\MainWindow.h">
+      <Filter>JUCE Designer\Source\Layouts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Layouts\MainLayout\MainLayout.h">
+      <Filter>JUCE Designer\Source\Layouts\MainLayout</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Globals.h">
       <Filter>JUCE Designer\Source</Filter>

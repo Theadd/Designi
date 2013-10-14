@@ -10,7 +10,14 @@
         <FILE id="RQ1u6g" name="Default.h" compile="0" resource="0" file="Source/Styles/Default.h"/>
       </GROUP>
       <GROUP id="{91FEA6B6-3B4B-9080-5F5C-93BA955508E8}" name="Layouts">
-        <FILE id="gsa6IR" name="MainLayout.cpp" compile="1" resource="0" file="Source/Layouts/MainLayout.cpp"/>
+        <FILE id="DPnXNo" name="MainWindow.cpp" compile="1" resource="0" file="Source/Layouts/MainWindow.cpp"/>
+        <FILE id="qZn2IT" name="MainWindow.h" compile="0" resource="0" file="Source/Layouts/MainWindow.h"/>
+        <GROUP id="{DBE84A0F-BC8A-CF79-40F6-663BDD809E90}" name="MainLayout">
+          <FILE id="DMereG" name="MainLayout.cpp" compile="1" resource="0" file="Source/Layouts/MainLayout/MainLayout.cpp"/>
+          <FILE id="pnbj67" name="MainLayout.h" compile="0" resource="0" file="Source/Layouts/MainLayout/MainLayout.h"/>
+          <FILE id="gsa6IR" name="LeftPanelContainer.cpp" compile="1" resource="0"
+                file="Source/Layouts/MainLayout/LeftPanelContainer.cpp"/>
+        </GROUP>
       </GROUP>
       <FILE id="MIPbpq" name="Globals.h" compile="0" resource="0" file="Source/Globals.h"/>
       <FILE id="PH6jHb" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>

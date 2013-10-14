@@ -8,7 +8,7 @@
   ==============================================================================
 */
 
-#include "../../JuceLibraryCode/JuceHeader.h"
+#include "../../../JuceLibraryCode/JuceHeader.h"
 //#include "../Globals.h"
 
 class ProjectFileFilter : public FileFilter
@@ -75,9 +75,9 @@ public:
 		projectNameLabel.setBoundsInset (BorderSize<int> (5, 5, 5, 50));
 		selectFileTreeA.setBounds(projectNameLabel.getWidth() + 10, 5, 20, 20);
 		selectFileTreeB.setBounds(projectNameLabel.getWidth() + 30, 5, 20, 20);
-		DBG("Resized FileBrowserTabHeader");
-		DBG(this->getBounds().toString());
-		DBG(projectNameLabel.getBounds().toString());
+		//DBG("Resized FileBrowserTabHeader");
+		//DBG(this->getBounds().toString());
+		//DBG(projectNameLabel.getBounds().toString());
 	}
 
 	void paint (Graphics& g)
@@ -107,12 +107,12 @@ public:
         //while (folder.getParentDirectory() != folder)
         //    folder = folder.getParentDirectory();
 		projectFileFilter = new ProjectFileFilter();
-		DBG("two");
+		//DBG("two");
 
         directoryList = new DirectoryContentsList(projectFileFilter, thread);
         directoryList->setDirectory (folder, true, true);
         thread.startThread (3);
-		DBG("three");
+		//DBG("three");
         fileTreeCompA = nullptr;
 		fileTreeCompB = nullptr;
 
@@ -139,7 +139,7 @@ public:
 			fileTreeCompB->setBoundsInset (BorderSize<int> (30, 5, 5, 5));
 
 		fileBrowserTabHeader.setBounds(0, 0, this->getWidth(), 30);
-		DBG("Resized FileBrowserTab");
+		//DBG("Resized FileBrowserTab");
 	}
 
 	void mouseUp (const MouseEvent &event)
@@ -289,7 +289,7 @@ public:
     {
         setBounds(4, 23, 260, 340);
         setName("LeftPanelContainer");
-		DBG("one");
+		//DBG("one");
 		resizableEdgeComponent = nullptr;
 		componentBoundsConstrainer = nullptr;
 		componentBoundsConstrainer = new ComponentBoundsConstrainer();
@@ -307,20 +307,20 @@ public:
 		//getTopLevelComponent()->addMouseListener(helpPanel, true);
 
 
-		DBG("four");
+		//DBG("four");
         resized();
-		DBG("five");
+		//DBG("five");
 
     }
 
 	~LeftPanelContainer()
     {
-        
+        DBG("~LeftPanelContainer()");
 		resizableEdgeComponent = nullptr;
 		componentBoundsConstrainer = nullptr;
-		DBG("deleting tabbedComponent");
+		//DBG("deleting tabbedComponent");
 		tabbedComponent = nullptr;
-		DBG("deleting fileBrowserTab");
+		//DBG("deleting fileBrowserTab");
 		fileBrowserTab = nullptr;
 		helpPanel = nullptr;
 
@@ -353,8 +353,8 @@ public:
 			if (helpPanel->isVisible()) {
 				helpPanelVisible = true;
 				helpPanel->setBounds(0, r.getHeight() - helpPanel->getHeight(), r.getWidth() - 5, helpPanel->getHeight());
-				DBG("HelpPanel Bounds:");
-				DBG(helpPanel->getBounds().toString());
+				//DBG("HelpPanel Bounds:");
+				//DBG(helpPanel->getBounds().toString());
 			}
 		}
 
@@ -386,40 +386,6 @@ private:
 };
 
 
-class MainLayout : public Component
-{
-public:
-
-    MainLayout() : Component()
-    {
-		DBG("dbg: MainLayout()");
-        setBounds(0, 0, 490, 414);
-        setName("MainLayout");
-        addAndMakeVisible(&leftpanelcontainer);
-
-    }
-
-    void mouseUp (const MouseEvent& event)
-    {
-        if (event.eventComponent == this)
-            Component::mouseUp(event);
-    }
-
-    void mouseDrag (const MouseEvent& event)
-    {
-        if (event.eventComponent == this)
-            Component::mouseDrag(event);
-    }
-
-    void mouseDoubleClick (const MouseEvent& event)
-    {
-        if (event.eventComponent == this)
-            Component::mouseDoubleClick(event);
-    }
-
-private:
-    LeftPanelContainer leftpanelcontainer;
-};
 
 
 

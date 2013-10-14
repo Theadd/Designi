@@ -10,7 +10,7 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 //#include "Styles/Default.h"
-#include "Layouts/MainLayout.cpp"
+#include "Layouts/MainWindow.h"
 
 
 //==============================================================================
@@ -53,98 +53,6 @@ public:
         // this method is invoked, and the commandLine parameter tells you what
         // the other instance's command-line arguments were.
     }
-
-    //==============================================================================
-    /*
-        This class implements the desktop window that contains an instance of
-        our MainContentComponent class.
-    */
-    /*class MainWindow    : public DocumentWindow
-    {
-    public:
-        MainWindow()  : DocumentWindow ("MainWindow",
-                                        Colours::lightgrey,
-                                        DocumentWindow::allButtons)
-        {
-            setContentOwned (new MainContentComponent(), true);
-
-            centreWithSize (getWidth(), getHeight());
-            setVisible (true);
-        }
-
-        void closeButtonPressed()
-        {
-            // This is called when the user tries to close this window. Here, we'll just
-            // ask the app to quit when this happens, but you can change this to do
-            // whatever you need.
-            JUCEApplication::getInstance()->systemRequestedQuit();
-        }
-
-         Note: Be careful if you override any DocumentWindow methods - the base
-           class uses a lot of them, so by overriding you might break its functionality.
-           It's best to do all your work in your content component instead, but if
-           you really have to override any DocumentWindow methods, make sure your
-           subclass also calls the superclass's method.
-        
-
-    private:
-        JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainWindow)
-    };*/
-    class MainWindow    : public DocumentWindow
-{
-public:
-    MainWindow()  : DocumentWindow ("JUCE GUI Designer",
-                                        Colours::lightgrey,
-                                        DocumentWindow::allButtons)
-    {
-		//Look And Feel
-        /*setLookAndFeel(lookAndFeel = new JUCEDesignerLookAndFeel());
-		lookAndFeel->setColour(TextButton::buttonColourId, Colour(Colour((juce::uint8) 83, (juce::uint8) 94, (juce::uint8) 104, (juce::uint8) 255)));
-		lookAndFeel->setColour(TextButton::textColourOffId, Colours::transparentWhite.withAlpha(0.9f));
-		lookAndFeel->setColour(TextButton::textColourOnId, Colours::blue.withAlpha(0.9f));*/
-
-        setBounds(55, 35, 490, 440);
-        setColour(DocumentWindow::backgroundColourId, Colour::fromString("FF202A32"));
-        setName("JUCE GUI Designer");
-		DBG("dbg: MainWindow()");
-        setTitleBarHeight(26);
-        setTitleBarButtonsRequired(7, 0);
-        setTitleBarTextCentred(0);
-        setUsingNativeTitleBar(1);
-        setContentOwned (&mainlayout, true);
-
-        setResizable(true, true);
-        setVisible (true);
-    }
-
-    void closeButtonPressed()
-    {
-        JUCEApplication::getInstance()->systemRequestedQuit();
-    }
-
-    void mouseUp (const MouseEvent& event)
-    {
-        if (event.eventComponent == this)
-            DocumentWindow::mouseUp(event);
-    }
-
-    void mouseDrag (const MouseEvent& event)
-    {
-        if (event.eventComponent == this)
-            DocumentWindow::mouseDrag(event);
-    }
-
-    void mouseDoubleClick (const MouseEvent& event)
-    {
-        if (event.eventComponent == this)
-            DocumentWindow::mouseDoubleClick(event);
-    }
-
-private:
-	ScopedPointer <LookAndFeel> lookAndFeel;
-    MainLayout mainlayout;
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainWindow)
-};
 
 private:
     ScopedPointer<MainWindow> mainWindow;
