@@ -287,7 +287,7 @@ public:
 
     LeftPanelContainer() : Component()
     {
-        setBounds(4, 23, 260, 340);
+        setBounds(0, 32, 260, 340);
         setName("LeftPanelContainer");
 		//DBG("one");
 		resizableEdgeComponent = nullptr;

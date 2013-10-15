@@ -4,6 +4,9 @@
               bundleIdentifier="io.github.Theadd" jucerVersion="3.0.0" defines=""
               userNotes="https://github.com/Theadd/JUCE-Designer">
   <MAINGROUP id="DchWjp" name="JUCE Designer">
+    <GROUP id="{2B5D31AE-D997-CE08-BF14-D7345862A558}" name="BinaryData">
+      <FILE id="QUijac" name="icons.zip" compile="0" resource="1" file="BinaryData/icons.zip"/>
+    </GROUP>
     <GROUP id="{4DA873A5-1CD7-B3EE-C91A-A71EFEFD4243}" name="Source">
       <GROUP id="{C9618E64-C7AC-8630-B754-8A531AFF8D4A}" name="Styles">
         <FILE id="aKhYcE" name="Default.cpp" compile="1" resource="0" file="Source/Styles/Default.cpp"/>
@@ -13,6 +16,8 @@
         <FILE id="DPnXNo" name="MainWindow.cpp" compile="1" resource="0" file="Source/Layouts/MainWindow.cpp"/>
         <FILE id="qZn2IT" name="MainWindow.h" compile="0" resource="0" file="Source/Layouts/MainWindow.h"/>
         <GROUP id="{DBE84A0F-BC8A-CF79-40F6-663BDD809E90}" name="MainLayout">
+          <FILE id="vOB6qs" name="Toolbars.cpp" compile="1" resource="0" file="Source/Layouts/MainLayout/Toolbars.cpp"/>
+          <FILE id="T1xM3B" name="Toolbars.h" compile="0" resource="0" file="Source/Layouts/MainLayout/Toolbars.h"/>
           <FILE id="DMereG" name="MainLayout.cpp" compile="1" resource="0" file="Source/Layouts/MainLayout/MainLayout.cpp"/>
           <FILE id="pnbj67" name="MainLayout.h" compile="0" resource="0" file="Source/Layouts/MainLayout/MainLayout.h"/>
           <FILE id="gsa6IR" name="LeftPanelContainer.cpp" compile="1" resource="0"

@@ -5,6 +5,9 @@
     <Filter Include="JUCE Designer">
       <UniqueIdentifier>{555AD9EE-00C8-7A1E-4FDD-9075B1A03C6D}</UniqueIdentifier>
     </Filter>
+    <Filter Include="JUCE Designer\BinaryData">
+      <UniqueIdentifier>{19E6B9CC-5B5D-1D1D-ACE7-9F36D916C9CE}</UniqueIdentifier>
+    </Filter>
     <Filter Include="JUCE Designer\Source">
       <UniqueIdentifier>{6785AD85-A22B-FF6F-5E95-94987FC5C695}</UniqueIdentifier>
     </Filter>
@@ -312,6 +315,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\Layouts\MainWindow.cpp">
       <Filter>JUCE Designer\Source\Layouts</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Layouts\MainLayout\Toolbars.cpp">
+      <Filter>JUCE Designer\Source\Layouts\MainLayout</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\Layouts\MainLayout\MainLayout.cpp">
       <Filter>JUCE Designer\Source\Layouts\MainLayout</Filter>
@@ -1447,6 +1453,9 @@
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_video\native\juce_win32_QuickTimeMovieComponent.cpp">
       <Filter>Juce Modules\juce_video\native</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\BinaryData.cpp">
+      <Filter>Juce Library Code</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_audio_basics\juce_audio_basics.cpp">
       <Filter>Juce Library Code</Filter>
     </ClCompile>
@@ -1493,6 +1502,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Layouts\MainWindow.h">
       <Filter>JUCE Designer\Source\Layouts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Layouts\MainLayout\Toolbars.h">
+      <Filter>JUCE Designer\Source\Layouts\MainLayout</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Layouts\MainLayout\MainLayout.h">
       <Filter>JUCE Designer\Source\Layouts\MainLayout</Filter>
@@ -2781,11 +2793,17 @@
     <ClInclude Include="..\..\JuceLibraryCode\AppConfig.h">
       <Filter>Juce Library Code</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\JuceLibraryCode\BinaryData.h">
+      <Filter>Juce Library Code</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\JuceLibraryCode\JuceHeader.h">
       <Filter>Juce Library Code</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\BinaryData\icons.zip">
+      <Filter>JUCE Designer\BinaryData</Filter>
+    </None>
     <None Include="..\..\JuceLibraryCode\modules\juce_audio_basics\juce_module_info">
       <Filter>Juce Modules\juce_audio_basics</Filter>
     </None>

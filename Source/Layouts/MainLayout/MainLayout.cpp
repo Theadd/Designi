@@ -13,18 +13,31 @@
 
 #include "../MainWindow.h"
 
+
 MainLayout::MainLayout(MainWindow& _mainWindow) : Component(), mainWindow(_mainWindow)
 {
 	DBG("dbg: MainLayout()");
-    setBounds(0, 0, 490, 414);
+    //setBounds(0, 0, 490, 414);
     setName("MainLayout");
-    addAndMakeVisible(&leftpanelcontainer);
 
+	toolbarComponent = nullptr;
+	addAndMakeVisible(toolbarComponent = new ToolbarComponent(32));
+
+    addAndMakeVisible(&leftpanelcontainer);
+	resized();
 }
 
 MainLayout::~MainLayout()
 {
+	toolbarComponent = nullptr;
+}
 
+void MainLayout::resized()
+{
+	if (toolbarComponent != nullptr)
+		toolbarComponent->setBounds(this->getLocalBounds());
+
+	leftpanelcontainer.setBounds(0, 32, 250, this->getHeight() - 32);
 }
 
 void MainLayout::mouseUp (const MouseEvent& event)

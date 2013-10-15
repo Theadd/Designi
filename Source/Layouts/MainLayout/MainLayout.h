@@ -11,7 +11,9 @@
 #ifndef __MAINLAYOUT_H_DBAC5B39__
 #define __MAINLAYOUT_H_DBAC5B39__
 
+#include "Toolbars.h"
 #include "LeftPanelContainer.cpp"
+
 
 class MainWindow;
 
@@ -24,6 +26,8 @@ public:
 
     MainLayout(MainWindow& _mainWindow);
 	~MainLayout();
+
+	void resized();
 
     void mouseUp (const MouseEvent& event);
 
@@ -48,6 +52,7 @@ public:
 private:
 	MainWindow& mainWindow;
     LeftPanelContainer leftpanelcontainer;
+	ScopedPointer <ToolbarComponent> toolbarComponent;
 
 	enum CommandIDs
     {
