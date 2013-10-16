@@ -27,13 +27,17 @@ public:
 	void resized();
 	void paint (Graphics& g);
 
-	/**  Sets panel ResizableEdgeOrientation and repaints it. **/
+	/** Add a component to this panel, if there was already another component, asTab will be always true. */
+	bool addContent (Component *componentToAdd, bool asTab = true);
+
+	/** Sets panel ResizableEdgeOrientation and repaints it. **/
 	void setResizableEdgeOrientation(ResizableEdgeOrientation resizableEdgeOrientation_);
 
 	ResizableEdgeOrientation resizableEdgeOrientation;
 private:
 	ScopedPointer <ResizableEdgeComponent> resizableEdgeComponent;
 	ScopedPointer <ComponentBoundsConstrainer> componentBoundsConstrainer;
+	ScopedPointer <TabbedComponent> tabbedComponent;
 };
 
 

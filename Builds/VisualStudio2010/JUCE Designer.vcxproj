@@ -127,7 +127,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\Source\Styles\Default.cpp"/>
     <ClCompile Include="..\..\Source\Layouts\MainWindow.cpp"/>
-    <ClCompile Include="..\..\Source\Layouts\MainLayout\RightPanelContainer.cpp"/>
+    <ClCompile Include="..\..\Source\Layouts\MainLayout\PanelContainer.cpp"/>
     <ClCompile Include="..\..\Source\Layouts\MainLayout\Toolbars.cpp"/>
     <ClCompile Include="..\..\Source\Layouts\MainLayout\MainLayout.cpp"/>
     <ClCompile Include="..\..\Source\Layouts\MainLayout\LeftPanelContainer.cpp"/>
@@ -1200,7 +1200,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\Source\Styles\Default.h"/>
     <ClInclude Include="..\..\Source\Layouts\MainWindow.h"/>
-    <ClInclude Include="..\..\Source\Layouts\MainLayout\RightPanelContainer.h"/>
+    <ClInclude Include="..\..\Source\Layouts\MainLayout\PanelContainer.h"/>
     <ClInclude Include="..\..\Source\Layouts\MainLayout\Toolbars.h"/>
     <ClInclude Include="..\..\Source\Layouts\MainLayout\MainLayout.h"/>
     <ClInclude Include="..\..\Source\Globals.h"/>
@@ -1635,6 +1635,8 @@
     <ClInclude Include="..\..\JuceLibraryCode\JuceHeader.h"/>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\BinaryData\treedemo.xml"/>
+    <None Include="..\..\BinaryData\navigator.xml"/>
     <None Include="..\..\BinaryData\icons.zip"/>
     <None Include="..\..\JuceLibraryCode\modules\juce_audio_basics\juce_module_info"/>
     <None Include="..\..\JuceLibraryCode\modules\juce_audio_devices\juce_module_info"/>

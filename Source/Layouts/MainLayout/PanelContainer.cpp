@@ -9,8 +9,10 @@
 */
 
 #include "../../../JuceLibraryCode/JuceHeader.h"
-#include "../../Globals.h";
-#include "RightPanelContainer.h"
+#include "../../Globals.h"
+#include "PanelContainer.h"
+
+
 
 
 Panel::Panel(const String& name) : Component (name)
@@ -21,13 +23,14 @@ Panel::Panel(const String& name) : Component (name)
 	componentBoundsConstrainer->setMinimumSize(50, 60);
 	//componentBoundsConstrainer->setMaximumHeight(200);
 	addAndMakeVisible(resizableEdgeComponent = new ResizableEdgeComponent(this, componentBoundsConstrainer, ResizableEdgeComponent::topEdge));
-	
+	tabbedComponent = nullptr;
 }
 
 Panel::~Panel()
 {
 	resizableEdgeComponent = nullptr;
 	componentBoundsConstrainer = nullptr;
+	tabbedComponent = nullptr;
 }
 
 void Panel::resized()
@@ -47,6 +50,34 @@ void Panel::resized()
 	}
 
 	//TODO: set bounds of child component
+	int numChilds = getNumChildComponents() - 1;
+	
+	if (numChilds > 0) {
+		//This panel is not empty, proceed to resize its content
+		Component *componentToBeResized;
+
+		if (tabbedComponent == nullptr)
+		{
+			//there is only one component inside without a tabbedComponent
+			componentToBeResized = getChildComponent(1);	//TODO: find correct child component in case we get the resizable edge component
+		}
+		else
+		{
+			componentToBeResized = tabbedComponent;
+		}
+
+		if (componentToBeResized != nullptr)
+		{
+			if (resizableEdgeOrientation == vertical)
+				componentToBeResized->setBounds(0, RESIZABLEEDGESIZE, r.getWidth(), r.getHeight() - RESIZABLEEDGESIZE);
+
+			if (resizableEdgeOrientation == horizontal)
+				componentToBeResized->setBounds(RESIZABLEEDGESIZE, 0, r.getWidth() - RESIZABLEEDGESIZE, r.getHeight());
+
+			if (resizableEdgeOrientation == none)
+				componentToBeResized->setBounds(0, 0, r.getWidth(), r.getHeight());
+		}
+	}
 }
 
 void Panel::paint (Graphics& g)
@@ -54,6 +85,48 @@ void Panel::paint (Graphics& g)
 	//g.fillAll (Colour((uint8) 49, (uint8) 124, (uint8) 205));
 	g.fillAll (Colour((uint8) Random::getSystemRandom().nextInt(255), (uint8) Random::getSystemRandom().nextInt(255), (uint8) Random::getSystemRandom().nextInt(255)));
 	//Colour(Random::getSystemRandom().nextInt(255));
+}
+
+bool Panel::addContent (Component *componentToAdd, bool asTab)
+{
+	int numChilds = getNumChildComponents() - 1;
+
+	if (numChilds > 0) {
+		//there was another component inside
+		if (tabbedComponent == nullptr)
+		{
+			//BUT IT WAS NOT INSIDE A TABBED COMPONENT! FALLBACK!
+			return false;
+		}
+		else
+		{
+			//add this component in another tab
+			tabbedComponent->addTab(componentToAdd->getName(), Colours::transparentBlack, componentToAdd, false);
+		}
+	}
+	else
+	{
+		if (asTab)
+		{
+			//This is the first component child of this panel
+			if (tabbedComponent == nullptr)
+			{
+				//There is no tabbedComponent created, let's create it
+				addAndMakeVisible(tabbedComponent = new TabbedComponent(TabbedButtonBar::TabsAtTop));
+			}
+
+			//add this component in a new tab
+			tabbedComponent->addTab(componentToAdd->getName(), Colours::transparentBlack, componentToAdd, false);
+		}
+		else
+		{
+			//Add component without a tabbedComponent
+			addAndMakeVisible(componentToAdd);
+		}
+	}
+
+	resized();
+	return true;
 }
 
 void Panel::setResizableEdgeOrientation(ResizableEdgeOrientation resizableEdgeOrientation_)
@@ -70,7 +143,7 @@ PanelContainer::PanelContainer(Position positionThatWillBePlaced) : Component(),
 	componentBoundsConstrainer = nullptr;
 	componentBoundsConstrainer = new ComponentBoundsConstrainer();
 	componentBoundsConstrainer->setMinimumSize(200, 150);
-	ResizableEdgeComponent::Edge resizableEdge;
+	ResizableEdgeComponent::Edge resizableEdge = ResizableEdgeComponent::leftEdge;
 	switch (position)
 	{
 	case top:
@@ -264,6 +337,7 @@ void PanelContainer::childBoundsChanged (Component *child)
 
 void PanelContainer::componentChildrenChanged (Component & component)
 {
+	//TODO: check if component changed is a panel
 	DBG("PanelContainer::componentChildrenChanged (Component & component)");
 	int panelSize = (position==right || position==left) ? this->getHeight() / (getNumChildComponents() - 1) : this->getWidth() / (getNumChildComponents() - 1);
 	int drawCount = 0;	//counter to know how many panels have been drawn at each iteration
@@ -280,30 +354,30 @@ void PanelContainer::componentChildrenChanged (Component & component)
 		if (position==top)
 		{
 			c->setBounds(drawCount * panelSize, 0, panelSize, getHeight() - RESIZABLEEDGESIZE);
-			(dynamic_cast <Panel *> (c))->setResizableEdgeOrientation(Panel::ResizableEdgeOrientation::horizontal);
+			(dynamic_cast <Panel *> (c))->setResizableEdgeOrientation(Panel::horizontal);
 		}
 
 		if (position==right)
 		{
 			c->setBounds(RESIZABLEEDGESIZE, drawCount * panelSize, getWidth() - RESIZABLEEDGESIZE, panelSize);
-			(dynamic_cast <Panel *> (c))->setResizableEdgeOrientation(Panel::ResizableEdgeOrientation::vertical);
+			(dynamic_cast <Panel *> (c))->setResizableEdgeOrientation(Panel::vertical);
 		}
 
 		if (position==bottom)
 		{
 			c->setBounds(drawCount * panelSize, RESIZABLEEDGESIZE, panelSize, getHeight() - RESIZABLEEDGESIZE);
-			(dynamic_cast <Panel *> (c))->setResizableEdgeOrientation(Panel::ResizableEdgeOrientation::horizontal);
+			(dynamic_cast <Panel *> (c))->setResizableEdgeOrientation(Panel::horizontal);
 		}
 
 		if (position==left)
 		{
 			c->setBounds(0, drawCount * panelSize, getWidth() - RESIZABLEEDGESIZE, panelSize);
-			(dynamic_cast <Panel *> (c))->setResizableEdgeOrientation(Panel::ResizableEdgeOrientation::vertical);
+			(dynamic_cast <Panel *> (c))->setResizableEdgeOrientation(Panel::vertical);
 		}
 
 		//If it's the first panel, do not draw its ResizableEdgeComponent
 		if (drawCount == 0)
-			(dynamic_cast <Panel *> (c))->setResizableEdgeOrientation(Panel::ResizableEdgeOrientation::none);
+			(dynamic_cast <Panel *> (c))->setResizableEdgeOrientation(Panel::none);
 
 		++drawCount;
 		remainingSize -= panelSize;

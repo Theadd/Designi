@@ -316,7 +316,7 @@
     <ClCompile Include="..\..\Source\Layouts\MainWindow.cpp">
       <Filter>JUCE Designer\Source\Layouts</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Layouts\MainLayout\RightPanelContainer.cpp">
+    <ClCompile Include="..\..\Source\Layouts\MainLayout\PanelContainer.cpp">
       <Filter>JUCE Designer\Source\Layouts\MainLayout</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\Layouts\MainLayout\Toolbars.cpp">
@@ -1506,7 +1506,7 @@
     <ClInclude Include="..\..\Source\Layouts\MainWindow.h">
       <Filter>JUCE Designer\Source\Layouts</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Layouts\MainLayout\RightPanelContainer.h">
+    <ClInclude Include="..\..\Source\Layouts\MainLayout\PanelContainer.h">
       <Filter>JUCE Designer\Source\Layouts\MainLayout</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Layouts\MainLayout\Toolbars.h">
@@ -2807,6 +2807,12 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\BinaryData\treedemo.xml">
+      <Filter>JUCE Designer\BinaryData</Filter>
+    </None>
+    <None Include="..\..\BinaryData\navigator.xml">
+      <Filter>JUCE Designer\BinaryData</Filter>
+    </None>
     <None Include="..\..\BinaryData\icons.zip">
       <Filter>JUCE Designer\BinaryData</Filter>
     </None>

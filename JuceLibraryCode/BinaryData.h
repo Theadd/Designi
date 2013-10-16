@@ -6,6 +6,12 @@
 
 namespace BinaryData
 {
+    extern const char*   treedemo_xml;
+    const int            treedemo_xmlSize = 1126;
+
+    extern const char*   navigator_xml;
+    const int            navigator_xmlSize = 12567;
+
     extern const char*   icons_zip;
     const int            icons_zipSize = 83876;
 

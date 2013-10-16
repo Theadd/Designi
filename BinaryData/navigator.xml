@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Window usingNativeTitleBar="0" id="47eb4ce71dac612196a0a344e154b5af"
+        declareExtended="1" titleBarTextCentered="0" titleBarButtonsOnLeft="0"
+        titleBarButtons="5" titleBarHeight="25" contentOwner="1" toolName="juced_Window"
+        className="DocumentWindow" varName="MainWindow" name="Manager Espontanis"
+        backgroundColour="FF004671" width="510" height="340" objectType="Window"
+        x="85" y="85" lookAndFeel="Inherit" castMouseEvents="0">
+  <Component allowTransform="0" id="8cae01e759d28dcc72e2420435ef1ee4" declareExtended="1"
+             toolName="juced_MainComponent" className="Component" varName="Container1"
+             name="Container" width="510" height="314" objectType="Component"
+             x="0" y="0" lookAndFeel="Inherit" castMouseEvents="0">
+    <Viewport scrollBarThickness="15" contentViewed="1" id="da47c34b8beb81fca64cd2d060fa88c7"
+              declareExtended="0" toolName="juced_Viewport" className="Viewport"
+              varName="Viewport1" name="Viewport" width="60" height="315" objectType="Viewport"
+              x="0" y="0" lookAndFeel="Inherit" castMouseEvents="0">
+      <Component id="06339ce377291b2d96f86c9991b90423" declareExtended="0" toolName="juced_Component"
+                 className="Component" varName="Toolbox" name="Component" width="45"
+                 height="405" objectType="Component" x="0" y="0" lookAndFeel="Inherit"
+                 castMouseEvents="0">
+        <ImageButton id="e1c5e1124872858c73ec6335d0ba9f6d" declareExtended="0" toolName="juced_ImageButton"
+                     className="ImageButton" downImage="" overImage="" normalImage="pointer.png"
+                     varName="ImageButton1" name="ImageButton" width="35" height="35"
+                     objectType="ImageButton" x="5" y="5" lookAndFeel="Inherit" castMouseEvents="0"/>
+        <ImageButton id="d88d005abd93db3e6eba88c5a4dfa75d" declareExtended="0" toolName="juced_ImageButton"
+                     className="ImageButton" downImage="" overImage="" normalImage="blocks.png"
+                     varName="ImageButton2" name="ImageButton" width="35" height="35"
+                     objectType="ImageButton" x="5" y="45" lookAndFeel="Inherit" castMouseEvents="0"/>
+        <ImageButton id="1a03a27d17123ff482fab6baba6a271d" declareExtended="0" toolName="juced_ImageButton"
+                     className="ImageButton" downImage="" overImage="" normalImage="config.png"
+                     varName="ImageButton3" name="ImageButton" width="35" height="35"
+                     objectType="ImageButton" x="5" y="85" lookAndFeel="Inherit" castMouseEvents="0"/>
+        <ImageButton id="044fd7b048ca68960e49d8da1c893981" declareExtended="0" toolName="juced_ImageButton"
+                     className="ImageButton" downImage="" overImage="" normalImage="colors.png"
+                     varName="ImageButton4" name="ImageButton" width="35" height="35"
+                     objectType="ImageButton" x="5" y="125" lookAndFeel="Inherit"
+                     castMouseEvents="0"/>
+        <ImageButton id="c161885e18ea4e5d963c95b8681d8281" declareExtended="0" toolName="juced_ImageButton"
+                     className="ImageButton" downImage="" overImage="" normalImage="movie.png"
+                     varName="ImageButton5" name="ImageButton" width="35" height="35"
+                     objectType="ImageButton" x="5" y="165" lookAndFeel="Inherit"
+                     castMouseEvents="0"/>
+        <ImageButton id="b348e2f05bf7590a628a249427851379" declareExtended="0" toolName="juced_ImageButton"
+                     className="ImageButton" downImage="" overImage="" normalImage="hammer.png"
+                     varName="ImageButton6" name="ImageButton" width="35" height="35"
+                     objectType="ImageButton" x="5" y="285" lookAndFeel="Inherit"
+                     castMouseEvents="0"/>
+        <ImageButton id="d12b9aaf098410404bd8aa4232170617" declareExtended="0" toolName="juced_ImageButton"
+                     className="ImageButton" downImage="" overImage="" normalImage="edit.png"
+                     varName="ImageButton7" name="ImageButton" width="35" height="35"
+                     objectType="ImageButton" x="5" y="325" lookAndFeel="Inherit"
+                     castMouseEvents="0"/>
+        <ImageButton id="85593daf912f07b202b25d57a7abe082" declareExtended="0" toolName="juced_ImageButton"
+                     className="ImageButton" downImage="" overImage="" normalImage="blocks.png"
+                     varName="ImageButton8" name="ImageButton" width="35" height="35"
+                     objectType="ImageButton" x="5" y="365" lookAndFeel="Inherit"
+                     castMouseEvents="0"/>
+        <ImageButton id="fd2c468d23a1da703be57ea27c4136c0" declareExtended="0" toolName="juced_ImageButton"
+                     className="ImageButton" downImage="" overImage="" normalImage="rotate_ccw.png"
+                     varName="ImageButton13" name="ImageButton" width="35" height="35"
+                     objectType="ImageButton" x="5" y="205" lookAndFeel="Inherit"
+                     castMouseEvents="0"/>
+        <ImageButton id="d2487582be8d869743b965f3b16de052" declareExtended="0" toolName="juced_ImageButton"
+                     className="ImageButton" downImage="" overImage="" normalImage="rotate_cw.png"
+                     varName="ImageButton14" name="ImageButton" width="35" height="35"
+                     objectType="ImageButton" x="5" y="245" lookAndFeel="Inherit"
+                     castMouseEvents="0"/>
+      </Component>
+    </Viewport>
+    <Viewport scrollBarThickness="15" contentViewed="1" id="deb8976b4330cdad8a0d8a8984c5b84c"
+              declareExtended="0" toolName="juced_Viewport" className="Viewport"
+              varName="Viewport2" name="Viewport" width="195" height="315"
+              objectType="Viewport" x="61" y="0" lookAndFeel="Inherit" castMouseEvents="0">
+      <Component id="403b03531a3e4c408935ccfba354372d" declareExtended="0" toolName="juced_Component"
+                 className="Component" varName="ContenidorReproductors" name="Component"
+                 width="180" height="309" objectType="Component" x="0" y="0" lookAndFeel="Inherit"
+                 castMouseEvents="0">
+        <Component id="2c28ba1acdf073beabf203eb3ea6798a" declareExtended="1" toolName="juced_Component"
+                   className="Component" varName="Reproductor" name="Component"
+                   width="170" height="145" objectType="Component" x="5" y="5" lookAndFeel="Inherit"
+                   castMouseEvents="0">
+          <Label id="c5a4cdba0d447ef35c8dab87b1dfb334" declareExtended="0" toolName="juced_Label"
+                 className="Label" varName="nom" name="Label" width="95" height="20"
+                 editable="1" showEditor="0" textColour="FF000000" backgroundColour="FF88AEE5"
+                 font="15.0 Regular" text="Pepito" objectType="Label" x="5" y="5"
+                 lookAndFeel="Inherit" castMouseEvents="0"/>
+          <Label movie="" id="d5cd03c8dc0c3647d984aeae41f27339" declareExtended="0"
+                 toolName="juced_DirectShowComponent" className="DirectShowComponent"
+                 varName="Player" name="DirectShow" width="160" height="90" objectType="Label"
+                 x="5" y="25" lookAndFeel="Inherit" castMouseEvents="0"/>
+          <ImageButton id="94d2886c28e2a84ca599dadfb946a15f" declareExtended="0" toolName="juced_ImageButton"
+                       className="ImageButton" downImage="" overImage="" normalImage="record.png"
+                       varName="Record" name="record" width="25" height="25" objectType="ImageButton"
+                       x="5" y="115" lookAndFeel="Inherit" castMouseEvents="1"/>
+          <ImageButton id="f261a12e58fdc9fb61bf89e5c9704905" declareExtended="0" toolName="juced_ImageButton"
+                       className="ImageButton" downImage="" overImage="" normalImage="select.png"
+                       varName="Select" name="select" width="25" height="25" objectType="ImageButton"
+                       x="35" y="115" lookAndFeel="Inherit" castMouseEvents="1"/>
+          <ImageButton id="79aff5db6ee3239bbd9c4af0fab65b35" declareExtended="0" toolName="juced_ImageButton"
+                       className="ImageButton" downImage="" overImage="" normalImage="play.png"
+                       varName="Play" name="play" width="25" height="25" objectType="ImageButton"
+                       x="65" y="115" lookAndFeel="Inherit" castMouseEvents="1"/>
+          <ImageButton id="f19361d1faed1d89883f0ff0896df3f8" declareExtended="0" toolName="juced_ImageButton"
+                       className="ImageButton" downImage="" overImage="" normalImage="stop.png"
+                       varName="Stop" name="stop" width="25" height="25" objectType="ImageButton"
+                       x="95" y="115" lookAndFeel="Inherit" castMouseEvents="1"/>
+          <Slider id="53120e144719fddafe9c53a0e88145c8" sliderStyle="RotaryHorizontalVerticalDrag"
+                  textEntryBoxPosition="NoTextBox" textBoxReadOnly="0" textEntryBoxHeight="20"
+                  textEntryBoxWidth="80" value="100" interval="5" maximum="100"
+                  minimum="0" declareExtended="0" toolName="juced_Slider" className="Slider"
+                  varName="Volume" name="Slider" width="25" height="25" backgroundColour="00000000"
+                  objectType="Slider" x="125" y="117" lookAndFeel="LookAndFeelCustom"
+                  castMouseEvents="0"/>
+        </Component>
+      </Component>
+    </Viewport>
+    <Viewport scrollBarThickness="18" contentViewed="1" id="38eb5a4a6566b8fdd9ed17cd4b5c3479"
+              declareExtended="0" toolName="juced_Viewport" className="Viewport"
+              varName="Viewport3" name="Viewport" width="250" height="315"
+              objectType="Viewport" x="257" y="0" lookAndFeel="Inherit" castMouseEvents="0">
+      <Component id="f684937266cdfb5b9b6b2436606d0638" declareExtended="0" toolName="juced_Component"
+                 className="Component" varName="ContenidorConversacions" name="Component"
+                 width="235" height="315" objectType="Component" x="0" y="0" lookAndFeel="Inherit"
+                 castMouseEvents="0">
+        <Component id="105276ab5dc0e4e011803e9088b0edd7" declareExtended="1" toolName="juced_Component"
+                   className="Component" varName="Conversa" name="Component" width="230"
+                   height="55" objectType="Component" x="2" y="4" lookAndFeel="Inherit"
+                   castMouseEvents="0">
+          <Label id="be083bb727c09322014d89c7551232ac" declareExtended="0" toolName="juced_Label"
+                 className="Label" varName="nom" name="Label" width="220" height="20"
+                 editable="1" showEditor="0" textColour="FF000000" backgroundColour="FF88AEE5"
+                 font="15.0 Regular" text="Juanito" objectType="Label" x="5" y="5"
+                 lookAndFeel="Inherit" castMouseEvents="0"/>
+          <Label id="6e936206a2642edd4b9a7ca18900221f" declareExtended="0" toolName="juced_Label"
+                 className="Label" varName="Status" name="Label" width="95" height="20"
+                 editable="0" showEditor="0" textColour="FFFFFFFF" backgroundColour="00000000"
+                 font="15.0 Regular" text="Online!" objectType="Label" x="5" y="30"
+                 lookAndFeel="Inherit" castMouseEvents="0"/>
+          <TextButton id="50422a491a1724b4c6f54e8d39e2a512" declareExtended="0" toolName="juced_ToggleButton"
+                      className="ToggleButton" connectedEdges="0" buttonText="Audio"
+                      varName="Audio" name="ToggleButton" width="55" height="20" buttonOnColour="FF4444FF"
+                      buttonColour="FFBBBBFF" objectType="TextButton" x="105" y="30"
+                      lookAndFeel="LookAndFeelCustom" castMouseEvents="1"/>
+          <TextButton id="b923109d5f10b6af1d5f58c26a436012" declareExtended="0" toolName="juced_ToggleButton"
+                      className="ToggleButton" connectedEdges="0" buttonText="Micro"
+                      varName="Micro" name="ToggleButton" width="60" height="20" buttonOnColour="FF4444FF"
+                      buttonColour="FFBBBBFF" objectType="TextButton" x="165" y="30"
+                      lookAndFeel="LookAndFeelCustom" castMouseEvents="1"/>
+        </Component>
+      </Component>
+    </Viewport>
+  </Component>
+</Window>

@@ -5,6 +5,8 @@
               userNotes="https://github.com/Theadd/JUCE-Designer">
   <MAINGROUP id="DchWjp" name="JUCE Designer">
     <GROUP id="{2B5D31AE-D997-CE08-BF14-D7345862A558}" name="BinaryData">
+      <FILE id="VWiZvI" name="treedemo.xml" compile="0" resource="1" file="BinaryData/treedemo.xml"/>
+      <FILE id="q3J4fY" name="navigator.xml" compile="0" resource="1" file="BinaryData/navigator.xml"/>
       <FILE id="QUijac" name="icons.zip" compile="0" resource="1" file="BinaryData/icons.zip"/>
     </GROUP>
     <GROUP id="{4DA873A5-1CD7-B3EE-C91A-A71EFEFD4243}" name="Source">
@@ -16,10 +18,10 @@
         <FILE id="DPnXNo" name="MainWindow.cpp" compile="1" resource="0" file="Source/Layouts/MainWindow.cpp"/>
         <FILE id="qZn2IT" name="MainWindow.h" compile="0" resource="0" file="Source/Layouts/MainWindow.h"/>
         <GROUP id="{DBE84A0F-BC8A-CF79-40F6-663BDD809E90}" name="MainLayout">
-          <FILE id="bgOjlR" name="RightPanelContainer.cpp" compile="1" resource="0"
-                file="Source/Layouts/MainLayout/RightPanelContainer.cpp"/>
-          <FILE id="P2CAnD" name="RightPanelContainer.h" compile="0" resource="0"
-                file="Source/Layouts/MainLayout/RightPanelContainer.h"/>
+          <FILE id="bgOjlR" name="PanelContainer.cpp" compile="1" resource="0"
+                file="Source/Layouts/MainLayout/PanelContainer.cpp"/>
+          <FILE id="P2CAnD" name="PanelContainer.h" compile="0" resource="0"
+                file="Source/Layouts/MainLayout/PanelContainer.h"/>
           <FILE id="vOB6qs" name="Toolbars.cpp" compile="1" resource="0" file="Source/Layouts/MainLayout/Toolbars.cpp"/>
           <FILE id="T1xM3B" name="Toolbars.h" compile="0" resource="0" file="Source/Layouts/MainLayout/Toolbars.h"/>
           <FILE id="DMereG" name="MainLayout.cpp" compile="1" resource="0" file="Source/Layouts/MainLayout/MainLayout.cpp"/>
