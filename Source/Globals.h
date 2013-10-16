@@ -7,11 +7,17 @@
 
   ==============================================================================
 */
-#include "../JuceLibraryCode/JuceHeader.h"
+//#include "../JuceLibraryCode/JuceHeader.h"
 
 #ifndef __GLOBALS_H_D2823AC0__
 #define __GLOBALS_H_D2823AC0__
 
+#define RESIZABLEEDGESIZE 5
+#define TOOLBARSIZE 32
+#define MINIMUMPANELSIZE 90
+
+
+/*
 namespace LayoutColourIds
 {
 	const Identifier headerBackgroundColour		("headerBackgroundColour");
@@ -32,5 +38,6 @@ namespace Layout
 			return Colours::transparentBlack;
 	}
 }
+*/
 
 #endif  // __GLOBALS_H_D2823AC0__

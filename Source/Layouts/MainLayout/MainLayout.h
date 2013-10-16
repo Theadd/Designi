@@ -13,6 +13,7 @@
 
 #include "Toolbars.h"
 #include "LeftPanelContainer.cpp"
+#include "RightPanelContainer.h"
 
 
 class MainWindow;
@@ -52,6 +53,7 @@ public:
 private:
 	MainWindow& mainWindow;
     LeftPanelContainer leftpanelcontainer;
+	ScopedPointer <PanelContainer> rightPanelContainer;
 	ScopedPointer <ToolbarComponent> toolbarComponent;
 
 	enum CommandIDs

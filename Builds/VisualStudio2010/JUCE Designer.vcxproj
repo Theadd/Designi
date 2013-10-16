@@ -127,6 +127,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\Source\Styles\Default.cpp"/>
     <ClCompile Include="..\..\Source\Layouts\MainWindow.cpp"/>
+    <ClCompile Include="..\..\Source\Layouts\MainLayout\RightPanelContainer.cpp"/>
     <ClCompile Include="..\..\Source\Layouts\MainLayout\Toolbars.cpp"/>
     <ClCompile Include="..\..\Source\Layouts\MainLayout\MainLayout.cpp"/>
     <ClCompile Include="..\..\Source\Layouts\MainLayout\LeftPanelContainer.cpp"/>
@@ -1199,6 +1200,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\Source\Styles\Default.h"/>
     <ClInclude Include="..\..\Source\Layouts\MainWindow.h"/>
+    <ClInclude Include="..\..\Source\Layouts\MainLayout\RightPanelContainer.h"/>
     <ClInclude Include="..\..\Source\Layouts\MainLayout\Toolbars.h"/>
     <ClInclude Include="..\..\Source\Layouts\MainLayout\MainLayout.h"/>
     <ClInclude Include="..\..\Source\Globals.h"/>

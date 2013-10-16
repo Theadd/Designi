@@ -9,6 +9,7 @@
 */
 
 #include "../../../JuceLibraryCode/JuceHeader.h"
+#include "../../Globals.h";
 #include "MainLayout.h"
 
 #include "../MainWindow.h"
@@ -24,6 +25,25 @@ MainLayout::MainLayout(MainWindow& _mainWindow) : Component(), mainWindow(_mainW
 	addAndMakeVisible(toolbarComponent = new ToolbarComponent(32));
 
     addAndMakeVisible(&leftpanelcontainer);
+	
+	//TEST
+	rightPanelContainer = nullptr;
+	addAndMakeVisible(rightPanelContainer = new PanelContainer(PanelContainer::right));
+	rightPanelContainer->setBounds(400,32,250,600);
+
+	DBG("ADDING PANEL A TO RIGHT");
+	Panel *panelA;
+	Panel *panelB;
+	Panel *panelC;
+	rightPanelContainer->addAndMakeVisible(panelA = new Panel("Panel A"));
+	DBG("ADDING PANEL B TO RIGHT");
+	rightPanelContainer->addAndMakeVisible(panelB = new Panel("Panel B"));
+	DBG("ADDING PANEL C TO RIGHT");
+	rightPanelContainer->addAndMakeVisible(panelC = new Panel("Panel C"));
+	Panel innerPanel("Inner Panel");
+	panelA->addAndMakeVisible(&innerPanel);
+	//
+
 	resized();
 }
 
@@ -34,10 +54,17 @@ MainLayout::~MainLayout()
 
 void MainLayout::resized()
 {
+	Rectangle<int> r = this->getLocalBounds();
+
 	if (toolbarComponent != nullptr)
 		toolbarComponent->setBounds(this->getLocalBounds());
 
-	leftpanelcontainer.setBounds(0, 32, 250, this->getHeight() - 32);
+	leftpanelcontainer.setBounds(0, TOOLBARSIZE, 250, this->getHeight() - TOOLBARSIZE);
+
+	if  (rightPanelContainer != nullptr)
+	{
+		rightPanelContainer->setBounds(r.getWidth() - rightPanelContainer->getWidth(), TOOLBARSIZE, rightPanelContainer->getWidth(), r.getHeight() - TOOLBARSIZE);
+	}
 }
 
 void MainLayout::mouseUp (const MouseEvent& event)

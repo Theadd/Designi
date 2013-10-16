@@ -16,6 +16,10 @@
         <FILE id="DPnXNo" name="MainWindow.cpp" compile="1" resource="0" file="Source/Layouts/MainWindow.cpp"/>
         <FILE id="qZn2IT" name="MainWindow.h" compile="0" resource="0" file="Source/Layouts/MainWindow.h"/>
         <GROUP id="{DBE84A0F-BC8A-CF79-40F6-663BDD809E90}" name="MainLayout">
+          <FILE id="bgOjlR" name="RightPanelContainer.cpp" compile="1" resource="0"
+                file="Source/Layouts/MainLayout/RightPanelContainer.cpp"/>
+          <FILE id="P2CAnD" name="RightPanelContainer.h" compile="0" resource="0"
+                file="Source/Layouts/MainLayout/RightPanelContainer.h"/>
           <FILE id="vOB6qs" name="Toolbars.cpp" compile="1" resource="0" file="Source/Layouts/MainLayout/Toolbars.cpp"/>
           <FILE id="T1xM3B" name="Toolbars.h" compile="0" resource="0" file="Source/Layouts/MainLayout/Toolbars.h"/>
           <FILE id="DMereG" name="MainLayout.cpp" compile="1" resource="0" file="Source/Layouts/MainLayout/MainLayout.cpp"/>
