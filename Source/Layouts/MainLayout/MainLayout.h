@@ -12,8 +12,8 @@
 #define __MAINLAYOUT_H_DBAC5B39__
 
 #include "Toolbars.h"
-#include "LeftPanelContainer.cpp"
-#include "PanelContainer.h"
+//#include "LeftPanelContainer.cpp"
+#include "InnerPanelContainers.h"
 
 
 class MainWindow;
@@ -52,13 +52,15 @@ public:
 
 private:
 	MainWindow& mainWindow;
-    LeftPanelContainer leftpanelcontainer;
 	//--
 	ScopedPointer <PanelContainer> rightPanelContainer;
 	//  --
 	ScopedPointer <XmlElement> treeXml;
     ScopedPointer <TreeViewItem> rootItem;
     ScopedPointer <TreeView> treeView;
+	//  --
+	ScopedPointer <HelpPanel> helpPanel;
+	ScopedPointer <FileBrowserTab> fileBrowserTab;
 	//--
 	ScopedPointer <ToolbarComponent> toolbarComponent;
 

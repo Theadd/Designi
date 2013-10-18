@@ -127,10 +127,10 @@
   <ItemGroup>
     <ClCompile Include="..\..\Source\Styles\Default.cpp"/>
     <ClCompile Include="..\..\Source\Layouts\MainWindow.cpp"/>
-    <ClCompile Include="..\..\Source\Layouts\MainLayout\PanelContainer.cpp"/>
+    <ClCompile Include="..\..\Source\Layouts\MainLayout\InnerPanels.cpp"/>
+    <ClCompile Include="..\..\Source\Layouts\MainLayout\InnerPanelContainers.cpp"/>
     <ClCompile Include="..\..\Source\Layouts\MainLayout\Toolbars.cpp"/>
     <ClCompile Include="..\..\Source\Layouts\MainLayout\MainLayout.cpp"/>
-    <ClCompile Include="..\..\Source\Layouts\MainLayout\LeftPanelContainer.cpp"/>
     <ClCompile Include="..\..\Source\Main.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_audio_basics\buffers\juce_AudioDataConverters.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
@@ -1200,7 +1200,8 @@
   <ItemGroup>
     <ClInclude Include="..\..\Source\Styles\Default.h"/>
     <ClInclude Include="..\..\Source\Layouts\MainWindow.h"/>
-    <ClInclude Include="..\..\Source\Layouts\MainLayout\PanelContainer.h"/>
+    <ClInclude Include="..\..\Source\Layouts\MainLayout\InnerPanels.h"/>
+    <ClInclude Include="..\..\Source\Layouts\MainLayout\InnerPanelContainers.h"/>
     <ClInclude Include="..\..\Source\Layouts\MainLayout\Toolbars.h"/>
     <ClInclude Include="..\..\Source\Layouts\MainLayout\MainLayout.h"/>
     <ClInclude Include="..\..\Source\Globals.h"/>

@@ -99,8 +99,6 @@ MainLayout::MainLayout(MainWindow& _mainWindow) : Component(), mainWindow(_mainW
 
 	toolbarComponent = nullptr;
 	addAndMakeVisible(toolbarComponent = new ToolbarComponent(32));
-
-    addAndMakeVisible(&leftpanelcontainer);
 	
 	//TEST
 	rightPanelContainer = nullptr;
@@ -134,7 +132,16 @@ MainLayout::MainLayout(MainWindow& _mainWindow) : Component(), mainWindow(_mainW
     treeView->setRootItem (rootItem);
     treeView->setMultiSelectEnabled (true);
 	treeView->setName("Navigator");
+	treeView->setTooltip("Direct access to your design components and its modifiers.");
 	panelA->addContent(treeView, true);
+	//helpPanel
+	DBG("ADDING HELP PANEL!");
+	helpPanel = nullptr;
+	panelB->addContent(helpPanel = new HelpPanel(), false);
+	//FileBrowserTab
+	fileBrowserTab = nullptr;
+	panelA->addContent(fileBrowserTab = new FileBrowserTab(), true);
+
 	//
 
 	resized();
@@ -143,6 +150,8 @@ MainLayout::MainLayout(MainWindow& _mainWindow) : Component(), mainWindow(_mainW
 MainLayout::~MainLayout()
 {
 	toolbarComponent = nullptr;
+	helpPanel = nullptr;
+	fileBrowserTab = nullptr;
 }
 
 void MainLayout::resized()
@@ -152,7 +161,7 @@ void MainLayout::resized()
 	if (toolbarComponent != nullptr)
 		toolbarComponent->setBounds(this->getLocalBounds());
 
-	leftpanelcontainer.setBounds(0, TOOLBARSIZE, 250, this->getHeight() - TOOLBARSIZE);
+	//leftpanelcontainer.setBounds(0, TOOLBARSIZE, 250, this->getHeight() - TOOLBARSIZE);
 
 	if  (rightPanelContainer != nullptr)
 	{

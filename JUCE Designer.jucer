@@ -18,16 +18,16 @@
         <FILE id="DPnXNo" name="MainWindow.cpp" compile="1" resource="0" file="Source/Layouts/MainWindow.cpp"/>
         <FILE id="qZn2IT" name="MainWindow.h" compile="0" resource="0" file="Source/Layouts/MainWindow.h"/>
         <GROUP id="{DBE84A0F-BC8A-CF79-40F6-663BDD809E90}" name="MainLayout">
-          <FILE id="bgOjlR" name="PanelContainer.cpp" compile="1" resource="0"
-                file="Source/Layouts/MainLayout/PanelContainer.cpp"/>
-          <FILE id="P2CAnD" name="PanelContainer.h" compile="0" resource="0"
-                file="Source/Layouts/MainLayout/PanelContainer.h"/>
+          <FILE id="WylhU8" name="InnerPanels.cpp" compile="1" resource="0" file="Source/Layouts/MainLayout/InnerPanels.cpp"/>
+          <FILE id="R7Z86F" name="InnerPanels.h" compile="0" resource="0" file="Source/Layouts/MainLayout/InnerPanels.h"/>
+          <FILE id="bgOjlR" name="InnerPanelContainers.cpp" compile="1" resource="0"
+                file="Source/Layouts/MainLayout/InnerPanelContainers.cpp"/>
+          <FILE id="P2CAnD" name="InnerPanelContainers.h" compile="0" resource="0"
+                file="Source/Layouts/MainLayout/InnerPanelContainers.h"/>
           <FILE id="vOB6qs" name="Toolbars.cpp" compile="1" resource="0" file="Source/Layouts/MainLayout/Toolbars.cpp"/>
           <FILE id="T1xM3B" name="Toolbars.h" compile="0" resource="0" file="Source/Layouts/MainLayout/Toolbars.h"/>
           <FILE id="DMereG" name="MainLayout.cpp" compile="1" resource="0" file="Source/Layouts/MainLayout/MainLayout.cpp"/>
           <FILE id="pnbj67" name="MainLayout.h" compile="0" resource="0" file="Source/Layouts/MainLayout/MainLayout.h"/>
-          <FILE id="gsa6IR" name="LeftPanelContainer.cpp" compile="1" resource="0"
-                file="Source/Layouts/MainLayout/LeftPanelContainer.cpp"/>
         </GROUP>
       </GROUP>
       <FILE id="MIPbpq" name="Globals.h" compile="0" resource="0" file="Source/Globals.h"/>

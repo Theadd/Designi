@@ -10,9 +10,193 @@
 
 #include "../../../JuceLibraryCode/JuceHeader.h"
 #include "../../Globals.h"
-#include "PanelContainer.h"
+#include "InnerPanelContainers.h"
 
 
+FileBrowserTab::FileBrowserTab() : thread ("FileTreeComponent thread")
+{
+	setName("File Browser");
+	File folder (File::getSpecialLocation (File::userHomeDirectory));
+    //while (folder.getParentDirectory() != folder)
+    //    folder = folder.getParentDirectory();
+	projectFileFilter = new ProjectFileFilter();
+	//DBG("two");
+
+    directoryList = new DirectoryContentsList(projectFileFilter, thread);
+    directoryList->setDirectory (folder, true, true);
+    thread.startThread (3);
+	//DBG("three");
+    fileTreeCompA = nullptr;
+	fileTreeCompB = nullptr;
+
+    addAndMakeVisible (fileTreeCompA = new FileTreeComponent (*directoryList));
+	addAndMakeVisible (fileTreeCompB = new FileTreeComponent (*directoryList));
+	fileTreeCompB->setVisible(false);
+	addAndMakeVisible (&fileBrowserTabHeader);
+
+	//From FileBrowserTabHeader
+	fileBrowserTabHeader.setBounds(0, 0, 170, 25);
+	fileBrowserTabHeader.setName("FileBrowserTabHeader");
+
+	projectNameLabel.setBounds(5, 5, 115, 15);
+	projectNameLabel.setText("Project Name", NotificationType());
+	//projectNameLabel.setColour(Label::backgroundColourId, Colours::transparentBlack);
+	projectNameLabel.setColour(Label::textColourId, Colour::fromString("70FFFFFF"));
+	fileBrowserTabHeader.addAndMakeVisible(&projectNameLabel);
+
+	selectFileTreeA.setBounds(120, 5, 20, 20);
+	selectFileTreeA.setName("selectFileTreeA");
+	selectFileTreeA.setButtonText("A");
+	selectFileTreeA.setTooltip("File browser remembers two locations, A and B. Use these buttons to switch between them.");
+	fileBrowserTabHeader.addAndMakeVisible(&selectFileTreeA);
+
+	selectFileTreeB.setBounds(140, 5, 20, 20);
+	selectFileTreeB.setName("selectFileTreeB");
+	selectFileTreeB.setButtonText("B");
+	selectFileTreeB.setTooltip("File browser remembers two locations, A and B. Use these buttons to switch between them.");
+	fileBrowserTabHeader.addAndMakeVisible(&selectFileTreeB);
+
+	//ADD this to the mouse listeners of "A" and "B" buttons.
+	selectFileTreeA.addMouseListener(this, false);
+	selectFileTreeB.addMouseListener(this, false);
+
+}
+
+FileBrowserTab::~FileBrowserTab() {
+	fileTreeCompA = nullptr;
+	fileTreeCompB = nullptr;
+    directoryList = nullptr; // (need to make sure this is deleted before the TimeSliceThread)
+	projectFileFilter = nullptr;
+}
+
+void FileBrowserTab::resized() {
+	if (fileTreeCompA != nullptr)
+		fileTreeCompA->setBoundsInset (BorderSize<int> (30, 5, 5, 5));
+	if (fileTreeCompB != nullptr)
+		fileTreeCompB->setBoundsInset (BorderSize<int> (30, 5, 5, 5));
+
+	fileBrowserTabHeader.setBounds(0, 0, this->getWidth(), 30);
+	projectNameLabel.setBoundsInset (BorderSize<int> (5, 5, 5, 50));
+	selectFileTreeA.setBounds(projectNameLabel.getWidth() + 10, 5, 20, 20);
+	selectFileTreeB.setBounds(projectNameLabel.getWidth() + 30, 5, 20, 20);
+	//DBG("Resized FileBrowserTab");
+}
+
+void FileBrowserTab::mouseUp (const MouseEvent &event)
+{
+	if (event.mouseWasClicked()) {
+		if (event.eventComponent == &selectFileTreeA) {
+			fileTreeCompA->setVisible(true);
+			fileTreeCompB->setVisible(false);
+		} else if (event.eventComponent == &selectFileTreeB) {
+			fileTreeCompA->setVisible(false);
+			fileTreeCompB->setVisible(true);
+		}
+	}
+}
+
+FileBrowserTab::ProjectFileFilter::ProjectFileFilter() : FileFilter("FileFilter for project directory trees.")
+{
+
+}
+
+FileBrowserTab::ProjectFileFilter::~ProjectFileFilter ()
+{
+
+}
+
+bool FileBrowserTab::ProjectFileFilter::isFileSuitable(const File &file) const
+{
+	return (file.getFileExtension().equalsIgnoreCase(".cpp") || file.getFileExtension().equalsIgnoreCase(".h"));
+}
+
+bool FileBrowserTab::ProjectFileFilter::isDirectorySuitable (const File &file) const
+{
+	return file.isDirectory();
+}
+
+
+///////////////////////////////////////////////////////////////
+
+
+HelpPanel::HelpPanel() : lastComponentUnderMouse (nullptr)
+{
+	setName("HelpPanel");
+	setBounds(0, 0, 150, 90);
+	_isHidden = false;
+
+	defaultTooltip = "Move your mouse over the interface element that you would like more info about.";
+	helpPanelHeader.setText("Help", NotificationType());
+	help.setText(defaultTooltip, NotificationType());
+	help.setJustificationType(Justification::topLeft);
+		
+
+	addAndMakeVisible(&helpPanelHeader);
+	addAndMakeVisible(&help);
+
+	//From juce_TooltipWindow
+	if (Desktop::getInstance().getMainMouseSource().canHover())
+		startTimer (123);
+}
+
+HelpPanel::~HelpPanel()
+{
+	
+}
+
+void HelpPanel::resized()
+{
+
+	Rectangle<int> r = this->getLocalBounds();
+
+	helpPanelHeader.setBounds(0, 5, r.getWidth(), 30);
+	help.setBoundsInset(BorderSize<int> (35, 0, 0, 0));
+}
+
+void HelpPanel::show() { _isHidden = false; }
+void HelpPanel::hide() { _isHidden = true; }
+bool HelpPanel::isVisible() { return !_isHidden; }
+
+String HelpPanel::getTipFor (Component* const c)
+{
+	if (c != nullptr
+			&& Process::isForegroundProcess()
+			&& ! ModifierKeys::getCurrentModifiers().isAnyMouseButtonDown())
+	{
+		if (TooltipClient* const ttc = dynamic_cast <TooltipClient*> (c))
+			if (! c->isCurrentlyBlockedByAnotherModalComponent())
+				return ttc->getTooltip();
+	}
+
+	return String::empty;
+}
+
+void HelpPanel::timerCallback()
+{
+	Desktop& desktop = Desktop::getInstance();
+	const MouseInputSource mouseSource (desktop.getMainMouseSource());
+
+	Component* const newComp = mouseSource.isMouse() ? mouseSource.getComponentUnderMouse() : nullptr;
+	const String newTip (getTipFor (newComp));
+	const bool tipChanged = (newTip != lastTipUnderMouse || newComp != lastComponentUnderMouse);
+	lastComponentUnderMouse = newComp;
+	lastTipUnderMouse = newTip;
+
+	if (newComp == nullptr || newTip.isEmpty())
+	{
+		help.setText(defaultTooltip, NotificationType());
+	}
+	else if (tipChanged)
+	{
+		help.setText(newTip, NotificationType());
+	}
+
+	if (newTip.isNotEmpty() && newTip != tipShowing)
+		help.setText(newTip, NotificationType());
+}
+
+
+//////////////////////////////////////////////////////////////////////
 
 
 Panel::Panel(const String& name) : Component (name)
@@ -24,6 +208,9 @@ Panel::Panel(const String& name) : Component (name)
 	//componentBoundsConstrainer->setMaximumHeight(200);
 	addAndMakeVisible(resizableEdgeComponent = new ResizableEdgeComponent(this, componentBoundsConstrainer, ResizableEdgeComponent::topEdge));
 	tabbedComponent = nullptr;
+
+	tempBackgroundColour = Colour((uint8) Random::getSystemRandom().nextInt(255), (uint8) Random::getSystemRandom().nextInt(255), (uint8) Random::getSystemRandom().nextInt(255));
+
 }
 
 Panel::~Panel()
@@ -82,9 +269,7 @@ void Panel::resized()
 
 void Panel::paint (Graphics& g)
 {
-	//g.fillAll (Colour((uint8) 49, (uint8) 124, (uint8) 205));
-	g.fillAll (Colour((uint8) Random::getSystemRandom().nextInt(255), (uint8) Random::getSystemRandom().nextInt(255), (uint8) Random::getSystemRandom().nextInt(255)));
-	//Colour(Random::getSystemRandom().nextInt(255));
+	g.fillAll (tempBackgroundColour);
 }
 
 bool Panel::addContent (Component *componentToAdd, bool asTab)
@@ -284,9 +469,7 @@ void PanelContainer::resized()
 
 void PanelContainer::paint (Graphics& g)
 {
-	//g.fillAll (Colour((uint8) 49, (uint8) 124, (uint8) 205));
-	g.fillAll (Colour((uint8) Random::getSystemRandom().nextInt(255), (uint8) Random::getSystemRandom().nextInt(255), (uint8) Random::getSystemRandom().nextInt(255)));
-	//Colour(Random::getSystemRandom().nextInt(255));
+	g.fillAll (Colour((uint8) 49, (uint8) 124, (uint8) 205));
 }
 
 void PanelContainer::childBoundsChanged (Component *child)
