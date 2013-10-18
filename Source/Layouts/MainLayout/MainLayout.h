@@ -58,11 +58,11 @@ private:
 	ScopedPointer <PanelContainer> rightPanelContainer;
 	ScopedPointer <PanelContainer> leftPanelContainer;
 	// --
-	ScopedPointer <Panel> panelA;
-	ScopedPointer <Panel> panelB;
-	ScopedPointer <Panel> panelC;
-	ScopedPointer <Panel> panelD;
-	ScopedPointer <Panel> panelE;
+	//ScopedPointer <Panel> panelA;
+	//ScopedPointer <Panel> panelB;
+	//ScopedPointer <Panel> panelC;
+	//ScopedPointer <Panel> panelD;
+	//ScopedPointer <Panel> panelE;
 	//  --
 	ScopedPointer <HelpPanel> helpPanel;
 	ScopedPointer <FileBrowserPanel> fileBrowserPanel;

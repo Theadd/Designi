@@ -25,7 +25,7 @@ public:
 		horizontal
 	};
 
-	Panel(const String& componentName = String::empty, DragAndDropContainer* _dragAndDropContainer = nullptr);
+	Panel(const String& componentName = String::empty, DragAndDropContainer* _dragAndDropContainer = nullptr, int _id = 0);
 	~Panel();
 	void resized();
 	void paint (Graphics& g);
@@ -37,11 +37,14 @@ public:
 	void mouseDrag (const MouseEvent &event);
 	bool isInterestedInDragSource (const SourceDetails &dragSourceDetails);
 	void itemDropped (const SourceDetails &dragSourceDetails);
+	//void componentChildrenChanged (Component & component);
+	void removeInnerPanelAt (int tabIndex);
 
 	/** Sets panel ResizableEdgeOrientation and repaints it. **/
 	void setResizableEdgeOrientation(ResizableEdgeOrientation resizableEdgeOrientation_);
 
 	ResizableEdgeOrientation resizableEdgeOrientation;
+	int id;
 private:
 	ScopedPointer <ResizableEdgeComponent> resizableEdgeComponent;
 	ScopedPointer <ComponentBoundsConstrainer> componentBoundsConstrainer;
@@ -64,7 +67,7 @@ public:
         left
     };
 
-    PanelContainer(Position positionThatWillBePlaced);
+    PanelContainer(Position positionThatWillBePlaced, DragAndDropContainer* _dragAndDropContainer = nullptr);
 
 	~PanelContainer();
 
@@ -79,11 +82,15 @@ public:
 
 	void componentChildrenChanged (Component & component);
 
+	bool addInnerPanel (InnerPanel *componentToAdd, bool asNewPanel = false);
+
 	Position position;
 	
 private:
 	ScopedPointer <ResizableEdgeComponent> resizableEdgeComponent;
 	ScopedPointer <ComponentBoundsConstrainer> componentBoundsConstrainer;
+	DragAndDropContainer* dragAndDropContainer;
+	OwnedArray <Panel> panels;
 };
 
 

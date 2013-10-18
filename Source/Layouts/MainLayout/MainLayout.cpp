@@ -28,32 +28,32 @@ MainLayout::MainLayout(MainWindow& _mainWindow) : Component(), mainWindow(_mainW
 	
 	//TEST
 	rightPanelContainer = nullptr;
-	addAndMakeVisible(rightPanelContainer = new PanelContainer(PanelContainer::right));
+	addAndMakeVisible(rightPanelContainer = new PanelContainer(PanelContainer::right, this));
 	rightPanelContainer->setBounds(400,32,250,600);
 	leftPanelContainer = nullptr;
-	addAndMakeVisible(leftPanelContainer = new PanelContainer(PanelContainer::left));
+	addAndMakeVisible(leftPanelContainer = new PanelContainer(PanelContainer::left, this));
 	leftPanelContainer->setBounds(0,32,250,600);
 
-	DBG("ADDING PANEL A TO RIGHT");
+	//DBG("ADDING PANEL A TO RIGHT");
 
-	rightPanelContainer->addAndMakeVisible(panelA = new Panel("Panel A", this));
-	DBG("ADDING PANEL B TO RIGHT");
-	rightPanelContainer->addAndMakeVisible(panelB = new Panel("Panel B", this));
-	DBG("ADDING PANEL C TO RIGHT");
-	rightPanelContainer->addAndMakeVisible(panelC = new Panel("Panel C", this));
-	DBG("ADDING PANEL D TO LEFT");
-	leftPanelContainer->addAndMakeVisible(panelD = new Panel("Panel D", this));
-	DBG("ADDING PANEL E TO LEFT");
-	leftPanelContainer->addAndMakeVisible(panelE = new Panel("Panel E", this));
+	//rightPanelContainer->addAndMakeVisible(panelA = new Panel("Panel A", this));
+	//DBG("ADDING PANEL B TO RIGHT");
+	//rightPanelContainer->addAndMakeVisible(panelB = new Panel("Panel B", this));
+	//DBG("ADDING PANEL C TO RIGHT");
+	//rightPanelContainer->addAndMakeVisible(panelC = new Panel("Panel C", this));
+	//DBG("ADDING PANEL D TO LEFT");
+	//leftPanelContainer->addAndMakeVisible(panelD = new Panel("Panel D", this));
+	//DBG("ADDING PANEL E TO LEFT");
+	//leftPanelContainer->addAndMakeVisible(panelE = new Panel("Panel E", this));
 
-	panelA->addInnerPanel(navigatorPanel = new NavigatorPanel());
+	rightPanelContainer->addInnerPanel(navigatorPanel = new NavigatorPanel());
+	//FileBrowserTab
+	fileBrowserPanel = nullptr;
+	leftPanelContainer->addInnerPanel(fileBrowserPanel = new FileBrowserPanel(), true);
 	//helpPanel
 	DBG("ADDING HELP PANEL!");
 	helpPanel = nullptr;
-	panelB->addInnerPanel(helpPanel = new HelpPanel());
-	//FileBrowserTab
-	fileBrowserPanel = nullptr;
-	panelA->addInnerPanel(fileBrowserPanel = new FileBrowserPanel());
+	leftPanelContainer->addInnerPanel(helpPanel = new HelpPanel(), true);
 
 	//
 
@@ -69,11 +69,11 @@ MainLayout::~MainLayout()
 
 	rightPanelContainer = nullptr;
 	leftPanelContainer = nullptr;
-	panelA = nullptr;
-	panelB = nullptr;
-	panelC = nullptr;
-	panelD = nullptr;
-	panelE = nullptr;
+	//panelA = nullptr;
+	//panelB = nullptr;
+	//panelC = nullptr;
+	//panelD = nullptr;
+	//panelE = nullptr;
 }
 
 void MainLayout::resized()

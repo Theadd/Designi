@@ -17,7 +17,7 @@
 //////////////////////////////////////////////////////////////////////
 
 
-Panel::Panel(const String& name, DragAndDropContainer* _dragAndDropContainer) : Component (name), dragAndDropContainer(_dragAndDropContainer)
+Panel::Panel(const String& name, DragAndDropContainer* _dragAndDropContainer, int _id) : Component (name), dragAndDropContainer(_dragAndDropContainer), id(_id)
 {
 	resizableEdgeComponent = nullptr;
 	componentBoundsConstrainer = nullptr;
@@ -158,9 +158,14 @@ void Panel::mouseDrag (const MouseEvent &event)
 			DBG("\tSTART DRAGGING!!");
 			//GET InnerPanel corresponding to the dragged tab button
 			TabbedButtonBar& buttonBar = tabbedComponent->getTabbedButtonBar();
+			DBG("\t1");
 			int tabIndex = buttonBar.indexOfTabButton((TabBarButton *)event.eventComponent);
+			DBG("\t2");
 			Component *innerPanelBeingDragged = tabbedComponent->getTabContentComponent(tabIndex);
+			DBG("\t3");
+			DBG("dragAndDropContainer->startDragging: " + String("InnerPanel#")+String(tabIndex));
 			dragAndDropContainer->startDragging("InnerPanel#"+String(tabIndex), innerPanelBeingDragged);
+			DBG("\t4");
 		}
 	}
 }
@@ -184,7 +189,8 @@ void Panel::itemDropped (const SourceDetails &dragSourceDetails)
 		//remove this panel from its current TabbedComponent
 		//DBG("innerPanel parentComponent name: " + innerPanel->getParentComponent()->getName());
 		//TabbedComponent *currentTabbedComponent = (TabbedComponent *)innerPanel->getParentComponent();
-		TabbedComponent *currentTabbedComponent = innerPanel->findParentComponentOfClass <TabbedComponent>();
+
+		/*TabbedComponent *currentTabbedComponent = innerPanel->findParentComponentOfClass <TabbedComponent>();
 		if (currentTabbedComponent == 0)
 		{
 			DBG("parentComponent of class TabbedComponent NOT FOUND!");
@@ -195,7 +201,32 @@ void Panel::itemDropped (const SourceDetails &dragSourceDetails)
 		DBG("removeTab call, index: "+String(tabIndex)+", numTabs: "+String(currentTabbedComponent->getNumTabs()));
 		currentTabbedComponent->removeTab(tabIndex);
 		DBG("addInnerTab call");
+		addInnerPanel(innerPanel);*/
+
+		Panel *currentPanel = innerPanel->findParentComponentOfClass <Panel>();
+		if (currentPanel == 0)
+		{
+			DBG("Parent Panel of InnerPanel being dropped was not found!");
+			return;
+			
+		}
+		
+		currentPanel->removeInnerPanelAt(tabIndex);
+		DBG("add  inner  panel");
 		addInnerPanel(innerPanel);
+
+	}
+}
+
+void Panel::removeInnerPanelAt (int tabIndex)
+{
+	DBG("Panel::removeInnerPanelAt (int tabIndex)");
+	tabbedComponent->removeTab(tabIndex);
+	//hide panel if there are no other tabs
+	if (tabbedComponent->getNumTabs() == 0)
+	{
+		getParentComponent()->removeChildComponent(this);
+		//delete this;
 	}
 }
 
@@ -205,7 +236,7 @@ void Panel::setResizableEdgeOrientation(ResizableEdgeOrientation resizableEdgeOr
 	resized();
 }
 
-PanelContainer::PanelContainer(Position positionThatWillBePlaced) : Component(), position(positionThatWillBePlaced)
+PanelContainer::PanelContainer(Position positionThatWillBePlaced, DragAndDropContainer* _dragAndDropContainer) : Component(), position(positionThatWillBePlaced), dragAndDropContainer(_dragAndDropContainer)
 {
     setBounds(0, 32, 260, 340);
 	//DBG("one");
@@ -232,6 +263,7 @@ PanelContainer::PanelContainer(Position positionThatWillBePlaced) : Component(),
 	addAndMakeVisible(resizableEdgeComponent = new ResizableEdgeComponent(this, componentBoundsConstrainer, resizableEdge));
 	resizableEdgeComponent->setName("Resizable Edge Component");
 	addComponentListener(this);
+
     resized();
 }
 
@@ -285,7 +317,7 @@ void PanelContainer::resized()
 			resizableEdgeComponent->setBounds(r.getWidth() - RESIZABLEEDGESIZE, 0,  RESIZABLEEDGESIZE, r.getHeight());
 	}
 
-	DBG("PanelContainer resize()");
+	DBG("PanelContainer resized()");
 	//int numChilds = getNumChildComponents() - 1;
 	int lastSize = 0;
 	//Get lastSize in pixels
@@ -411,14 +443,34 @@ void PanelContainer::componentChildrenChanged (Component & component)
 		return;
 
 	DBG("PanelContainer::componentChildrenChanged (Component & component)");
+	DBG("Component name: "+component.getName()+", getNumChildComponents(): "+String(getNumChildComponents()));
+
+	if (component.getParentComponent() != this)
+	{
+		//child component was removed, delete it from panels OwnedArray
+		DBG("child component was removed, delete it from panels OwnedArray");
+		panels.remove(((Panel *) &component)->id, true);
+	}
+
+	if (getNumChildComponents() - 1 == 0)
+	{
+		//This PanelContainer is empty, so we hide it!
+		DBG("This PanelContainer is empty, so we hide it! panels.size(): " + panels.size());
+		setVisible(false);
+
+		return;
+	}
+
 	int panelSize = (position==right || position==left) ? this->getHeight() / (getNumChildComponents() - 1) : this->getWidth() / (getNumChildComponents() - 1);
 	int drawCount = 0;	//counter to know how many panels have been drawn at each iteration
 	int remainingSize = (position==right || position==left) ? this->getHeight() : this->getWidth();
 	for (int i = 0; i < getNumChildComponents(); ++i)
 	{
 		Component *c = getChildComponent(i);
-		if (c->getName().equalsIgnoreCase("Resizable Edge Component"))
+		if (!c->getName().equalsIgnoreCase("Panel"))
 			continue;
+
+		DBG("for (int i = "+String(i)+"; i < getNumChildComponents(); ++i), c->getName(): "+c->getName());
 
 		//if this will be the last panel drawn, set panel size to the remaining pixels
 		if (i == getNumChildComponents() - 1) panelSize = remainingSize;
@@ -455,6 +507,27 @@ void PanelContainer::componentChildrenChanged (Component & component)
 		remainingSize -= panelSize;
 	}
 
+		
+
+
 	resized();
 }
 
+
+bool PanelContainer::addInnerPanel (InnerPanel *componentToAdd, bool asNewPanel)
+{
+	if (panels.size() == 0)	//if there was no old panel created, create a new panel
+		asNewPanel = true;
+
+	if (asNewPanel)
+	{
+		panels.add(new Panel("Panel", dragAndDropContainer));
+		panels.getLast()->id = panels.indexOf(panels.getLast());
+		addAndMakeVisible(panels.getLast());
+		return panels.getLast()->addInnerPanel(componentToAdd);
+	}
+	else
+	{
+		return panels.getFirst()->addInnerPanel(componentToAdd);
+	}
+}
