@@ -105,7 +105,6 @@ public:
 	void timerCallback();
 
 private:
-	Label helpPanelHeader;
 	Label help;
 	bool _isHidden;
 	String defaultTooltip;

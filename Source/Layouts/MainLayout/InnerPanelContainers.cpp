@@ -138,6 +138,7 @@ bool Panel::addInnerPanel (InnerPanel *componentToAdd)
 		TabbedButtonBar& buttonBar = tabbedComponent->getTabbedButtonBar();
 		TabBarButton* lastTabButton	= buttonBar.getTabButton (buttonBar.getNumTabs() - 1);
 		lastTabButton->addMouseListener(this, false);
+		lastTabButton = nullptr;
 	}
 
 
@@ -237,6 +238,7 @@ PanelContainer::PanelContainer(Position positionThatWillBePlaced) : Component(),
 PanelContainer::~PanelContainer()
 {
     DBG("~RightPanelContainer()");
+	removeComponentListener(this);
 	resizableEdgeComponent = nullptr;
 	componentBoundsConstrainer = nullptr;
 	//DBG("deleting tabbedComponent");

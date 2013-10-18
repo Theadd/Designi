@@ -35,11 +35,7 @@ MainLayout::MainLayout(MainWindow& _mainWindow) : Component(), mainWindow(_mainW
 	leftPanelContainer->setBounds(0,32,250,600);
 
 	DBG("ADDING PANEL A TO RIGHT");
-	Panel *panelA;
-	Panel *panelB;
-	Panel *panelC;
-	Panel *panelD;
-	Panel *panelE;
+
 	rightPanelContainer->addAndMakeVisible(panelA = new Panel("Panel A", this));
 	DBG("ADDING PANEL B TO RIGHT");
 	rightPanelContainer->addAndMakeVisible(panelB = new Panel("Panel B", this));
@@ -70,6 +66,14 @@ MainLayout::~MainLayout()
 	helpPanel = nullptr;
 	fileBrowserPanel = nullptr;
 	navigatorPanel = nullptr;
+
+	rightPanelContainer = nullptr;
+	leftPanelContainer = nullptr;
+	panelA = nullptr;
+	panelB = nullptr;
+	panelC = nullptr;
+	panelD = nullptr;
+	panelE = nullptr;
 }
 
 void MainLayout::resized()

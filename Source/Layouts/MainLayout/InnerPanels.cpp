@@ -42,9 +42,9 @@ NavigatorPanel::NavigatorPanel () : InnerPanel()
 
 NavigatorPanel::~NavigatorPanel ()
 {
+	treeView = nullptr;
+	rootItem = nullptr;
 	treeXml = nullptr;
-    rootItem = nullptr;
-    treeView = nullptr;
 }
 
 void NavigatorPanel::resized ()
@@ -234,17 +234,14 @@ bool FileBrowserPanel::ProjectFileFilter::isDirectorySuitable (const File &file)
 
 HelpPanel::HelpPanel() : lastComponentUnderMouse (nullptr), InnerPanel(true)
 {
-	setName("HelpPanel");
+	setName("Help");
 	setBounds(0, 0, 150, 90);
 	_isHidden = false;
 
 	defaultTooltip = "Move your mouse over the interface element that you would like more info about.";
-	helpPanelHeader.setText("Help", NotificationType());
 	help.setText(defaultTooltip, NotificationType());
 	help.setJustificationType(Justification::topLeft);
-		
-
-	addAndMakeVisible(&helpPanelHeader);
+	
 	addAndMakeVisible(&help);
 
 	//From juce_TooltipWindow
@@ -259,11 +256,7 @@ HelpPanel::~HelpPanel()
 
 void HelpPanel::resized()
 {
-
-	Rectangle<int> r = this->getLocalBounds();
-
-	helpPanelHeader.setBounds(0, 5, r.getWidth(), 30);
-	help.setBoundsInset(BorderSize<int> (35, 0, 0, 0));
+	help.setBoundsInset(BorderSize<int> (0, 0, 0, 0));
 }
 
 void HelpPanel::show() { _isHidden = false; }
