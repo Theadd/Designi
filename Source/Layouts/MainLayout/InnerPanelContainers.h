@@ -50,10 +50,25 @@ public:
 private:
 	ScopedPointer <ResizableEdgeComponent> resizableEdgeComponent;
 	ScopedPointer <ComponentBoundsConstrainer> componentBoundsConstrainer;
-	ScopedPointer <TabbedComponent> tabbedComponent;
+	
 	DragAndDropContainer* dragAndDropContainer;
 
 	Colour tempBackgroundColour;	//TODO: remove randomly painting panels
+
+	class CustomTabbedComponent : public TabbedComponent
+	{
+	public:
+		CustomTabbedComponent();
+		CustomTabbedComponent(TabbedButtonBar::Orientation _orientation);
+		void popupMenuClickOnTab (int tabIndex, const String &tabName);
+		static void menuItemChosenCallback (int result, CustomTabbedComponent* component);
+		void menuItemChosenCallback (int result);
+	private:
+
+	};
+
+	ScopedPointer <CustomTabbedComponent> tabbedComponent;
+
 };
 
 

@@ -117,7 +117,7 @@ bool Panel::addInnerPanel (InnerPanel *componentToAdd)
 			if (tabbedComponent == nullptr)
 			{
 				//There is no tabbedComponent created, let's create it
-				addAndMakeVisible(tabbedComponent = new TabbedComponent(TabbedButtonBar::TabsAtTop));
+				addAndMakeVisible(tabbedComponent = new CustomTabbedComponent(TabbedButtonBar::TabsAtTop));
 				tabbedComponent->setName(getName() + " TabbedComponent");
 			}
 
@@ -262,6 +262,89 @@ void Panel::setResizableEdgeOrientation(ResizableEdgeOrientation resizableEdgeOr
 	resizableEdgeOrientation = resizableEdgeOrientation_;
 	resized();
 }
+
+
+Panel::CustomTabbedComponent::CustomTabbedComponent() : TabbedComponent(TabbedButtonBar::TabsAtTop)
+{
+
+}
+
+Panel::CustomTabbedComponent::CustomTabbedComponent(TabbedButtonBar::Orientation _orientation) : TabbedComponent(_orientation)
+{
+
+}
+
+void Panel::CustomTabbedComponent::popupMenuClickOnTab (int tabIndex, const String &tabName)
+{
+	DBG("popupMenuClickOnTab!");
+
+	PopupMenu m;
+    m.addItem (1, "Close");
+	m.addSeparator();
+    m.addItem (2, "Move To Left Panel");
+	m.addItem (3, "Move To Right Panel");
+    m.addSeparator();
+    m.addItem (4, "Move Away", true);
+
+	TabbedButtonBar& buttonBar = getTabbedButtonBar();
+	TabBarButton *button = buttonBar.getTabButton(tabIndex);
+
+    m.showMenuAsync (PopupMenu::Options().withTargetComponent (button),
+                        ModalCallbackFunction::forComponent (menuItemChosenCallback, this));
+
+}
+
+void Panel::CustomTabbedComponent::menuItemChosenCallback (int result, CustomTabbedComponent* component)
+{
+	DBG("static menuItemChosenCallback");
+    if (component != nullptr)
+        component->menuItemChosenCallback (result);
+}
+
+void Panel::CustomTabbedComponent::menuItemChosenCallback (int result)
+{
+    DBG("menuItemChosenCallback");
+}
+
+/*
+    void buttonClicked (Button*)
+    {
+        PopupMenu m;
+        m.addItem (1, "Custom treeview showing an XML tree");
+        m.addItem (2, "FileTreeComponent showing the file system");
+        m.addSeparator();
+        m.addItem (3, "Show root item", true,
+                   treeView != nullptr ? treeView->isRootItemVisible()
+                                       : fileTreeComp->isRootItemVisible());
+        m.addItem (4, "Show open/close buttons", true,
+                   treeView != nullptr ? treeView->areOpenCloseButtonsVisible()
+                                       : fileTreeComp->areOpenCloseButtonsVisible());
+
+        m.showMenuAsync (PopupMenu::Options().withTargetComponent (&typeButton),
+                         ModalCallbackFunction::forComponent (menuItemChosenCallback, this));
+    }
+
+    static void menuItemChosenCallback (int result, TreeViewDemo* demoComponent)
+    {
+        if (demoComponent != nullptr)
+            demoComponent->menuItemChosenCallback (result);
+    }
+
+    void menuItemChosenCallback (int result)
+    {
+        if (result == 1)
+        {
+            showCustomTreeView();
+        }
+        else if (result == 2)
+        {
+            showFileTreeComp();
+        }
+    }
+	*/
+
+///////////////////////////////////////////////////////////////////////////
+
 
 PanelContainer::PanelContainer(Position positionThatWillBePlaced, DragAndDropContainer* _dragAndDropContainer) : Component(), position(positionThatWillBePlaced), dragAndDropContainer(_dragAndDropContainer)
 {

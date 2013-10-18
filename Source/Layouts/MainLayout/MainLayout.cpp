@@ -162,9 +162,9 @@ PopupMenu MainLayout::getMenuForIndex (int menuIndex, const String& /*menuName*/
 	if (menuIndex == 2)
 	{
 		//VIEW
-		menu.addCommandItem (commandManager, leftPanel);
-		menu.addCommandItem (commandManager, rightPanel);
-		menu.addSeparator();
+		//menu.addCommandItem (commandManager, leftPanel);
+		//menu.addCommandItem (commandManager, rightPanel);
+		//menu.addSeparator();
 
 			PopupMenu toolbarsSubMenu;
             
