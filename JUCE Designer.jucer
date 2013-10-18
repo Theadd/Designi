@@ -18,6 +18,8 @@
         <FILE id="DPnXNo" name="MainWindow.cpp" compile="1" resource="0" file="Source/Layouts/MainWindow.cpp"/>
         <FILE id="qZn2IT" name="MainWindow.h" compile="0" resource="0" file="Source/Layouts/MainWindow.h"/>
         <GROUP id="{DBE84A0F-BC8A-CF79-40F6-663BDD809E90}" name="MainLayout">
+          <FILE id="tPKH3P" name="InnerPanel.cpp" compile="1" resource="0" file="Source/Layouts/MainLayout/InnerPanel.cpp"/>
+          <FILE id="UJdSjB" name="InnerPanel.h" compile="0" resource="0" file="Source/Layouts/MainLayout/InnerPanel.h"/>
           <FILE id="WylhU8" name="InnerPanels.cpp" compile="1" resource="0" file="Source/Layouts/MainLayout/InnerPanels.cpp"/>
           <FILE id="R7Z86F" name="InnerPanels.h" compile="0" resource="0" file="Source/Layouts/MainLayout/InnerPanels.h"/>
           <FILE id="bgOjlR" name="InnerPanelContainers.cpp" compile="1" resource="0"

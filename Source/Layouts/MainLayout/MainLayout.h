@@ -22,7 +22,8 @@ class MainWindow;
 class MainLayout :	public Component,
 					public ComponentListener,
 					public MenuBarModel,
-					public ApplicationCommandTarget
+					public ApplicationCommandTarget,
+					public DragAndDropContainer
 {
 public:
 
@@ -55,6 +56,7 @@ private:
 	MainWindow& mainWindow;
 	//--
 	ScopedPointer <PanelContainer> rightPanelContainer;
+	ScopedPointer <PanelContainer> leftPanelContainer;
 	//  --
 	ScopedPointer <HelpPanel> helpPanel;
 	ScopedPointer <FileBrowserPanel> fileBrowserPanel;

@@ -12,16 +12,7 @@
 #define __INNERPANELS_H_B9C0D563__
 
 
-class InnerPanel : public Component, public SettableTooltipClient
-{
-public:
-
-	InnerPanel(bool showAsTab_ = true);
-
-	bool showAsTab;
-private:
-	
-};
+#include "InnerPanel.h"
 
 
 class NavigatorPanel : public InnerPanel

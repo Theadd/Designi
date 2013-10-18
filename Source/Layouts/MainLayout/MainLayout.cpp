@@ -30,27 +30,34 @@ MainLayout::MainLayout(MainWindow& _mainWindow) : Component(), mainWindow(_mainW
 	rightPanelContainer = nullptr;
 	addAndMakeVisible(rightPanelContainer = new PanelContainer(PanelContainer::right));
 	rightPanelContainer->setBounds(400,32,250,600);
+	leftPanelContainer = nullptr;
+	addAndMakeVisible(leftPanelContainer = new PanelContainer(PanelContainer::left));
+	leftPanelContainer->setBounds(0,32,250,600);
 
 	DBG("ADDING PANEL A TO RIGHT");
 	Panel *panelA;
 	Panel *panelB;
 	Panel *panelC;
-	rightPanelContainer->addAndMakeVisible(panelA = new Panel("Panel A"));
+	Panel *panelD;
+	Panel *panelE;
+	rightPanelContainer->addAndMakeVisible(panelA = new Panel("Panel A", this));
 	DBG("ADDING PANEL B TO RIGHT");
-	rightPanelContainer->addAndMakeVisible(panelB = new Panel("Panel B"));
+	rightPanelContainer->addAndMakeVisible(panelB = new Panel("Panel B", this));
 	DBG("ADDING PANEL C TO RIGHT");
-	rightPanelContainer->addAndMakeVisible(panelC = new Panel("Panel C"));
-	//Panel innerPanel("Inner Panel");
-	//panelA->addAndMakeVisible(&innerPanel);
+	rightPanelContainer->addAndMakeVisible(panelC = new Panel("Panel C", this));
+	DBG("ADDING PANEL D TO LEFT");
+	leftPanelContainer->addAndMakeVisible(panelD = new Panel("Panel D", this));
+	DBG("ADDING PANEL E TO LEFT");
+	leftPanelContainer->addAndMakeVisible(panelE = new Panel("Panel E", this));
 
-	panelA->addContent(navigatorPanel = new NavigatorPanel(), true);
+	panelA->addInnerPanel(navigatorPanel = new NavigatorPanel());
 	//helpPanel
 	DBG("ADDING HELP PANEL!");
 	helpPanel = nullptr;
-	panelB->addContent(helpPanel = new HelpPanel(), false);
+	panelB->addInnerPanel(helpPanel = new HelpPanel());
 	//FileBrowserTab
 	fileBrowserPanel = nullptr;
-	panelA->addContent(fileBrowserPanel = new FileBrowserPanel(), true);
+	panelA->addInnerPanel(fileBrowserPanel = new FileBrowserPanel());
 
 	//
 
@@ -72,7 +79,10 @@ void MainLayout::resized()
 	if (toolbarComponent != nullptr)
 		toolbarComponent->setBounds(this->getLocalBounds());
 
-	//leftpanelcontainer.setBounds(0, TOOLBARSIZE, 250, this->getHeight() - TOOLBARSIZE);
+	if  (leftPanelContainer != nullptr)
+	{
+		leftPanelContainer->setBounds(0, TOOLBARSIZE, leftPanelContainer->getWidth(), r.getHeight() - TOOLBARSIZE);
+	}
 
 	if  (rightPanelContainer != nullptr)
 	{

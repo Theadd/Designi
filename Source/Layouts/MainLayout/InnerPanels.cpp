@@ -10,14 +10,12 @@
 
 #include "../../../JuceLibraryCode/JuceHeader.h"
 #include "../../Globals.h"
+
 #include "InnerPanels.h"
 
 
 
-InnerPanel::InnerPanel(bool showAsTab_) : Component(), showAsTab(showAsTab_)
-{
-	
-}
+
 
 
 NavigatorPanel::NavigatorPanel () : InnerPanel()
@@ -234,7 +232,7 @@ bool FileBrowserPanel::ProjectFileFilter::isDirectorySuitable (const File &file)
 ///////////////////////////////////////////////////////////////
 
 
-HelpPanel::HelpPanel() : lastComponentUnderMouse (nullptr), InnerPanel(false)
+HelpPanel::HelpPanel() : lastComponentUnderMouse (nullptr), InnerPanel(true)
 {
 	setName("HelpPanel");
 	setBounds(0, 0, 150, 90);

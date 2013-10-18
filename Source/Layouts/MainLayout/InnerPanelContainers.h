@@ -11,8 +11,10 @@
 #ifndef __RIGHTPANELCONTAINER_H_E7390F97__
 #define __RIGHTPANELCONTAINER_H_E7390F97__
 
+#include "InnerPanel.h"
 
-class Panel : public Component
+class Panel :	public Component,
+				public DragAndDropTarget
 {
 public:
 
@@ -23,13 +25,18 @@ public:
 		horizontal
 	};
 
-	Panel(const String& componentName = String::empty);
+	Panel(const String& componentName = String::empty, DragAndDropContainer* _dragAndDropContainer = nullptr);
 	~Panel();
 	void resized();
 	void paint (Graphics& g);
 
-	/** Add a component to this panel, if there was already another component, asTab will be always true. */
-	bool addContent (Component *componentToAdd, bool asTab = true);
+	/** Add a component to this panel. */
+	bool addInnerPanel (InnerPanel *componentToAdd);
+
+	//drag&drop
+	void mouseDrag (const MouseEvent &event);
+	bool isInterestedInDragSource (const SourceDetails &dragSourceDetails);
+	void itemDropped (const SourceDetails &dragSourceDetails);
 
 	/** Sets panel ResizableEdgeOrientation and repaints it. **/
 	void setResizableEdgeOrientation(ResizableEdgeOrientation resizableEdgeOrientation_);
@@ -39,6 +46,7 @@ private:
 	ScopedPointer <ResizableEdgeComponent> resizableEdgeComponent;
 	ScopedPointer <ComponentBoundsConstrainer> componentBoundsConstrainer;
 	ScopedPointer <TabbedComponent> tabbedComponent;
+	DragAndDropContainer* dragAndDropContainer;
 
 	Colour tempBackgroundColour;	//TODO: remove randomly painting panels
 };

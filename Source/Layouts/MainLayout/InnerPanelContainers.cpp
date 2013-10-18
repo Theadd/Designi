@@ -17,7 +17,7 @@
 //////////////////////////////////////////////////////////////////////
 
 
-Panel::Panel(const String& name) : Component (name)
+Panel::Panel(const String& name, DragAndDropContainer* _dragAndDropContainer) : Component (name), dragAndDropContainer(_dragAndDropContainer)
 {
 	resizableEdgeComponent = nullptr;
 	componentBoundsConstrainer = nullptr;
@@ -90,9 +90,10 @@ void Panel::paint (Graphics& g)
 	g.fillAll (tempBackgroundColour);
 }
 
-bool Panel::addContent (Component *componentToAdd, bool asTab)
+bool Panel::addInnerPanel (InnerPanel *componentToAdd)
 {
 	int numChilds = getNumChildComponents() - 1;
+	bool asTab = componentToAdd->showAsTab;
 
 	if (numChilds > 0) {
 		//there was another component inside
@@ -104,6 +105,7 @@ bool Panel::addContent (Component *componentToAdd, bool asTab)
 		else
 		{
 			//add this component in another tab
+			tabbedComponent->addChildComponent(componentToAdd);	//we add as child so we can get this tabbed component looking for inner component's parent
 			tabbedComponent->addTab(componentToAdd->getName(), Colours::transparentBlack, componentToAdd, false);
 		}
 	}
@@ -116,9 +118,11 @@ bool Panel::addContent (Component *componentToAdd, bool asTab)
 			{
 				//There is no tabbedComponent created, let's create it
 				addAndMakeVisible(tabbedComponent = new TabbedComponent(TabbedButtonBar::TabsAtTop));
+				tabbedComponent->setName(getName() + " TabbedComponent");
 			}
 
 			//add this component in a new tab
+			tabbedComponent->addChildComponent(componentToAdd);
 			tabbedComponent->addTab(componentToAdd->getName(), Colours::transparentBlack, componentToAdd, false);
 		}
 		else
@@ -128,8 +132,70 @@ bool Panel::addContent (Component *componentToAdd, bool asTab)
 		}
 	}
 
+	//drag&drop of tab buttons
+	if  (tabbedComponent != nullptr && dragAndDropContainer != nullptr)
+	{
+		TabbedButtonBar& buttonBar = tabbedComponent->getTabbedButtonBar();
+		TabBarButton* lastTabButton	= buttonBar.getTabButton (buttonBar.getNumTabs() - 1);
+		lastTabButton->addMouseListener(this, false);
+	}
+
+
 	resized();
+
 	return true;
+}
+
+void Panel::mouseDrag (const MouseEvent &event)
+{
+	DBG("PANEL MOUSEDRAG!!");
+	DBG(event.eventComponent->getName());
+	if (dragAndDropContainer != nullptr)
+	{
+		if (!dragAndDropContainer->isDragAndDropActive())
+		{
+			DBG("\tSTART DRAGGING!!");
+			//GET InnerPanel corresponding to the dragged tab button
+			TabbedButtonBar& buttonBar = tabbedComponent->getTabbedButtonBar();
+			int tabIndex = buttonBar.indexOfTabButton((TabBarButton *)event.eventComponent);
+			Component *innerPanelBeingDragged = tabbedComponent->getTabContentComponent(tabIndex);
+			dragAndDropContainer->startDragging("InnerPanel#"+String(tabIndex), innerPanelBeingDragged);
+		}
+	}
+}
+
+bool Panel::isInterestedInDragSource (const SourceDetails &dragSourceDetails)
+{
+	DBG("\t\t\tisInterestedInDragSource!!!!!!!!!!!!! dragSourceDetails.description: "+String(dragSourceDetails.description));
+	String description(dragSourceDetails.description);
+	return (description.upToFirstOccurrenceOf("#", false, false).equalsIgnoreCase("InnerPanel"));
+}
+
+void Panel::itemDropped (const SourceDetails &dragSourceDetails)
+{
+	
+	DBG("\t\t\tITEM DROPED!!!!!!!!!!!!!");
+	String description(dragSourceDetails.description);
+	if  (description.upToFirstOccurrenceOf("#", false, false).equalsIgnoreCase("InnerPanel"))
+	{
+		int tabIndex = description.fromFirstOccurrenceOf("#", false, false).getIntValue();
+		InnerPanel *innerPanel = (InnerPanel *)dragSourceDetails.sourceComponent.get();
+		//remove this panel from its current TabbedComponent
+		//DBG("innerPanel parentComponent name: " + innerPanel->getParentComponent()->getName());
+		//TabbedComponent *currentTabbedComponent = (TabbedComponent *)innerPanel->getParentComponent();
+		TabbedComponent *currentTabbedComponent = innerPanel->findParentComponentOfClass <TabbedComponent>();
+		if (currentTabbedComponent == 0)
+		{
+			DBG("parentComponent of class TabbedComponent NOT FOUND!");
+			return;
+		}
+		 
+		
+		DBG("removeTab call, index: "+String(tabIndex)+", numTabs: "+String(currentTabbedComponent->getNumTabs()));
+		currentTabbedComponent->removeTab(tabIndex);
+		DBG("addInnerTab call");
+		addInnerPanel(innerPanel);
+	}
 }
 
 void Panel::setResizableEdgeOrientation(ResizableEdgeOrientation resizableEdgeOrientation_)

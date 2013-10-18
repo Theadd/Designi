@@ -316,6 +316,9 @@
     <ClCompile Include="..\..\Source\Layouts\MainWindow.cpp">
       <Filter>JUCE Designer\Source\Layouts</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\Layouts\MainLayout\InnerPanel.cpp">
+      <Filter>JUCE Designer\Source\Layouts\MainLayout</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\Layouts\MainLayout\InnerPanels.cpp">
       <Filter>JUCE Designer\Source\Layouts\MainLayout</Filter>
     </ClCompile>
@@ -1505,6 +1508,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Layouts\MainWindow.h">
       <Filter>JUCE Designer\Source\Layouts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Layouts\MainLayout\InnerPanel.h">
+      <Filter>JUCE Designer\Source\Layouts\MainLayout</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Layouts\MainLayout\InnerPanels.h">
       <Filter>JUCE Designer\Source\Layouts\MainLayout</Filter>
