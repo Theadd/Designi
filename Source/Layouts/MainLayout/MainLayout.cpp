@@ -49,8 +49,8 @@ MainLayout::MainLayout(MainWindow& _mainWindow) : Component(), mainWindow(_mainW
 	helpPanel = nullptr;
 	panelB->addContent(helpPanel = new HelpPanel(), false);
 	//FileBrowserTab
-	fileBrowserTab = nullptr;
-	panelA->addContent(fileBrowserTab = new FileBrowserTab(), true);
+	fileBrowserPanel = nullptr;
+	panelA->addContent(fileBrowserPanel = new FileBrowserPanel(), true);
 
 	//
 
@@ -61,7 +61,7 @@ MainLayout::~MainLayout()
 {
 	toolbarComponent = nullptr;
 	helpPanel = nullptr;
-	fileBrowserTab = nullptr;
+	fileBrowserPanel = nullptr;
 	navigatorPanel = nullptr;
 }
 

@@ -57,12 +57,12 @@ private:
 };
 
 
-class FileBrowserTab : public InnerPanel
+class FileBrowserPanel : public InnerPanel
 {
 public:
 
-	FileBrowserTab ();
-	~FileBrowserTab ();
+	FileBrowserPanel ();
+	~FileBrowserPanel ();
 
 	void resized ();
 	void mouseUp (const MouseEvent &event);
@@ -74,8 +74,8 @@ private:
 	
     TimeSliceThread thread;
 
-	//FileBrowserTabHeader:
-	Component fileBrowserTabHeader;	//container for header (projectNameLabel + A&B buttons)
+	//FileBrowserPanelHeader:
+	Component fileBrowserPanelHeader;	//container for header (projectNameLabel + A&B buttons)
 	Label projectNameLabel;
     TextButton selectFileTreeA;
 	TextButton selectFileTreeB;

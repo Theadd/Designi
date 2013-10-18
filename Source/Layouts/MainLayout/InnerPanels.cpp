@@ -128,7 +128,7 @@ var NavigatorPanel::TreeViewItemParser::getDragSourceDescription()
 //////////////////////////////////////////////////////////////////////////
 
 
-FileBrowserTab::FileBrowserTab() : thread ("FileTreeComponent thread"), InnerPanel()
+FileBrowserPanel::FileBrowserPanel() : thread ("FileTreeComponent thread"), InnerPanel()
 {
 	setName("File Browser");
 	File folder (File::getSpecialLocation (File::userHomeDirectory));
@@ -147,29 +147,29 @@ FileBrowserTab::FileBrowserTab() : thread ("FileTreeComponent thread"), InnerPan
     addAndMakeVisible (fileTreeCompA = new FileTreeComponent (*directoryList));
 	addAndMakeVisible (fileTreeCompB = new FileTreeComponent (*directoryList));
 	fileTreeCompB->setVisible(false);
-	addAndMakeVisible (&fileBrowserTabHeader);
+	addAndMakeVisible (&fileBrowserPanelHeader);
 
-	//From FileBrowserTabHeader
-	fileBrowserTabHeader.setBounds(0, 0, 170, 25);
-	fileBrowserTabHeader.setName("FileBrowserTabHeader");
+	//From FileBrowserPanelHeader
+	fileBrowserPanelHeader.setBounds(0, 0, 170, 25);
+	fileBrowserPanelHeader.setName("FileBrowserPanelHeader");
 
 	projectNameLabel.setBounds(5, 5, 115, 15);
 	projectNameLabel.setText("Project Name", NotificationType());
 	//projectNameLabel.setColour(Label::backgroundColourId, Colours::transparentBlack);
 	projectNameLabel.setColour(Label::textColourId, Colour::fromString("70FFFFFF"));
-	fileBrowserTabHeader.addAndMakeVisible(&projectNameLabel);
+	fileBrowserPanelHeader.addAndMakeVisible(&projectNameLabel);
 
 	selectFileTreeA.setBounds(120, 5, 20, 20);
 	selectFileTreeA.setName("selectFileTreeA");
 	selectFileTreeA.setButtonText("A");
 	selectFileTreeA.setTooltip("File browser remembers two locations, A and B. Use these buttons to switch between them.");
-	fileBrowserTabHeader.addAndMakeVisible(&selectFileTreeA);
+	fileBrowserPanelHeader.addAndMakeVisible(&selectFileTreeA);
 
 	selectFileTreeB.setBounds(140, 5, 20, 20);
 	selectFileTreeB.setName("selectFileTreeB");
 	selectFileTreeB.setButtonText("B");
 	selectFileTreeB.setTooltip("File browser remembers two locations, A and B. Use these buttons to switch between them.");
-	fileBrowserTabHeader.addAndMakeVisible(&selectFileTreeB);
+	fileBrowserPanelHeader.addAndMakeVisible(&selectFileTreeB);
 
 	//ADD this to the mouse listeners of "A" and "B" buttons.
 	selectFileTreeA.addMouseListener(this, false);
@@ -177,27 +177,27 @@ FileBrowserTab::FileBrowserTab() : thread ("FileTreeComponent thread"), InnerPan
 
 }
 
-FileBrowserTab::~FileBrowserTab() {
+FileBrowserPanel::~FileBrowserPanel() {
 	fileTreeCompA = nullptr;
 	fileTreeCompB = nullptr;
     directoryList = nullptr; // (need to make sure this is deleted before the TimeSliceThread)
 	projectFileFilter = nullptr;
 }
 
-void FileBrowserTab::resized() {
+void FileBrowserPanel::resized() {
 	if (fileTreeCompA != nullptr)
 		fileTreeCompA->setBoundsInset (BorderSize<int> (30, 5, 5, 5));
 	if (fileTreeCompB != nullptr)
 		fileTreeCompB->setBoundsInset (BorderSize<int> (30, 5, 5, 5));
 
-	fileBrowserTabHeader.setBounds(0, 0, this->getWidth(), 30);
+	fileBrowserPanelHeader.setBounds(0, 0, this->getWidth(), 30);
 	projectNameLabel.setBoundsInset (BorderSize<int> (5, 5, 5, 50));
 	selectFileTreeA.setBounds(projectNameLabel.getWidth() + 10, 5, 20, 20);
 	selectFileTreeB.setBounds(projectNameLabel.getWidth() + 30, 5, 20, 20);
-	//DBG("Resized FileBrowserTab");
+	//DBG("Resized FileBrowserPanel");
 }
 
-void FileBrowserTab::mouseUp (const MouseEvent &event)
+void FileBrowserPanel::mouseUp (const MouseEvent &event)
 {
 	if (event.mouseWasClicked()) {
 		if (event.eventComponent == &selectFileTreeA) {
@@ -210,22 +210,22 @@ void FileBrowserTab::mouseUp (const MouseEvent &event)
 	}
 }
 
-FileBrowserTab::ProjectFileFilter::ProjectFileFilter() : FileFilter("FileFilter for project directory trees.")
+FileBrowserPanel::ProjectFileFilter::ProjectFileFilter() : FileFilter("FileFilter for project directory trees.")
 {
 
 }
 
-FileBrowserTab::ProjectFileFilter::~ProjectFileFilter ()
+FileBrowserPanel::ProjectFileFilter::~ProjectFileFilter ()
 {
 
 }
 
-bool FileBrowserTab::ProjectFileFilter::isFileSuitable(const File &file) const
+bool FileBrowserPanel::ProjectFileFilter::isFileSuitable(const File &file) const
 {
 	return (file.getFileExtension().equalsIgnoreCase(".cpp") || file.getFileExtension().equalsIgnoreCase(".h"));
 }
 
-bool FileBrowserTab::ProjectFileFilter::isDirectorySuitable (const File &file) const
+bool FileBrowserPanel::ProjectFileFilter::isDirectorySuitable (const File &file) const
 {
 	return file.isDirectory();
 }

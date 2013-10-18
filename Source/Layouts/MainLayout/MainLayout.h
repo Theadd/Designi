@@ -57,7 +57,7 @@ private:
 	ScopedPointer <PanelContainer> rightPanelContainer;
 	//  --
 	ScopedPointer <HelpPanel> helpPanel;
-	ScopedPointer <FileBrowserTab> fileBrowserTab;
+	ScopedPointer <FileBrowserPanel> fileBrowserPanel;
 	ScopedPointer <NavigatorPanel> navigatorPanel;
 	//--
 	ScopedPointer <ToolbarComponent> toolbarComponent;
