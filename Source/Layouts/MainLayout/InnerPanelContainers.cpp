@@ -211,9 +211,10 @@ void Panel::itemDropped (const SourceDetails &dragSourceDetails)
 			
 		}
 		
-		currentPanel->removeInnerPanelAt(tabIndex);
+		
 		DBG("add  inner  panel");
 		addInnerPanel(innerPanel);
+		currentPanel->removeInnerPanelAt(tabIndex);
 
 	}
 }
@@ -228,6 +229,32 @@ void Panel::removeInnerPanelAt (int tabIndex)
 		getParentComponent()->removeChildComponent(this);
 		//delete this;
 	}
+}
+
+bool Panel::removeInnerPanel(InnerPanel *innerPanel)
+{
+	if (tabbedComponent != nullptr)
+	{
+		for (int i = 0; i < tabbedComponent->getNumTabs(); ++i)
+		{
+			if (innerPanel == tabbedComponent->getTabContentComponent(i))
+			{
+				removeInnerPanelAt(i);
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+bool Panel::isInnerPanelVisible(InnerPanel* innerPanel)
+{
+	if (tabbedComponent != nullptr)
+		for (int i = 0; i < tabbedComponent->getNumTabs(); ++i)
+			if (innerPanel == tabbedComponent->getTabContentComponent(i))
+				return true;
+
+	return false;
 }
 
 void Panel::setResizableEdgeOrientation(ResizableEdgeOrientation resizableEdgeOrientation_)
@@ -530,4 +557,27 @@ bool PanelContainer::addInnerPanel (InnerPanel *componentToAdd, bool asNewPanel)
 	{
 		return panels.getFirst()->addInnerPanel(componentToAdd);
 	}
+}
+
+bool PanelContainer::isEmpty()
+{
+	return (panels.size() == 0);
+}
+
+bool PanelContainer::removeInnerPanel(InnerPanel *innerPanel)
+{
+	for (int i = 0; i < panels.size(); ++i)
+		if (panels[i]->removeInnerPanel(innerPanel))
+			return true;
+
+	return false;
+}
+
+bool PanelContainer::isInnerPanelVisible(InnerPanel* innerPanel)
+{
+	for (int i = 0; i < panels.size(); ++i)
+		if (panels[i]->isInnerPanelVisible(innerPanel))
+			return true;
+
+	return false;
 }

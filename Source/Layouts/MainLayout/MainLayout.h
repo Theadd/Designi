@@ -51,6 +51,8 @@ public:
 
 	bool perform (const InvocationInfo& info);
 
+	bool isInnerPanelVisible(InnerPanel* innerPanel);
+	void toggleInnerPanel(InnerPanel* innerPanel, bool placeOnLeftPanel = true);
 
 private:
 	MainWindow& mainWindow;
@@ -58,11 +60,6 @@ private:
 	ScopedPointer <PanelContainer> rightPanelContainer;
 	ScopedPointer <PanelContainer> leftPanelContainer;
 	// --
-	//ScopedPointer <Panel> panelA;
-	//ScopedPointer <Panel> panelB;
-	//ScopedPointer <Panel> panelC;
-	//ScopedPointer <Panel> panelD;
-	//ScopedPointer <Panel> panelE;
 	//  --
 	ScopedPointer <HelpPanel> helpPanel;
 	ScopedPointer <FileBrowserPanel> fileBrowserPanel;
@@ -100,7 +97,12 @@ private:
 			clipboardToolbar	= 0x2204,
 			historyToolbar		= 0x2205,
 			drawableToolbar		= 0x2206,
-		help					= 0x2207,
+		fileBrowser				= 0x2207,
+		navigator				= 0x2208,
+		properties				= 0x2209,
+		toolbox					= 0x220A,
+		modifiers				= 0x220B,
+		help					= 0x220C,
 		//WINDOW
 		//...
 		//Help

@@ -176,6 +176,12 @@ PopupMenu MainLayout::getMenuForIndex (int menuIndex, const String& /*menuName*/
 			menu.addSubMenu ("Toolbars", toolbarsSubMenu);
 
 		menu.addSeparator();
+		//fileBrowser, navigator, properties, toolbox, modifiers,
+		menu.addCommandItem (commandManager, fileBrowser);
+		menu.addCommandItem (commandManager, navigator);
+		menu.addCommandItem (commandManager, properties);
+		menu.addCommandItem (commandManager, toolbox);
+		menu.addCommandItem (commandManager, modifiers);
 		menu.addCommandItem (commandManager, help);
 	}
 	if (menuIndex == 3)
@@ -212,7 +218,7 @@ ApplicationCommandTarget* MainLayout::getNextCommandTarget()
 void MainLayout::getAllCommands (Array <CommandID>& commands)
 {
 	// this returns the set of all commands that this target can perform..
-	const CommandID ids[] = {newProject, newDesign, openProject, openRecentProject, closeProject, save, saveAs, saveAll, print, undo, redo, cut, copy, paste, delete_, find, replace, preferences, leftPanel, rightPanel, fileToolbar, clipboardToolbar, historyToolbar, drawableToolbar, help, webpage, about};
+	const CommandID ids[] = {newProject, newDesign, openProject, openRecentProject, closeProject, save, saveAs, saveAll, print, undo, redo, cut, copy, paste, delete_, find, replace, preferences, leftPanel, rightPanel, fileToolbar, clipboardToolbar, historyToolbar, drawableToolbar, fileBrowser, navigator, properties, toolbox, modifiers, help, webpage, about};
 
 	commands.addArray (ids, numElementsInArray (ids));
 }
@@ -311,13 +317,31 @@ void MainLayout::getCommandInfo (CommandID commandID, ApplicationCommandInfo& re
 		break;
 	case leftPanel:
 		result.setInfo ("Left Panel", "", generalCategory, 0);
-		result.setTicked (true);
 		result.addDefaultKeypress ('l', ModifierKeys::commandModifier | ModifierKeys::altModifier);
+		if (leftPanelContainer != nullptr && !leftPanelContainer->isEmpty())
+		{
+			result.setActive (true);
+			result.setTicked (leftPanelContainer->isVisible());
+		}
+		else
+		{
+			result.setActive (false);
+			result.setTicked (false);
+		}
 		break;
 	case rightPanel:
 		result.setInfo ("Right Panel", "", generalCategory, 0);
-		result.setTicked (true);
 		result.addDefaultKeypress ('r', ModifierKeys::commandModifier | ModifierKeys::altModifier);
+		if (rightPanelContainer != nullptr && !rightPanelContainer->isEmpty())
+		{
+			result.setActive (true);
+			result.setTicked (rightPanelContainer->isVisible());
+		}
+		else
+		{
+			result.setActive (false);
+			result.setTicked (false);
+		}
 		break;
 	case fileToolbar:
 		result.setInfo ("File", "", generalCategory, 0);
@@ -335,9 +359,40 @@ void MainLayout::getCommandInfo (CommandID commandID, ApplicationCommandInfo& re
 		result.setInfo ("Drawable Components", "", generalCategory, 0);
 		result.setTicked (true);
 		break;
+	case fileBrowser:
+		result.setInfo ("File Browser", "", generalCategory, 0);
+		result.setTicked ((fileBrowserPanel != nullptr && isInnerPanelVisible(fileBrowserPanel) ? true : false));
+		result.setActive ((fileBrowserPanel != nullptr) ? true : false);
+		result.addDefaultKeypress ('b', ModifierKeys::commandModifier | ModifierKeys::altModifier);
+		break;
+	case navigator:
+		result.setInfo ("Navigator", "", generalCategory, 0);
+		result.setTicked ((navigatorPanel != nullptr && isInnerPanelVisible(navigatorPanel) ? true : false));
+		result.setActive ((navigatorPanel != nullptr) ? true : false);
+		result.addDefaultKeypress ('n', ModifierKeys::commandModifier | ModifierKeys::altModifier);
+		break;
+	case properties:
+		result.setInfo ("Properties", "", generalCategory, 0);
+		//result.setTicked ((navigatorPanel != nullptr && isInnerPanelVisible(navigatorPanel) ? true : false));
+		result.setActive (false);//((navigatorPanel != nullptr) ? true : false);
+		result.addDefaultKeypress ('p', ModifierKeys::commandModifier | ModifierKeys::altModifier);
+		break;
+	case toolbox:
+		result.setInfo ("Toolbox", "", generalCategory, 0);
+		//result.setTicked ((navigatorPanel != nullptr && isInnerPanelVisible(navigatorPanel) ? true : false));
+		result.setActive (false);//((navigatorPanel != nullptr) ? true : false);
+		result.addDefaultKeypress ('t', ModifierKeys::commandModifier | ModifierKeys::altModifier);
+		break;
+	case modifiers:
+		result.setInfo ("Modifiers", "", generalCategory, 0);
+		//result.setTicked ((navigatorPanel != nullptr && isInnerPanelVisible(navigatorPanel) ? true : false));
+		result.setActive (false);//((navigatorPanel != nullptr) ? true : false);
+		result.addDefaultKeypress ('m', ModifierKeys::commandModifier | ModifierKeys::altModifier);
+		break;
 	case help:
 		result.setInfo ("Help", "", generalCategory, 0);
-		result.setTicked (true);
+		result.setTicked ((helpPanel != nullptr && isInnerPanelVisible(helpPanel) ? true : false));
+		result.setActive ((helpPanel != nullptr) ? true : false);
 		result.addDefaultKeypress ('h', ModifierKeys::commandModifier | ModifierKeys::altModifier);
 		break;
 	case webpage:
@@ -356,7 +411,6 @@ void MainLayout::getCommandInfo (CommandID commandID, ApplicationCommandInfo& re
 
 bool MainLayout::perform (const InvocationInfo& info)
 {
-
 	switch (info.commandID)
 	{
 	case newProject:
@@ -396,8 +450,12 @@ bool MainLayout::perform (const InvocationInfo& info)
 	case preferences:
 		break;
 	case leftPanel:
+		if (leftPanelContainer != nullptr)
+			leftPanelContainer->setVisible(!leftPanelContainer->isVisible());
 		break;
 	case rightPanel:
+		if (rightPanelContainer != nullptr)
+			rightPanelContainer->setVisible(!rightPanelContainer->isVisible());
 		break;
 	case fileToolbar:
 		break;
@@ -407,7 +465,20 @@ bool MainLayout::perform (const InvocationInfo& info)
 		break;
 	case drawableToolbar:
 		break;
+	case fileBrowser:
+		toggleInnerPanel(fileBrowserPanel, true);
+		break;
+	case navigator:
+		toggleInnerPanel(navigatorPanel, false);
+		break;
+	case properties:
+		break;
+	case toolbox:
+		break;
+	case modifiers:
+		break;
 	case help:
+		toggleInnerPanel(helpPanel, true);
 		break;
 	case webpage:
 		break;
@@ -419,4 +490,51 @@ bool MainLayout::perform (const InvocationInfo& info)
 	};
 
 	return true;
+}
+
+bool MainLayout::isInnerPanelVisible(InnerPanel* innerPanel)
+{
+	if (innerPanel->isVisible())
+	{
+		return true;
+	}
+	else
+	{
+		if (leftPanelContainer != nullptr && leftPanelContainer->isInnerPanelVisible(innerPanel))
+		{
+			return true;
+		}
+		else
+		{
+			if (rightPanelContainer != nullptr && rightPanelContainer->isInnerPanelVisible(innerPanel))
+				return true;
+
+			return false;
+		}
+	}
+}
+
+void MainLayout::toggleInnerPanel(InnerPanel* innerPanel, bool placeOnLeftPanel)
+{
+	if (innerPanel != nullptr)
+		{
+			if (isInnerPanelVisible(innerPanel))
+			{
+				if (!leftPanelContainer->removeInnerPanel(innerPanel))
+					rightPanelContainer->removeInnerPanel(innerPanel);
+			}
+			else
+			{
+				if (placeOnLeftPanel)
+				{
+					leftPanelContainer->addInnerPanel(innerPanel, true);
+					leftPanelContainer->setVisible(true);
+				}
+				else
+				{
+					rightPanelContainer->addInnerPanel(innerPanel, true);
+					rightPanelContainer->setVisible(true);
+				}
+			}
+		}
 }

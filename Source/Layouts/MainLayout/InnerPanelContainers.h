@@ -39,6 +39,8 @@ public:
 	void itemDropped (const SourceDetails &dragSourceDetails);
 	//void componentChildrenChanged (Component & component);
 	void removeInnerPanelAt (int tabIndex);
+	bool removeInnerPanel(InnerPanel *innerPanel);
+	bool isInnerPanelVisible(InnerPanel* innerPanel);
 
 	/** Sets panel ResizableEdgeOrientation and repaints it. **/
 	void setResizableEdgeOrientation(ResizableEdgeOrientation resizableEdgeOrientation_);
@@ -83,6 +85,9 @@ public:
 	void componentChildrenChanged (Component & component);
 
 	bool addInnerPanel (InnerPanel *componentToAdd, bool asNewPanel = false);
+	bool removeInnerPanel(InnerPanel *innerPanel);
+	bool isInnerPanelVisible(InnerPanel* innerPanel);
+	bool isEmpty();
 
 	Position position;
 	
