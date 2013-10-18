@@ -9,86 +9,12 @@
 */
 
 #include "../../../JuceLibraryCode/JuceHeader.h"
-#include "../../Globals.h";
+#include "../../Globals.h"
 #include "MainLayout.h"
 
 #include "../MainWindow.h"
 
-class TreeViewDemoItem  : public TreeViewItem
-{
-public:
-    TreeViewDemoItem (XmlElement& xml_)
-        : xml (xml_)
-    {
-    }
 
-    int getItemWidth() const
-    {
-        return xml.getIntAttribute ("width", -1);
-    }
-
-    String getUniqueName() const
-    {
-        return xml.getTagName();
-    }
-
-    bool mightContainSubItems()
-    {
-        return xml.getFirstChildElement() != 0;
-    }
-
-    void paintItem (Graphics& g, int width, int height)
-    {
-        // if this item is selected, fill it with a background colour..
-        if (isSelected())
-            g.fillAll (Colours::blue.withAlpha (0.3f));
-
-        // use a "colour" attribute in the xml tag for this node to set the text colour..
-        g.setColour (Colour::fromString (xml.getStringAttribute ("colour", "ff000000")));
-
-        g.setFont (height * 0.7f);
-
-        // draw the xml element's tag name..
-        g.drawText (xml.getTagName(),
-                    4, 0, width - 4, height,
-                    Justification::centredLeft, true);
-    }
-
-    void itemOpennessChanged (bool isNowOpen)
-    {
-        if (isNowOpen)
-        {
-            // if we've not already done so, we'll now add the tree's sub-items. You could
-            // also choose to delete the existing ones and refresh them if that's more suitable
-            // in your app.
-            if (getNumSubItems() == 0)
-            {
-                // create and add sub-items to this node of the tree, corresponding to
-                // each sub-element in the XML..
-
-                forEachXmlChildElement (xml, child)
-                {
-                    jassert (child != 0);
-                    addSubItem (new TreeViewDemoItem (*child));
-                }
-            }
-        }
-        else
-        {
-            // in this case, we'll leave any sub-items in the tree when the node gets closed,
-            // though you could choose to delete them if that's more appropriate for
-            // your application.
-        }
-    }
-
-    var getDragSourceDescription()
-    {
-        return "TreeView Items";
-    }
-
-private:
-    XmlElement& xml;
-};
 
 
 MainLayout::MainLayout(MainWindow& _mainWindow) : Component(), mainWindow(_mainWindow)
@@ -116,24 +42,8 @@ MainLayout::MainLayout(MainWindow& _mainWindow) : Component(), mainWindow(_mainW
 	rightPanelContainer->addAndMakeVisible(panelC = new Panel("Panel C"));
 	//Panel innerPanel("Inner Panel");
 	//panelA->addAndMakeVisible(&innerPanel);
-	{
-        const String treeXmlString (BinaryData::treedemo_xml);
-        XmlDocument parser (treeXmlString);
-        treeXml = parser.getDocumentElement();
-        jassert (treeXml != nullptr);
-    }
 
-    rootItem = new TreeViewDemoItem (*treeXml);
-    rootItem->setOpen (true);
-
-	treeView = nullptr;
-
-    addAndMakeVisible (treeView = new TreeView());
-    treeView->setRootItem (rootItem);
-    treeView->setMultiSelectEnabled (true);
-	treeView->setName("Navigator");
-	treeView->setTooltip("Direct access to your design components and its modifiers.");
-	panelA->addContent(treeView, true);
+	panelA->addContent(navigatorPanel = new NavigatorPanel(), true);
 	//helpPanel
 	DBG("ADDING HELP PANEL!");
 	helpPanel = nullptr;
@@ -152,6 +62,7 @@ MainLayout::~MainLayout()
 	toolbarComponent = nullptr;
 	helpPanel = nullptr;
 	fileBrowserTab = nullptr;
+	navigatorPanel = nullptr;
 }
 
 void MainLayout::resized()

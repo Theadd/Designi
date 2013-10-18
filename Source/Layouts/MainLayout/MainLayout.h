@@ -14,6 +14,7 @@
 #include "Toolbars.h"
 //#include "LeftPanelContainer.cpp"
 #include "InnerPanelContainers.h"
+#include "InnerPanels.h"
 
 
 class MainWindow;
@@ -55,12 +56,9 @@ private:
 	//--
 	ScopedPointer <PanelContainer> rightPanelContainer;
 	//  --
-	ScopedPointer <XmlElement> treeXml;
-    ScopedPointer <TreeViewItem> rootItem;
-    ScopedPointer <TreeView> treeView;
-	//  --
 	ScopedPointer <HelpPanel> helpPanel;
 	ScopedPointer <FileBrowserTab> fileBrowserTab;
+	ScopedPointer <NavigatorPanel> navigatorPanel;
 	//--
 	ScopedPointer <ToolbarComponent> toolbarComponent;
 
