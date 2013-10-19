@@ -15,9 +15,10 @@ class InnerPanel : public Component, public SettableTooltipClient
 {
 public:
 
-	InnerPanel(bool showAsTab_ = true);
+	InnerPanel(bool showAsTab_ = true, Globals::Position _position = Globals::left);
 
 	bool showAsTab;
+	Globals::Position position;
 private:
 	
 };

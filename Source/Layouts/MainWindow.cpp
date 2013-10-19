@@ -25,7 +25,7 @@ MainWindow::MainWindow()  : DocumentWindow ("JUCE GUI Designer",
 
 
 
-    setBounds(55, 35, 490, 440);
+    setBounds(55, 35, 900, 900);
     setColour(DocumentWindow::backgroundColourId, Colour::fromString("FF202A32"));
     setName("JUCE GUI Designer");
 	DBG("dbg: MainWindow()");

@@ -12,7 +12,7 @@
 #include "../../Globals.h"
 #include "InnerPanel.h"
 
-InnerPanel::InnerPanel(bool showAsTab_) : Component(), showAsTab(showAsTab_)
+InnerPanel::InnerPanel(bool showAsTab_, Globals::Position _position) : Component(), showAsTab(showAsTab_), position(_position)
 {
 	
 }

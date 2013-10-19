@@ -15,6 +15,7 @@
 //#include "LeftPanelContainer.cpp"
 #include "InnerPanelContainers.h"
 #include "InnerPanels.h"
+#include "../../Globals.h"
 
 
 class MainWindow;
@@ -52,13 +53,16 @@ public:
 	bool perform (const InvocationInfo& info);
 
 	bool isInnerPanelVisible(InnerPanel* innerPanel);
-	void toggleInnerPanel(InnerPanel* innerPanel, bool placeOnLeftPanel = true);
+	void toggleInnerPanel(InnerPanel* innerPanel, Globals::Position position = Globals::left);
+	PanelContainer* getPanelContainer(Globals::Position position);
+	PanelContainer* getPanelContainerOf(InnerPanel* innerPanel, Globals::Position guessPosition = Globals::top);
 
 private:
 	MainWindow& mainWindow;
 	//--
-	ScopedPointer <PanelContainer> rightPanelContainer;
-	ScopedPointer <PanelContainer> leftPanelContainer;
+	//ScopedPointer <PanelContainer> rightPanelContainer;
+	//ScopedPointer <PanelContainer> leftPanelContainer;
+	OwnedArray <PanelContainer> panelContainers;
 	// --
 	//  --
 	ScopedPointer <HelpPanel> helpPanel;

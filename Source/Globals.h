@@ -16,6 +16,24 @@
 #define TOOLBARSIZE 32
 #define MINIMUMPANELSIZE 90
 
+namespace Globals
+{
+    enum Position
+	{
+		top,
+		right,
+		bottom,
+		left
+	};
+
+	enum Orientation
+	{
+		none,
+		vertical,
+		horizontal
+	};
+}
+
 
 /*
 namespace LayoutColourIds

@@ -9,7 +9,7 @@
 */
 
 #include "../../../JuceLibraryCode/JuceHeader.h"
-#include "../../Globals.h"
+
 #include "MainLayout.h"
 
 #include "../MainWindow.h"
@@ -26,13 +26,25 @@ MainLayout::MainLayout(MainWindow& _mainWindow) : Component(), mainWindow(_mainW
 	toolbarComponent = nullptr;
 	addAndMakeVisible(toolbarComponent = new ToolbarComponent(32));
 	
-	//TEST
-	rightPanelContainer = nullptr;
-	addAndMakeVisible(rightPanelContainer = new PanelContainer(PanelContainer::right, this));
+	//ADD PANEL CONTAINERS
+	panelContainers.add(new PanelContainer(Globals::top, this));
+	panelContainers.add(new PanelContainer(Globals::right, this));
+	panelContainers.add(new PanelContainer(Globals::bottom, this));
+	panelContainers.add(new PanelContainer(Globals::left, this));
+
+	PanelContainer *leftPanelContainer = getPanelContainer(Globals::left);
+	PanelContainer *rightPanelContainer = getPanelContainer(Globals::right);
+	PanelContainer *topPanelContainer = getPanelContainer(Globals::top);
+	PanelContainer *bottomPanelContainer = getPanelContainer(Globals::bottom);
+
+	addChildComponent(rightPanelContainer);
 	rightPanelContainer->setBounds(400,32,250,600);
-	leftPanelContainer = nullptr;
-	addAndMakeVisible(leftPanelContainer = new PanelContainer(PanelContainer::left, this));
+	addChildComponent(leftPanelContainer);
 	leftPanelContainer->setBounds(0,32,250,600);
+	addChildComponent(topPanelContainer);
+	topPanelContainer->setBounds(0,32,250,250);
+	addChildComponent(bottomPanelContainer);
+	bottomPanelContainer->setBounds(0,32,250,250);
 
 	//DBG("ADDING PANEL A TO RIGHT");
 
@@ -66,32 +78,51 @@ MainLayout::~MainLayout()
 	helpPanel = nullptr;
 	fileBrowserPanel = nullptr;
 	navigatorPanel = nullptr;
-
-	rightPanelContainer = nullptr;
-	leftPanelContainer = nullptr;
-	//panelA = nullptr;
-	//panelB = nullptr;
-	//panelC = nullptr;
-	//panelD = nullptr;
-	//panelE = nullptr;
 }
 
 void MainLayout::resized()
 {
 	Rectangle<int> r = this->getLocalBounds();
+	PanelContainer *leftPanelContainer = getPanelContainer(Globals::left);
+	PanelContainer *rightPanelContainer = getPanelContainer(Globals::right);
+	PanelContainer *topPanelContainer = getPanelContainer(Globals::top);
+	PanelContainer *bottomPanelContainer = getPanelContainer(Globals::bottom);
 
 	if (toolbarComponent != nullptr)
 		toolbarComponent->setBounds(this->getLocalBounds());
 
+	if (bottomPanelContainer != nullptr)
+	{
+		bottomPanelContainer->setBounds(0, r.getHeight() - bottomPanelContainer->getHeight(), r.getWidth(), bottomPanelContainer->getHeight());
+	}
+
 	if  (leftPanelContainer != nullptr)
 	{
-		leftPanelContainer->setBounds(0, TOOLBARSIZE, leftPanelContainer->getWidth(), r.getHeight() - TOOLBARSIZE);
+		int modHeight = (bottomPanelContainer != nullptr && bottomPanelContainer->isVisible()) ? -1 * bottomPanelContainer->getHeight() : 0;
+		leftPanelContainer->setBounds(0, TOOLBARSIZE, leftPanelContainer->getWidth(), r.getHeight() - TOOLBARSIZE + modHeight);
 	}
 
 	if  (rightPanelContainer != nullptr)
 	{
-		rightPanelContainer->setBounds(r.getWidth() - rightPanelContainer->getWidth(), TOOLBARSIZE, rightPanelContainer->getWidth(), r.getHeight() - TOOLBARSIZE);
+		int modHeight = (bottomPanelContainer != nullptr && bottomPanelContainer->isVisible()) ? -1 * bottomPanelContainer->getHeight() : 0;
+		rightPanelContainer->setBounds(r.getWidth() - rightPanelContainer->getWidth(), TOOLBARSIZE, rightPanelContainer->getWidth(), r.getHeight() - TOOLBARSIZE + modHeight);
 	}
+
+	if (topPanelContainer != nullptr)
+	{
+		int startX = 0;
+		int modWidth = 0;
+		if (leftPanelContainer != nullptr && leftPanelContainer->isVisible())
+		{
+			startX = leftPanelContainer->getX() + leftPanelContainer->getWidth();
+			modWidth -= startX;
+		}
+		if (rightPanelContainer != nullptr && rightPanelContainer->isVisible())
+			modWidth -= rightPanelContainer->getWidth();
+
+		topPanelContainer->setBounds(0 + startX, TOOLBARSIZE, r.getWidth() + modWidth, topPanelContainer->getHeight());
+	}
+
 }
 
 void MainLayout::mouseUp (const MouseEvent& event)
@@ -318,30 +349,10 @@ void MainLayout::getCommandInfo (CommandID commandID, ApplicationCommandInfo& re
 	case leftPanel:
 		result.setInfo ("Left Panel", "", generalCategory, 0);
 		result.addDefaultKeypress ('l', ModifierKeys::commandModifier | ModifierKeys::altModifier);
-		if (leftPanelContainer != nullptr && !leftPanelContainer->isEmpty())
-		{
-			result.setActive (true);
-			result.setTicked (leftPanelContainer->isVisible());
-		}
-		else
-		{
-			result.setActive (false);
-			result.setTicked (false);
-		}
 		break;
 	case rightPanel:
 		result.setInfo ("Right Panel", "", generalCategory, 0);
 		result.addDefaultKeypress ('r', ModifierKeys::commandModifier | ModifierKeys::altModifier);
-		if (rightPanelContainer != nullptr && !rightPanelContainer->isEmpty())
-		{
-			result.setActive (true);
-			result.setTicked (rightPanelContainer->isVisible());
-		}
-		else
-		{
-			result.setActive (false);
-			result.setTicked (false);
-		}
 		break;
 	case fileToolbar:
 		result.setInfo ("File", "", generalCategory, 0);
@@ -450,12 +461,12 @@ bool MainLayout::perform (const InvocationInfo& info)
 	case preferences:
 		break;
 	case leftPanel:
-		if (leftPanelContainer != nullptr)
-			leftPanelContainer->setVisible(!leftPanelContainer->isVisible());
+		if (getPanelContainer(Globals::left) != nullptr)
+			getPanelContainer(Globals::left)->setVisible(!getPanelContainer(Globals::left)->isVisible());
 		break;
 	case rightPanel:
-		if (rightPanelContainer != nullptr)
-			rightPanelContainer->setVisible(!rightPanelContainer->isVisible());
+		if (getPanelContainer(Globals::right) != nullptr)
+			getPanelContainer(Globals::right)->setVisible(!getPanelContainer(Globals::right)->isVisible());
 		break;
 	case fileToolbar:
 		break;
@@ -466,10 +477,10 @@ bool MainLayout::perform (const InvocationInfo& info)
 	case drawableToolbar:
 		break;
 	case fileBrowser:
-		toggleInnerPanel(fileBrowserPanel, true);
+		toggleInnerPanel(fileBrowserPanel, Globals::left);
 		break;
 	case navigator:
-		toggleInnerPanel(navigatorPanel, false);
+		toggleInnerPanel(navigatorPanel, Globals::right);
 		break;
 	case properties:
 		break;
@@ -478,7 +489,7 @@ bool MainLayout::perform (const InvocationInfo& info)
 	case modifiers:
 		break;
 	case help:
-		toggleInnerPanel(helpPanel, true);
+		toggleInnerPanel(helpPanel, Globals::left);
 		break;
 	case webpage:
 		break;
@@ -495,46 +506,84 @@ bool MainLayout::perform (const InvocationInfo& info)
 bool MainLayout::isInnerPanelVisible(InnerPanel* innerPanel)
 {
 	if (innerPanel->isVisible())
-	{
 		return true;
-	}
-	else
+	if (getPanelContainerOf(innerPanel, innerPanel->position) != nullptr)
+		return true;
+	return false;
+}
+
+void MainLayout::toggleInnerPanel(InnerPanel* innerPanel, Globals::Position position)
+{
+	if (innerPanel != nullptr)
 	{
-		if (leftPanelContainer != nullptr && leftPanelContainer->isInnerPanelVisible(innerPanel))
+		PanelContainer *panel = getPanelContainerOf(innerPanel, position);
+		if (panel != nullptr)
 		{
-			return true;
+			panel->removeInnerPanel(innerPanel);
 		}
 		else
 		{
-			if (rightPanelContainer != nullptr && rightPanelContainer->isInnerPanelVisible(innerPanel))
-				return true;
-
-			return false;
+			if (position == Globals::left)
+			{
+				getPanelContainer(Globals::left)->addInnerPanel(innerPanel, true);
+			}
+			else if (position == Globals::right)
+			{
+				getPanelContainer(Globals::right)->addInnerPanel(innerPanel, true);
+			}
+			else if (position == Globals::top)
+			{
+				getPanelContainer(Globals::top)->addInnerPanel(innerPanel, true);
+			}
+			else if (position == Globals::bottom)
+			{
+				getPanelContainer(Globals::bottom)->addInnerPanel(innerPanel, true);
+			}
 		}
 	}
+	resized();
 }
 
-void MainLayout::toggleInnerPanel(InnerPanel* innerPanel, bool placeOnLeftPanel)
+
+PanelContainer* MainLayout::getPanelContainer(Globals::Position position)
 {
-	if (innerPanel != nullptr)
+	if (position == Globals::top)
+		return panelContainers[0];
+	if (position == Globals::right)
+		return panelContainers[1];
+	if (position == Globals::bottom)
+		return panelContainers[2];
+	if (position == Globals::left)
+		return panelContainers[3];
+
+	return nullptr;
+}
+
+PanelContainer* MainLayout::getPanelContainerOf(InnerPanel* innerPanel, Globals::Position guessPosition)
+{
+	if (getPanelContainer(guessPosition)->isInnerPanelVisible(innerPanel))
+	{
+		return getPanelContainer(guessPosition);
+	}
+	else
+	{
+		if (guessPosition != Globals::top && getPanelContainer(Globals::top)->isInnerPanelVisible(innerPanel))
 		{
-			if (isInnerPanelVisible(innerPanel))
-			{
-				if (!leftPanelContainer->removeInnerPanel(innerPanel))
-					rightPanelContainer->removeInnerPanel(innerPanel);
-			}
-			else
-			{
-				if (placeOnLeftPanel)
-				{
-					leftPanelContainer->addInnerPanel(innerPanel, true);
-					leftPanelContainer->setVisible(true);
-				}
-				else
-				{
-					rightPanelContainer->addInnerPanel(innerPanel, true);
-					rightPanelContainer->setVisible(true);
-				}
-			}
+			return getPanelContainer(Globals::top);
 		}
+		if (guessPosition != Globals::right && getPanelContainer(Globals::right)->isInnerPanelVisible(innerPanel))
+		{
+			return getPanelContainer(Globals::right);
+		}
+		if (guessPosition != Globals::bottom && getPanelContainer(Globals::bottom)->isInnerPanelVisible(innerPanel))
+		{
+			return getPanelContainer(Globals::bottom);
+		}
+		if (guessPosition != Globals::left && getPanelContainer(Globals::left)->isInnerPanelVisible(innerPanel))
+		{
+			return getPanelContainer(Globals::left);
+		}
+	}
+
+	return nullptr;
 }

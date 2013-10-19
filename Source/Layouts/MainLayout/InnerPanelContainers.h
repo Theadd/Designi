@@ -10,7 +10,7 @@
 
 #ifndef __RIGHTPANELCONTAINER_H_E7390F97__
 #define __RIGHTPANELCONTAINER_H_E7390F97__
-
+#include "../../Globals.h"
 #include "InnerPanel.h"
 
 class MainLayout;
@@ -19,13 +19,6 @@ class Panel :	public Component,
 				public DragAndDropTarget
 {
 public:
-
-	enum ResizableEdgeOrientation
-	{
-		none,	/*Do not draw it's ResizableEdgeComponent.*/
-		vertical,
-		horizontal
-	};
 
 	Panel(const String& componentName = String::empty, DragAndDropContainer* _dragAndDropContainer = nullptr, int _id = 0);
 	~Panel();
@@ -45,9 +38,9 @@ public:
 	bool isInnerPanelVisible(InnerPanel* innerPanel);
 
 	/** Sets panel ResizableEdgeOrientation and repaints it. **/
-	void setResizableEdgeOrientation(ResizableEdgeOrientation resizableEdgeOrientation_);
+	void setResizableEdgeOrientation(Globals::Orientation resizableEdgeOrientation_);
 
-	ResizableEdgeOrientation resizableEdgeOrientation;
+	Globals::Orientation resizableEdgeOrientation;
 	int id;
 private:
 	ScopedPointer <ResizableEdgeComponent> resizableEdgeComponent;
@@ -78,15 +71,8 @@ class PanelContainer : public Component, public DragAndDropContainer, public Com
 {
 public:
 
-	enum Position
-    {
-        top,
-        right,
-        bottom,
-        left
-    };
 
-    PanelContainer(Position positionThatWillBePlaced, DragAndDropContainer* _dragAndDropContainer = nullptr);
+    PanelContainer(Globals::Position positionThatWillBePlaced, DragAndDropContainer* _dragAndDropContainer = nullptr);
 
 	~PanelContainer();
 
@@ -106,7 +92,7 @@ public:
 	bool isInnerPanelVisible(InnerPanel* innerPanel);
 	bool isEmpty();
 
-	Position position;
+	Globals::Position position;
 	
 private:
 	ScopedPointer <ResizableEdgeComponent> resizableEdgeComponent;

@@ -9,7 +9,7 @@
 */
 
 #include "../../../JuceLibraryCode/JuceHeader.h"
-#include "../../Globals.h"
+
 #include "InnerPanelContainers.h"
 #include "MainLayout.h"
 
@@ -45,13 +45,13 @@ void Panel::resized()
 
 	if (resizableEdgeComponent != nullptr)
 	{
-		if (resizableEdgeOrientation == vertical)
+		if (resizableEdgeOrientation == Globals::vertical)
 			resizableEdgeComponent->setBounds(0, 0, r.getWidth(), RESIZABLEEDGESIZE);
 
-		if (resizableEdgeOrientation == horizontal)
+		if (resizableEdgeOrientation == Globals::horizontal)
 			resizableEdgeComponent->setBounds(0, 0, RESIZABLEEDGESIZE, r.getHeight());
 
-		if (resizableEdgeOrientation == none)
+		if (resizableEdgeOrientation == Globals::none)
 			resizableEdgeComponent->setBounds(0, 0, 0, 0);
 	}
 
@@ -74,13 +74,13 @@ void Panel::resized()
 
 		if (componentToBeResized != nullptr)
 		{
-			if (resizableEdgeOrientation == vertical)
+			if (resizableEdgeOrientation == Globals::vertical)
 				componentToBeResized->setBounds(0, RESIZABLEEDGESIZE, r.getWidth(), r.getHeight() - RESIZABLEEDGESIZE);
 
-			if (resizableEdgeOrientation == horizontal)
+			if (resizableEdgeOrientation == Globals::horizontal)
 				componentToBeResized->setBounds(RESIZABLEEDGESIZE, 0, r.getWidth() - RESIZABLEEDGESIZE, r.getHeight());
 
-			if (resizableEdgeOrientation == none)
+			if (resizableEdgeOrientation == Globals::none)
 				componentToBeResized->setBounds(0, 0, r.getWidth(), r.getHeight());
 		}
 	}
@@ -217,6 +217,9 @@ void Panel::itemDropped (const SourceDetails &dragSourceDetails)
 		addInnerPanel(innerPanel);
 		currentPanel->removeInnerPanelAt(tabIndex);
 
+		MainLayout *mainLayout = findParentComponentOfClass <MainLayout>();
+		if (mainLayout != 0)
+			mainLayout->resized();
 	}
 }
 
@@ -258,7 +261,7 @@ bool Panel::isInnerPanelVisible(InnerPanel* innerPanel)
 	return false;
 }
 
-void Panel::setResizableEdgeOrientation(ResizableEdgeOrientation resizableEdgeOrientation_)
+void Panel::setResizableEdgeOrientation(Globals::Orientation resizableEdgeOrientation_)
 {
 	resizableEdgeOrientation = resizableEdgeOrientation_;
 	resized();
@@ -281,19 +284,34 @@ void Panel::CustomTabbedComponent::popupMenuClickOnTab (int tabIndex, const Stri
 	//check if its on leftPanelContainer or rightPanelContainer so we disable moving to the same panel
 	bool isOnLeftPanel = true;
 	bool isOnRightPanel = true;
+	bool isOnTopPanel = true;
+	bool isOnBottomPanel = true;
 	PanelContainer *panelContainer = findParentComponentOfClass <PanelContainer>();
 	if (panelContainer != 0)
 	{
-		isOnLeftPanel = (panelContainer->position == PanelContainer::left);
-		isOnRightPanel = (panelContainer->position == PanelContainer::right);
+		isOnLeftPanel = (panelContainer->position == Globals::left);
+		isOnRightPanel = (panelContainer->position == Globals::right);
+		isOnTopPanel = (panelContainer->position == Globals::top);
+		isOnBottomPanel = (panelContainer->position == Globals::bottom);
 	}
 
 	PopupMenu m;
     m.addItem (1, "Close");
 	m.addSeparator();
-    m.addItem (2, "Move To Left Panel", !isOnLeftPanel, isOnLeftPanel);
-	m.addItem (3, "Move To Right Panel", !isOnRightPanel, isOnRightPanel);
-    m.addSeparator();
+
+				PopupMenu moveToSubMenu;
+            
+			moveToSubMenu.addItem (5, "Top Panel", !isOnTopPanel, isOnTopPanel);
+			moveToSubMenu.addItem (3, "Right Panel", !isOnRightPanel, isOnRightPanel);
+			moveToSubMenu.addItem (6, "Bottom Panel", !isOnBottomPanel, isOnBottomPanel);
+			moveToSubMenu.addItem (2, "Left Panel", !isOnLeftPanel, isOnLeftPanel);
+
+
+			m.addSubMenu ("Move To", moveToSubMenu);
+
+    //m.addItem (2, "Move To Left Panel", !isOnLeftPanel, isOnLeftPanel);
+	//m.addItem (3, "Move To Right Panel", !isOnRightPanel, isOnRightPanel);
+    //m.addSeparator();
     m.addItem (4, "Move Away", true);
 
 	TabbedButtonBar& buttonBar = getTabbedButtonBar();
@@ -327,16 +345,24 @@ void Panel::CustomTabbedComponent::menuItemChosenCallback (int result, InnerPane
 		mainLayout->toggleInnerPanel(innerPanel);
 		break;
 	case 2:
-		mainLayout->toggleInnerPanel(innerPanel);
-		mainLayout->toggleInnerPanel(innerPanel, true);
+		mainLayout->toggleInnerPanel(innerPanel, innerPanel->position);
+		mainLayout->toggleInnerPanel(innerPanel, Globals::left);
 		break;
 	case 3:
-		mainLayout->toggleInnerPanel(innerPanel);
-		mainLayout->toggleInnerPanel(innerPanel, false);
+		mainLayout->toggleInnerPanel(innerPanel, innerPanel->position);
+		mainLayout->toggleInnerPanel(innerPanel, Globals::right);
 		break;
 	case 4:
 		mainLayout->toggleInnerPanel(innerPanel);
 		panelContainer->addInnerPanel(innerPanel, true);
+		break;
+	case 5:
+		mainLayout->toggleInnerPanel(innerPanel, innerPanel->position);
+		mainLayout->toggleInnerPanel(innerPanel, Globals::top);
+		break;
+	case 6:
+		mainLayout->toggleInnerPanel(innerPanel, innerPanel->position);
+		mainLayout->toggleInnerPanel(innerPanel, Globals::bottom);
 		break;
 	default:
 		break;
@@ -383,7 +409,7 @@ void Panel::CustomTabbedComponent::menuItemChosenCallback (int result, InnerPane
 ///////////////////////////////////////////////////////////////////////////
 
 
-PanelContainer::PanelContainer(Position positionThatWillBePlaced, DragAndDropContainer* _dragAndDropContainer) : Component(), position(positionThatWillBePlaced), dragAndDropContainer(_dragAndDropContainer)
+PanelContainer::PanelContainer(Globals::Position positionThatWillBePlaced, DragAndDropContainer* _dragAndDropContainer) : Component(), position(positionThatWillBePlaced), dragAndDropContainer(_dragAndDropContainer)
 {
     setBounds(0, 32, 260, 340);
 	//DBG("one");
@@ -394,16 +420,16 @@ PanelContainer::PanelContainer(Position positionThatWillBePlaced, DragAndDropCon
 	ResizableEdgeComponent::Edge resizableEdge = ResizableEdgeComponent::leftEdge;
 	switch (position)
 	{
-	case top:
+	case Globals::top:
 		resizableEdge = ResizableEdgeComponent::bottomEdge;
 		break;
-	case right:
+	case Globals::right:
 		resizableEdge = ResizableEdgeComponent::leftEdge;
 		break;
-	case bottom:
+	case Globals::bottom:
 		resizableEdge = ResizableEdgeComponent::topEdge;
 		break;
-	case left:
+	case Globals::left:
 		resizableEdge = ResizableEdgeComponent::rightEdge;
 		break;
 	}
@@ -451,16 +477,16 @@ void PanelContainer::resized()
 
 	if (resizableEdgeComponent != nullptr)
 	{
-		if (position==top)
+		if (position==Globals::top)
 			resizableEdgeComponent->setBounds(0, r.getHeight() - RESIZABLEEDGESIZE,  r.getWidth(), RESIZABLEEDGESIZE);
 
-		if (position==right)
+		if (position==Globals::right)
 			resizableEdgeComponent->setBounds(0, 0,  RESIZABLEEDGESIZE, r.getHeight());
 
-		if (position==bottom)
+		if (position==Globals::bottom)
 			resizableEdgeComponent->setBounds(0, 0,  r.getWidth(), RESIZABLEEDGESIZE);
 
-		if (position==left)
+		if (position==Globals::left)
 			resizableEdgeComponent->setBounds(r.getWidth() - RESIZABLEEDGESIZE, 0,  RESIZABLEEDGESIZE, r.getHeight());
 	}
 
@@ -475,12 +501,12 @@ void PanelContainer::resized()
 			continue;
 
 		DBG("--Size of Panel "+String(i)+": "+String(c->getHeight()));
-		lastSize += (position == right || position == left) ? c->getHeight(): c->getWidth();
+		lastSize += (position == Globals::right || position == Globals::left) ? c->getHeight(): c->getWidth();
 	}
 	
 	DBG("lastSize: "+String(lastSize));
 	DBG("Current size: "+String(getHeight()));
-	int lastSizeDifference = ((position == right || position == left) ? getHeight(): getWidth()) - lastSize;
+	int lastSizeDifference = ((position == Globals::right || position == Globals::left) ? getHeight(): getWidth()) - lastSize;
 	DBG("lastSizeDifference: "+String(lastSizeDifference));
 	int nextPanelPosition = 0;
 	if (getHeight() >= MINIMUMPANELSIZE)
@@ -492,7 +518,7 @@ void PanelContainer::resized()
 			if (c->getName().equalsIgnoreCase("Resizable Edge Component"))
 				continue;
 
-			if (position == right || position == left)
+			if (position == Globals::right || position == Globals::left)
 			{
 				int newSize = c->getHeight() + lastSizeDifference;
 				DBG("\tPANEL Current size: "+String(c->getHeight()));
@@ -563,7 +589,7 @@ void PanelContainer::childBoundsChanged (Component *child)
 			Component *c1 = getChildComponent(childIndex - 1);
 			Component *c2 = getChildComponent(childIndex);
 
-			if (position == right || position == left)
+			if (position == Globals::right || position == Globals::left)
 			{
 				if (c1->getHeight() + c1->getY() != c2->getY())
 				{
@@ -608,9 +634,9 @@ void PanelContainer::componentChildrenChanged (Component & component)
 		return;
 	}
 
-	int panelSize = (position==right || position==left) ? this->getHeight() / (getNumChildComponents() - 1) : this->getWidth() / (getNumChildComponents() - 1);
+	int panelSize = (position==Globals::right || position==Globals::left) ? this->getHeight() / (getNumChildComponents() - 1) : this->getWidth() / (getNumChildComponents() - 1);
 	int drawCount = 0;	//counter to know how many panels have been drawn at each iteration
-	int remainingSize = (position==right || position==left) ? this->getHeight() : this->getWidth();
+	int remainingSize = (position==Globals::right || position==Globals::left) ? this->getHeight() : this->getWidth();
 	for (int i = 0; i < getNumChildComponents(); ++i)
 	{
 		Component *c = getChildComponent(i);
@@ -622,33 +648,33 @@ void PanelContainer::componentChildrenChanged (Component & component)
 		//if this will be the last panel drawn, set panel size to the remaining pixels
 		if (i == getNumChildComponents() - 1) panelSize = remainingSize;
 
-		if (position==top)
+		if (position==Globals::top)
 		{
 			c->setBounds(drawCount * panelSize, 0, panelSize, getHeight() - RESIZABLEEDGESIZE);
-			(dynamic_cast <Panel *> (c))->setResizableEdgeOrientation(Panel::horizontal);
+			(dynamic_cast <Panel *> (c))->setResizableEdgeOrientation(Globals::horizontal);
 		}
 
-		if (position==right)
+		if (position==Globals::right)
 		{
 			c->setBounds(RESIZABLEEDGESIZE, drawCount * panelSize, getWidth() - RESIZABLEEDGESIZE, panelSize);
-			(dynamic_cast <Panel *> (c))->setResizableEdgeOrientation(Panel::vertical);
+			(dynamic_cast <Panel *> (c))->setResizableEdgeOrientation(Globals::vertical);
 		}
 
-		if (position==bottom)
+		if (position==Globals::bottom)
 		{
 			c->setBounds(drawCount * panelSize, RESIZABLEEDGESIZE, panelSize, getHeight() - RESIZABLEEDGESIZE);
-			(dynamic_cast <Panel *> (c))->setResizableEdgeOrientation(Panel::horizontal);
+			(dynamic_cast <Panel *> (c))->setResizableEdgeOrientation(Globals::horizontal);
 		}
 
-		if (position==left)
+		if (position==Globals::left)
 		{
 			c->setBounds(0, drawCount * panelSize, getWidth() - RESIZABLEEDGESIZE, panelSize);
-			(dynamic_cast <Panel *> (c))->setResizableEdgeOrientation(Panel::vertical);
+			(dynamic_cast <Panel *> (c))->setResizableEdgeOrientation(Globals::vertical);
 		}
 
 		//If it's the first panel, do not draw its ResizableEdgeComponent
 		if (drawCount == 0)
-			(dynamic_cast <Panel *> (c))->setResizableEdgeOrientation(Panel::none);
+			(dynamic_cast <Panel *> (c))->setResizableEdgeOrientation(Globals::none);
 
 		++drawCount;
 		remainingSize -= panelSize;
@@ -664,6 +690,7 @@ void PanelContainer::componentChildrenChanged (Component & component)
 bool PanelContainer::addInnerPanel (InnerPanel *componentToAdd, bool asNewPanel)
 {
 	setVisible(true);
+	componentToAdd->position = position;
 
 	if (panels.size() == 0)	//if there was no old panel created, create a new panel
 		asNewPanel = true;
