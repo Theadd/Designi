@@ -11,6 +11,7 @@
 #include "../../../JuceLibraryCode/JuceHeader.h"
 #include "../../Globals.h"
 #include "InnerPanelContainers.h"
+#include "MainLayout.h"
 
 
 
@@ -276,13 +277,22 @@ Panel::CustomTabbedComponent::CustomTabbedComponent(TabbedButtonBar::Orientation
 
 void Panel::CustomTabbedComponent::popupMenuClickOnTab (int tabIndex, const String &tabName)
 {
-	DBG("popupMenuClickOnTab!");
+	DBG("popupMenuClickOnTab: " + tabName);
+	//check if its on leftPanelContainer or rightPanelContainer so we disable moving to the same panel
+	bool isOnLeftPanel = true;
+	bool isOnRightPanel = true;
+	PanelContainer *panelContainer = findParentComponentOfClass <PanelContainer>();
+	if (panelContainer != 0)
+	{
+		isOnLeftPanel = (panelContainer->position == PanelContainer::left);
+		isOnRightPanel = (panelContainer->position == PanelContainer::right);
+	}
 
 	PopupMenu m;
     m.addItem (1, "Close");
 	m.addSeparator();
-    m.addItem (2, "Move To Left Panel");
-	m.addItem (3, "Move To Right Panel");
+    m.addItem (2, "Move To Left Panel", !isOnLeftPanel, isOnLeftPanel);
+	m.addItem (3, "Move To Right Panel", !isOnRightPanel, isOnRightPanel);
     m.addSeparator();
     m.addItem (4, "Move Away", true);
 
@@ -290,20 +300,47 @@ void Panel::CustomTabbedComponent::popupMenuClickOnTab (int tabIndex, const Stri
 	TabBarButton *button = buttonBar.getTabButton(tabIndex);
 
     m.showMenuAsync (PopupMenu::Options().withTargetComponent (button),
-                        ModalCallbackFunction::forComponent (menuItemChosenCallback, this));
+                        ModalCallbackFunction::forComponent (menuItemChosenCallback, this, tabIndex));
 
 }
 
-void Panel::CustomTabbedComponent::menuItemChosenCallback (int result, CustomTabbedComponent* component)
+void Panel::CustomTabbedComponent::menuItemChosenCallback (int result, CustomTabbedComponent* component, int tabIndex)
 {
 	DBG("static menuItemChosenCallback");
     if (component != nullptr)
-        component->menuItemChosenCallback (result);
+	{
+        component->menuItemChosenCallback (result, (InnerPanel *) component->getTabContentComponent(tabIndex));
+	}
 }
 
-void Panel::CustomTabbedComponent::menuItemChosenCallback (int result)
+void Panel::CustomTabbedComponent::menuItemChosenCallback (int result, InnerPanel* innerPanel)
 {
     DBG("menuItemChosenCallback");
+	MainLayout *mainLayout = findParentComponentOfClass <MainLayout>();
+	PanelContainer *panelContainer = innerPanel->findParentComponentOfClass <PanelContainer>();
+	if (mainLayout == 0 || panelContainer == 0)
+		return;
+
+	switch (result)
+	{
+	case 1:
+		mainLayout->toggleInnerPanel(innerPanel);
+		break;
+	case 2:
+		mainLayout->toggleInnerPanel(innerPanel);
+		mainLayout->toggleInnerPanel(innerPanel, true);
+		break;
+	case 3:
+		mainLayout->toggleInnerPanel(innerPanel);
+		mainLayout->toggleInnerPanel(innerPanel, false);
+		break;
+	case 4:
+		mainLayout->toggleInnerPanel(innerPanel);
+		panelContainer->addInnerPanel(innerPanel, true);
+		break;
+	default:
+		break;
+	}
 }
 
 /*
@@ -626,6 +663,8 @@ void PanelContainer::componentChildrenChanged (Component & component)
 
 bool PanelContainer::addInnerPanel (InnerPanel *componentToAdd, bool asNewPanel)
 {
+	setVisible(true);
+
 	if (panels.size() == 0)	//if there was no old panel created, create a new panel
 		asNewPanel = true;
 
@@ -640,6 +679,7 @@ bool PanelContainer::addInnerPanel (InnerPanel *componentToAdd, bool asNewPanel)
 	{
 		return panels.getFirst()->addInnerPanel(componentToAdd);
 	}
+
 }
 
 bool PanelContainer::isEmpty()

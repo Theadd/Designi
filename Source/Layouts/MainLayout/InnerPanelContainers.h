@@ -13,6 +13,8 @@
 
 #include "InnerPanel.h"
 
+class MainLayout;
+
 class Panel :	public Component,
 				public DragAndDropTarget
 {
@@ -61,8 +63,8 @@ private:
 		CustomTabbedComponent();
 		CustomTabbedComponent(TabbedButtonBar::Orientation _orientation);
 		void popupMenuClickOnTab (int tabIndex, const String &tabName);
-		static void menuItemChosenCallback (int result, CustomTabbedComponent* component);
-		void menuItemChosenCallback (int result);
+		static void menuItemChosenCallback (int result, CustomTabbedComponent* component, int tabIndex);
+		void menuItemChosenCallback (int result, InnerPanel* innerPanel);
 	private:
 
 	};
