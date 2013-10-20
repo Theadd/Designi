@@ -125,7 +125,7 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\Styles\Default.cpp"/>
+    <ClCompile Include="..\..\Source\Styles\DuskMap.cpp"/>
     <ClCompile Include="..\..\Source\Layouts\MainWindow.cpp"/>
     <ClCompile Include="..\..\Source\Layouts\MainLayout\InnerPanel.cpp"/>
     <ClCompile Include="..\..\Source\Layouts\MainLayout\InnerPanels.cpp"/>
@@ -1199,7 +1199,7 @@
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_video\juce_video.cpp"/>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\Styles\Default.h"/>
+    <ClInclude Include="..\..\Source\Styles\DuskMap.h"/>
     <ClInclude Include="..\..\Source\Layouts\MainWindow.h"/>
     <ClInclude Include="..\..\Source\Layouts\MainLayout\InnerPanel.h"/>
     <ClInclude Include="..\..\Source\Layouts\MainLayout\InnerPanels.h"/>
@@ -1638,6 +1638,7 @@
     <ClInclude Include="..\..\JuceLibraryCode\JuceHeader.h"/>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\BinaryData\background_tile.png"/>
     <None Include="..\..\BinaryData\treedemo.xml"/>
     <None Include="..\..\BinaryData\navigator.xml"/>
     <None Include="..\..\BinaryData\icons.zip"/>

@@ -17,8 +17,70 @@
 #include "InnerPanels.h"
 #include "../../Globals.h"
 
-
 class MainWindow;
+
+class FloatingComponentOverlay : public Component
+{
+public:
+	FloatingComponentOverlay()
+	{
+		setInterceptsMouseClicks(false, false);
+		setAlwaysOnTop(true);
+	}
+
+	void paint (Graphics& g)
+	{
+		/*int color = Random::getSystemRandom().nextInt(6);
+
+		switch (color)
+		{
+		case 0:
+			g.fillAll (Colours::cadetblue);
+			DBG("0aquamarine");
+			break;
+		case 1:
+			g.fillAll (Colours::darkblue);
+			DBG("1aqua");
+			break;
+		case 2:
+			g.fillAll (Colours::darkcyan);
+			DBG("2azure");
+			break;
+		case 3:
+			g.fillAll (Colours::darkkhaki);
+			DBG("3beige");
+			break;
+		case 4:
+			g.fillAll (Colours::darkorange);
+			DBG("4bisque");
+			break;
+		case 5:
+			g.fillAll (Colours::darkslateblue);
+			DBG("5blanchedalmond");
+			break;
+		default:
+			break;
+		}*/
+		g.fillAll (Colours::darkblue.withAlpha(0.4f));
+	}
+
+	void mouseEnter (const MouseEvent &event)
+	{
+		Component* mainLayout = getParentComponent();
+		if (mainLayout != 0)
+		{
+			Rectangle<int> sBounds = event.eventComponent->getScreenBounds();
+			Rectangle<int> mBounds = mainLayout->getScreenBounds();
+			setBounds(sBounds.getX() - mBounds.getX(), sBounds.getY() - mBounds.getY(), sBounds.getWidth(), sBounds.getHeight());
+			
+			if (typeid(event.eventComponent) == typeid(InnerPanel))
+				DBG("\t\t\tTYPEID == TextButton");
+		}
+	}
+
+private:
+
+};
 
 class MainLayout :	public Component,
 					public ComponentListener,
@@ -63,6 +125,7 @@ private:
 	//ScopedPointer <PanelContainer> rightPanelContainer;
 	//ScopedPointer <PanelContainer> leftPanelContainer;
 	OwnedArray <PanelContainer> panelContainers;
+	ScopedPointer <FloatingComponentOverlay> floatingComponentOverlay;
 	// --
 	//  --
 	ScopedPointer <HelpPanel> helpPanel;

@@ -34,6 +34,12 @@ namespace Globals
 	};
 }
 
+enum ColourIds
+{
+    mainBackgroundColourId          = 0x2340000,
+    treeviewHighlightColourId       = 0x2340002,
+};
+
 
 /*
 namespace LayoutColourIds

@@ -5,14 +5,16 @@
               userNotes="https://github.com/Theadd/JUCE-Designer">
   <MAINGROUP id="DchWjp" name="JUCE Designer">
     <GROUP id="{2B5D31AE-D997-CE08-BF14-D7345862A558}" name="BinaryData">
+      <FILE id="q8kvg0" name="background_tile.png" compile="0" resource="1"
+            file="BinaryData/background_tile.png"/>
       <FILE id="VWiZvI" name="treedemo.xml" compile="0" resource="1" file="BinaryData/treedemo.xml"/>
       <FILE id="q3J4fY" name="navigator.xml" compile="0" resource="1" file="BinaryData/navigator.xml"/>
       <FILE id="QUijac" name="icons.zip" compile="0" resource="1" file="BinaryData/icons.zip"/>
     </GROUP>
     <GROUP id="{4DA873A5-1CD7-B3EE-C91A-A71EFEFD4243}" name="Source">
       <GROUP id="{C9618E64-C7AC-8630-B754-8A531AFF8D4A}" name="Styles">
-        <FILE id="aKhYcE" name="Default.cpp" compile="1" resource="0" file="Source/Styles/Default.cpp"/>
-        <FILE id="RQ1u6g" name="Default.h" compile="0" resource="0" file="Source/Styles/Default.h"/>
+        <FILE id="aKhYcE" name="DuskMap.cpp" compile="1" resource="0" file="Source/Styles/DuskMap.cpp"/>
+        <FILE id="RQ1u6g" name="DuskMap.h" compile="0" resource="0" file="Source/Styles/DuskMap.h"/>
       </GROUP>
       <GROUP id="{91FEA6B6-3B4B-9080-5F5C-93BA955508E8}" name="Layouts">
         <FILE id="DPnXNo" name="MainWindow.cpp" compile="1" resource="0" file="Source/Layouts/MainWindow.cpp"/>

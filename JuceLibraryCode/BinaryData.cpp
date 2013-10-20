@@ -7,6 +7,13 @@
 namespace BinaryData
 {
 
+//================== background_tile.png ==================
+static const unsigned char temp_91d44ec0[] =
+{ 137,80,78,71,13,10,26,10,0,0,0,13,73,72,68,82,0,0,0,7,0,0,0,7,8,6,0,0,0,196,82,87,211,0,0,0,94,73,68,65,84,120,218,85,141,73,14,0,33,8,4,253,137,226,18,19,245,234,255,127,70,75,155,232,56,135,10,132,94,112,33,4,37,222,123,205,57,107,74,105,239,196,137,
+8,72,239,29,99,12,204,57,209,90,227,237,19,45,113,161,209,12,234,172,18,49,70,88,229,134,34,103,173,245,159,60,134,82,10,238,79,166,223,106,238,91,100,229,73,191,80,92,47,179,68,223,148,158,98,226,0,0,0,0,73,69,78,68,174,66,96,130,0,0 };
+
+const char* background_tile_png = (const char*) temp_91d44ec0;
+
 //================== treedemo.xml ==================
 static const unsigned char temp_29ae204[] =
 "<tree>\r\n"
@@ -1425,6 +1432,7 @@ const char* getNamedResource (const char* resourceNameUTF8, int& numBytes) throw
 
     switch (hash)
     {
+        case 0x4a0cfd09:  numBytes = 151; return background_tile_png;
         case 0xdd644959:  numBytes = 1126; return treedemo_xml;
         case 0xfa31262f:  numBytes = 12567; return navigator_xml;
         case 0xae303c7c:  numBytes = 83876; return icons_zip;

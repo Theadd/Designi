@@ -6,6 +6,9 @@
 
 namespace BinaryData
 {
+    extern const char*   background_tile_png;
+    const int            background_tile_pngSize = 151;
+
     extern const char*   treedemo_xml;
     const int            treedemo_xmlSize = 1126;
 

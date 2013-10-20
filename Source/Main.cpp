@@ -29,6 +29,22 @@ public:
     {
         // This method is where you should put your application's initialisation code..
 		DBG("INIT commandLine: " + commandLine);
+		PropertiesFile::Options options;
+		options.applicationName     = "JUCE Designer";
+		options.filenameSuffix      = "settings";
+		options.osxLibrarySubFolder = "Application Support";
+		#if JUCE_LINUX
+			options.folderName          = "~/.config/JUCE Designer";
+		#else
+			options.folderName          = "JUCE Designer";
+		#endif
+
+		propertiesFile = new PropertiesFile(options);
+		if (!propertiesFile->getFile().existsAsFile())
+		{
+			propertiesFile->getFile().create();
+		}
+		DBG("PROPERTIES FILE: " + propertiesFile->getFile().getFullPathName());
         mainWindow = new MainWindow();
     }
 
@@ -37,6 +53,7 @@ public:
         // Add your application's shutdown code here..
 
         mainWindow = nullptr; // (deletes our window)
+		propertiesFile = nullptr;
     }
 
     //==============================================================================
@@ -57,6 +74,7 @@ public:
 
 private:
     ScopedPointer<MainWindow> mainWindow;
+	ScopedPointer <PropertiesFile> propertiesFile;
 };
 
 //==============================================================================

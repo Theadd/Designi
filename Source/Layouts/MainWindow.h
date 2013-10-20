@@ -12,6 +12,7 @@
 #define __MAINWINDOW_H_F0B8E400__
 
 #include "MainLayout/MainLayout.h"
+#include "../Styles/DuskMap.h"
 
 class MainWindow    : public DocumentWindow
 {
@@ -30,6 +31,7 @@ public:
 	ApplicationCommandManager commandManager;
 
 private:
+	ScopedPointer <LookAndFeel> lookAndFeel;
     ScopedPointer <MainLayout> mainLayout;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainWindow)
 };

@@ -68,6 +68,8 @@ MainLayout::MainLayout(MainWindow& _mainWindow) : Component(), mainWindow(_mainW
 	leftPanelContainer->addInnerPanel(helpPanel = new HelpPanel(), true);
 
 	//
+	addAndMakeVisible(floatingComponentOverlay = new FloatingComponentOverlay());
+	addMouseListener(floatingComponentOverlay, true);
 
 	resized();
 }
@@ -78,6 +80,7 @@ MainLayout::~MainLayout()
 	helpPanel = nullptr;
 	fileBrowserPanel = nullptr;
 	navigatorPanel = nullptr;
+	floatingComponentOverlay = nullptr;
 }
 
 void MainLayout::resized()

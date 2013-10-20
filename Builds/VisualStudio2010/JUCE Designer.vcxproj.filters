@@ -310,7 +310,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\Styles\Default.cpp">
+    <ClCompile Include="..\..\Source\Styles\DuskMap.cpp">
       <Filter>JUCE Designer\Source\Styles</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\Layouts\MainWindow.cpp">
@@ -1503,7 +1503,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\Styles\Default.h">
+    <ClInclude Include="..\..\Source\Styles\DuskMap.h">
       <Filter>JUCE Designer\Source\Styles</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Layouts\MainWindow.h">
@@ -2816,6 +2816,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\BinaryData\background_tile.png">
+      <Filter>JUCE Designer\BinaryData</Filter>
+    </None>
     <None Include="..\..\BinaryData\treedemo.xml">
       <Filter>JUCE Designer\BinaryData</Filter>
     </None>
