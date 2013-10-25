@@ -11,9 +11,10 @@
 #ifndef __DUSKMAP_H_4A610CFE__
 #define __DUSKMAP_H_4A610CFE__
 
+#include "../Layouts/ExtendedLookAndFeel.h"
 #include "../Globals.h"
 
-class DuskMapLookAndFeel   : public LookAndFeel
+class DuskMapLookAndFeel   : public ExtendedLookAndFeel
 {
 public:
     DuskMapLookAndFeel();
@@ -21,14 +22,14 @@ public:
     void fillWithBackgroundTexture (Graphics&);
     static void fillWithBackgroundTexture (Component&, Graphics&);
 
-    int getTabButtonOverlap (int tabDepth) override;
-    int getTabButtonSpaceAroundImage() override;
-    int getTabButtonBestWidth (TabBarButton&, int tabDepth) override;
-    static Colour getTabBackgroundColour (TabBarButton&);
+    //int getTabButtonOverlap (int tabDepth) override;
+    //int getTabButtonSpaceAroundImage() override;
+    //int getTabButtonBestWidth (TabBarButton&, int tabDepth) override;
+    //static Colour getTabBackgroundColour (TabBarButton&);
     void drawTabButton (TabBarButton& button, Graphics&, bool isMouseOver, bool isMouseDown) override;
 
-    Rectangle<int> getTabButtonExtraComponentBounds (const TabBarButton&, Rectangle<int>& textArea, Component&) override;
-    void drawTabAreaBehindFrontButton (TabbedButtonBar&, Graphics&, int, int) override {}
+    //Rectangle<int> getTabButtonExtraComponentBounds (const TabBarButton&, Rectangle<int>& textArea, Component&) override;
+    //void drawTabAreaBehindFrontButton (TabbedButtonBar&, Graphics&, int, int) override {}
 
     void drawStretchableLayoutResizerBar (Graphics&, int w, int h, bool isVerticalBar, bool isMouseOver, bool isMouseDragging) override;
     //Rectangle<int> getPropertyComponentContentPosition (PropertyComponent&) override;
@@ -44,9 +45,14 @@ public:
     void drawButtonBackground (Graphics&, Button&, const Colour& backgroundColour,
                                bool isMouseOverButton, bool isButtonDown) override;
 
-    void drawTableHeaderBackground (Graphics&, TableHeaderComponent&) override;
+    //void drawTableHeaderBackground (Graphics&, TableHeaderComponent&) override;
 
     static Colour getScrollbarColourForBackground (Colour background);
+
+	void drawPopupMenuBackground (Graphics &, int width, int height);
+	void drawMenuBarBackground (Graphics &, int width, int height, bool isMouseOverBar, MenuBarComponent &menuBar);
+	
+	//void paintToolbarBackground (Graphics &, int width, int height, Toolbar &toolbar);
 
 private:
     Image backgroundTexture;

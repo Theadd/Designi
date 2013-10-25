@@ -20,6 +20,11 @@ class Panel :	public Component,
 {
 public:
 
+	enum ColourIds
+    {
+        backgroundColourId     = 0x2900001 /**< The background colour to fill the panel with. */
+    };
+
 	Panel(const String& componentName = String::empty, DragAndDropContainer* _dragAndDropContainer = nullptr, int _id = 0);
 	~Panel();
 	void resized();
@@ -71,6 +76,10 @@ class PanelContainer : public Component, public DragAndDropContainer, public Com
 {
 public:
 
+	enum ColourIds
+    {
+        backgroundColourId     = 0x2901001 /**< The background colour to fill the panel container with. */
+    };
 
     PanelContainer(Globals::Position positionThatWillBePlaced, DragAndDropContainer* _dragAndDropContainer = nullptr);
 

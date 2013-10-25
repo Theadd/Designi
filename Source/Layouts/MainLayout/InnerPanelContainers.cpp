@@ -9,7 +9,7 @@
 */
 
 #include "../../../JuceLibraryCode/JuceHeader.h"
-
+#include "../ExtendedLookAndFeel.h"
 #include "InnerPanelContainers.h"
 #include "MainLayout.h"
 
@@ -27,9 +27,6 @@ Panel::Panel(const String& name, DragAndDropContainer* _dragAndDropContainer, in
 	//componentBoundsConstrainer->setMaximumHeight(200);
 	addAndMakeVisible(resizableEdgeComponent = new ResizableEdgeComponent(this, componentBoundsConstrainer, ResizableEdgeComponent::topEdge));
 	tabbedComponent = nullptr;
-
-	tempBackgroundColour = Colour((uint8) Random::getSystemRandom().nextInt(255), (uint8) Random::getSystemRandom().nextInt(255), (uint8) Random::getSystemRandom().nextInt(255));
-
 }
 
 Panel::~Panel()
@@ -88,11 +85,13 @@ void Panel::resized()
 
 void Panel::paint (Graphics& g)
 {
-	g.fillAll (tempBackgroundColour);
+	((ExtendedLookAndFeel*) &getLookAndFeel())->drawPanel (g, *this);
 }
 
 bool Panel::addInnerPanel (InnerPanel *componentToAdd)
 {
+	Colour tabsColour((juce::uint8) 22, (juce::uint8) 25, (juce::uint8) 27, (juce::uint8) 255);
+	DBG("TABS COLOUR: "+tabsColour.toDisplayString(false));
 	int numChilds = getNumChildComponents() - 1;
 	bool asTab = componentToAdd->showAsTab;
 
@@ -107,7 +106,7 @@ bool Panel::addInnerPanel (InnerPanel *componentToAdd)
 		{
 			//add this component in another tab
 			tabbedComponent->addChildComponent(componentToAdd);	//we add as child so we can get this tabbed component looking for inner component's parent
-			tabbedComponent->addTab(componentToAdd->getName(), Colours::transparentBlack, componentToAdd, false);
+			tabbedComponent->addTab(componentToAdd->getName(), tabsColour, componentToAdd, false);
 		}
 	}
 	else
@@ -124,7 +123,7 @@ bool Panel::addInnerPanel (InnerPanel *componentToAdd)
 
 			//add this component in a new tab
 			tabbedComponent->addChildComponent(componentToAdd);
-			tabbedComponent->addTab(componentToAdd->getName(), Colours::transparentBlack, componentToAdd, false);
+			tabbedComponent->addTab(componentToAdd->getName(), tabsColour, componentToAdd, false);
 		}
 		else
 		{
@@ -591,7 +590,8 @@ void PanelContainer::resized()
 
 void PanelContainer::paint (Graphics& g)
 {
-	g.fillAll (Colour((uint8) 49, (uint8) 124, (uint8) 205));
+	//g.fillAll (Colour((uint8) 49, (uint8) 124, (uint8) 205));
+	((ExtendedLookAndFeel*) &getLookAndFeel())->drawPanelContainer (g, *this);
 }
 
 void PanelContainer::childBoundsChanged (Component *child)

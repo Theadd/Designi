@@ -9,7 +9,7 @@
 */
 
 #include "../../../JuceLibraryCode/JuceHeader.h"
-
+#include "../ExtendedLookAndFeel.h"
 #include "MainLayout.h"
 
 #include "../MainWindow.h"
@@ -196,6 +196,11 @@ void MainLayout::resized()
 		centerPanelContainer->setBounds(0 + startX, 0 + startY, r.getWidth() + modWidth, r.getHeight() + modHeight);
 	}
 
+}
+
+void MainLayout::paint (Graphics& g)
+{
+	((ExtendedLookAndFeel*) &getLookAndFeel())->drawMainLayout (g, *this);
 }
 
 void MainLayout::mouseUp (const MouseEvent& event)

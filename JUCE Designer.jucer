@@ -5,6 +5,7 @@
               userNotes="https://github.com/Theadd/JUCE-Designer">
   <MAINGROUP id="DchWjp" name="JUCE Designer">
     <GROUP id="{2B5D31AE-D997-CE08-BF14-D7345862A558}" name="BinaryData">
+      <FILE id="ldNCCr" name="background.png" compile="0" resource="1" file="BinaryData/background.png"/>
       <FILE id="IcewsI" name="icons2.zip" compile="0" resource="1" file="BinaryData/icons2.zip"/>
       <FILE id="q8kvg0" name="background_tile.png" compile="0" resource="1"
             file="BinaryData/background_tile.png"/>
@@ -18,6 +19,10 @@
         <FILE id="RQ1u6g" name="DuskMap.h" compile="0" resource="0" file="Source/Styles/DuskMap.h"/>
       </GROUP>
       <GROUP id="{91FEA6B6-3B4B-9080-5F5C-93BA955508E8}" name="Layouts">
+        <FILE id="P4IznY" name="ExtendedLookAndFeel.cpp" compile="1" resource="0"
+              file="Source/Layouts/ExtendedLookAndFeel.cpp"/>
+        <FILE id="GTdNxN" name="ExtendedLookAndFeel.h" compile="0" resource="0"
+              file="Source/Layouts/ExtendedLookAndFeel.h"/>
         <FILE id="DPnXNo" name="MainWindow.cpp" compile="1" resource="0" file="Source/Layouts/MainWindow.cpp"/>
         <FILE id="qZn2IT" name="MainWindow.h" compile="0" resource="0" file="Source/Layouts/MainWindow.h"/>
         <GROUP id="{DBE84A0F-BC8A-CF79-40F6-663BDD809E90}" name="MainLayout">

@@ -40,10 +40,16 @@ class MainLayout :	public Component,
 {
 public:
 
+	enum ColourIds
+    {
+        backgroundColourId     = 0x2900001 /**< The background colour to fill MainLayer with. */
+    };
+
     MainLayout(MainWindow& _mainWindow);
 	~MainLayout();
 
 	void resized();
+	void paint (Graphics& g);
 
     void mouseUp (const MouseEvent& event);
 

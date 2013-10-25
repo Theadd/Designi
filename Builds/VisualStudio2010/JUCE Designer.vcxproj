@@ -126,6 +126,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\Styles\DuskMap.cpp"/>
+    <ClCompile Include="..\..\Source\Layouts\ExtendedLookAndFeel.cpp"/>
     <ClCompile Include="..\..\Source\Layouts\MainWindow.cpp"/>
     <ClCompile Include="..\..\Source\Layouts\MainLayout\InnerPanel.cpp"/>
     <ClCompile Include="..\..\Source\Layouts\MainLayout\InnerPanels.cpp"/>
@@ -1200,6 +1201,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\Styles\DuskMap.h"/>
+    <ClInclude Include="..\..\Source\Layouts\ExtendedLookAndFeel.h"/>
     <ClInclude Include="..\..\Source\Layouts\MainWindow.h"/>
     <ClInclude Include="..\..\Source\Layouts\MainLayout\InnerPanel.h"/>
     <ClInclude Include="..\..\Source\Layouts\MainLayout\InnerPanels.h"/>
@@ -1638,6 +1640,7 @@
     <ClInclude Include="..\..\JuceLibraryCode\JuceHeader.h"/>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\BinaryData\background.png"/>
     <None Include="..\..\BinaryData\icons2.zip"/>
     <None Include="..\..\BinaryData\background_tile.png"/>
     <None Include="..\..\BinaryData\treedemo.xml"/>

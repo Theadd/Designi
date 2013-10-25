@@ -22,11 +22,11 @@ MainWindow::MainWindow()  : DocumentWindow ("JUCE GUI Designer",
 	lookAndFeel->setColour(TextButton::textColourOffId, Colours::transparentWhite.withAlpha(0.9f));
 	lookAndFeel->setColour(TextButton::textColourOnId, Colours::blue.withAlpha(0.9f));*/
 
-	setLookAndFeel(lookAndFeel = new LookAndFeel());//new DuskMapLookAndFeel());
+	setLookAndFeel(lookAndFeel = new DuskMapLookAndFeel());
 
 
     setBounds(55, 35, 900, 720);
-    setColour(DocumentWindow::backgroundColourId, Colour::fromString("FF202A32"));
+    //setColour(DocumentWindow::backgroundColourId, Colour::fromString("FF202A32"));
     setName("JUCE Designer");
     setTitleBarHeight(26);
     setTitleBarButtonsRequired(7, 0);
