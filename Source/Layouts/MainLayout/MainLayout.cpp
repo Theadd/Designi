@@ -15,6 +15,42 @@
 #include "../MainWindow.h"
 
 
+FloatingComponentOverlay::FloatingComponentOverlay()
+{
+	setInterceptsMouseClicks(false, false);
+	setAlwaysOnTop(true);
+}
+
+void FloatingComponentOverlay::paint (Graphics& g)
+{
+	g.fillAll (Colours::darkblue.withAlpha(0.4f));
+}
+
+void FloatingComponentOverlay::mouseEnter (const MouseEvent &event)
+{
+	if (!isVisible())
+		return;
+	/*Component* mainLayout = getParentComponent();
+	if (mainLayout != 0)
+	{
+		Rectangle<int> sBounds = event.eventComponent->getScreenBounds();
+		Rectangle<int> mBounds = mainLayout->getScreenBounds();
+		setBounds(sBounds.getX() - mBounds.getX(), sBounds.getY() - mBounds.getY(), sBounds.getWidth(), sBounds.getHeight());
+			
+		if (typeid(event.eventComponent) == typeid(InnerPanel))
+			DBG("\t\t\tTYPEID == TextButton");
+	}*/
+	MainWindow* window = findParentComponentOfClass <MainWindow>();
+	if (window != 0)
+	{
+		Rectangle<int> sBounds = event.eventComponent->getScreenBounds();
+		Rectangle<int> mBounds = window->getScreenBounds();
+		setBounds(sBounds.getX() - mBounds.getX(), sBounds.getY() - mBounds.getY() - window->getTitleBarHeight() - MENUBARHEIGHT, sBounds.getWidth(), sBounds.getHeight());
+			
+		DBG("Inspector: "+event.eventComponent->getName()+" : " + event.eventComponent->getBounds().toString());
+	}
+}
+
 
 
 MainLayout::MainLayout(MainWindow& _mainWindow) : Component(), mainWindow(_mainWindow)
@@ -61,9 +97,6 @@ MainLayout::MainLayout(MainWindow& _mainWindow) : Component(), mainWindow(_mainW
 	leftPanelContainer->addInnerPanel(helpPanel = new HelpPanel(), true);
 
 	//
-	addAndMakeVisible(floatingComponentOverlay = new FloatingComponentOverlay());
-	addMouseListener(floatingComponentOverlay, true);
-
 	resized();
 }
 
@@ -258,6 +291,8 @@ PopupMenu MainLayout::getMenuForIndex (int menuIndex, const String& /*menuName*/
 		menu.addCommandItem (commandManager, toolbox);
 		menu.addCommandItem (commandManager, modifiers);
 		menu.addCommandItem (commandManager, help);
+		menu.addSeparator();
+		menu.addCommandItem (commandManager, componentInspector);
 	}
 	if (menuIndex == 3)
 	{
@@ -293,7 +328,7 @@ ApplicationCommandTarget* MainLayout::getNextCommandTarget()
 void MainLayout::getAllCommands (Array <CommandID>& commands)
 {
 	// this returns the set of all commands that this target can perform..
-	const CommandID ids[] = {newProject, newDesign, openProject, openRecentProject, closeProject, save, saveAs, saveAll, print, undo, redo, cut, copy, paste, delete_, find, replace, preferences, leftPanel, rightPanel, fileToolbar, clipboardToolbar, historyToolbar, drawableToolbar, toolbarOrientation, toolbarCustomize, fileBrowser, navigator, properties, toolbox, modifiers, help, webpage, about};
+	const CommandID ids[] = {newProject, newDesign, openProject, openRecentProject, closeProject, save, saveAs, saveAll, print, undo, redo, cut, copy, paste, delete_, find, replace, preferences, leftPanel, rightPanel, fileToolbar, clipboardToolbar, historyToolbar, drawableToolbar, toolbarOrientation, toolbarCustomize, fileBrowser, navigator, properties, toolbox, modifiers, help, componentInspector, webpage, about};
 
 	commands.addArray (ids, numElementsInArray (ids));
 }
@@ -458,6 +493,12 @@ void MainLayout::getCommandInfo (CommandID commandID, ApplicationCommandInfo& re
 		result.setActive ((helpPanel != nullptr) ? true : false);
 		result.addDefaultKeypress ('h', ModifierKeys::commandModifier | ModifierKeys::altModifier);
 		break;
+	case componentInspector:
+		result.setInfo ("Component Inspector", "Shows a floating overlay over a component when mouse hover on it.", generalCategory, 0);
+		result.setTicked ((floatingComponentOverlay != nullptr && floatingComponentOverlay->isVisible() ? true : false));
+		result.setActive ((floatingComponentOverlay != nullptr) ? true : false);
+		result.addDefaultKeypress (KeyPress::F2Key, 0);
+		break;
 	case webpage:
 		result.setInfo ("Webpage", "", generalCategory, 0);
 		result.setTicked (false);
@@ -549,6 +590,9 @@ bool MainLayout::perform (const InvocationInfo& info)
 		break;
 	case help:
 		toggleInnerPanel(helpPanel, Globals::left);
+		break;
+	case componentInspector:
+		floatingComponentOverlay->setVisible(!floatingComponentOverlay->isVisible());
 		break;
 	case webpage:
 		break;

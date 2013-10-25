@@ -57,6 +57,9 @@ MainWindow::MainWindow()  : DocumentWindow ("JUCE GUI Designer",
 
     setResizable(true, true);
     setVisible (true);
+
+	mainLayout->addChildComponent(mainLayout->floatingComponentOverlay = new FloatingComponentOverlay());
+	addMouseListener(mainLayout->floatingComponentOverlay, true);
 }
 
 MainWindow::~MainWindow()

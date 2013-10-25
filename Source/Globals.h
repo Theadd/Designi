@@ -15,6 +15,7 @@
 #define RESIZABLEEDGESIZE 5
 #define TOOLBARSIZE 32
 #define MINIMUMPANELSIZE 90
+#define MENUBARHEIGHT 24
 
 namespace Globals
 {
