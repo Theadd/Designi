@@ -304,53 +304,115 @@ void DuskMapLookAndFeel::drawConcertinaPanelHeader (Graphics& g, const Rectangle
     g.drawFittedText (panel.getName(), 4, 0, area.getWidth() - 6, area.getHeight(), Justification::centredLeft, 1);
 }
 
+
 void DuskMapLookAndFeel::drawButtonBackground (Graphics& g,
-                                                  Button& button,
-                                                  const Colour& backgroundColour,
-                                                  bool isMouseOverButton,
-                                                  bool isButtonDown)
+                                                 Button& button,
+                                                 const Colour& backgroundColour,
+                                                 bool isMouseOverButton,
+                                                 bool isButtonDown)
 {
-    const bool flatOnLeft   = button.isConnectedOnLeft();
-    const bool flatOnRight  = button.isConnectedOnRight();
-    const bool flatOnTop    = button.isConnectedOnTop();
-    const bool flatOnBottom = button.isConnectedOnBottom();
 
-    const float width  = (float) button.getWidth();
-    const float height = (float) button.getHeight();
+	bool flatOnLeft = button.isConnectedOnLeft();
+	bool flatOnRight = button.isConnectedOnRight();
+	bool flatOnTop = button.isConnectedOnTop();
+	bool flatOnBottom = button.isConnectedOnBottom();
+	bool roundedUpperLeft = (!(flatOnLeft || flatOnTop));
+	bool roundedUpperRight = (!(flatOnRight || flatOnTop));
+	bool roundedBottomLeft = (!(flatOnLeft || flatOnBottom));
+	bool roundedBottomRight = (!(flatOnRight || flatOnBottom));
 
-    const float x = 0.5f;
-    const float y = 0.5f;
-    const float w = width  - 1.0f;
-    const float h = height - 1.0f;
-    const float cornerSize = 4.0f;
+    const int width = button.getWidth();
+    const int height = button.getHeight();
 
-    Colour baseColour (backgroundColour.withMultipliedSaturation (button.hasKeyboardFocus (true)
-                                                                      ? 1.3f : 0.9f)
-                                       .withMultipliedAlpha (button.isEnabled() ? 0.9f : 0.5f));
+    const float indent = 2.0f;
+    const int cornerSize = 5;	//jmin (roundToInt (width * 0.4f), roundToInt (height * 0.4f));
 
-    if (isButtonDown)           baseColour = baseColour.contrasting (0.2f);
-    else if (isMouseOverButton) baseColour = baseColour.contrasting (0.1f);
-
-    const float mainBrightness = baseColour.getBrightness();
-    const float mainAlpha = baseColour.getFloatAlpha();
-
-    Path outline;
-    outline.addRoundedRectangle (x, y, w, h, cornerSize, cornerSize,
-                                 ! (flatOnLeft  || flatOnTop),
+    Path p;
+    p.addRoundedRectangle (0.0f, 0.0f, width, height, cornerSize, cornerSize,
+                                 ! (flatOnLeft || flatOnTop),
                                  ! (flatOnRight || flatOnTop),
-                                 ! (flatOnLeft  || flatOnBottom),
+                                 ! (flatOnLeft || flatOnBottom),
                                  ! (flatOnRight || flatOnBottom));
 
-    g.setGradientFill (ColourGradient (baseColour.brighter (0.2f), 0.0f, 0.0f,
-                                       baseColour.darker (0.25f), 0.0f, height, false));
-    g.fillPath (outline);
+	Colour colour = (isMouseOverButton) ? backgroundColour.brighter(0.1f) : backgroundColour;
+	//if (!isButtonDown) {
+        ColourGradient cg (colour, 0, 0,
+                           colour.darker (0.7f), 0, 0 + height, false);
 
-    g.setColour (Colours::white.withAlpha (0.4f * mainAlpha * mainBrightness * mainBrightness));
-    g.strokePath (outline, PathStrokeType (1.0f), AffineTransform::translation (0.0f, 1.0f)
-                                                        .scaled (1.0f, (h - 1.6f) / h));
+        cg.addColour (0.1, colour.brighter(0.1f));
+        //cg.addColour (0.4, colour);
+        //cg.addColour (0.97, colour.withMultipliedAlpha (0.3f));
 
-    g.setColour (Colours::black.withAlpha (0.4f * mainAlpha));
-    g.strokePath (outline, PathStrokeType (1.0f));
+        g.setGradientFill (cg);
+        g.fillPath (p);
+		g.setColour(colour.brighter(0.4f));
+		
+		g.drawHorizontalLine(1, (roundedUpperLeft) ? 4 : 1, (roundedUpperRight) ? width - 4 : width);
+		if (roundedUpperLeft) {
+			g.setColour(colour.brighter(0.2f));
+			g.drawHorizontalLine(1, 3, 4);
+			//g.setColour(colour.brighter(0.2f));
+			g.drawHorizontalLine(2, 2, 3);
+		}
+		if (roundedUpperRight) {
+			g.setColour(colour.brighter(0.2f));
+			g.drawHorizontalLine(1, width - 4, width - 3);
+			//g.setColour(colour.brighter(0.2f));
+			g.drawHorizontalLine(2, width - 3, width - 2);
+		}
+
+    //}
+
+	if (isButtonDown) {
+		g.setColour(Colours::black);
+		g.setOpacity(0.5f);
+		g.fillPath (p);
+	}
+
+	//draw border
+	g.setColour(Colours::black);
+	g.setOpacity(1.0f);
+    g.strokePath (p, PathStrokeType(1.0f));//PathStrokeType ((isMouseOverButton) ? 1.0f : 1.0f));
+	//g.strokePath (p, PathStrokeType(1.0f));
+
+
+	//Draw brighter 1px vertical gradient on the right
+	if (!isButtonDown) {
+		g.setGradientFill (ColourGradient (colour, width - 1, 0, Colours::grey.withAlpha(0.7f), width - 1, height, false));
+		if (!roundedUpperRight && !roundedBottomRight)
+			g.fillRect(width - 1, 2, 1, height - 3);
+	
+
+		//draw darker 1px vertical line on the left
+		if (!roundedUpperLeft && !roundedBottomLeft) {
+			g.setColour(Colours::darkgrey.withAlpha(0.3f));
+			g.fillRect(0, 2, 1, height - 3);
+		}
+	}
+
+	//fix pixels
+	if (!isButtonDown) {
+		if (!roundedUpperRight) {
+			g.setColour(colour.brighter(0.4f));
+			g.drawHorizontalLine(1, width - 1, width);
+		}
+		if (!roundedUpperLeft) {
+			g.setColour(colour.brighter(0.4f));
+			g.drawHorizontalLine(1, 0, 1);
+		}
+	}
+
+	//Redraw border
+	g.setColour(Colours::black);
+	g.setOpacity(1.0f);
+	g.drawHorizontalLine(0, (roundedUpperLeft) ? 4 : 0, (roundedUpperRight) ? width - 4 : width);
+	g.drawHorizontalLine(height, (roundedBottomLeft) ? 4 : 0, (roundedBottomRight) ? width - 4 : width);
+	if (!(!roundedUpperLeft && !roundedBottomLeft))
+		g.drawVerticalLine(0, (roundedUpperLeft) ? 4 : 0, (roundedBottomLeft) ? height - 4 : height);
+	if (!(!roundedUpperRight && !roundedBottomRight))
+	g.drawVerticalLine(width, (roundedUpperRight) ? 4 : 0, (roundedBottomRight) ? height - 4 : height);
+
+	
 }
 
 /*void DuskMapLookAndFeel::drawTableHeaderBackground (Graphics& g, TableHeaderComponent& header)

@@ -160,12 +160,14 @@ FileBrowserPanel::FileBrowserPanel() : thread ("FileTreeComponent thread"), Inne
 	selectFileTreeA.setBounds(120, 5, 20, 20);
 	selectFileTreeA.setName("selectFileTreeA");
 	selectFileTreeA.setButtonText("A");
+	selectFileTreeA.setConnectedEdges(Button::ConnectedOnRight);
 	selectFileTreeA.setTooltip("File browser remembers two locations, A and B. Use these buttons to switch between them.");
 	fileBrowserPanelHeader.addAndMakeVisible(&selectFileTreeA);
 
 	selectFileTreeB.setBounds(140, 5, 20, 20);
 	selectFileTreeB.setName("selectFileTreeB");
 	selectFileTreeB.setButtonText("B");
+	selectFileTreeB.setConnectedEdges(Button::ConnectedOnLeft);
 	selectFileTreeB.setTooltip("File browser remembers two locations, A and B. Use these buttons to switch between them.");
 	fileBrowserPanelHeader.addAndMakeVisible(&selectFileTreeB);
 
