@@ -23,6 +23,9 @@ public:
 
 	void ToolbarComponent::showCustomisationDialog ();
 
+	int getToolbarThickness();
+	void setToolbarThickness(int newThickness);
+
 private:
 	int toolbarThickness;
     Toolbar toolbar;

@@ -122,8 +122,7 @@ public:
 private:
 	MainWindow& mainWindow;
 	//--
-	//ScopedPointer <PanelContainer> rightPanelContainer;
-	//ScopedPointer <PanelContainer> leftPanelContainer;
+	Component panelContainerBox;
 	OwnedArray <PanelContainer> panelContainers;
 	ScopedPointer <FloatingComponentOverlay> floatingComponentOverlay;
 	// --

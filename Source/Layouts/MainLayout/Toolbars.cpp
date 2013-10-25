@@ -41,6 +41,17 @@ void ToolbarComponent::showCustomisationDialog ()
 	toolbar.showCustomisationDialog (factory);
 }
 
+int ToolbarComponent::getToolbarThickness()
+{
+	return toolbarThickness;
+}
+
+void ToolbarComponent::setToolbarThickness(int newThickness)
+{
+	toolbarThickness = newThickness;
+	resized();
+}
+
 ToolbarComponent::ToolbarComponentItemFactory::ToolbarComponentItemFactory()
 {
 
