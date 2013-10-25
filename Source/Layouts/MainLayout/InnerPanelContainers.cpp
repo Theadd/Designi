@@ -286,6 +286,7 @@ void Panel::CustomTabbedComponent::popupMenuClickOnTab (int tabIndex, const Stri
 	bool isOnRightPanel = true;
 	bool isOnTopPanel = true;
 	bool isOnBottomPanel = true;
+	bool isOnCenterPanel = true;
 	PanelContainer *panelContainer = findParentComponentOfClass <PanelContainer>();
 	if (panelContainer != 0)
 	{
@@ -293,6 +294,7 @@ void Panel::CustomTabbedComponent::popupMenuClickOnTab (int tabIndex, const Stri
 		isOnRightPanel = (panelContainer->position == Globals::right);
 		isOnTopPanel = (panelContainer->position == Globals::top);
 		isOnBottomPanel = (panelContainer->position == Globals::bottom);
+		isOnCenterPanel = (panelContainer->position == Globals::center);
 	}
 
 	PopupMenu m;
@@ -305,6 +307,8 @@ void Panel::CustomTabbedComponent::popupMenuClickOnTab (int tabIndex, const Stri
 			moveToSubMenu.addItem (3, "Right Panel", !isOnRightPanel, isOnRightPanel);
 			moveToSubMenu.addItem (6, "Bottom Panel", !isOnBottomPanel, isOnBottomPanel);
 			moveToSubMenu.addItem (2, "Left Panel", !isOnLeftPanel, isOnLeftPanel);
+			moveToSubMenu.addSeparator();
+			moveToSubMenu.addItem (7, "Center Panel", !isOnCenterPanel, isOnCenterPanel);
 
 
 			m.addSubMenu ("Move To", moveToSubMenu);
@@ -364,6 +368,10 @@ void Panel::CustomTabbedComponent::menuItemChosenCallback (int result, InnerPane
 		mainLayout->toggleInnerPanel(innerPanel, innerPanel->position);
 		mainLayout->toggleInnerPanel(innerPanel, Globals::bottom);
 		break;
+	case 7:	//Move To -> Center Panel
+		mainLayout->toggleInnerPanel(innerPanel, innerPanel->position);
+		mainLayout->toggleInnerPanel(innerPanel, Globals::center);
+		break;
 	default:
 		break;
 	}
@@ -418,6 +426,7 @@ PanelContainer::PanelContainer(Globals::Position positionThatWillBePlaced, DragA
 	componentBoundsConstrainer = new ComponentBoundsConstrainer();
 	componentBoundsConstrainer->setMinimumSize(200, 150);
 	ResizableEdgeComponent::Edge resizableEdge = ResizableEdgeComponent::leftEdge;
+
 	switch (position)
 	{
 	case Globals::top:
@@ -432,9 +441,13 @@ PanelContainer::PanelContainer(Globals::Position positionThatWillBePlaced, DragA
 	case Globals::left:
 		resizableEdge = ResizableEdgeComponent::rightEdge;
 		break;
+	case Globals::center:
+		resizableEdge = ResizableEdgeComponent::rightEdge;
+		break;
 	}
 	addAndMakeVisible(resizableEdgeComponent = new ResizableEdgeComponent(this, componentBoundsConstrainer, resizableEdge));
 	resizableEdgeComponent->setName("Resizable Edge Component");
+
 	addComponentListener(this);
 
     resized();
@@ -488,6 +501,9 @@ void PanelContainer::resized()
 
 		if (position==Globals::left)
 			resizableEdgeComponent->setBounds(r.getWidth() - RESIZABLEEDGESIZE, 0,  RESIZABLEEDGESIZE, r.getHeight());
+
+		if (position==Globals::center)
+			resizableEdgeComponent->setBounds(0, 0, 0, 0);
 	}
 
 	DBG("PanelContainer resized()");
@@ -535,6 +551,21 @@ void PanelContainer::resized()
 				DBG("\tlastSizeDifference: "+String(lastSizeDifference));
 				DBG("---------------------------------");
 				c->setBounds(c->getX(), nextPanelPosition, getWidth() - RESIZABLEEDGESIZE, newSize);
+				nextPanelPosition += newSize;
+			}
+			else if (position == Globals::center)
+			{
+				int newSize = c->getWidth() + lastSizeDifference;
+				if (newSize < MINIMUMPANELSIZE)
+				{
+					lastSizeDifference = newSize - MINIMUMPANELSIZE;
+					newSize = MINIMUMPANELSIZE;
+				}
+				else
+				{
+					lastSizeDifference = 0;
+				}
+				c->setBounds(nextPanelPosition, c->getY(), newSize, getHeight());
 				nextPanelPosition += newSize;
 			}
 			else
@@ -670,6 +701,12 @@ void PanelContainer::componentChildrenChanged (Component & component)
 		{
 			c->setBounds(0, drawCount * panelSize, getWidth() - RESIZABLEEDGESIZE, panelSize);
 			(dynamic_cast <Panel *> (c))->setResizableEdgeOrientation(Globals::vertical);
+		}
+
+		if (position==Globals::center)
+		{
+			c->setBounds(drawCount * panelSize, 0, panelSize, getHeight());
+			(dynamic_cast <Panel *> (c))->setResizableEdgeOrientation(Globals::horizontal);
 		}
 
 		//If it's the first panel, do not draw its ResizableEdgeComponent

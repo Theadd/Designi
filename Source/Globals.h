@@ -23,7 +23,8 @@ namespace Globals
 		top,
 		right,
 		bottom,
-		left
+		left,
+		center
 	};
 
 	enum Orientation
