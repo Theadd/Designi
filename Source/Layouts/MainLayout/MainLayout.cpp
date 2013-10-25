@@ -92,7 +92,7 @@ void MainLayout::resized()
 	{
 		toolbarComponent->setBounds(this->getLocalBounds());
 		int toolbarThickness = toolbarComponent->getToolbarThickness();
-		if (toolbarComponent->getHeight() <= toolbarComponent->getWidth())
+		if (!toolbarComponent->isVertical())
 		{
 			//toolbar is horizontal
 			panelContainerBox.setBounds(0, toolbarThickness, r.getWidth(), r.getHeight() - toolbarThickness);
@@ -243,6 +243,10 @@ PopupMenu MainLayout::getMenuForIndex (int menuIndex, const String& /*menuName*/
 			toolbarsSubMenu.addCommandItem (commandManager, clipboardToolbar);
 			toolbarsSubMenu.addCommandItem (commandManager, historyToolbar);
 			toolbarsSubMenu.addCommandItem (commandManager, drawableToolbar);
+			toolbarsSubMenu.addSeparator();
+			toolbarsSubMenu.addCommandItem (commandManager, toolbarOrientation);
+			toolbarsSubMenu.addSeparator();
+			toolbarsSubMenu.addCommandItem (commandManager, toolbarCustomize);
 
 			menu.addSubMenu ("Toolbars", toolbarsSubMenu);
 
@@ -289,7 +293,7 @@ ApplicationCommandTarget* MainLayout::getNextCommandTarget()
 void MainLayout::getAllCommands (Array <CommandID>& commands)
 {
 	// this returns the set of all commands that this target can perform..
-	const CommandID ids[] = {newProject, newDesign, openProject, openRecentProject, closeProject, save, saveAs, saveAll, print, undo, redo, cut, copy, paste, delete_, find, replace, preferences, leftPanel, rightPanel, fileToolbar, clipboardToolbar, historyToolbar, drawableToolbar, fileBrowser, navigator, properties, toolbox, modifiers, help, webpage, about};
+	const CommandID ids[] = {newProject, newDesign, openProject, openRecentProject, closeProject, save, saveAs, saveAll, print, undo, redo, cut, copy, paste, delete_, find, replace, preferences, leftPanel, rightPanel, fileToolbar, clipboardToolbar, historyToolbar, drawableToolbar, toolbarOrientation, toolbarCustomize, fileBrowser, navigator, properties, toolbox, modifiers, help, webpage, about};
 
 	commands.addArray (ids, numElementsInArray (ids));
 }
@@ -410,6 +414,14 @@ void MainLayout::getCommandInfo (CommandID commandID, ApplicationCommandInfo& re
 		result.setInfo ("Drawable Components", "", generalCategory, 0);
 		result.setTicked (true);
 		break;
+	case toolbarOrientation:
+		result.setInfo ("Vertical/Horizontal", "", generalCategory, 0);
+		result.setTicked (false);
+		break;
+	case toolbarCustomize:
+		result.setInfo ("Customize...", "", generalCategory, 0);
+		result.setTicked (false);
+		break;
 	case fileBrowser:
 		result.setInfo ("File Browser", "", generalCategory, 0);
 		result.setTicked ((fileBrowserPanel != nullptr && isInnerPanelVisible(fileBrowserPanel) ? true : false));
@@ -515,6 +527,13 @@ bool MainLayout::perform (const InvocationInfo& info)
 	case historyToolbar:
 		break;
 	case drawableToolbar:
+		break;
+	case toolbarOrientation:
+		toolbarComponent->setVertical(!toolbarComponent->isVertical());
+		resized();
+		break;
+	case toolbarCustomize:
+		toolbarComponent->showCustomisationDialog();
 		break;
 	case fileBrowser:
 		toggleInnerPanel(fileBrowserPanel, Globals::left);

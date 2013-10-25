@@ -163,6 +163,8 @@ private:
 			clipboardToolbar	= 0x2204,
 			historyToolbar		= 0x2205,
 			drawableToolbar		= 0x2206,
+			toolbarOrientation	= 0x220D,	//not in order, watch out!
+			toolbarCustomize	= 0x220E,	//
 		fileBrowser				= 0x2207,
 		navigator				= 0x2208,
 		properties				= 0x2209,

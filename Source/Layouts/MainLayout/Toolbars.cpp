@@ -15,6 +15,7 @@ ToolbarComponent::ToolbarComponent(int _toolbarThickness) : toolbarThickness(_to
 {
     // Create and add the toolbar...
     addAndMakeVisible (&toolbar);
+	_isVertical = false;
 
     // And use our item factory to add a set of default icons to it...
     toolbar.addDefaultItems (factory);
@@ -32,8 +33,14 @@ void ToolbarComponent::resized()
 
 void ToolbarComponent::setVertical (bool shouldBeVertical)
 {
+	_isVertical = shouldBeVertical;
 	toolbar.setVertical(shouldBeVertical);
 	resized();
+}
+
+bool ToolbarComponent::isVertical ()
+{
+	return _isVertical;
 }
 
 void ToolbarComponent::showCustomisationDialog ()

@@ -19,9 +19,10 @@ public:
 
     void resized();
 
-	void ToolbarComponent::setVertical (bool shouldBeVertical);
+	void setVertical (bool shouldBeVertical);
+	bool isVertical ();
 
-	void ToolbarComponent::showCustomisationDialog ();
+	void showCustomisationDialog ();
 
 	int getToolbarThickness();
 	void setToolbarThickness(int newThickness);
@@ -29,6 +30,7 @@ public:
 private:
 	int toolbarThickness;
     Toolbar toolbar;
+	bool _isVertical;
 
     //==============================================================================
     class ToolbarComponentItemFactory   : public ToolbarItemFactory
