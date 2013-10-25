@@ -70,6 +70,9 @@ MainLayout::MainLayout(MainWindow& _mainWindow) : Component(), mainWindow(_mainW
 	panelContainers.add(new PanelContainer(Globals::left, this));
 	panelContainers.add(new PanelContainer(Globals::center, this));
 
+	//ADD EMPTY CODE EDITOR PANEL
+	codeEditorPanels.add(new CodeEditorPanel(String("New")));
+
 	PanelContainer *leftPanelContainer = getPanelContainer(Globals::left);
 	PanelContainer *rightPanelContainer = getPanelContainer(Globals::right);
 	PanelContainer *topPanelContainer = getPanelContainer(Globals::top);
@@ -95,7 +98,8 @@ MainLayout::MainLayout(MainWindow& _mainWindow) : Component(), mainWindow(_mainW
 	//helpPanel
 	helpPanel = nullptr;
 	leftPanelContainer->addInnerPanel(helpPanel = new HelpPanel(), true);
-
+	//codeEditorPanel
+	centerPanelContainer->addInnerPanel(codeEditorPanels[0], true);
 	//
 	resized();
 }
@@ -705,3 +709,32 @@ PanelContainer* MainLayout::getPanelContainerOf(InnerPanel* innerPanel, Globals:
 
 	return nullptr;
 }
+
+void MainLayout::loadDocument(File& file)
+{
+	String filename(file.getFileName());
+	String filePath(file.getFullPathName());
+
+	//check if that file was already loaded
+	bool fileAlreadyLoaded = false;
+	CodeEditorPanel* existingEditor;
+	for (int i = 0; i < codeEditorPanels.size(); ++i)
+	{
+		if (codeEditorPanels[i]->filePath.equalsIgnoreCase(filePath))
+		{
+			fileAlreadyLoaded = true;
+			existingEditor = codeEditorPanels[i];
+			break;
+		}
+	}
+
+	if (!fileAlreadyLoaded)
+	{
+		codeEditorPanels.add(new CodeEditorPanel(filename, &file));
+		getPanelContainer(Globals::center)->addInnerPanel(codeEditorPanels.getLast(), false);
+		existingEditor = codeEditorPanels.getLast();
+	}
+
+	getPanelContainer(Globals::center)->showInnerPanel(existingEditor);
+}
+

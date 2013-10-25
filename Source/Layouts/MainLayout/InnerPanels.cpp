@@ -12,10 +12,48 @@
 #include "../../Globals.h"
 
 #include "InnerPanels.h"
+#include "MainLayout.h"
 
 
 
+CodeEditorPanel::CodeEditorPanel (String& filename, File* file)
+{
+	setName(filename);
+	loadedFile = nullptr;
+	filePath = String::empty;
+	codeTokeniser = new CPlusPlusCodeTokeniser();
+	codeDocument = new CodeDocument();
+	codeEditorComponent = new CodeEditorComponent(*codeDocument, codeTokeniser);
+	addAndMakeVisible(codeEditorComponent);
+	if (file != nullptr)
+	{
+		loadedFile = new File(*file);
+		filePath = loadedFile->getFullPathName();
+		loadContent(loadedFile->loadFileAsString());
+	}
+	resized();
+}
 
+CodeEditorPanel::~CodeEditorPanel ()
+{
+	codeEditorComponent = nullptr;
+	codeTokeniser = nullptr;
+	codeDocument = nullptr;
+	loadedFile = nullptr;
+}
+
+void CodeEditorPanel::resized ()
+{
+	codeEditorComponent->setBoundsInset (BorderSize<int> (0, 0, 0, 0));
+}
+
+void CodeEditorPanel::loadContent (const String &newContent)
+{
+	codeEditorComponent->loadContent(newContent);
+}
+
+
+////////////////////////////////////////////////////////////////////////////
 
 
 NavigatorPanel::NavigatorPanel () : InnerPanel()
@@ -145,6 +183,9 @@ FileBrowserPanel::FileBrowserPanel() : thread ("FileTreeComponent thread"), Inne
     addAndMakeVisible (fileTreeCompA = new FileTreeComponent (*directoryList));
 	addAndMakeVisible (fileTreeCompB = new FileTreeComponent (*directoryList));
 	fileTreeCompB->setVisible(false);
+	//Add listeners for double clicking files
+	fileTreeCompA->addListener(this);
+	fileTreeCompB->addListener(this);
 	addAndMakeVisible (&fileBrowserPanelHeader);
 
 	//From FileBrowserPanelHeader
@@ -208,6 +249,16 @@ void FileBrowserPanel::mouseUp (const MouseEvent &event)
 			fileTreeCompB->setVisible(true);
 		}
 	}
+}
+
+void FileBrowserPanel::fileDoubleClicked (const File &file)
+{
+	if (file.isDirectory())
+		return;
+
+	MainLayout* mainLayout = findParentComponentOfClass <MainLayout>();
+	File fileToOpen(file);
+	mainLayout->loadDocument(fileToOpen);
 }
 
 FileBrowserPanel::ProjectFileFilter::ProjectFileFilter() : FileFilter("FileFilter for project directory trees.")

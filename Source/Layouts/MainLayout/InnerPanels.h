@@ -14,6 +14,29 @@
 
 #include "InnerPanel.h"
 
+class MainLayout;
+
+class CodeEditorPanel : public InnerPanel
+{
+public:
+
+	CodeEditorPanel (String& filename, File* file = nullptr);
+	~CodeEditorPanel ();
+
+	void resized ();
+
+	void loadContent (const String &newContent);
+
+	ScopedPointer <File> loadedFile;
+	String filePath;
+private:
+	//CodeEditorComponent (CodeDocument &document, CodeTokeniser *codeTokeniser)
+	ScopedPointer <CodeEditorComponent> codeEditorComponent;
+	ScopedPointer <CodeDocument> codeDocument;
+	ScopedPointer <CPlusPlusCodeTokeniser> codeTokeniser;
+
+};
+
 
 class NavigatorPanel : public InnerPanel
 {
@@ -48,7 +71,8 @@ private:
 };
 
 
-class FileBrowserPanel : public InnerPanel
+class FileBrowserPanel :	public InnerPanel,
+							public FileBrowserListener
 {
 public:
 
@@ -57,6 +81,11 @@ public:
 
 	void resized ();
 	void mouseUp (const MouseEvent &event);
+
+	void selectionChanged (){};
+	void fileClicked (const File &file, const MouseEvent &e){};
+	void fileDoubleClicked (const File &file);
+	void browserRootChanged (const File &newRoot){};
 
 private:
 	ScopedPointer <FileTreeComponent> fileTreeCompA;

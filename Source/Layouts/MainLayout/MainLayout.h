@@ -75,6 +75,8 @@ public:
 	PanelContainer* getPanelContainer(Globals::Position position);
 	PanelContainer* getPanelContainerOf(InnerPanel* innerPanel, Globals::Position guessPosition = Globals::top);
 
+	void loadDocument(File& file);
+
 	ScopedPointer <FloatingComponentOverlay> floatingComponentOverlay;
 
 private:
@@ -82,12 +84,14 @@ private:
 	//--
 	Component panelContainerBox;
 	OwnedArray <PanelContainer> panelContainers;
+	OwnedArray <CodeEditorPanel> codeEditorPanels;
 	
 	// --
 	//  --
 	ScopedPointer <HelpPanel> helpPanel;
 	ScopedPointer <FileBrowserPanel> fileBrowserPanel;
 	ScopedPointer <NavigatorPanel> navigatorPanel;
+	
 	//--
 	ScopedPointer <ToolbarComponent> toolbarComponent;
 

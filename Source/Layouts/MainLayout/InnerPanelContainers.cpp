@@ -250,6 +250,21 @@ bool Panel::removeInnerPanel(InnerPanel *innerPanel)
 	return false;
 }
 
+void Panel::showInnerPanel(InnerPanel *innerPanel)
+{
+	if (tabbedComponent != nullptr)
+	{
+		for (int i = 0; i < tabbedComponent->getNumTabs(); ++i)
+		{
+			if (innerPanel == tabbedComponent->getTabContentComponent(i))
+			{
+				tabbedComponent->setCurrentTabIndex(i);
+				return;
+			}
+		}
+	}
+}
+
 bool Panel::isInnerPanelVisible(InnerPanel* innerPanel)
 {
 	if (tabbedComponent != nullptr)
@@ -758,6 +773,18 @@ bool PanelContainer::removeInnerPanel(InnerPanel *innerPanel)
 			return true;
 
 	return false;
+}
+
+void PanelContainer::showInnerPanel(InnerPanel *innerPanel)
+{
+	for (int i = 0; i < panels.size(); ++i)
+	{
+		if (panels[i]->isInnerPanelVisible(innerPanel))
+		{
+			panels[i]->showInnerPanel(innerPanel);
+			return;
+		}
+	}
 }
 
 bool PanelContainer::isInnerPanelVisible(InnerPanel* innerPanel)
