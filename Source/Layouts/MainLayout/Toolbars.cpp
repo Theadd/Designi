@@ -70,13 +70,16 @@ void ToolbarComponent::ToolbarComponentItemFactory::getAllToolbarItemIds (Array 
     // go in our toolbar. Any items you might want to add must be listed here. The
     // order in which they are listed will be used by the toolbar customisation panel.
 
-    ids.add (doc_new);
     ids.add (doc_open);
     ids.add (doc_save);
-    ids.add (doc_saveAs);
-    ids.add (edit_copy);
-    ids.add (edit_cut);
-    ids.add (edit_paste);
+    ids.add (edit_undo);
+    ids.add (edit_redo);
+	/*
+				doc_open		= 1,
+			doc_save		= 2,
+			edit_undo		= 3,
+			edit_redo		= 4
+			*/
 
     // If you're going to use separators, then they must also be added explicitly
     // to the list.
@@ -90,31 +93,39 @@ void ToolbarComponent::ToolbarComponentItemFactory::getDefaultItemSet (Array <in
     // This returns an ordered list of the set of items that make up a
     // toolbar's default set. Not all items need to be on this list, and
     // items can appear multiple times (e.g. the separators used here).
-    ids.add (doc_new);
     ids.add (doc_open);
     ids.add (doc_save);
-    ids.add (doc_saveAs);
-    ids.add (spacerId);
     ids.add (separatorBarId);
-    ids.add (edit_copy);
-    ids.add (edit_cut);
-    ids.add (edit_paste);
+    ids.add (edit_undo);
+    ids.add (edit_redo);
     ids.add (flexibleSpacerId);
 
 }
 
 ToolbarItemComponent* ToolbarComponent::ToolbarComponentItemFactory::createItem (int itemId)
 {
+	ToolbarButton* button;
+
     switch (itemId)
     {
-        case doc_new:           return createButtonFromZipFileSVG (itemId, "new", "document-new.svg");
-        case doc_open:          return createButtonFromZipFileSVG (itemId, "open", "document-open.svg");
-        case doc_save:          return createButtonFromZipFileSVG (itemId, "save", "document-save.svg");
-        case doc_saveAs:        return createButtonFromZipFileSVG (itemId, "save as", "document-save-as.svg");
-        case edit_copy:         return createButtonFromZipFileSVG (itemId, "copy", "edit-copy.svg");
-        case edit_cut:          return createButtonFromZipFileSVG (itemId, "cut", "edit-cut.svg");
-        case edit_paste:        return createButtonFromZipFileSVG (itemId, "paste", "edit-paste.svg");
-        default:                break;
+        case doc_open:
+			button = createButtonFromZipFileSVG (itemId, "Open", "Download.svg");
+			button->setTooltip("Open file");
+			return button;
+        case doc_save:
+			button = createButtonFromZipFileSVG (itemId, "Save", "Upload.svg");
+			button->setTooltip("Save file");
+			return button;
+        case edit_undo:
+			button = createButtonFromZipFileSVG (itemId, "Undo", "Undo.svg");
+			button->setTooltip("Undo");
+			return button;
+        case edit_redo:
+			button = createButtonFromZipFileSVG (itemId, "Redo", "Redo.svg");
+			button->setTooltip("Redo");
+			return button;
+        default:
+			break;
     }
 
     return 0;
@@ -125,7 +136,7 @@ ToolbarButton* ToolbarComponent::ToolbarComponentItemFactory::createButtonFromZi
     if (iconsFromZipFile.size() == 0)
     {
         // If we've not already done so, load all the images from the zip file..
-        MemoryInputStream iconsFileStream (BinaryData::icons_zip, BinaryData::icons_zipSize, false);
+        MemoryInputStream iconsFileStream (BinaryData::icons2_zip, BinaryData::icons2_zipSize, false);
         ZipFile icons (&iconsFileStream, false);
 
         for (int i = 0; i < icons.getNumEntries(); ++i)

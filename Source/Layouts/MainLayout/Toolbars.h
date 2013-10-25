@@ -43,13 +43,17 @@ private:
         // are the ones we'll use in this demo.
         enum ToolbarItemIds
         {
-            doc_new         = 1,
+            /*doc_new         = 1,
             doc_open        = 2,
             doc_save        = 3,
             doc_saveAs      = 4,
             edit_copy       = 5,
             edit_cut        = 6,
-            edit_paste      = 7
+            edit_paste      = 7*/
+			doc_open		= 1,
+			doc_save		= 2,
+			edit_undo		= 3,
+			edit_redo		= 4
         };
 
         void getAllToolbarItemIds (Array <int>& ids);

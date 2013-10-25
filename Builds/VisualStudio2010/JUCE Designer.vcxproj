@@ -1638,6 +1638,7 @@
     <ClInclude Include="..\..\JuceLibraryCode\JuceHeader.h"/>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\BinaryData\icons2.zip"/>
     <None Include="..\..\BinaryData\background_tile.png"/>
     <None Include="..\..\BinaryData\treedemo.xml"/>
     <None Include="..\..\BinaryData\navigator.xml"/>

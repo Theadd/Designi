@@ -2816,6 +2816,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\BinaryData\icons2.zip">
+      <Filter>JUCE Designer\BinaryData</Filter>
+    </None>
     <None Include="..\..\BinaryData\background_tile.png">
       <Filter>JUCE Designer\BinaryData</Filter>
     </None>

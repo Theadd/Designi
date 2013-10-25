@@ -5,6 +5,7 @@
               userNotes="https://github.com/Theadd/JUCE-Designer">
   <MAINGROUP id="DchWjp" name="JUCE Designer">
     <GROUP id="{2B5D31AE-D997-CE08-BF14-D7345862A558}" name="BinaryData">
+      <FILE id="IcewsI" name="icons2.zip" compile="0" resource="1" file="BinaryData/icons2.zip"/>
       <FILE id="q8kvg0" name="background_tile.png" compile="0" resource="1"
             file="BinaryData/background_tile.png"/>
       <FILE id="VWiZvI" name="treedemo.xml" compile="0" resource="1" file="BinaryData/treedemo.xml"/>
