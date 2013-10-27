@@ -9,9 +9,13 @@
 */
 
 #include "../../../JuceLibraryCode/JuceHeader.h"
-#include "../ExtendedLookAndFeel.h"
+
 #include "MainLayout.h"
 
+#include "Toolbars.h"
+#include "InnerPanelContainers.h"
+#include "InnerPanels.h"
+#include "../ExtendedLookAndFeel.h"
 #include "../MainWindow.h"
 
 
@@ -71,7 +75,8 @@ MainLayout::MainLayout(MainWindow& _mainWindow) : Component(), mainWindow(_mainW
 	panelContainers.add(new PanelContainer(Globals::center, this));
 
 	//ADD EMPTY CODE EDITOR PANEL
-	codeEditorPanels.add(new CodeEditorPanel(String("New")));
+	String filename = "New File";
+	codeEditorPanels.add(new CodeEditorPanel(filename));
 
 	PanelContainer *leftPanelContainer = getPanelContainer(Globals::left);
 	PanelContainer *rightPanelContainer = getPanelContainer(Globals::right);
@@ -95,6 +100,8 @@ MainLayout::MainLayout(MainWindow& _mainWindow) : Component(), mainWindow(_mainW
 	//FileBrowserTab
 	fileBrowserPanel = nullptr;
 	leftPanelContainer->addInnerPanel(fileBrowserPanel = new FileBrowserPanel(), true);
+	fileBrowserPanel->setProjectName(String("JUCE GUI Designer"));
+	fileBrowserPanel->setBrowserRoot(File(String("C:\\Users\\admin\\juced")));
 	//helpPanel
 	helpPanel = nullptr;
 	leftPanelContainer->addInnerPanel(helpPanel = new HelpPanel(), true);
@@ -717,7 +724,7 @@ void MainLayout::loadDocument(File& file)
 
 	//check if that file was already loaded
 	bool fileAlreadyLoaded = false;
-	CodeEditorPanel* existingEditor;
+	CodeEditorPanel* existingEditor = nullptr;
 	for (int i = 0; i < codeEditorPanels.size(); ++i)
 	{
 		if (codeEditorPanels[i]->filePath.equalsIgnoreCase(filePath))

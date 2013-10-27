@@ -12,6 +12,7 @@
 #include "../../Globals.h"
 
 #include "InnerPanels.h"
+
 #include "MainLayout.h"
 
 
@@ -194,9 +195,11 @@ FileBrowserPanel::FileBrowserPanel() : thread ("FileTreeComponent thread"), Inne
 
 	projectNameLabel.setBounds(5, 5, 115, 15);
 	projectNameLabel.setText("Project Name", NotificationType());
-	//projectNameLabel.setColour(Label::backgroundColourId, Colours::transparentBlack);
-	projectNameLabel.setColour(Label::textColourId, Colour::fromString("70FFFFFF"));
+	projectName = "Project Name";
+	
+
 	fileBrowserPanelHeader.addAndMakeVisible(&projectNameLabel);
+	projectNameLabel.setVisible(false);
 
 	selectFileTreeA.setBounds(120, 5, 20, 20);
 	selectFileTreeA.setName("selectFileTreeA");
@@ -227,12 +230,13 @@ FileBrowserPanel::~FileBrowserPanel() {
 
 void FileBrowserPanel::resized() {
 	if (fileTreeCompA != nullptr)
-		fileTreeCompA->setBoundsInset (BorderSize<int> (30, 5, 5, 5));
+		fileTreeCompA->setBoundsInset (BorderSize<int> (31, 0, 0, 0));
 	if (fileTreeCompB != nullptr)
-		fileTreeCompB->setBoundsInset (BorderSize<int> (30, 5, 5, 5));
+		fileTreeCompB->setBoundsInset (BorderSize<int> (31, 0, 0, 0));
 
 	fileBrowserPanelHeader.setBounds(0, 0, this->getWidth(), 30);
 	projectNameLabel.setBoundsInset (BorderSize<int> (5, 5, 5, 50));
+	projectNameLabel.setColour(Label::backgroundColourId, Colours::white.withAlpha(0.2f));
 	selectFileTreeA.setBounds(projectNameLabel.getWidth() + 10, 5, 20, 20);
 	selectFileTreeB.setBounds(projectNameLabel.getWidth() + 30, 5, 20, 20);
 	//DBG("Resized FileBrowserPanel");
@@ -260,6 +264,23 @@ void FileBrowserPanel::fileDoubleClicked (const File &file)
 	File fileToOpen(file);
 	mainLayout->loadDocument(fileToOpen);
 }
+
+void FileBrowserPanel::setBrowserRoot (const File &file)
+{
+	directoryList->setDirectory (file, true, true);
+}
+
+void FileBrowserPanel::setProjectName (const String &name)
+{
+	projectName = String(name);
+	setHeader(true, projectName, 30, 5, 45, 0);
+}
+	
+
+
+
+//////////////////////
+
 
 FileBrowserPanel::ProjectFileFilter::ProjectFileFilter() : FileFilter("FileFilter for project directory trees.")
 {

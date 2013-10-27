@@ -11,9 +11,10 @@
 #ifndef __RIGHTPANELCONTAINER_H_E7390F97__
 #define __RIGHTPANELCONTAINER_H_E7390F97__
 #include "../../Globals.h"
-#include "InnerPanel.h"
 
+class InnerPanel;
 class MainLayout;
+class ExtendedLookAndFeel;
 
 class Panel :	public Component,
 				public DragAndDropTarget

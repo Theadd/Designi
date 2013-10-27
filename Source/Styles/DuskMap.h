@@ -52,7 +52,7 @@ public:
 	void drawPopupMenuBackground (Graphics &, int width, int height);
 	void drawMenuBarBackground (Graphics &, int width, int height, bool isMouseOverBar, MenuBarComponent &menuBar);
 	
-	//void paintToolbarBackground (Graphics &, int width, int height, Toolbar &toolbar);
+	void drawTreeviewPlusMinusBox (Graphics &, int x, int y, int w, int h, bool isPlus, bool isMouseOver);
 
 private:
     Image backgroundTexture;

@@ -11,7 +11,6 @@
 #ifndef __INNERPANELS_H_B9C0D563__
 #define __INNERPANELS_H_B9C0D563__
 
-
 #include "InnerPanel.h"
 
 class MainLayout;
@@ -83,9 +82,14 @@ public:
 	void mouseUp (const MouseEvent &event);
 
 	void selectionChanged (){};
-	void fileClicked (const File &file, const MouseEvent &e){};
+	void fileClicked (const File& /*file*/, const MouseEvent& /*e*/){};
 	void fileDoubleClicked (const File &file);
-	void browserRootChanged (const File &newRoot){};
+	void browserRootChanged (const File& /*newRoot*/){};
+
+	void setBrowserRoot (const File &file);
+	void setProjectName (const String &name);
+
+	String projectName;
 
 private:
 	ScopedPointer <FileTreeComponent> fileTreeCompA;

@@ -11,12 +11,18 @@
 #ifndef __MAINLAYOUT_H_DBAC5B39__
 #define __MAINLAYOUT_H_DBAC5B39__
 
-#include "Toolbars.h"
-//#include "LeftPanelContainer.cpp"
-#include "InnerPanelContainers.h"
-#include "InnerPanels.h"
+
 #include "../../Globals.h"
 
+class ToolbarComponent;
+class InnerPanel;
+class FileBrowserPanel;
+class NavigatorPanel;
+class HelpPanel;
+class CodeEditorPanel;
+class Panel;
+class PanelContainer;
+class ExtendedLookAndFeel;
 class MainWindow;
 
 class FloatingComponentOverlay : public Component

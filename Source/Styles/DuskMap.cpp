@@ -28,7 +28,7 @@ namespace LookAndFeelHelpers
 
         return baseColour;
     }
-
+	/*
     static TextLayout layoutTooltipText (const String& text, Colour colour) noexcept
     {
         const float tooltipFontSize = 13.0f;
@@ -47,6 +47,7 @@ namespace LookAndFeelHelpers
     {
         return LookAndFeel::getDefaultLookAndFeel().getTypefaceForFont (font);
     }
+	*/
 }
 
 DuskMapLookAndFeel::DuskMapLookAndFeel()
@@ -54,16 +55,14 @@ DuskMapLookAndFeel::DuskMapLookAndFeel()
     setColour (mainBackgroundColourId, Colour::greyLevel (0.8f));
     setColour (treeviewHighlightColourId, Colour (0x401111ee));
     //setColour (TextButton::buttonColourId, Colour (0xffeeeeff));
-
-    setColour (ScrollBar::thumbColourId,
-               getScrollbarColourForBackground (findColour (mainBackgroundColourId)));
 	
 	setColour (TextButton::buttonColourId,          Colour(Colour((juce::uint8) 83, (juce::uint8) 94, (juce::uint8) 104, (juce::uint8) 255)));
     setColour(TextButton::textColourOffId, Colours::transparentWhite.withAlpha(0.9f));
 	setColour(TextButton::textColourOnId, Colours::blue.withAlpha(0.9f));
 	setColour (ListBox::outlineColourId,            findColour (ComboBox::outlineColourId));
-    //setColour (ScrollBar::thumbColourId,            Colour (0xffbbbbdd));
-    setColour (ScrollBar::backgroundColourId,       Colours::transparentBlack);
+	//SCROLLBAR
+    setColour (ScrollBar::thumbColourId,            Colours::white.withAlpha(0.2f));
+    setColour (ScrollBar::backgroundColourId,       Colours::black.withAlpha(0.2f));
     setColour (Slider::thumbColourId,               Colours::yellow);
     setColour (Slider::trackColourId,               Colour (0x7f000000));
     setColour (Slider::textBoxOutlineColourId,      Colours::green);
@@ -91,6 +90,15 @@ DuskMapLookAndFeel::DuskMapLookAndFeel()
 	setColour (Toolbar::buttonMouseDownBackgroundColourId,	findColour (TextButton::buttonColourId).interpolatedWith(Colours::blue, 0.1f));
 	//TABBED COMPONENT
 	setColour (TabbedComponent::outlineColourId, Colours::black);
+	//LABEL
+	setColour (Label::textColourId, Colours::white);
+	//TREEVIEW
+	//ColourIds { backgroundColourId = 0x1000500, linesColourId = 0x1000501, dragAndDropIndicatorColourId = 0x1000502 }
+	setColour (TreeView::linesColourId, Colours::transparentBlack);
+	//DirectoryContentsDisplayComponent (inherited by FileTreeComponent)
+	//ColourIds { highlightColourId = 0x1000540, textColourId = 0x1000541 }
+	setColour (DirectoryContentsDisplayComponent::textColourId, Colours::white);
+	setColour (DirectoryContentsDisplayComponent::highlightColourId, Colours::white.withAlpha(0.1f));
 }
 
 Colour DuskMapLookAndFeel::getScrollbarColourForBackground (Colour background)
@@ -198,11 +206,14 @@ void DuskMapLookAndFeel::drawScrollbar (Graphics& g, ScrollBar& scrollbar, int x
                                            bool isScrollbarVertical, int thumbStartPosition, int thumbSize,
                                            bool isMouseOver, bool isMouseDown)
 {
-    Path thumbPath;
+    //Draw scrollbar background
+	g.fillAll(scrollbar.findColour (ScrollBar::backgroundColourId));
 
+	//draw scrollbar
+	Path thumbPath;
     if (thumbSize > 0)
     {
-        const float thumbIndent = (isScrollbarVertical ? width : height) * 0.25f;
+        /*const float thumbIndent = (isScrollbarVertical ? width : height) * 0.25f;
         const float thumbIndentx2 = thumbIndent * 2.0f;
 
         if (isScrollbarVertical)
@@ -211,9 +222,14 @@ void DuskMapLookAndFeel::drawScrollbar (Graphics& g, ScrollBar& scrollbar, int x
         else
             thumbPath.addRoundedRectangle (thumbStartPosition + thumbIndent, y + thumbIndent,
                                            thumbSize - thumbIndentx2, height - thumbIndentx2, (height - thumbIndentx2) * 0.5f);
-    }
+		*/
+		if (isScrollbarVertical)
+			thumbPath.addRectangle((float) x, (float) thumbStartPosition, (float) width, (float) thumbSize);
+		else
+			thumbPath.addRectangle((float) thumbStartPosition, (float) y, (float) thumbSize, (float) height);
+	}
 
-    Colour thumbCol (scrollbar.findColour (ScrollBar::thumbColourId, true));
+    Colour thumbCol (findColour (ScrollBar::thumbColourId));
 
     if (isMouseOver || isMouseDown)
         thumbCol = thumbCol.withMultipliedAlpha (2.0f);
@@ -221,8 +237,12 @@ void DuskMapLookAndFeel::drawScrollbar (Graphics& g, ScrollBar& scrollbar, int x
     g.setColour (thumbCol);
     g.fillPath (thumbPath);
 
-    g.setColour (thumbCol.contrasting ((isMouseOver  || isMouseDown) ? 0.2f : 0.1f));
-    g.strokePath (thumbPath, PathStrokeType (1.0f));
+	//draw scrollbar left border
+	g.setColour(Colours::black);
+	g.drawVerticalLine(x, 0.0f, (float) scrollbar.getHeight());
+
+    //g.setColour (thumbCol.contrasting ((isMouseOver  || isMouseDown) ? 0.2f : 0.1f));
+    //g.strokePath (thumbPath, PathStrokeType (1.0f));
 }
 
 static Range<float> getBrightnessRange (const Image& im)
@@ -321,11 +341,10 @@ void DuskMapLookAndFeel::drawButtonBackground (Graphics& g,
 	bool roundedBottomLeft = (!(flatOnLeft || flatOnBottom));
 	bool roundedBottomRight = (!(flatOnRight || flatOnBottom));
 
-    const int width = button.getWidth();
-    const int height = button.getHeight();
+    float width = (float) button.getWidth();
+    float height = (float) button.getHeight();
 
-    const float indent = 2.0f;
-    const int cornerSize = 5;	//jmin (roundToInt (width * 0.4f), roundToInt (height * 0.4f));
+    float cornerSize = 5.0f;	//jmin (roundToInt (width * 0.4f), roundToInt (height * 0.4f));
 
     Path p;
     p.addRoundedRectangle (0.0f, 0.0f, width, height, cornerSize, cornerSize,
@@ -347,7 +366,7 @@ void DuskMapLookAndFeel::drawButtonBackground (Graphics& g,
         g.fillPath (p);
 		g.setColour(colour.brighter(0.4f));
 		
-		g.drawHorizontalLine(1, (roundedUpperLeft) ? 4 : 1, (roundedUpperRight) ? width - 4 : width);
+		g.drawHorizontalLine(1, (roundedUpperLeft) ? 4.0f : 1.0f, (roundedUpperRight) ? ((float) width) - 4.0f : (float) width);
 		if (roundedUpperLeft) {
 			g.setColour(colour.brighter(0.2f));
 			g.drawHorizontalLine(1, 3, 4);
@@ -380,13 +399,13 @@ void DuskMapLookAndFeel::drawButtonBackground (Graphics& g,
 	if (!isButtonDown) {
 		g.setGradientFill (ColourGradient (colour, width - 1, 0, Colours::grey.withAlpha(0.7f), width - 1, height, false));
 		if (!roundedUpperRight && !roundedBottomRight)
-			g.fillRect(width - 1, 2, 1, height - 3);
+			g.fillRect(width - 1.0f, 2.0f, 1.0f, height - 3.0f);
 	
 
 		//draw darker 1px vertical line on the left
 		if (!roundedUpperLeft && !roundedBottomLeft) {
 			g.setColour(Colours::darkgrey.withAlpha(0.3f));
-			g.fillRect(0, 2, 1, height - 3);
+			g.fillRect(0.0f, 2.0f, 1.0f, height - 3.0f);
 		}
 	}
 
@@ -405,12 +424,12 @@ void DuskMapLookAndFeel::drawButtonBackground (Graphics& g,
 	//Redraw border
 	g.setColour(Colours::black);
 	g.setOpacity(1.0f);
-	g.drawHorizontalLine(0, (roundedUpperLeft) ? 4 : 0, (roundedUpperRight) ? width - 4 : width);
-	g.drawHorizontalLine(height, (roundedBottomLeft) ? 4 : 0, (roundedBottomRight) ? width - 4 : width);
+	g.drawHorizontalLine(0, (roundedUpperLeft) ? 4.0f : 0.0f, (roundedUpperRight) ? width - 4.0f : width);
+	g.drawHorizontalLine((int) height, (roundedBottomLeft) ? 4.0f : 0.0f, (roundedBottomRight) ? width - 4.0f : width);
 	if (!(!roundedUpperLeft && !roundedBottomLeft))
-		g.drawVerticalLine(0, (roundedUpperLeft) ? 4 : 0, (roundedBottomLeft) ? height - 4 : height);
+		g.drawVerticalLine(0, (roundedUpperLeft) ? 4.0f : 0.0f, (roundedBottomLeft) ? height - 4.0f : height);
 	if (!(!roundedUpperRight && !roundedBottomRight))
-	g.drawVerticalLine(width, (roundedUpperRight) ? 4 : 0, (roundedBottomRight) ? height - 4 : height);
+		g.drawVerticalLine((int) width, (roundedUpperRight) ? 4.0f : 0.0f, (roundedBottomRight) ? height - 4.0f : height);
 
 	
 }
@@ -448,7 +467,7 @@ void DuskMapLookAndFeel::drawPopupMenuBackground (Graphics& g, int width, int he
 #endif
 }
 
-void DuskMapLookAndFeel::drawMenuBarBackground (Graphics& g, int width, int height,
+void DuskMapLookAndFeel::drawMenuBarBackground (Graphics& g, int /*width*/, int /*height*/,
                                          bool, MenuBarComponent& menuBar)
 {
     const Colour baseColour (LookAndFeelHelpers::createBaseColour (menuBar.findColour (PopupMenu::backgroundColourId), false, false, false));
@@ -464,7 +483,51 @@ void DuskMapLookAndFeel::drawMenuBarBackground (Graphics& g, int width, int heig
     }
 }
 
-/*void DuskMapLookAndFeel::paintToolbarBackground (Graphics &, int width, int height, Toolbar &toolbar)
+void DuskMapLookAndFeel::drawTreeviewPlusMinusBox (Graphics& g, int x, int y, int w, int h, bool isPlus, bool isMouseOver)
 {
+    const int boxSize = ((jmin (16, w, h) << 1) / 3) | 1;
 
-}*/
+    x += ((w - boxSize) >> 1) + 8;
+    y += ((h - boxSize) >> 1) + 2;
+	if (isPlus)
+	{
+		w = 6;
+		h = 8;
+	}
+	else
+	{
+		w = 8;
+		h = 6;
+		x -= 1;
+		y += 2;
+	}
+
+	Path p;
+
+	if (isPlus)
+		p.addTriangle((float) x, (float) y, (float) (x + w), (float) (y + (h / 2)), (float) x, (float) (y + h));
+	else
+		p.addTriangle((float) x, (float) y, (float) (x + w), (float) y, (float) (x + (w / 2)), (float) (y + h));
+
+	if (!isMouseOver)
+		g.setColour(Colours::white.withAlpha(0.8f));
+	else
+		g.setColour(Colours::white);
+
+    g.fillPath (p);
+	/*
+    g.setColour (Colour (0xe5ffffff));
+    g.fillRect (x, y, w, h);
+
+    g.setColour (Colour (0x80000000));
+    g.drawRect (x, y, w, h);
+
+    const float size = boxSize / 2 + 1.0f;
+    const float centre = (float) (boxSize / 2);
+
+    g.fillRect (x + (w - size) * 0.5f, y + centre, size, 1.0f);
+
+    if (isPlus)
+        g.fillRect (x + centre, y + (h - size) * 0.5f, 1.0f, size);
+		*/
+}

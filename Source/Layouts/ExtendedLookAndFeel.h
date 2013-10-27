@@ -27,7 +27,8 @@ public:
 
 	void drawPanelContainer (Graphics& g, Component& comp);
 	void drawPanel (Graphics& g, Component& comp);
-	void drawInnerPanel (Graphics& g, Component& comp);
+	//void drawInnerPanel (Graphics& g, Component& comp);
+	void drawInnerPanel	(Graphics& g, Component& comp, bool drawHeader = false, String panelHeaderName = String::empty, int headerNameMarginRight = 0, int headerNameMarginLeft = 0, int panelHeaderHeight = 30, int indent = 5, float borderRadius = 5.0f);
 	void drawMainLayout (Graphics& g, Component& comp);
 
 private:

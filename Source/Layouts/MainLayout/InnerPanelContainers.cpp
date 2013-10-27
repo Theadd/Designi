@@ -9,9 +9,12 @@
 */
 
 #include "../../../JuceLibraryCode/JuceHeader.h"
-#include "../ExtendedLookAndFeel.h"
+
+
 #include "InnerPanelContainers.h"
+#include "InnerPanel.h"
 #include "MainLayout.h"
+#include "../ExtendedLookAndFeel.h"
 
 
 
