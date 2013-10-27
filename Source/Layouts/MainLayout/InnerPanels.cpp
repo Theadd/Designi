@@ -187,33 +187,22 @@ FileBrowserPanel::FileBrowserPanel() : thread ("FileTreeComponent thread"), Inne
 	//Add listeners for double clicking files
 	fileTreeCompA->addListener(this);
 	fileTreeCompB->addListener(this);
-	addAndMakeVisible (&fileBrowserPanelHeader);
 
-	//From FileBrowserPanelHeader
-	fileBrowserPanelHeader.setBounds(0, 0, 170, 25);
-	fileBrowserPanelHeader.setName("FileBrowserPanelHeader");
-
-	projectNameLabel.setBounds(5, 5, 115, 15);
-	projectNameLabel.setText("Project Name", NotificationType());
 	projectName = "Project Name";
-	
-
-	fileBrowserPanelHeader.addAndMakeVisible(&projectNameLabel);
-	projectNameLabel.setVisible(false);
 
 	selectFileTreeA.setBounds(120, 5, 20, 20);
 	selectFileTreeA.setName("selectFileTreeA");
 	selectFileTreeA.setButtonText("A");
 	selectFileTreeA.setConnectedEdges(Button::ConnectedOnRight);
 	selectFileTreeA.setTooltip("File browser remembers two locations, A and B. Use these buttons to switch between them.");
-	fileBrowserPanelHeader.addAndMakeVisible(&selectFileTreeA);
+	addAndMakeVisible(&selectFileTreeA);
 
 	selectFileTreeB.setBounds(140, 5, 20, 20);
 	selectFileTreeB.setName("selectFileTreeB");
 	selectFileTreeB.setButtonText("B");
 	selectFileTreeB.setConnectedEdges(Button::ConnectedOnLeft);
 	selectFileTreeB.setTooltip("File browser remembers two locations, A and B. Use these buttons to switch between them.");
-	fileBrowserPanelHeader.addAndMakeVisible(&selectFileTreeB);
+	addAndMakeVisible(&selectFileTreeB);
 
 	//ADD this to the mouse listeners of "A" and "B" buttons.
 	selectFileTreeA.addMouseListener(this, false);
@@ -234,11 +223,8 @@ void FileBrowserPanel::resized() {
 	if (fileTreeCompB != nullptr)
 		fileTreeCompB->setBoundsInset (BorderSize<int> (31, 0, 0, 0));
 
-	fileBrowserPanelHeader.setBounds(0, 0, this->getWidth(), 30);
-	projectNameLabel.setBoundsInset (BorderSize<int> (5, 5, 5, 50));
-	projectNameLabel.setColour(Label::backgroundColourId, Colours::white.withAlpha(0.2f));
-	selectFileTreeA.setBounds(projectNameLabel.getWidth() + 10, 5, 20, 20);
-	selectFileTreeB.setBounds(projectNameLabel.getWidth() + 30, 5, 20, 20);
+	selectFileTreeA.setBounds(getWidth() - 45, 5, 20, 20);
+	selectFileTreeB.setBounds(getWidth() - 25, 5, 20, 20);
 	//DBG("Resized FileBrowserPanel");
 }
 

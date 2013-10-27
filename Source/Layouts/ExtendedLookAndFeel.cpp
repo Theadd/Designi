@@ -23,7 +23,7 @@ ExtendedLookAndFeel::ExtendedLookAndFeel() : LookAndFeel()
 	setColour (InnerPanel::headerNameBorderColourId, Colours::black);
 	setColour (InnerPanel::borderColourId, Colours::black);
 	setColour (InnerPanel::headerNameTextColourId, Colours::white);
-	setColour (InnerPanel::nonHeaderBackgroundColourId, Colours::black.withAlpha(0.2f));
+	setColour (InnerPanel::nonHeaderBackgroundColourId, Colours::black.withAlpha(0.4f));
 	setColour (InnerPanel::backgroundColourId, Colours::transparentBlack);
 }
 

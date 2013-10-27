@@ -167,7 +167,11 @@ void Panel::mouseDrag (const MouseEvent &event)
 			Component *innerPanelBeingDragged = tabbedComponent->getTabContentComponent(tabIndex);
 			DBG("\t3");
 			DBG("dragAndDropContainer->startDragging: " + String("InnerPanel#")+String(tabIndex));
-			dragAndDropContainer->startDragging("InnerPanel#"+String(tabIndex), innerPanelBeingDragged);
+			//GET TAB BUTTON SNAPSHOT (IMAGE)
+			Image dragImage = event.eventComponent->createComponentSnapshot (event.eventComponent->getLocalBounds()).convertedToFormat (Image::ARGB);
+            dragImage.multiplyAllAlphas (0.6f);
+
+			dragAndDropContainer->startDragging("InnerPanel#"+String(tabIndex), innerPanelBeingDragged, dragImage);
 			DBG("\t4");
 		}
 	}

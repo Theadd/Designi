@@ -531,3 +531,8 @@ void DuskMapLookAndFeel::drawTreeviewPlusMinusBox (Graphics& g, int x, int y, in
         g.fillRect (x + centre, y + (h - size) * 0.5f, 1.0f, size);
 		*/
 }
+
+int DuskMapLookAndFeel::getDefaultScrollbarWidth ()
+{
+	return 12;
+}

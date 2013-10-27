@@ -54,6 +54,8 @@ public:
 	
 	void drawTreeviewPlusMinusBox (Graphics &, int x, int y, int w, int h, bool isPlus, bool isMouseOver);
 
+	int getDefaultScrollbarWidth ();
+
 private:
     Image backgroundTexture;
     Colour backgroundTextureBaseColour;

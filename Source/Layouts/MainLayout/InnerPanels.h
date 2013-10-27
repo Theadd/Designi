@@ -98,9 +98,6 @@ private:
 	
     TimeSliceThread thread;
 
-	//FileBrowserPanelHeader:
-	Component fileBrowserPanelHeader;	//container for header (projectNameLabel + A&B buttons)
-	Label projectNameLabel;
     TextButton selectFileTreeA;
 	TextButton selectFileTreeB;
 
