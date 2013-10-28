@@ -26,7 +26,7 @@ public:
 
 	void loadContent (const String &newContent);
 	bool getNeedsToBeSaved () override;
-	bool save () override;	//returns true if successful, false if we don't have write access
+	bool save (File initialDirectory = File::nonexistent) override;	//returns true if successful, false if we don't have write access
 
 	ScopedPointer <File> loadedFile;
 	String filePath;
@@ -73,7 +73,8 @@ private:
 
 
 class FileBrowserPanel :	public InnerPanel,
-							public FileBrowserListener
+							public FileBrowserListener,
+							public Timer
 {
 public:
 
@@ -91,6 +92,9 @@ public:
 	void setBrowserRoot (const File &file);
 	void setProjectName (const String &name);
 
+	void refresh() override;
+	void timerCallback ();
+
 	String projectName;
 
 private:
@@ -99,6 +103,9 @@ private:
     ScopedPointer <DirectoryContentsList> directoryList;
 	
     TimeSliceThread thread;
+	int refreshTimeCount;
+	XmlElement* stateA;
+	XmlElement* stateB;
 
     TextButton selectFileTreeA;
 	TextButton selectFileTreeB;

@@ -62,7 +62,7 @@ bool CodeEditorPanel::getNeedsToBeSaved ()
 	return InnerPanel::getNeedsToBeSaved();
 }
 
-bool CodeEditorPanel::save ()
+bool CodeEditorPanel::save (File initialDirectory)
 {
 	DBG("bool CodeEditorPanel::save ()");
 	if (codeDocument != nullptr)
@@ -82,7 +82,7 @@ bool CodeEditorPanel::save ()
 			//Show save as dialog box!
 			WildcardFileFilter wildcardFilter ("*.*", String::empty, "Save As Filters");
 			FileBrowserComponent browser (FileBrowserComponent::saveMode | FileBrowserComponent::canSelectFiles,
-			File::nonexistent,
+			initialDirectory,
 			&wildcardFilter,
 			nullptr);
 			FileChooserDialogBox dialogBox ("Save As...", "Specify description", browser, true, Colours::lightgrey);
@@ -317,7 +317,40 @@ void FileBrowserPanel::setProjectName (const String &name)
 	projectName = String(name);
 	setHeader(true, projectName, 30, 5, 45, 0);
 }
+
+void FileBrowserPanel::refresh()
+{
+	if (directoryList != nullptr && fileTreeCompA != nullptr && fileTreeCompB != nullptr)
+	{
+		DBG("void FileBrowserPanel::refresh()");
+
+		stateA = fileTreeCompA->getOpennessState(true);
+		stateB = fileTreeCompB->getOpennessState(true);
+		
+		directoryList->refresh();
+
+		refreshTimeCount = 10;
+		startTimer(100);
+	}
+}
+
+void FileBrowserPanel::timerCallback()
+{
+	if (stateA != 0)
+		fileTreeCompA->restoreOpennessState(*stateA, true);
+
+	if (stateB != 0)
+		fileTreeCompB->restoreOpennessState(*stateB, true);
+
+	--refreshTimeCount;
 	
+	if (refreshTimeCount <= 0)
+	{
+		delete stateA;
+		delete stateB;
+		stopTimer();
+	}
+}
 
 
 

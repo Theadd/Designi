@@ -55,13 +55,14 @@ void FloatingComponentOverlay::mouseEnter (const MouseEvent &event)
 	}
 }
 
-
+//////////////////////////////////////////////////////////////////
 
 MainLayout::MainLayout(MainWindow& _mainWindow) : Component(), mainWindow(_mainWindow)
 {
 	DBG("dbg: MainLayout()");
     //setBounds(0, 0, 490, 414);
     setName("MainLayout");
+	workingPath = new File("C:\\Users\\admin\\juced_");
 
 	toolbarComponent = nullptr;
 	addAndMakeVisible(toolbarComponent = new ToolbarComponent(TOOLBARSIZE));
@@ -101,7 +102,7 @@ MainLayout::MainLayout(MainWindow& _mainWindow) : Component(), mainWindow(_mainW
 	fileBrowserPanel = nullptr;
 	leftPanelContainer->addInnerPanel(fileBrowserPanel = new FileBrowserPanel(), true);
 	fileBrowserPanel->setProjectName(String("JUCE GUI Designer"));
-	fileBrowserPanel->setBrowserRoot(File(String("C:\\Users\\admin\\juced")));
+	fileBrowserPanel->setBrowserRoot(*workingPath);
 	//helpPanel
 	helpPanel = nullptr;
 	leftPanelContainer->addInnerPanel(helpPanel = new HelpPanel(), true);
@@ -123,6 +124,7 @@ MainLayout::~MainLayout()
 	fileBrowserPanel = nullptr;
 	navigatorPanel = nullptr;
 	floatingComponentOverlay = nullptr;
+	workingPath = nullptr;
 }
 
 void MainLayout::resized()
@@ -662,11 +664,12 @@ void MainLayout::toggleInnerPanel(InnerPanel* innerPanel, Globals::Position posi
 					{
 					case 1:
 						//save
-						if (!codeEditorPanels[index]->save())
+						if (!codeEditorPanels[index]->save(*workingPath))
 						{
 							AlertWindow::showMessageBox (AlertWindow::NoIcon, "Save error!", "File could not be written to disk!", "Ok");
 							return;
 						}
+						fileBrowserPanel->refresh();
 						break;
 					case 2:
 						//dont save

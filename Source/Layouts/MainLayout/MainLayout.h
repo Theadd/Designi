@@ -98,7 +98,7 @@ private:
 	OwnedArray <PanelContainer> panelContainers;
 	OwnedArray <CodeEditorPanel> codeEditorPanels;
 	
-	// --
+	ScopedPointer <File> workingPath;
 	//  --
 	ScopedPointer <HelpPanel> helpPanel;
 	ScopedPointer <FileBrowserPanel> fileBrowserPanel;

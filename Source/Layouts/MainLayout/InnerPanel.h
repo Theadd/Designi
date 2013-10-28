@@ -38,7 +38,8 @@ public:
 
 	void setNeedsToBeSaved (bool needsToBeSaved = true);
 	bool getNeedsToBeSaved ();
-	bool save (){return true;};
+	bool save (File initialDirectory = File::nonexistent) { return true; };
+	void refresh();	//update its content
 
 	Globals::Position position;
 
