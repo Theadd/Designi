@@ -27,6 +27,7 @@ public:
     //int getTabButtonBestWidth (TabBarButton&, int tabDepth) override;
     //static Colour getTabBackgroundColour (TabBarButton&);
     void drawTabButton (TabBarButton& button, Graphics&, bool isMouseOver, bool isMouseDown) override;
+	void fillTabButtonShape (TabBarButton&, Graphics&, const Path& path, bool isMouseOver, bool isMouseDown) override;
 
     //Rectangle<int> getTabButtonExtraComponentBounds (const TabBarButton&, Rectangle<int>& textArea, Component&) override;
     //void drawTabAreaBehindFrontButton (TabbedButtonBar&, Graphics&, int, int) override {}

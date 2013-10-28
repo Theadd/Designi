@@ -107,7 +107,11 @@ MainLayout::MainLayout(MainWindow& _mainWindow) : Component(), mainWindow(_mainW
 	leftPanelContainer->addInnerPanel(helpPanel = new HelpPanel(), true);
 	//codeEditorPanel
 	centerPanelContainer->addInnerPanel(codeEditorPanels[0], true);
-	//
+
+	//ADD COMPONENT LISTENERS TO PANEL CONTAINERS
+	for (int i = 0; i < panelContainers.size(); ++i)
+		panelContainers[i]->addComponentListener(this);
+
 	resized();
 }
 
@@ -123,6 +127,7 @@ MainLayout::~MainLayout()
 
 void MainLayout::resized()
 {
+	DBG("MainLayout::resized()");
 	Rectangle<int> r = this->getLocalBounds();
 	PanelContainer *leftPanelContainer = getPanelContainer(Globals::left);
 	PanelContainer *rightPanelContainer = getPanelContainer(Globals::right);
@@ -230,6 +235,12 @@ void MainLayout::mouseDoubleClick (const MouseEvent& event)
 {
     if (event.eventComponent == this)
         Component::mouseDoubleClick(event);
+}
+
+
+void MainLayout::componentMovedOrResized (Component& /*component*/, bool /*wasMoved*/, bool /*wasResized*/)
+{
+	resized();
 }
 
 
@@ -631,14 +642,46 @@ bool MainLayout::isInnerPanelVisible(InnerPanel* innerPanel)
 	return false;
 }
 
-void MainLayout::toggleInnerPanel(InnerPanel* innerPanel, Globals::Position position)
+void MainLayout::toggleInnerPanel(InnerPanel* innerPanel, Globals::Position position, bool isBeingClosed)
 {
 	if (innerPanel != nullptr)
 	{
 		PanelContainer *panel = getPanelContainerOf(innerPanel, position);
 		if (panel != nullptr)
 		{
+			DBG("[toggleInnerPanel] Found panel container! isBeingClosed = "+String(isBeingClosed));
+			//check if needs to be saved before closing
+			if (isBeingClosed)
+			{
+				int index = getDocumentIndex(innerPanel);
+				if (index >= 0 && codeEditorPanels[index]->getNeedsToBeSaved())
+				{
+					DBG("JOINS ALERT!");
+					int result = AlertWindow::showYesNoCancelBox (AlertWindow::NoIcon, "Save changes to the following items?", innerPanel->getHeaderName(), "Yes", "No", "Cancel", nullptr, nullptr);
+					switch (result)
+					{
+					case 1:
+						//save
+						if (!codeEditorPanels[index]->save())
+						{
+							AlertWindow::showMessageBox (AlertWindow::NoIcon, "Save error!", "File could not be written to disk!", "Ok");
+							return;
+						}
+						break;
+					case 2:
+						//dont save
+						break;
+					case 0:
+						//cancel closing
+						return;
+						break;
+					};
+				}
+			}
 			panel->removeInnerPanel(innerPanel);
+			//unload document in case we are closing it (only removes document based inner panels)
+			if (isBeingClosed)
+				unloadDocument(innerPanel);
 		}
 		else
 		{
@@ -738,10 +781,33 @@ void MainLayout::loadDocument(File& file)
 	if (!fileAlreadyLoaded)
 	{
 		codeEditorPanels.add(new CodeEditorPanel(filename, &file));
+		DBG("[MainLayout::loadDocument] (Globals::center)->addInnerPanel()");
 		getPanelContainer(Globals::center)->addInnerPanel(codeEditorPanels.getLast(), false);
 		existingEditor = codeEditorPanels.getLast();
 	}
 
+	DBG("[MainLayout::loadDocument] \t\t(Globals::center)->showInnerPanel()");
 	getPanelContainer(Globals::center)->showInnerPanel(existingEditor);
+}
+
+void MainLayout::unloadDocument(InnerPanel* innerPanel)
+{
+	int index = getDocumentIndex(innerPanel);
+	if (index >= 0)
+		unloadDocumentAt(index);
+}
+
+void MainLayout::unloadDocumentAt(int index)
+{
+	codeEditorPanels.remove(index, true);
+}
+
+int MainLayout::getDocumentIndex(InnerPanel* innerPanel)
+{
+	for (int i = 0; i < codeEditorPanels.size(); ++i)
+		if (codeEditorPanels[i] == innerPanel)
+			return i;
+
+	return -1;
 }
 

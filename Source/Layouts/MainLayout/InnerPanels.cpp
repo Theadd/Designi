@@ -53,6 +53,62 @@ void CodeEditorPanel::loadContent (const String &newContent)
 	codeEditorComponent->loadContent(newContent);
 }
 
+bool CodeEditorPanel::getNeedsToBeSaved ()
+{
+	if (codeDocument != nullptr)
+		if (codeDocument->hasChangedSinceSavePoint ())
+			return true;
+
+	return InnerPanel::getNeedsToBeSaved();
+}
+
+bool CodeEditorPanel::save ()
+{
+	DBG("bool CodeEditorPanel::save ()");
+	if (codeDocument != nullptr)
+	{
+		if (loadedFile != nullptr && loadedFile->existsAsFile())
+		{
+			DBG("bool CodeEditorPanel::save () file exists");
+			if (!loadedFile->hasWriteAccess())
+				return false;	//file could not be written
+
+			//write to disk
+			loadedFile->replaceWithText(codeDocument->getAllContent());
+		}
+		else
+		{
+			DBG("bool CodeEditorPanel::save () save as dialog box");
+			//Show save as dialog box!
+			WildcardFileFilter wildcardFilter ("*.*", String::empty, "Save As Filters");
+			FileBrowserComponent browser (FileBrowserComponent::saveMode | FileBrowserComponent::canSelectFiles,
+			File::nonexistent,
+			&wildcardFilter,
+			nullptr);
+			FileChooserDialogBox dialogBox ("Save As...", "Specify description", browser, true, Colours::lightgrey);
+			if (dialogBox.show())
+			{
+				File selectedFile = browser.getSelectedFile (0);
+				DBG("bool CodeEditorPanel::save () selectedFile = "+selectedFile.getFullPathName());
+				if (!selectedFile.existsAsFile())
+					selectedFile.create();
+
+				if (selectedFile.existsAsFile() && selectedFile.hasWriteAccess())
+				{
+					loadedFile = new File(selectedFile);
+					filePath = loadedFile->getFullPathName();
+					//write to disk
+					loadedFile->replaceWithText(codeDocument->getAllContent());
+				}
+				else return false;	//selected file could  not be written
+			}
+			else return true;	//no file was selected so we return success but we don't setSavePoint
+		}
+		codeDocument->setSavePoint();
+	}
+	return true;
+}
+
 
 ////////////////////////////////////////////////////////////////////////////
 

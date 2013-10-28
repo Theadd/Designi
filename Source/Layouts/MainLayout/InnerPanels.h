@@ -25,6 +25,8 @@ public:
 	void resized ();
 
 	void loadContent (const String &newContent);
+	bool getNeedsToBeSaved () override;
+	bool save () override;	//returns true if successful, false if we don't have write access
 
 	ScopedPointer <File> loadedFile;
 	String filePath;

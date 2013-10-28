@@ -196,6 +196,23 @@ void DuskMapLookAndFeel::drawTabButton (TabBarButton& button, Graphics& g, bool 
     drawTabButtonText (button, g, isMouseOver, isMouseDown);
 }
 
+void DuskMapLookAndFeel::fillTabButtonShape (TabBarButton& button, Graphics& g, const Path& path,  bool /*isMouseOver*/, bool /*isMouseDown*/)
+{
+    const Colour tabBackground (button.getTabBackgroundColour());
+    const bool isFrontTab = button.isFrontTab();
+
+    g.setColour (isFrontTab ? tabBackground
+                            : tabBackground.brighter(0.08f));
+
+    g.fillPath (path);
+
+    g.setColour (button.findColour (isFrontTab ? TabbedButtonBar::frontOutlineColourId
+                                               : TabbedButtonBar::tabOutlineColourId, false)
+                    .withMultipliedAlpha (button.isEnabled() ? 1.0f : 0.5f));
+
+    g.strokePath (path, PathStrokeType (isFrontTab ? 1.0f : 0.5f));
+}
+
 void DuskMapLookAndFeel::drawStretchableLayoutResizerBar (Graphics& g, int /*w*/, int /*h*/, bool /*isVerticalBar*/, bool isMouseOver, bool isMouseDragging)
 {
     if (isMouseOver || isMouseDragging)

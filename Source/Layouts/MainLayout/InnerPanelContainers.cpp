@@ -125,7 +125,7 @@ bool Panel::addInnerPanel (InnerPanel *componentToAdd)
 			}
 
 			//add this component in a new tab
-			tabbedComponent->addChildComponent(componentToAdd);
+			tabbedComponent->addChildComponent(componentToAdd);	//set as child so we can find parent components from child
 			tabbedComponent->addTab(componentToAdd->getName(), tabsColour, componentToAdd, false);
 		}
 		else
@@ -152,42 +152,31 @@ bool Panel::addInnerPanel (InnerPanel *componentToAdd)
 
 void Panel::mouseDrag (const MouseEvent &event)
 {
-	DBG("PANEL MOUSEDRAG!!");
-	DBG(event.eventComponent->getName());
 	if (dragAndDropContainer != nullptr)
 	{
 		if (!dragAndDropContainer->isDragAndDropActive())
 		{
-			DBG("\tSTART DRAGGING!!");
 			//GET InnerPanel corresponding to the dragged tab button
 			TabbedButtonBar& buttonBar = tabbedComponent->getTabbedButtonBar();
-			DBG("\t1");
 			int tabIndex = buttonBar.indexOfTabButton((TabBarButton *)event.eventComponent);
-			DBG("\t2");
 			Component *innerPanelBeingDragged = tabbedComponent->getTabContentComponent(tabIndex);
-			DBG("\t3");
-			DBG("dragAndDropContainer->startDragging: " + String("InnerPanel#")+String(tabIndex));
 			//GET TAB BUTTON SNAPSHOT (IMAGE)
 			Image dragImage = event.eventComponent->createComponentSnapshot (event.eventComponent->getLocalBounds()).convertedToFormat (Image::ARGB);
             dragImage.multiplyAllAlphas (0.6f);
 
 			dragAndDropContainer->startDragging("InnerPanel#"+String(tabIndex), innerPanelBeingDragged, dragImage);
-			DBG("\t4");
 		}
 	}
 }
 
 bool Panel::isInterestedInDragSource (const SourceDetails &dragSourceDetails)
 {
-	DBG("\t\t\tisInterestedInDragSource!!!!!!!!!!!!! dragSourceDetails.description: "+String(dragSourceDetails.description));
 	String description(dragSourceDetails.description);
 	return (description.upToFirstOccurrenceOf("#", false, false).equalsIgnoreCase("InnerPanel"));
 }
 
 void Panel::itemDropped (const SourceDetails &dragSourceDetails)
 {
-	
-	DBG("\t\t\tITEM DROPED!!!!!!!!!!!!!");
 	String description(dragSourceDetails.description);
 	if  (description.upToFirstOccurrenceOf("#", false, false).equalsIgnoreCase("InnerPanel"))
 	{
@@ -218,8 +207,6 @@ void Panel::itemDropped (const SourceDetails &dragSourceDetails)
 			
 		}
 		
-		
-		DBG("add  inner  panel");
 		addInnerPanel(innerPanel);
 		currentPanel->removeInnerPanelAt(tabIndex);
 
@@ -231,13 +218,17 @@ void Panel::itemDropped (const SourceDetails &dragSourceDetails)
 
 void Panel::removeInnerPanelAt (int tabIndex)
 {
-	DBG("Panel::removeInnerPanelAt (int tabIndex)");
+	bool swapPanel = (tabbedComponent->getCurrentTabIndex() == tabIndex) ? true : false;
 	tabbedComponent->removeTab(tabIndex);
 	//hide panel if there are no other tabs
 	if (tabbedComponent->getNumTabs() == 0)
 	{
 		getParentComponent()->removeChildComponent(this);
 		//delete this;
+	}
+	else if (swapPanel)
+	{
+		tabbedComponent->setCurrentTabIndex(0);
 	}
 }
 
@@ -297,6 +288,43 @@ Panel::CustomTabbedComponent::CustomTabbedComponent() : TabbedComponent(TabbedBu
 Panel::CustomTabbedComponent::CustomTabbedComponent(TabbedButtonBar::Orientation _orientation) : TabbedComponent(_orientation)
 {
 
+}
+
+void Panel::CustomTabbedComponent::addTab (const String& tabName,
+                              Colour tabBackgroundColour,
+                              Component* const contentComponent,
+                              const bool deleteComponentWhenNotNeeded,
+                              const int insertIndex)
+{
+	TabbedComponent::addTab(tabName, tabBackgroundColour, contentComponent, deleteComponentWhenNotNeeded, insertIndex);
+    
+	//ADD CLOSE TAB BUTTON
+	TabbedButtonBar& buttonBar = getTabbedButtonBar();
+	TabBarButton *button;
+
+	if (insertIndex == -1)
+		button = buttonBar.getTabButton(buttonBar.getNumTabs() - 1);
+	else
+		button = buttonBar.getTabButton(insertIndex);
+
+	CloseTabButton *close = new CloseTabButton();
+	close->setSize(20, 10);
+	close->addMouseListener(this, false);
+	button->setExtraComponent(close, TabBarButton::afterText);
+}
+
+void Panel::CustomTabbedComponent::CloseTabButton::paint (Graphics& g)
+{
+	Rectangle<int> r = getLocalBounds();
+	g.setColour(getLookAndFeel().findColour(Label::textColourId).withAlpha(0.5f));
+	float size = 6.0f;
+	float hSwitch = -3.0f;
+	float indent = (((float) r.getHeight()) - size) / 2.0f;
+	if (indent > 0.0f)
+	{
+		g.drawLine(indent + hSwitch, indent, indent + size + hSwitch, indent + size, 1.5f);
+		g.drawLine(indent + hSwitch, indent + size, indent + size + hSwitch, indent, 1.5f);
+	}
 }
 
 void Panel::CustomTabbedComponent::popupMenuClickOnTab (int tabIndex, const String &tabName)
@@ -367,7 +395,7 @@ void Panel::CustomTabbedComponent::menuItemChosenCallback (int result, InnerPane
 	switch (result)
 	{
 	case 1:
-		mainLayout->toggleInnerPanel(innerPanel);
+		mainLayout->toggleInnerPanel(innerPanel, innerPanel->position, true);	//close
 		break;
 	case 2:
 		mainLayout->toggleInnerPanel(innerPanel, innerPanel->position);
@@ -398,42 +426,25 @@ void Panel::CustomTabbedComponent::menuItemChosenCallback (int result, InnerPane
 	}
 }
 
-/*
-    void buttonClicked (Button*)
-    {
-        PopupMenu m;
-        m.addItem (1, "Custom treeview showing an XML tree");
-        m.addItem (2, "FileTreeComponent showing the file system");
-        m.addSeparator();
-        m.addItem (3, "Show root item", true,
-                   treeView != nullptr ? treeView->isRootItemVisible()
-                                       : fileTreeComp->isRootItemVisible());
-        m.addItem (4, "Show open/close buttons", true,
-                   treeView != nullptr ? treeView->areOpenCloseButtonsVisible()
-                                       : fileTreeComp->areOpenCloseButtonsVisible());
-
-        m.showMenuAsync (PopupMenu::Options().withTargetComponent (&typeButton),
-                         ModalCallbackFunction::forComponent (menuItemChosenCallback, this));
-    }
-
-    static void menuItemChosenCallback (int result, TreeViewDemo* demoComponent)
-    {
-        if (demoComponent != nullptr)
-            demoComponent->menuItemChosenCallback (result);
-    }
-
-    void menuItemChosenCallback (int result)
-    {
-        if (result == 1)
-        {
-            showCustomTreeView();
-        }
-        else if (result == 2)
-        {
-            showFileTreeComp();
-        }
-    }
-	*/
+void Panel::CustomTabbedComponent::mouseUp (const MouseEvent& event)
+{
+	MainLayout *mainLayout = findParentComponentOfClass <MainLayout>();
+	//close tab button
+	if (mainLayout != 0 && event.mouseWasClicked())
+	{
+		TabbedButtonBar& buttonBar = getTabbedButtonBar();
+		for (int i = 0; i < buttonBar.getNumTabs(); ++i)
+		{
+			TabBarButton *button = buttonBar.getTabButton(i);
+			if (button->getExtraComponent() == event.eventComponent)
+			{
+				InnerPanel* innerPanel = (InnerPanel *) getTabContentComponent(i);
+				mainLayout->toggleInnerPanel(innerPanel, innerPanel->position, true);
+				break;
+			}
+		}
+	}
+}
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -441,6 +452,7 @@ void Panel::CustomTabbedComponent::menuItemChosenCallback (int result, InnerPane
 PanelContainer::PanelContainer(Globals::Position positionThatWillBePlaced, DragAndDropContainer* _dragAndDropContainer) : Component(), position(positionThatWillBePlaced), dragAndDropContainer(_dragAndDropContainer)
 {
     setBounds(0, 32, 260, 340);
+	setName("PanelContainer");
 	//DBG("one");
 	resizableEdgeComponent = nullptr;
 	componentBoundsConstrainer = nullptr;
@@ -527,7 +539,7 @@ void PanelContainer::resized()
 			resizableEdgeComponent->setBounds(0, 0, 0, 0);
 	}
 
-	DBG("PanelContainer resized()");
+	//DBG("PanelContainer resized()");
 	//int numChilds = getNumChildComponents() - 1;
 	int lastSize = 0;
 	//Get lastSize in pixels
@@ -537,14 +549,14 @@ void PanelContainer::resized()
 		if (c->getName().equalsIgnoreCase("Resizable Edge Component"))
 			continue;
 
-		DBG("--Size of Panel "+String(i)+": "+String(c->getHeight()));
+		//DBG("--Size of Panel "+String(i)+": "+String(c->getHeight()));
 		lastSize += (position == Globals::right || position == Globals::left) ? c->getHeight(): c->getWidth();
 	}
 	
-	DBG("lastSize: "+String(lastSize));
-	DBG("Current size: "+String(getHeight()));
+	//DBG("lastSize: "+String(lastSize));
+	//DBG("Current size: "+String(getHeight()));
 	int lastSizeDifference = ((position == Globals::right || position == Globals::left) ? getHeight(): getWidth()) - lastSize;
-	DBG("lastSizeDifference: "+String(lastSizeDifference));
+	//DBG("lastSizeDifference: "+String(lastSizeDifference));
 	int nextPanelPosition = 0;
 	if (getHeight() >= MINIMUMPANELSIZE)
 	{
@@ -558,7 +570,7 @@ void PanelContainer::resized()
 			if (position == Globals::right || position == Globals::left)
 			{
 				int newSize = c->getHeight() + lastSizeDifference;
-				DBG("\tPANEL Current size: "+String(c->getHeight()));
+				//DBG("\tPANEL Current size: "+String(c->getHeight()));
 				if (newSize < MINIMUMPANELSIZE)
 				{
 					lastSizeDifference = newSize - MINIMUMPANELSIZE;
@@ -568,9 +580,9 @@ void PanelContainer::resized()
 				{
 					lastSizeDifference = 0;
 				}
-				DBG("\tPANEL newSize: "+String(newSize));
-				DBG("\tlastSizeDifference: "+String(lastSizeDifference));
-				DBG("---------------------------------");
+				//DBG("\tPANEL newSize: "+String(newSize));
+				//DBG("\tlastSizeDifference: "+String(lastSizeDifference));
+				//DBG("---------------------------------");
 				c->setBounds(c->getX(), nextPanelPosition, getWidth() - RESIZABLEEDGESIZE, newSize);
 				nextPanelPosition += newSize;
 			}
@@ -751,6 +763,7 @@ bool PanelContainer::addInnerPanel (InnerPanel *componentToAdd, bool asNewPanel)
 	setVisible(true);
 	componentToAdd->position = position;
 
+	DBG("\t[PanelContainer::addInnerPanel] panels.size(): "+String(panels.size()));
 	if (panels.size() == 0)	//if there was no old panel created, create a new panel
 		asNewPanel = true;
 

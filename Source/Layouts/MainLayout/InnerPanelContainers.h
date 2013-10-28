@@ -55,17 +55,26 @@ private:
 	
 	DragAndDropContainer* dragAndDropContainer;
 
-	Colour tempBackgroundColour;	//TODO: remove randomly painting panels
-
 	class CustomTabbedComponent : public TabbedComponent
 	{
 	public:
 		CustomTabbedComponent();
 		CustomTabbedComponent(TabbedButtonBar::Orientation _orientation);
+
+		void addTab (const String &tabName, Colour tabBackgroundColour, Component *contentComponent, bool deleteComponentWhenNotNeeded, int insertIndex=-1);
 		void popupMenuClickOnTab (int tabIndex, const String &tabName);
 		static void menuItemChosenCallback (int result, CustomTabbedComponent* component, int tabIndex);
 		void menuItemChosenCallback (int result, InnerPanel* innerPanel);
+
+		void mouseUp (const MouseEvent& event);	//for close tab button (x)
+
 	private:
+
+		class CloseTabButton : public Component
+		{
+		public:
+			void paint (Graphics& g);
+		};
 
 	};
 

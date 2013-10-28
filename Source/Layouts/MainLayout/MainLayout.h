@@ -63,6 +63,8 @@ public:
 
     void mouseDoubleClick (const MouseEvent& event);
 
+	void componentMovedOrResized (Component &component, bool wasMoved, bool wasResized);
+
 	
 	StringArray getMenuBarNames();
 	PopupMenu getMenuForIndex (int menuIndex, const String& /*menuName*/);
@@ -77,11 +79,15 @@ public:
 	bool perform (const InvocationInfo& info);
 
 	bool isInnerPanelVisible(InnerPanel* innerPanel);
-	void toggleInnerPanel(InnerPanel* innerPanel, Globals::Position position = Globals::left);
+	void toggleInnerPanel(InnerPanel* innerPanel, Globals::Position position = Globals::left, bool isBeingClosed = false);
 	PanelContainer* getPanelContainer(Globals::Position position);
 	PanelContainer* getPanelContainerOf(InnerPanel* innerPanel, Globals::Position guessPosition = Globals::top);
 
 	void loadDocument(File& file);
+	void unloadDocument(InnerPanel* innerPanel);
+	void unloadDocumentAt(int index);
+	int getDocumentIndex(InnerPanel* innerPanel);
+
 
 	ScopedPointer <FloatingComponentOverlay> floatingComponentOverlay;
 

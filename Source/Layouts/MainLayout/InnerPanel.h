@@ -31,12 +31,20 @@ public:
 
 	void setHeader(bool showHeader = true, String headerName = "Panel Header", int headerHeight = 30, int indent = 5, int headerNameMarginRight = 0, int headerNameMarginLeft = 0);
 
+	String getHeaderName();
+
 	void paint (Graphics& g);
 	bool showAsTab;
+
+	void setNeedsToBeSaved (bool needsToBeSaved = true);
+	bool getNeedsToBeSaved ();
+	bool save (){return true;};
+
 	Globals::Position position;
 
 
 private:
+	bool needsToBeSaved;	//if needs to be saved before closing
 	bool isHeaderVisible;
 	String headerName;
 	int headerHeight;

@@ -17,6 +17,7 @@
 InnerPanel::InnerPanel(bool showAsTab_, Globals::Position _position) : Component(), showAsTab(showAsTab_), position(_position)
 {
 	isHeaderVisible = false;
+	needsToBeSaved = false;
 }
 
 void InnerPanel::setHeader(bool showHeader_, String headerName_, int headerHeight_, int indent_, int headerNameMarginRight_, int headerNameMarginLeft_)
@@ -31,6 +32,10 @@ void InnerPanel::setHeader(bool showHeader_, String headerName_, int headerHeigh
 	repaint();
 }
 
+String InnerPanel::getHeaderName()
+{
+	return headerName;
+}
 
 void InnerPanel::paint (Graphics& g)
 {
@@ -40,3 +45,14 @@ void InnerPanel::paint (Graphics& g)
 	else
 		((ExtendedLookAndFeel*) &getLookAndFeel())->drawInnerPanel (g, *this);
 }
+
+void InnerPanel::setNeedsToBeSaved(bool needs)
+{
+	needsToBeSaved = needs;
+}
+
+bool InnerPanel::getNeedsToBeSaved()
+{
+	return needsToBeSaved;
+}
+
