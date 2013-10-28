@@ -7,10 +7,11 @@
 
   ==============================================================================
 */
-//#include "../JuceLibraryCode/JuceHeader.h"
 
 #ifndef __GLOBALS_H_D2823AC0__
 #define __GLOBALS_H_D2823AC0__
+
+
 
 #define RESIZABLEEDGESIZE 5
 #define TOOLBARSIZE 32
@@ -41,6 +42,19 @@ enum ColourIds
     mainBackgroundColourId          = 0x2340000,
     treeviewHighlightColourId       = 0x2340002,
 };
+
+
+String T (const String& text);
+String T (const char* text);
+String T (CharPointer_UTF8 text);
+
+const char* T_UTF8 (const String& text);
+const char* T_UTF8 (const char* text);
+
+const char* T_UTF8 (CharPointer_UTF8 text);
+
+
+
 
 
 /*

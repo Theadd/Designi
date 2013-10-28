@@ -16,14 +16,11 @@ MainWindow::MainWindow()  : DocumentWindow ("JUCE GUI Designer",
                                         Colours::lightgrey,
                                         DocumentWindow::allButtons)
 {
-	//Look And Feel
-    /*setLookAndFeel(lookAndFeel = new JUCEDesignerLookAndFeel());
-	lookAndFeel->setColour(TextButton::buttonColourId, Colour(Colour((juce::uint8) 83, (juce::uint8) 94, (juce::uint8) 104, (juce::uint8) 255)));
-	lookAndFeel->setColour(TextButton::textColourOffId, Colours::transparentWhite.withAlpha(0.9f));
-	lookAndFeel->setColour(TextButton::textColourOnId, Colours::blue.withAlpha(0.9f));*/
 
 	setLookAndFeel(lookAndFeel = new DuskMapLookAndFeel());
 
+	LocalisedStrings::setCurrentMappings(new LocalisedStrings(File(File::addTrailingSeparator(File::getCurrentWorkingDirectory().getFullPathName()) + "translations" + File::separatorString + "spanish.txt"), true));
+	//LocalisedStrings::setCurrentMappings(0);
 
     setBounds(55, 35, 900, 720);
     //setColour(DocumentWindow::backgroundColourId, Colour::fromString("FF202A32"));

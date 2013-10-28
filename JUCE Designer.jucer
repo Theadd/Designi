@@ -40,6 +40,7 @@
           <FILE id="pnbj67" name="MainLayout.h" compile="0" resource="0" file="Source/Layouts/MainLayout/MainLayout.h"/>
         </GROUP>
       </GROUP>
+      <FILE id="T8SRwC" name="Globals.cpp" compile="1" resource="0" file="Source/Globals.cpp"/>
       <FILE id="MIPbpq" name="Globals.h" compile="0" resource="0" file="Source/Globals.h"/>
       <FILE id="PH6jHb" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
     </GROUP>

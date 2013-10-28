@@ -133,6 +133,7 @@
     <ClCompile Include="..\..\Source\Layouts\MainLayout\InnerPanelContainers.cpp"/>
     <ClCompile Include="..\..\Source\Layouts\MainLayout\Toolbars.cpp"/>
     <ClCompile Include="..\..\Source\Layouts\MainLayout\MainLayout.cpp"/>
+    <ClCompile Include="..\..\Source\Globals.cpp"/>
     <ClCompile Include="..\..\Source\Main.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_audio_basics\buffers\juce_AudioDataConverters.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>

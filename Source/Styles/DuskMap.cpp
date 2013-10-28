@@ -9,7 +9,7 @@
 */
 
 #include "../../JuceLibraryCode/JuceHeader.h"
-
+#include "../Globals.h"
 #include "DuskMap.h"
 
 

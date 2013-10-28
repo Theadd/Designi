@@ -12,7 +12,7 @@
 #define __DUSKMAP_H_4A610CFE__
 
 #include "../Layouts/ExtendedLookAndFeel.h"
-#include "../Globals.h"
+
 
 class DuskMapLookAndFeel   : public ExtendedLookAndFeel
 {

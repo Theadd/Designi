@@ -1,0 +1,6 @@
+language: Spanish
+countries: es
+
+"File" = "Archivo"
+"Edit" = "Editar"
+"File Browser" = "Explorador de archivos"

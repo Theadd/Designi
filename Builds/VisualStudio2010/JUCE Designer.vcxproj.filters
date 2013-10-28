@@ -334,6 +334,9 @@
     <ClCompile Include="..\..\Source\Layouts\MainLayout\MainLayout.cpp">
       <Filter>JUCE Designer\Source\Layouts\MainLayout</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\Globals.cpp">
+      <Filter>JUCE Designer\Source</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\Main.cpp">
       <Filter>JUCE Designer\Source</Filter>
     </ClCompile>

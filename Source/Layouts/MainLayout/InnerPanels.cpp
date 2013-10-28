@@ -223,7 +223,7 @@ var NavigatorPanel::TreeViewItemParser::getDragSourceDescription()
 
 FileBrowserPanel::FileBrowserPanel() : thread ("FileTreeComponent thread"), InnerPanel()
 {
-	setName("File Browser");
+	setName(T("File Browser"));
 	File folder (File::getSpecialLocation (File::userHomeDirectory));
     //while (folder.getParentDirectory() != folder)
     //    folder = folder.getParentDirectory();
