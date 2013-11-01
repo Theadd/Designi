@@ -195,6 +195,8 @@ DuskMapLookAndFeel::DuskMapLookAndFeel()
 	setColour (Toolbar::buttonMouseDownBackgroundColourId,	findColour (TextButton::buttonColourId).interpolatedWith(Colours::blue, 0.1f));
 	//TABBED COMPONENT
 	setColour (TabbedComponent::outlineColourId, Colours::black);
+	setColour (TabbedButtonBar::tabOutlineColourId, Colours::black);
+	setColour (TabbedButtonBar::frontOutlineColourId, Colours::black); 
 	//LABEL
 	setColour (Label::textColourId, Colours::white);
 	//TREEVIEW
@@ -358,7 +360,7 @@ int DuskMapLookAndFeel::getTabButtonOverlap (int tabDepth)
 
 int DuskMapLookAndFeel::getTabButtonSpaceAroundImage()
 {
-    return 4;
+    return 3;	//4
 }
 
 void DuskMapLookAndFeel::drawTabButton (TabBarButton& button, Graphics& g, bool isMouseOver, bool isMouseDown)
@@ -745,7 +747,7 @@ void DuskMapLookAndFeel::drawFileBrowserRow (Graphics& g, int width, int height,
 	{
 		id = "folder";
 	}
-	DBG("[drawFileBrowserRow] filename = "+filename+", isItemSelected = "+String(isItemSelected)+", itemIndex = "+String(itemIndex));
+	//DBG("[drawFileBrowserRow] filename = "+filename+", isItemSelected = "+String(isItemSelected)+", itemIndex = "+String(itemIndex));
 	//dcc.getOpennessState()
 	
 	//bool isOpen = (dynamic_cast <TreeView *> (&dcc))->getItemOnRow(itemIndex)->isOpen();

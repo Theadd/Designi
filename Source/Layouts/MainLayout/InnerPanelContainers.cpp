@@ -282,12 +282,12 @@ void Panel::setResizableEdgeOrientation(Globals::Orientation resizableEdgeOrient
 
 Panel::CustomTabbedComponent::CustomTabbedComponent() : TabbedComponent(TabbedButtonBar::TabsAtTop)
 {
-
+	setTabBarDepth(27);
 }
 
 Panel::CustomTabbedComponent::CustomTabbedComponent(TabbedButtonBar::Orientation _orientation) : TabbedComponent(_orientation)
 {
-
+	setTabBarDepth(27);
 }
 
 void Panel::CustomTabbedComponent::addTab (const String& tabName,
@@ -296,6 +296,7 @@ void Panel::CustomTabbedComponent::addTab (const String& tabName,
                               const bool deleteComponentWhenNotNeeded,
                               const int insertIndex)
 {
+	//DBG("\t\t\t!!!! TAB BAR DEPTH: "+String(getTabBarDepth()));
 	TabbedComponent::addTab(tabName, tabBackgroundColour, contentComponent, deleteComponentWhenNotNeeded, insertIndex);
     
 	//ADD CLOSE TAB BUTTON
