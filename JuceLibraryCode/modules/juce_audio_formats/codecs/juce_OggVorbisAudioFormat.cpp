@@ -186,7 +186,7 @@ public:
                 {
                     float** dataIn = nullptr;
 
-                    const int samps = OggVorbisNamespace::ov_read_float (&ovFile, &dataIn, numToRead, &bitStream);
+                    const long samps = OggVorbisNamespace::ov_read_float (&ovFile, &dataIn, numToRead, &bitStream);
                     if (samps <= 0)
                         break;
 
@@ -479,8 +479,8 @@ AudioFormatWriter* OggVorbisAudioFormat::createWriterFor (OutputStream* out,
 
 StringArray OggVorbisAudioFormat::getQualityOptions()
 {
-    const char* options[] = { "64 kbps", "80 kbps", "96 kbps", "112 kbps", "128 kbps", "160 kbps",
-                              "192 kbps", "224 kbps", "256 kbps", "320 kbps", "500 kbps", 0 };
+    static const char* options[] = { "64 kbps", "80 kbps", "96 kbps", "112 kbps", "128 kbps", "160 kbps",
+                                     "192 kbps", "224 kbps", "256 kbps", "320 kbps", "500 kbps", 0 };
     return StringArray (options);
 }
 

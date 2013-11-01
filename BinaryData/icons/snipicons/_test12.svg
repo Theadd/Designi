@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW X6 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="100%" height="100%" version="1.1" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd"
+viewBox="0 0 50 50"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+   <linearGradient id="id0" gradientUnits="userSpaceOnUse" x1="25.0972" y1="40.0621" x2="24.9036" y2="23.4383">
+    <stop offset="0" stop-color="#008BFF"/>
+    <stop offset="1" stop-color="#00AAFF"/>
+   </linearGradient>
+   <linearGradient id="id1" gradientUnits="userSpaceOnUse" x1="30.9359" y1="5.8309" x2="25.0633" y2="12.1689">
+    <stop offset="0" stop-color="#008BFF"/>
+    <stop offset="1" stop-color="#00AAFF"/>
+   </linearGradient>
+   <linearGradient id="id2" gradientUnits="userSpaceOnUse" x1="19.0633" y1="5.8309" x2="24.9357" y2="12.1687">
+    <stop offset="0" stop-color="#008BFF"/>
+    <stop offset="1" stop-color="#00AAFF"/>
+   </linearGradient>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <path fill="#434242" d="M47 22c0,1 -1,2 -2,2l-40 0c-1,0 -2,-1 -2,-2 0,0 0,-1 0,-1 0,-1 1,-1 2,-1l40 0c1,0 2,0 2,1 0,0 0,1 0,1z"/>
+  <path fill="#434242" d="M28 9c0,1 0,2 0,2l12 11c0,1 1,1 2,0 0,-1 0,-2 0,-2l-12 -11c0,0 -1,0 -2,0z"/>
+  <path fill="#434242" d="M22 9c0,1 0,2 0,2l-12 11c0,1 -1,1 -2,0 0,-1 0,-2 0,-2l12 -11c0,0 1,0 2,0z"/>
+  <path fill="url(#id0)" stroke="#434242" stroke-width="1" d="M5 24c13,0 27,0 40,0 -1,4 -2,9 -3,13 0,2 -2,3 -3,3 -9,0 -18,0 -27,0 -2,0 -3,-1 -4,-3 -1,-4 -2,-9 -3,-13z"/>
+  <g id="_864532576">
+   <path fill="#FFFFFF" d="M27 26c0,0 1,0 2,0 0,0 0,0 0,0 0,2 0,4 0,6 0,2 -1,4 -1,6 0,0 0,0 0,0 -1,0 -1,0 -2,0 0,0 0,0 0,0 0,-2 0,-4 0,-6 0,-2 0,-4 0,-6 0,0 0,0 1,0z"/>
+   <path fill="#FFFFFF" d="M32 26c1,0 1,0 2,0 0,0 1,0 1,0 -1,2 -1,4 -1,6 -1,2 -1,4 -1,6 0,0 -1,0 -1,0 0,0 -1,0 -1,0 -1,0 -1,0 -1,0 0,-2 1,-4 1,-6 0,-2 0,-4 1,-6 0,0 0,0 0,0z"/>
+   <path fill="#FFFFFF" d="M38 26c0,0 1,0 1,0 1,0 1,0 1,0 -1,2 -1,4 -2,6 0,2 -1,4 -1,6 0,0 0,0 0,0 -1,0 -1,0 -2,0 0,0 0,0 0,0 0,-2 0,-4 1,-6 0,-2 0,-4 1,-6 0,0 0,0 1,0z"/>
+   <path fill="#FFFFFF" d="M23 26c0,0 -1,0 -2,0 0,0 0,0 0,0 0,2 0,4 0,6 0,2 1,4 1,6 0,0 0,0 0,0 1,0 1,0 2,0 0,0 0,0 0,0 0,-2 0,-4 0,-6 0,-2 0,-4 0,-6 0,0 0,0 -1,0z"/>
+   <path fill="#FFFFFF" d="M18 26c-1,0 -1,0 -2,0 0,0 -1,0 -1,0 1,2 1,4 1,6 1,2 1,4 1,6 0,0 1,0 1,0 0,0 1,0 1,0 1,0 1,0 1,0 0,-2 -1,-4 -1,-6 0,-2 0,-4 -1,-6 0,0 0,0 0,0z"/>
+   <path fill="#FFFFFF" d="M12 26c0,0 -1,0 -1,0 -1,0 -1,0 -1,0 1,2 1,4 2,6 0,2 1,4 1,6 0,0 0,0 0,0 1,0 1,0 2,0 0,0 0,0 0,0 0,-2 0,-4 -1,-6 0,-2 0,-4 -1,-6 0,0 0,0 -1,0z"/>
+  </g>
+  <path fill="url(#id1)" stroke="#434242" stroke-width="1" d="M26 7c-1,1 -1,3 0,4 1,1 3,1 4,0 1,-1 1,-3 0,-4 -1,-1 -3,-1 -4,0z"/>
+  <path fill="url(#id2)" stroke="#434242" stroke-width="1" d="M24 7c1,1 1,3 0,4 -1,1 -3,1 -4,0 -1,-1 -1,-3 0,-4 1,-1 3,-1 4,0z"/>
+ </g>
+</svg>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW X6 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="100%" height="100%" version="1.1" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd"
+viewBox="0 0 500 500"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+   <linearGradient id="id0" gradientUnits="userSpaceOnUse" x1="260.796" y1="137.738" x2="260.796" y2="323.101">
+    <stop offset="0" stop-color="#C5C5C5"/>
+    <stop offset="0.478431" stop-color="#FFFFFF"/>
+    <stop offset="1" stop-color="#C5C5C5"/>
+   </linearGradient>
+   <linearGradient id="id1" gradientUnits="userSpaceOnUse" x1="111.349" y1="296.361" x2="111.349" y2="164.473">
+    <stop offset="0" stop-color="#434242"/>
+    <stop offset="1" stop-color="#8D8D8E"/>
+   </linearGradient>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <circle fill="#434242" cx="381" cy="230" r="89"/>
+  <path fill="url(#id0)" d="M279 141l-189 0c-7,0 -13,6 -13,13l0 153c0,7 6,13 13,13l189 0 0 0c63,0 114,38 153,82 6,7 12,0 12,-7l0 -329c0,-7 -6,-14 -12,-7 -39,44 -90,82 -153,82z"/>
+  <path fill="#008BFF" stroke="#434242" stroke-width="5" d="M301 321c13,2 26,6 38,10l0 -202c-12,5 -25,9 -38,11l0 181z"/>
+  <path fill="none" stroke="#434242" stroke-width="10" d="M279 141l-189 0c-7,0 -13,6 -13,13l0 153c0,7 6,13 13,13l189 0 0 0c63,0 114,38 153,82 6,7 12,0 12,-7l0 -329c0,-7 -6,-14 -12,-7 -39,44 -90,82 -153,82z"/>
+  <path fill="url(#id1)" stroke="#434242" stroke-width="10" d="M75 141l30 0c9,0 16,7 16,16l0 22c0,36 26,51 58,51 6,0 13,6 13,13l0 77 -87 0 -15 0 -15 0c-9,0 -16,-7 -16,-16l0 -26c-17,-10 -28,-29 -28,-51 0,-21 11,-40 28,-51l0 -19c0,-9 7,-16 16,-16z"/>
+  <path fill="#434242" stroke="#434242" stroke-width="10" d="M192 320l-70 0 38 114c3,8 6,13 19,13l51 0c6,0 13,-6 13,-13l0 -13c0,-25 -38,-25 -51,-101z"/>
+ </g>
+</svg>

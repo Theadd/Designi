@@ -524,41 +524,42 @@ juce_wchar String::operator[] (int index) const noexcept
     return text [index];
 }
 
-int String::hashCode() const noexcept
+template <typename Type>
+struct HashGenerator
 {
-    int result = 0;
+    template <typename CharPointer>
+    static Type calculate (CharPointer t) noexcept
+    {
+        Type result = Type();
 
-    for (CharPointerType t (text); ! t.isEmpty();)
-        result = 31 * result + (int) t.getAndAdvance();
+        while (! t.isEmpty())
+            result = multiplier * result + t.getAndAdvance();
 
-    return result;
-}
+        return result;
+    }
 
-int64 String::hashCode64() const noexcept
-{
-    int64 result = 0;
+    enum { multiplier = sizeof (Type) > 4 ? 101 : 31 };
+};
 
-    for (CharPointerType t (text); ! t.isEmpty();)
-        result = 101 * result + t.getAndAdvance();
-
-    return result;
-}
+int String::hashCode() const noexcept       { return HashGenerator<int>        ::calculate (text); }
+int64 String::hashCode64() const noexcept   { return HashGenerator<int64>      ::calculate (text); }
+std::size_t String::hash() const noexcept   { return HashGenerator<std::size_t>::calculate (text); }
 
 //==============================================================================
 JUCE_API bool JUCE_CALLTYPE operator== (const String& s1, const String& s2) noexcept            { return s1.compare (s2) == 0; }
-JUCE_API bool JUCE_CALLTYPE operator== (const String& s1, const char* const s2) noexcept        { return s1.compare (s2) == 0; }
-JUCE_API bool JUCE_CALLTYPE operator== (const String& s1, const wchar_t* const s2) noexcept     { return s1.compare (s2) == 0; }
-JUCE_API bool JUCE_CALLTYPE operator== (const String& s1, const CharPointer_UTF8 s2) noexcept   { return s1.getCharPointer().compare (s2) == 0; }
-JUCE_API bool JUCE_CALLTYPE operator== (const String& s1, const CharPointer_UTF16 s2) noexcept  { return s1.getCharPointer().compare (s2) == 0; }
-JUCE_API bool JUCE_CALLTYPE operator== (const String& s1, const CharPointer_UTF32 s2) noexcept  { return s1.getCharPointer().compare (s2) == 0; }
-JUCE_API bool JUCE_CALLTYPE operator== (const String& s1, StringRef s2) noexcept                { return s1.getCharPointer().compare (s2.text) == 0; }
 JUCE_API bool JUCE_CALLTYPE operator!= (const String& s1, const String& s2) noexcept            { return s1.compare (s2) != 0; }
-JUCE_API bool JUCE_CALLTYPE operator!= (const String& s1, const char* const s2) noexcept        { return s1.compare (s2) != 0; }
-JUCE_API bool JUCE_CALLTYPE operator!= (const String& s1, const wchar_t* const s2) noexcept     { return s1.compare (s2) != 0; }
-JUCE_API bool JUCE_CALLTYPE operator!= (const String& s1, const CharPointer_UTF8 s2) noexcept   { return s1.getCharPointer().compare (s2) != 0; }
-JUCE_API bool JUCE_CALLTYPE operator!= (const String& s1, const CharPointer_UTF16 s2) noexcept  { return s1.getCharPointer().compare (s2) != 0; }
-JUCE_API bool JUCE_CALLTYPE operator!= (const String& s1, const CharPointer_UTF32 s2) noexcept  { return s1.getCharPointer().compare (s2) != 0; }
+JUCE_API bool JUCE_CALLTYPE operator== (const String& s1, const char* s2) noexcept              { return s1.compare (s2) == 0; }
+JUCE_API bool JUCE_CALLTYPE operator!= (const String& s1, const char* s2) noexcept              { return s1.compare (s2) != 0; }
+JUCE_API bool JUCE_CALLTYPE operator== (const String& s1, const wchar_t* s2) noexcept           { return s1.compare (s2) == 0; }
+JUCE_API bool JUCE_CALLTYPE operator!= (const String& s1, const wchar_t* s2) noexcept           { return s1.compare (s2) != 0; }
+JUCE_API bool JUCE_CALLTYPE operator== (const String& s1, StringRef s2) noexcept                { return s1.getCharPointer().compare (s2.text) == 0; }
 JUCE_API bool JUCE_CALLTYPE operator!= (const String& s1, StringRef s2) noexcept                { return s1.getCharPointer().compare (s2.text) != 0; }
+JUCE_API bool JUCE_CALLTYPE operator== (const String& s1, const CharPointer_UTF8 s2) noexcept   { return s1.getCharPointer().compare (s2) == 0; }
+JUCE_API bool JUCE_CALLTYPE operator!= (const String& s1, const CharPointer_UTF8 s2) noexcept   { return s1.getCharPointer().compare (s2) != 0; }
+JUCE_API bool JUCE_CALLTYPE operator== (const String& s1, const CharPointer_UTF16 s2) noexcept  { return s1.getCharPointer().compare (s2) == 0; }
+JUCE_API bool JUCE_CALLTYPE operator!= (const String& s1, const CharPointer_UTF16 s2) noexcept  { return s1.getCharPointer().compare (s2) != 0; }
+JUCE_API bool JUCE_CALLTYPE operator== (const String& s1, const CharPointer_UTF32 s2) noexcept  { return s1.getCharPointer().compare (s2) == 0; }
+JUCE_API bool JUCE_CALLTYPE operator!= (const String& s1, const CharPointer_UTF32 s2) noexcept  { return s1.getCharPointer().compare (s2) != 0; }
 JUCE_API bool JUCE_CALLTYPE operator>  (const String& s1, const String& s2) noexcept            { return s1.compare (s2) > 0; }
 JUCE_API bool JUCE_CALLTYPE operator<  (const String& s1, const String& s2) noexcept            { return s1.compare (s2) < 0; }
 JUCE_API bool JUCE_CALLTYPE operator>= (const String& s1, const String& s2) noexcept            { return s1.compare (s2) >= 0; }
@@ -1897,7 +1898,7 @@ struct StringEncodingConverter
             return CharPointerType_Dest (reinterpret_cast <const DestChar*> (&emptyChar));
 
         CharPointerType_Src text (source.getCharPointer());
-        const size_t extraBytesNeeded = CharPointerType_Dest::getBytesRequiredFor (text);
+        const size_t extraBytesNeeded = CharPointerType_Dest::getBytesRequiredFor (text) + sizeof (typename CharPointerType_Dest::CharType);
         const size_t endOffset = (text.sizeInBytes() + 3) & ~3u; // the new string must be word-aligned or many Windows
                                                                 // functions will fail to read it correctly!
         source.preallocateBytes (endOffset + extraBytesNeeded);
@@ -1993,9 +1994,14 @@ String String::fromUTF8 (const char* const buffer, int bufferSizeBytes)
 {
     if (buffer != nullptr)
     {
-        if (bufferSizeBytes < 0) return String (CharPointer_UTF8 (buffer));
-        if (bufferSizeBytes > 0) return String (CharPointer_UTF8 (buffer),
-                                                CharPointer_UTF8 (buffer + bufferSizeBytes));
+        if (bufferSizeBytes < 0)
+            return String (CharPointer_UTF8 (buffer));
+
+        if (bufferSizeBytes > 0)
+        {
+            jassert (CharPointer_UTF8::isValidString (buffer, bufferSizeBytes));
+            return String (CharPointer_UTF8 (buffer), CharPointer_UTF8 (buffer + bufferSizeBytes));
+        }
     }
 
     return String();

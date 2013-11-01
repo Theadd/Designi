@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="100%" height="100%" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 500 500"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .str0 {stroke:#434242;stroke-width:10}
+    .str2 {stroke:#434242;stroke-width:10;stroke-linejoin:round}
+    .str1 {stroke:#434242;stroke-width:15}
+    .fil2 {fill:url(#id0)}
+    .fil4 {fill:url(#id1)}
+    .fil3 {fill:url(#id2)}
+    .fil0 {fill:url(#id3)}
+    .fil1 {fill:url(#id4)}
+   ]]>
+  </style>
+  <linearGradient id="id0" gradientUnits="userSpaceOnUse" x1="251.282" y1="77.448" x2="99.998" y2="77.448">
+   <stop offset="0" style="stop-color:#008BFF"/>
+   <stop offset="1" style="stop-color:#00AAFF"/>
+  </linearGradient>
+  <linearGradient id="id1" gradientUnits="userSpaceOnUse" xlink:href="#id0" x1="279.998" y1="292.5" x2="219.998" y2="292.5">
+  </linearGradient>
+  <linearGradient id="id2" gradientUnits="userSpaceOnUse" xlink:href="#id0" x1="399.998" y1="77.448" x2="248.714" y2="77.448">
+  </linearGradient>
+  <linearGradient id="id3" gradientUnits="userSpaceOnUse" xlink:href="#id0" x1="451.599" y1="192.499" x2="48.399" y2="192.499">
+  </linearGradient>
+  <linearGradient id="id4" gradientUnits="userSpaceOnUse" x1="249.999" y1="266.4" x2="249.999" y2="433.6">
+   <stop offset="0" style="stop-color:#FCFCFD"/>
+   <stop offset="1" style="stop-color:#FFFFFF"/>
+  </linearGradient>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <path class="fil0 str0" d="M55 145l390 0c8,0 15,7 15,15l0 80 -420 0 0 -80c0,-8 7,-15 15,-15z"/>
+  <path class="fil1 str1" d="M50 240l400 0 0 200c0,11 -9,20 -20,20l-360 0c-11,0 -20,-9 -20,-20l0 -200z"/>
+  <path class="fil2 str0" d="M200 115c10,5 5,15 -10,10 -40,-10 -90,-30 -90,-60 0,-30 20,-40 40,-40 50,0 80,40 100,70 11,12 0,25 -10,10 -10,-15 -22,-25 -35,-35 -25,-20 -50,5 -35,25 15,15 30,15 40,20z"/>
+  <path class="fil3 str0" d="M300 115c-10,5 -5,15 10,10 40,-10 90,-30 90,-60 0,-30 -20,-40 -40,-40 -50,0 -80,40 -100,70 -11,12 0,25 10,10 10,-15 22,-25 35,-35 25,-20 50,5 35,25 -15,15 -30,15 -40,20z"/>
+  <path class="fil4 str2" d="M220 140c15,-15 45,-15 60,0l0 320 -60 0 0 -320z"/>
+ </g>
+</svg>

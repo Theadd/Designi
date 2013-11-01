@@ -495,7 +495,10 @@
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_core\xml\juce_XmlElement.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\JuceLibraryCode\modules\juce_core\json\juce_JSON.cpp">
+    <ClCompile Include="..\..\JuceLibraryCode\modules\juce_core\javascript\juce_Javascript.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\juce_core\javascript\juce_JSON.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_core\zip\juce_GZIPCompressorOutputStream.cpp">
@@ -529,6 +532,9 @@
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_core\native\juce_android_Threads.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\juce_core\native\juce_linux_CommonFile.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_core\native\juce_linux_Files.cpp">
@@ -1011,6 +1017,15 @@
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_basics\lookandfeel\juce_LookAndFeel.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_basics\lookandfeel\juce_LookAndFeel_V1.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_basics\lookandfeel\juce_LookAndFeel_V2.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_basics\lookandfeel\juce_LookAndFeel_V3.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_basics\filebrowser\juce_DirectoryContentsDisplayComponent.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
@@ -1102,9 +1117,6 @@
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_extra\documents\juce_FileBasedDocument.cpp">
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_extra\lookandfeel\juce_OldSchoolLookAndFeel.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_extra\misc\juce_BubbleMessageComponent.cpp">
@@ -1376,7 +1388,8 @@
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_core\system\juce_TargetPlatform.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_core\xml\juce_XmlDocument.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_core\xml\juce_XmlElement.h"/>
-    <ClInclude Include="..\..\JuceLibraryCode\modules\juce_core\json\juce_JSON.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\juce_core\javascript\juce_Javascript.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\juce_core\javascript\juce_JSON.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_core\zip\juce_GZIPCompressorOutputStream.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_core\zip\juce_GZIPDecompressorInputStream.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_core\zip\juce_ZipFile.h"/>
@@ -1566,6 +1579,9 @@
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_gui_basics\properties\juce_SliderPropertyComponent.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_gui_basics\properties\juce_TextPropertyComponent.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_gui_basics\lookandfeel\juce_LookAndFeel.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\juce_gui_basics\lookandfeel\juce_LookAndFeel_V1.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\juce_gui_basics\lookandfeel\juce_LookAndFeel_V2.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\juce_gui_basics\lookandfeel\juce_LookAndFeel_V3.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_gui_basics\filebrowser\juce_DirectoryContentsDisplayComponent.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_gui_basics\filebrowser\juce_DirectoryContentsList.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_gui_basics\filebrowser\juce_FileBrowserComponent.h"/>
@@ -1599,7 +1615,6 @@
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_gui_extra\embedding\juce_ActiveXControlComponent.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_gui_extra\embedding\juce_NSViewComponent.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_gui_extra\embedding\juce_UIViewComponent.h"/>
-    <ClInclude Include="..\..\JuceLibraryCode\modules\juce_gui_extra\lookandfeel\juce_OldSchoolLookAndFeel.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_gui_extra\misc\juce_AppleRemote.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_gui_extra\misc\juce_BubbleMessageComponent.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_gui_extra\misc\juce_ColourSelector.h"/>
@@ -1641,6 +1656,18 @@
     <ClInclude Include="..\..\JuceLibraryCode\JuceHeader.h"/>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\BinaryData\file_cpp.png"/>
+    <None Include="..\..\BinaryData\file_h.png"/>
+    <None Include="..\..\BinaryData\folder-close.png"/>
+    <None Include="..\..\BinaryData\folder-open.png"/>
+    <None Include="..\..\BinaryData\note.png"/>
+    <None Include="..\..\BinaryData\pen-brush.png"/>
+    <None Include="..\..\BinaryData\application-code.svg"/>
+    <None Include="..\..\BinaryData\application.svg"/>
+    <None Include="..\..\BinaryData\file.svg"/>
+    <None Include="..\..\BinaryData\folder-close.svg"/>
+    <None Include="..\..\BinaryData\folder-open.svg"/>
+    <None Include="..\..\BinaryData\note.svg"/>
     <None Include="..\..\BinaryData\background.png"/>
     <None Include="..\..\BinaryData\icons2.zip"/>
     <None Include="..\..\BinaryData\background_tile.png"/>

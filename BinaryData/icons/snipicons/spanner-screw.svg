@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW X6 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="100%" height="100%" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 500 500"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .str2 {stroke:#2B2A29;stroke-width:0.1}
+    .str1 {stroke:#333333;stroke-width:5}
+    .str0 {stroke:#333333;stroke-width:10}
+    .fil2 {fill:none}
+    .fil4 {fill:#008BFF}
+    .fil0 {fill:#E2E3E3}
+    .fil3 {fill:url(#id0)}
+    .fil1 {fill:url(#id1)}
+   ]]>
+  </style>
+  <linearGradient id="id0" gradientUnits="userSpaceOnUse" x1="398.172" y1="106.154" x2="104.672" y2="399.654">
+   <stop offset="0" style="stop-color:#E2E3E3"/>
+   <stop offset="0.458824" style="stop-color:white"/>
+   <stop offset="1" style="stop-color:#E2E3E3"/>
+  </linearGradient>
+  <linearGradient id="id1" gradientUnits="userSpaceOnUse" x1="150.673" y1="402.885" x2="97.145" y2="349.357">
+   <stop offset="0" style="stop-color:#008BFF"/>
+   <stop offset="0.490196" style="stop-color:#279DFF"/>
+   <stop offset="1" style="stop-color:#008BFF"/>
+  </linearGradient>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <polygon class="fil0 str0" points="406,118 220,305 195,280 382,94 390,72 434,49 451,66 428,110 "/>
+  <path class="fil1 str0" d="M93 460l114 -114c2,-2 3,-3 3,-5l1 -6c1,-5 5,-8 9,-8l2 0c3,0 5,-1 7,-3l4 -4c3,-3 3,-9 0,-13l-40 -40c-4,-3 -10,-3 -13,0l-4 4c-2,2 -3,4 -3,7l0 2c0,4 -3,8 -8,9l-6 1c-2,0 -3,1 -5,3l-114 114c-13,13 -13,27 0,40l13 13c14,13 27,13 40,0z"/>
+  <line class="fil2 str1" x1="65" y1="435" x2="181" y2= "319" />
+  <line class="fil2 str1" x1="194" y1="333" x2="78" y2= "449" />
+  <line class="fil2 str1" x1="52" y1="422" x2="168" y2= "306" />
+  <rect class="fil2 str2" width="500" height="500"/>
+  <path class="fil3 str0" d="M409 375l-11 11 -15 0 0 15 -10 11 10 10 0 15 15 0 11 11 11 -11 15 0 0 -15 11 -10 -11 -11 0 -15 -15 0 -11 -11zm-41 78c23,23 60,23 82,0 23,-23 23,-60 0,-83 -24,-24 -40,-7 -66,-33l-178 -178c-21,-21 -17,-31 -16,-57 1,-26 -46,-57 -71,-72l-17 10 30 54c2,2 1,6 -2,8l-43 25c-3,1 -7,0 -8,-2l-31 -53 -15 9c-3,36 6,82 40,100 33,18 60,8 79,23l182 183c26,25 10,42 34,66z"/>
+  <path class="fil4" d="M189 192c-7,7 -7,18 0,25l129 128c7,7 18,7 25,0 7,-7 7,-18 0,-25l-129 -128c-7,-7 -18,-7 -25,0z"/>
+ </g>
+</svg>

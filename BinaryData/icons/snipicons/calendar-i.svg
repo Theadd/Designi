@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="100%" height="100%" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 5000 5000"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil0 {fill:#FFFFFF}
+   ]]>
+  </style>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <path class="fil0" d="M800 650l400 0 0 421c-88,38 -150,127 -150,229 0,138 112,250 250,250 138,0 250,-112 250,-250 0,-103 -62,-191 -150,-229l0 -421 2300 0 0 421c-88,38 -150,127 -150,229 0,138 112,250 250,250 138,0 250,-112 250,-250 0,-103 -62,-191 -150,-229l0 -421 300 0c165,0 300,135 300,300l0 3500c0,165 -135,300 -300,300l-3400 0c-165,0 -300,-135 -300,-300l0 -3500c0,-165 135,-300 300,-300zm-100 1150l3600 0 0 2550c0,110 -90,200 -200,200l-3200 0c-110,0 -200,-90 -200,-200l0 -2550z"/>
+  <rect class="fil0" x="3750" y="400" width="99.98" height="900" rx="50" ry="50"/>
+  <rect class="fil0" x="1250" y="400" width="99.98" height="900" rx="50" ry="50"/>
+  <rect class="fil0" x="900" y="3900" width="700" height="400"/>
+  <rect class="fil0" x="1700" y="3900" width="700" height="400"/>
+  <rect class="fil0" x="2600" y="3900" width="700" height="400"/>
+  <rect class="fil0" x="900" y="3300" width="700" height="400"/>
+  <rect class="fil0" x="1700" y="3300" width="700" height="400"/>
+  <rect class="fil0" x="2600" y="3300" width="700" height="400"/>
+  <rect class="fil0" x="3400" y="3300" width="700" height="400"/>
+  <rect class="fil0" x="900" y="2700" width="700" height="400"/>
+  <rect class="fil0" x="1700" y="2700" width="700" height="400"/>
+  <rect class="fil0" x="2600" y="2700" width="700" height="400"/>
+  <rect class="fil0" x="3400" y="2700" width="700" height="400"/>
+  <rect class="fil0" x="1700" y="2100" width="700" height="400"/>
+  <rect class="fil0" x="2600" y="2100" width="700" height="400"/>
+  <rect class="fil0" x="3400" y="2100" width="700" height="400"/>
+  <circle class="fil0" cx="1300" cy="1300" r="150"/>
+  <circle class="fil0" cx="3800" cy="1300" r="150"/>
+ </g>
+</svg>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="100%" height="100%" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 500 500"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .str0 {stroke:#434242;stroke-width:10}
+    .fil0 {fill:none}
+    .fil1 {fill:#434242}
+    .fil4 {fill:url(#id0)}
+    .fil3 {fill:url(#id1)}
+    .fil5 {fill:url(#id2)}
+    .fil2 {fill:url(#id3)}
+   ]]>
+  </style>
+  <linearGradient id="id0" gradientUnits="userSpaceOnUse" x1="65.002" y1="345.359" x2="35.002" y2="345.359">
+   <stop offset="0" style="stop-color:#008BFF"/>
+   <stop offset="1" style="stop-color:#00AAFF"/>
+  </linearGradient>
+  <linearGradient id="id1" gradientUnits="userSpaceOnUse" xlink:href="#id0" x1="68.96" y1="350.359" x2="86.736" y2="350.359">
+  </linearGradient>
+  <linearGradient id="id2" gradientUnits="userSpaceOnUse" xlink:href="#id0" x1="434.998" y1="345.359" x2="464.998" y2="345.359">
+  </linearGradient>
+  <linearGradient id="id3" gradientUnits="userSpaceOnUse" xlink:href="#id0" x1="431.04" y1="350.359" x2="413.264" y2="350.359">
+  </linearGradient>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="_1474453776">
+   <g>
+    <path class="fil0 str0" d="M390 263l10 0c6,0 10,5 10,10l0 140c0,6 -4,10 -10,10l-10 0c-5,0 -10,-4 -10,-10l0 -140c0,-5 5,-10 10,-10z"/>
+    <path id="1" class="fil1" d="M390 263l10 0c6,0 10,5 10,10l0 140c0,6 -4,10 -10,10l-10 0c-5,0 -10,-4 -10,-10l0 -140c0,-5 5,-10 10,-10z"/>
+   </g>
+   <g>
+    <path class="fil0 str0" d="M423 273l-8 0 0 140 8 0c4,0 7,-3 7,-7l0 -125c0,-4 -3,-8 -7,-8z"/>
+    <path id="1" class="fil2" d="M423 273l-8 0 0 140 8 0c4,0 7,-3 7,-7l0 -125c0,-4 -3,-8 -7,-8z"/>
+   </g>
+   <g>
+    <path class="fil0 str0" d="M110 263l-10 0c-6,0 -10,5 -10,10l0 140c0,6 4,10 10,10l10 0c5,0 10,-4 10,-10l0 -140c0,-5 -5,-10 -10,-10z"/>
+    <path id="1" class="fil1" d="M110 263l-10 0c-6,0 -10,5 -10,10l0 140c0,6 4,10 10,10l10 0c5,0 10,-4 10,-10l0 -140c0,-5 -5,-10 -10,-10z"/>
+   </g>
+   <g>
+    <path class="fil0 str0" d="M78 273l7 0 0 140 -7 0c-5,0 -8,-3 -8,-7l0 -125c0,-4 3,-8 8,-8z"/>
+    <path id="1" class="fil3" d="M78 273l7 0 0 140 -7 0c-5,0 -8,-3 -8,-7l0 -125c0,-4 3,-8 8,-8z"/>
+   </g>
+   <g>
+    <path class="fil0 str0" d="M65 303l0 80c-14,0 -25,-11 -25,-25l0 -30c0,-14 11,-25 25,-25z"/>
+    <path id="1" class="fil4" d="M65 303l0 80c-14,0 -25,-11 -25,-25l0 -30c0,-14 11,-25 25,-25z"/>
+   </g>
+   <g>
+    <path class="fil0 str0" d="M435 303l0 80c14,0 25,-11 25,-25l0 -30c0,-14 -11,-25 -25,-25z"/>
+    <path id="1" class="fil5" d="M435 303l0 80c14,0 25,-11 25,-25l0 -30c0,-14 -11,-25 -25,-25z"/>
+   </g>
+   <path class="fil1" d="M61 330c0,10 -10,10 -10,0l0 -58c0,-108 90,-195 200,-195 111,0 200,87 200,195l0 58c0,10 -10,10 -10,0l0 -68c0,-83 -85,-150 -190,-150 -105,0 -190,67 -190,150l0 68z"/>
+  </g>
+ </g>
+</svg>

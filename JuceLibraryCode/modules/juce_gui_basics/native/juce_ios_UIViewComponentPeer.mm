@@ -480,7 +480,7 @@ UIViewComponentPeer::UIViewComponentPeer (Component& comp, const int windowStyle
     view = [[JuceUIView alloc] initWithOwner: this withFrame: r];
 
     view.multipleTouchEnabled = YES;
-    view.hidden = ! component.isVisible();
+    view.hidden = true;
     view.opaque = component.isOpaque();
     view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent: 0];
     view.transform = CGAffineTransformIdentity;
@@ -499,6 +499,7 @@ UIViewComponentPeer::UIViewComponentPeer (Component& comp, const int windowStyle
         r.origin.y = [UIScreen mainScreen].bounds.size.height - (r.origin.y + r.size.height);
 
         window = [[JuceUIWindow alloc] init];
+        window.hidden = true;
         window.autoresizesSubviews = NO;
         window.transform = CGAffineTransformIdentity;
         window.frame = r;
@@ -514,11 +515,10 @@ UIViewComponentPeer::UIViewComponentPeer (Component& comp, const int windowStyle
 
         window.rootViewController = controller;
         [window addSubview: view];
-
-        window.hidden = view.hidden;
     }
 
     setTitle (component.getName());
+    setVisible (component.isVisible());
 
     Desktop::getInstance().addFocusChangeListener (this);
 }
@@ -542,10 +542,10 @@ UIViewComponentPeer::~UIViewComponentPeer()
 //==============================================================================
 void UIViewComponentPeer::setVisible (bool shouldBeVisible)
 {
-    view.hidden = ! shouldBeVisible;
-
     if (! isSharedWindow)
         window.hidden = ! shouldBeVisible;
+
+    view.hidden = ! shouldBeVisible;
 }
 
 void UIViewComponentPeer::setTitle (const String&)

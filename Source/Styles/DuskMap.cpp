@@ -12,6 +12,111 @@
 #include "../Globals.h"
 #include "DuskMap.h"
 
+//================== folder-open.svg ==================
+static const unsigned char temp_82949625[] =
+"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n"
+"<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\r\n"
+"<!-- Creator: CorelDRAW X6 -->\r\n"
+"<svg xmlns=\"http://www.w3.org/2000/svg\" xml:space=\"preserve\" width=\"100%\" height=\"100%\" version=\"1.1\" style=\"shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-ru"
+"le:evenodd\"\r\n"
+"viewBox=\"0 0 500 500\"\r\n"
+" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\r\n"
+" <defs>\r\n"
+"  <style type=\"text/css\">\r\n"
+"   <![CDATA[\r\n"
+"    .str1 {stroke:#2B2A29;stroke-width:0.1}\r\n"
+"    .str0 {stroke:#434242;stroke-width:10}\r\n"
+"    .str2 {stroke:#333333;stroke-width:20;stroke-linecap:round}\r\n"
+"    .fil2 {fill:none}\r\n"
+"    .fil0 {fill:url(#id0)}\r\n"
+"    .fil1 {fill:url(#id1)}\r\n"
+"   ]]>\r\n"
+"  </style>\r\n"
+"  <linearGradient id=\"id0\" gradientUnits=\"userSpaceOnUse\" x1=\"250.05\" y1=\"257.25\" x2=\"250.05\" y2=\"112.852\">\r\n"
+"   <stop offset=\"0\" style=\"stop-color:#FCFCFD\"/>\r\n"
+"   <stop offset=\"1\" style=\"stop-color:#EDEDED\"/>\r\n"
+"  </linearGradient>\r\n"
+"  <linearGradient id=\"id1\" gradientUnits=\"userSpaceOnUse\" x1=\"257.779\" y1=\"263.852\" x2=\"257.779\" y2=\"386.252\">\r\n"
+"   <stop offset=\"0\" style=\"stop-color:#008BFF\"/>\r\n"
+"   <stop offset=\"1\" style=\"stop-color:#00AAFF\"/>\r\n"
+"  </linearGradient>\r\n"
+" </defs>\r\n"
+" <g id=\"Layer_x0020_1\">\r\n"
+"  <metadata id=\"CorelCorpID_0Corel-Layer\"/>\r\n"
+"  <path class=\"fil0 str0\" d=\"M50 280l0 -180c0,-5 5,-10 10,-10l140 0c20,0 20,30 40,30l200 0c6,0 10,5 10,10l0 150 -400 0z\"/>\r\n"
+"  <path class=\"fil1 str0\" d=\"M60 410l380 0c5,0 9,-5 10,-10l25 -150c1,-5 -5,-10 -10,-10l-160 0c-20,0 -20,30 -40,30l-215 0c-5,0 -10,5 -10,10l10 120c1,6 5,10 10,10z\"/>\r\n"
+"  <rect class=\"fil2 str1\" width=\"500\" height=\"500\"/>\r\n"
+"  <line class=\"fil2 str2\" x1=\"85\" y1=\"120\" x2=\"185\" y2= \"120\" />\r\n"
+" </g>\r\n"
+"</svg>\r\n";
+
+const char* folderopen_svg = (const char*) temp_82949625;
+
+//================== folder-close.svg ==================
+static const unsigned char temp_59b278a9[] =
+"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n"
+"<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\r\n"
+"<!-- Creator: CorelDRAW X6 -->\r\n"
+"<svg xmlns=\"http://www.w3.org/2000/svg\" xml:space=\"preserve\" width=\"100%\" height=\"100%\" version=\"1.1\" style=\"shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-ru"
+"le:evenodd\"\r\n"
+"viewBox=\"0 0 500 500\"\r\n"
+" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\r\n"
+" <defs>\r\n"
+"  <style type=\"text/css\">\r\n"
+"   <![CDATA[\r\n"
+"    .str1 {stroke:#2B2A29;stroke-width:0.1}\r\n"
+"    .str0 {stroke:#434242;stroke-width:10}\r\n"
+"    .str2 {stroke:#333333;stroke-width:20;stroke-linecap:round}\r\n"
+"    .fil2 {fill:none}\r\n"
+"    .fil0 {fill:url(#id0)}\r\n"
+"    .fil1 {fill:url(#id1)}\r\n"
+"   ]]>\r\n"
+"  </style>\r\n"
+"  <linearGradient id=\"id0\" gradientUnits=\"userSpaceOnUse\" x1=\"250.05\" y1=\"90.052\" x2=\"250.05\" y2=\"195.052\">\r\n"
+"   <stop offset=\"0\" style=\"stop-color:#FCFCFD\"/>\r\n"
+"   <stop offset=\"1\" style=\"stop-color:#EDEDED\"/>\r\n"
+"  </linearGradient>\r\n"
+"  <linearGradient id=\"id1\" gradientUnits=\"userSpaceOnUse\" x1=\"250.036\" y1=\"171.55\" x2=\"250.036\" y2=\"383.552\">\r\n"
+"   <stop offset=\"0\" style=\"stop-color:#008BFF\"/>\r\n"
+"   <stop offset=\"1\" style=\"stop-color:#00AAFF\"/>\r\n"
+"  </linearGradient>\r\n"
+" </defs>\r\n"
+" <g id=\"Layer_x0020_1\">\r\n"
+"  <metadata id=\"CorelCorpID_0Corel-Layer\"/>\r\n"
+"  <path class=\"fil0 str0\" d=\"M50 195l0 -95c0,-5 5,-10 10,-10l140 0c20,0 20,30 40,30l200 0c6,0 10,5 10,10l0 65 -400 0z\"/>\r\n"
+"  <path class=\"fil1 str0\" d=\"M60 410l380 0c6,0 10,-4 10,-10l10 -245c0,-5 -4,-10 -10,-10l-150 0c-20,0 -20,30 -40,30l-210 0c-5,0 -10,5 -10,10l10 215c0,6 5,10 10,10z\"/>\r\n"
+"  <rect class=\"fil2 str1\" width=\"500\" height=\"500\"/>\r\n"
+"  <line class=\"fil2 str2\" x1=\"85\" y1=\"120\" x2=\"185\" y2= \"120\" />\r\n"
+" </g>\r\n"
+"</svg>\r\n";
+
+const char* folderclose_svg = (const char*) temp_59b278a9;
+
+//================== file.svg ==================
+static const unsigned char temp_3409dacc[] =
+"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n"
+"<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\r\n"
+"<svg xmlns=\"http://www.w3.org/2000/svg\" xml:space=\"preserve\" width=\"100%\" height=\"100%\" version=\"1.1\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" image-rendering=\"optimizeQuality\" fill-rule=\"evenodd\" cli"
+"p-rule=\"evenodd\"\r\n"
+"viewBox=\"0 0 500 500\"\r\n"
+" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\r\n"
+" <defs>\r\n"
+"  <linearGradient y2=\"0\" x2=\"0\" y1=\"1\" x1=\"1\" id=\"btl\">\r\n"
+"   <stop stop-color=\"#008BFF\" offset=\"0\"/>\r\n"
+"   <stop stop-color=\"#00AAFF\" offset=\"1\"/>\r\n"
+"  </linearGradient>\r\n"
+"  <linearGradient y2=\"0\" x2=\"0\" y1=\"1\" x1=\"0\" id=\"wtb\">\r\n"
+"   <stop stop-color=\"#FCFCFD\" offset=\"0\"/>\r\n"
+"   <stop stop-color=\"#DDDEDE\" offset=\"1\"/>\r\n"
+"  </linearGradient>\r\n"
+" </defs>\r\n"
+" <g id=\"Layer_x0020_1\">\r\n"
+"  <path fill=\"url(#wtb)\" stroke=\"#434242\" stroke-width=\"15\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M250 30l140 0c11,0 20,9 20,20l0 400c0,11 -9,20 -20,20l-280 0c-11,0 -20,-9 -20,-20l0 -260 160 -160z\"/>\r\n"
+"  <path fill=\"url(#btl)\" stroke=\"#434242\" stroke-width=\"10\" stroke-linejoin=\"round\" d=\"M220 190l-130 0 160 -160 0 130c0,17 -14,30 -30,30z\"/>\r\n"
+" </g>\r\n"
+"</svg>\r\n";
+
+const char* file_svg = (const char*) temp_3409dacc;
 
 namespace LookAndFeelHelpers
 {
@@ -101,6 +206,11 @@ DuskMapLookAndFeel::DuskMapLookAndFeel()
 	setColour (DirectoryContentsDisplayComponent::highlightColourId, Colours::white.withAlpha(0.1f));
 }
 
+DuskMapLookAndFeel::~DuskMapLookAndFeel()
+{
+	//folderImage = nullptr;
+}
+
 Colour DuskMapLookAndFeel::getScrollbarColourForBackground (Colour background)
 {
     return background.contrasting().withAlpha (0.13f);
@@ -180,6 +290,76 @@ Colour DuskMapLookAndFeel::getScrollbarColourForBackground (Colour background)
     return textArea.removeFromRight (comp.getWidth());
 	
 }*/
+
+
+void DuskMapLookAndFeel::createTabButtonShape (TabBarButton& button, Path& p, bool /*isMouseOver*/, bool /*isMouseDown*/)
+{
+    const Rectangle<int> activeArea (button.getActiveArea());
+    const float w = (float) activeArea.getWidth();
+    const float h = (float) activeArea.getHeight();
+
+    float length = w;
+    float depth = h;
+
+    if (button.getTabbedButtonBar().isVertical())
+        std::swap (length, depth);
+
+    const float indent = (float) getTabButtonOverlap ((int) depth);
+    const float overhang = 4.0f;
+
+    switch (button.getTabbedButtonBar().getOrientation())
+    {
+        case TabbedButtonBar::TabsAtLeft:
+            p.startNewSubPath (w, 0.0f);
+            p.lineTo (0.0f, indent);
+            p.lineTo (0.0f, h - indent);
+            p.lineTo (w, h);
+            p.lineTo (w + overhang, h + overhang);
+            p.lineTo (w + overhang, -overhang);
+            break;
+
+        case TabbedButtonBar::TabsAtRight:
+            p.startNewSubPath (0.0f, 0.0f);
+            p.lineTo (w, indent);
+            p.lineTo (w, h - indent);
+            p.lineTo (0.0f, h);
+            p.lineTo (-overhang, h + overhang);
+            p.lineTo (-overhang, -overhang);
+            break;
+
+        case TabbedButtonBar::TabsAtBottom:
+            p.startNewSubPath (0.0f, 0.0f);
+            p.lineTo (indent, h);
+            p.lineTo (w - indent, h);
+            p.lineTo (w, 0.0f);
+            p.lineTo (w + overhang, -overhang);
+            p.lineTo (-overhang, -overhang);
+            break;
+
+        default:
+            p.startNewSubPath (0.0f, h);
+            p.lineTo (indent, 0.0f);
+            p.lineTo (w - indent, 0.0f);
+            p.lineTo (w, h);
+            p.lineTo (w + overhang, h + overhang);
+            p.lineTo (-overhang, h + overhang);
+            break;
+    }
+
+    p.closeSubPath();
+
+    p = p.createPathWithRoundedCorners (3.0f);
+}
+
+int DuskMapLookAndFeel::getTabButtonOverlap (int tabDepth)
+{
+    return 1 + tabDepth / 3;
+}
+
+int DuskMapLookAndFeel::getTabButtonSpaceAroundImage()
+{
+    return 4;
+}
 
 void DuskMapLookAndFeel::drawTabButton (TabBarButton& button, Graphics& g, bool isMouseOver, bool isMouseDown)
 {
@@ -500,6 +680,11 @@ void DuskMapLookAndFeel::drawMenuBarBackground (Graphics& g, int /*width*/, int 
     }
 }
 
+void DuskMapLookAndFeel::drawTreeviewPlusMinusBox (Graphics& g, const Rectangle< float > &area, Colour backgroundColour, bool isOpen, bool isMouseOver)
+{
+	drawTreeviewPlusMinusBox (g, area.getX(), area.getY(), area.getWidth(), area.getHeight(), !isOpen, isMouseOver);
+}
+
 void DuskMapLookAndFeel::drawTreeviewPlusMinusBox (Graphics& g, int x, int y, int w, int h, bool isPlus, bool isMouseOver)
 {
     const int boxSize = ((jmin (16, w, h) << 1) / 3) | 1;
@@ -532,24 +717,67 @@ void DuskMapLookAndFeel::drawTreeviewPlusMinusBox (Graphics& g, int x, int y, in
 		g.setColour(Colours::white);
 
     g.fillPath (p);
-	/*
-    g.setColour (Colour (0xe5ffffff));
-    g.fillRect (x, y, w, h);
-
-    g.setColour (Colour (0x80000000));
-    g.drawRect (x, y, w, h);
-
-    const float size = boxSize / 2 + 1.0f;
-    const float centre = (float) (boxSize / 2);
-
-    g.fillRect (x + (w - size) * 0.5f, y + centre, size, 1.0f);
-
-    if (isPlus)
-        g.fillRect (x + centre, y + (h - size) * 0.5f, 1.0f, size);
-		*/
 }
 
 int DuskMapLookAndFeel::getDefaultScrollbarWidth ()
 {
 	return 12;
 }
+
+
+void DuskMapLookAndFeel::drawFileBrowserRow (Graphics& g, int width, int height,
+                                      const String& filename, Image* icon,
+                                      const String& fileSizeDescription,
+                                      const String& fileTimeDescription,
+                                      const bool isDirectory,
+                                      const bool isItemSelected,
+                                      const int itemIndex,
+                                      DirectoryContentsDisplayComponent& dcc)
+{
+	String id;
+	if (!isDirectory)
+	{
+		id = filename.fromLastOccurrenceOf(".", true, true);
+		if (id.isEmpty())
+			id = "unknown";
+	}
+	else
+	{
+		id = "folder";
+	}
+	DBG("[drawFileBrowserRow] filename = "+filename+", isItemSelected = "+String(isItemSelected)+", itemIndex = "+String(itemIndex));
+	//dcc.getOpennessState()
+	
+	//bool isOpen = (dynamic_cast <TreeView *> (&dcc))->getItemOnRow(itemIndex)->isOpen();
+
+	//TreeView *tree = dynamic_cast <TreeView *> (&dcc);
+	//DBG("\tgetting item from TreeView on index = "+String(itemIndex));
+	//TreeViewItem *item = tree->getItemOnRow(itemIndex);
+	//DBG("\tisOpen = "+String(item->isOpen())+" Identifier String = #"+String(item->getItemIdentifierString())+"#, unique name = "+item->getUniqueName());
+	//bool isOpen = item->isOpen();
+
+
+	//set icon for file type
+	if (!isDirectory)
+	{
+		if (id.equalsIgnoreCase(".cpp"))
+			icon = &ImageCache::getFromMemory (BinaryData::file_cpp_png, BinaryData::file_cpp_pngSize);
+		else if (id.equalsIgnoreCase(".h"))
+			icon = &ImageCache::getFromMemory (BinaryData::file_h_png, BinaryData::file_h_pngSize);
+		else if (id.equalsIgnoreCase(".design"))
+			icon = &ImageCache::getFromMemory (BinaryData::penbrush_png, BinaryData::penbrush_pngSize);
+		else 
+			icon = &ImageCache::getFromMemory (BinaryData::note_png, BinaryData::note_pngSize);
+	}
+	else
+	{
+		if (isItemSelected)
+			icon = &ImageCache::getFromMemory (BinaryData::folderopen_png, BinaryData::folderopen_pngSize);
+		else
+			icon = &ImageCache::getFromMemory (BinaryData::folderclose_png, BinaryData::folderclose_pngSize);
+	}
+
+	LookAndFeel_V3::drawFileBrowserRow (g, width, height, filename, icon, fileSizeDescription, fileTimeDescription, false /*isDirectory*/, isItemSelected, itemIndex, dcc);
+
+}
+

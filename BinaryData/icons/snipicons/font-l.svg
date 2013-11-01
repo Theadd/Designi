@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="100%" height="100%" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 5000 5000"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .str0 {stroke:#434242;stroke-width:300;stroke-linecap:round}
+    .fil0 {fill:none}
+   ]]>
+  </style>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <polyline class="fil0 str0" points="1050,600 2600,600 4100,4500 "/>
+  <line class="fil0 str0" x1="812" y1="4500" x2="2312" y2= "600" />
+  <line class="fil0 str0" x1="450" y1="4500" x2="1700" y2= "4500" />
+  <line class="fil0 str0" x1="3250" y1="4500" x2="4500" y2= "4500" />
+  <line class="fil0 str0" x1="1350" y1="3100" x2="3550" y2= "3100" />
+ </g>
+</svg>

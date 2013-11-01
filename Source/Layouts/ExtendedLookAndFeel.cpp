@@ -14,7 +14,7 @@
 #include "MainLayout/InnerPanel.h"
 #include "MainLayout/MainLayout.h"
 
-ExtendedLookAndFeel::ExtendedLookAndFeel() : LookAndFeel()
+ExtendedLookAndFeel::ExtendedLookAndFeel() : LookAndFeel_V3()
 {
 	setColour (PanelContainer::backgroundColourId, Colour((juce::uint8) 51, (juce::uint8) 57, (juce::uint8) 61, (juce::uint8) 255));
 	setColour (Panel::backgroundColourId, Colours::transparentBlack);

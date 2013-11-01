@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="100%" height="100%" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 5000 5000"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .str1 {stroke:#434242;stroke-width:150;stroke-linecap:round}
+    .str0 {stroke:#434242;stroke-width:250;stroke-linejoin:round}
+    .fil0 {fill:none}
+   ]]>
+  </style>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <path class="fil0 str0" d="M1350 981l2300 0c467,0 850,383 850,850l0 800c0,468 -383,850 -850,850l-1050 0 -1000 1000c-52,52 -100,49 -100,0l0 -900c0,-49 -50,-100 -100,-100l-50 0c-467,0 -850,-382 -850,-850l0 -800c0,-467 383,-850 850,-850z"/>
+  <line class="fil0 str1" x1="1300" y1="1650" x2="3100" y2= "1650" />
+  <line class="fil0 str1" x1="1300" y1="2150" x2="3550" y2= "2150" />
+  <line class="fil0 str1" x1="1300" y1="2650" x2="2550" y2= "2650" />
+ </g>
+</svg>

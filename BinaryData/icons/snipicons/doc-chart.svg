@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW X6 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="100%" height="100%" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 500 500"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .str2 {stroke:#333333;stroke-width:0.1}
+    .str1 {stroke:#333333;stroke-width:10;stroke-linejoin:round}
+    .str0 {stroke:#333333;stroke-width:15;stroke-linejoin:round}
+    .fil2 {fill:none}
+    .fil3 {fill:#0076D8}
+    .fil1 {fill:#008BFF}
+    .fil4 {fill:#279DFF}
+    .fil0 {fill:url(#id0)}
+   ]]>
+  </style>
+  <linearGradient id="id0" gradientUnits="userSpaceOnUse" x1="97.196" y1="47.888" x2="402.904" y2="452.214">
+   <stop offset="0" style="stop-color:#DDDEDE"/>
+   <stop offset="0.14902" style="stop-color:#EDEDED"/>
+   <stop offset="0.439216" style="stop-color:#FDFDFD"/>
+   <stop offset="0.721569" style="stop-color:#EBEBEB"/>
+   <stop offset="1" style="stop-color:#DDDEDE"/>
+  </linearGradient>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="_837255488">
+   <path class="fil0 str0" d="M175 40l225 0c6,0 10,5 10,10l0 400c0,6 -4,10 -10,10l-300 0c-5,0 -10,-4 -10,-10l0 -325 85 -85z"/>
+   <path class="fil1 str1" d="M175 40l0 73c0,6 -6,12 -12,12l-73 0 85 -85z"/>
+  </g>
+  <rect class="fil2 str2" width="500" height="500"/>
+  <rect class="fil3" x="130" y="190" width="60" height="229.744"/>
+  <rect class="fil1" x="220" y="265" width="60" height="154.743"/>
+  <rect class="fil4" x="310" y="225" width="60" height="194.741"/>
+ </g>
+</svg>

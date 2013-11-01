@@ -183,7 +183,7 @@ public:
         owner.getLookAndFeel().drawFileBrowserRow (g, width, height,
                                                    file.getFileName(),
                                                    &icon, fileSize, modTime,
-                                                   isDirectory, isSelected(),
+                                                   isDirectory, isOpen(),
                                                    indexInContentsList, owner);
     }
 

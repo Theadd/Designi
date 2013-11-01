@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW X6 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="100%" height="100%" version="1.1" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd"
+viewBox="0 0 500 500"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+   <linearGradient id="id0" gradientUnits="userSpaceOnUse" x1="315.712" y1="216.897" x2="45.834" y2="216.897">
+    <stop offset="0" stop-color="#008BFF"/>
+    <stop offset="1" stop-color="#00AAFF"/>
+   </linearGradient>
+   <linearGradient id="id1" gradientUnits="userSpaceOnUse" x1="82.124" y1="160.538" x2="188.908" y2="273.256">
+    <stop offset="0" stop-color="#008BFF"/>
+    <stop offset="1" stop-color="#4EAFFF"/>
+   </linearGradient>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <path fill="url(#id0)" d="M53 135l256 0c4,0 7,3 7,7l0 150c0,4 -3,7 -7,7l-256 0c-4,0 -7,-3 -7,-7l0 -150c0,-4 3,-7 7,-7z"/>
+  <path fill="url(#id1)" d="M53 135l172 0c0,1 0,2 0,2 0,71 -40,132 -99,162l-73 0c-4,0 -7,-3 -7,-7l0 -150c0,-4 3,-7 7,-7z"/>
+  <path fill="#434242" d="M53 135l256 0c4,0 7,3 7,7l0 150c0,4 -3,7 -7,7l-256 0c-4,0 -7,-3 -7,-7l0 -150c0,-4 3,-7 7,-7zm38 214l53 0 0 -21 -100 0c-8,0 -14,-7 -14,-15l0 -178c0,-8 6,-15 14,-15l272 0c8,0 14,7 14,15l0 178c0,8 -6,15 -14,15l-100 0 0 21 53 0c6,0 11,5 11,11l0 3 -200 0 0 -3c0,-6 5,-11 11,-11z"/>
+  <circle fill="#279DFF" cx="180" cy="328" r="12"/>
+  <path fill="#434242" d="M360 360l100 0c6,0 10,-4 10,-10l0 -250c0,-6 -4,-10 -10,-10l-100 0c-6,0 -10,4 -10,10l0 250c0,6 4,10 10,10z"/>
+  <path fill="#FFFFFF" d="M365 130l90 0 0 -20 -90 0 0 20zm0 35l90 0 0 -20 -90 0 0 20z"/>
+  <path fill="#FFFFFF" d="M400 240l0 90c0,6 4,10 10,10 6,0 10,-4 10,-10l0 -90c0,-5 -4,-10 -10,-10 -6,0 -10,5 -10,10z"/>
+  <path fill="#008BFF" fill-rule="nonzero" d="M425 195c0,8 -7,15 -15,15 -8,0 -15,-7 -15,-15 0,-8 7,-15 15,-15 8,0 15,7 15,15z"/>
+  <line fill="none" stroke="#008BFF" stroke-width="7.5" stroke-linecap="round" x1="410" y1="330" x2="410" y2= "280" />
+  <line fill="none" stroke="#008BFF" stroke-width="7.5" stroke-linecap="round" x1="410" y1="240" x2="410" y2= "265" />
+ </g>
+</svg>

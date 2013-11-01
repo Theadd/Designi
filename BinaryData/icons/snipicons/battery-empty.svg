@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW X6 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="100%" height="100%" version="1.1" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd"
+viewBox="0 0 500 500"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+   <linearGradient id="id0" gradientUnits="userSpaceOnUse" x1="339.997" y1="454.132" x2="159.999" y2="454.132">
+    <stop offset="0" stop-color="#434242"/>
+    <stop offset="0.580392" stop-color="#474747"/>
+    <stop offset="1" stop-color="#434242"/>
+   </linearGradient>
+   <linearGradient id="id1" gradientUnits="userSpaceOnUse" x1="339.997" y1="59.132" x2="159.999" y2="59.132">
+    <stop offset="0" stop-color="#434242"/>
+    <stop offset="0.580392" stop-color="#474747"/>
+    <stop offset="1" stop-color="#434242"/>
+   </linearGradient>
+   <linearGradient id="id2" gradientUnits="userSpaceOnUse" x1="339.997" y1="259.132" x2="159.999" y2="259.132">
+    <stop offset="0" stop-color="#C5C5C5"/>
+    <stop offset="0.478431" stop-color="#FFFFFF"/>
+    <stop offset="0.588235" stop-color="whitesmoke"/>
+    <stop offset="0.690196" stop-color="#FFFFFF"/>
+    <stop offset="1" stop-color="#D5D6D6"/>
+   </linearGradient>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <path fill="url(#id0)" stroke="#434242" stroke-width="10" d="M160 439l180 0 0 15c0,3 -2,5 -5,5l-170 0c-3,0 -5,-2 -5,-5l0 -15z"/>
+  <path fill="url(#id1)" stroke="#434242" stroke-width="10" d="M340 79c-60,0 -120,0 -180,0 0,-5 0,-10 0,-15 0,-3 2,-5 5,-5l50 0c3,0 5,-2 5,-5l0 -10c0,-3 2,-5 5,-5l50 0c3,0 5,2 5,5l0 10c0,3 2,5 5,5l50 0c3,0 5,2 5,5 0,5 0,10 0,15z"/>
+  <rect fill="url(#id2)" stroke="#434242" stroke-width="10" x="160" y="79" width="180" height="360"/>
+  <line fill="none" stroke="#8D8D8E" stroke-width="10" x1="165" y1="169" x2="335" y2= "169" />
+  <line fill="none" stroke="#434242" stroke-width="10" x1="160" y1="259" x2="340" y2= "259" />
+  <line fill="none" stroke="#8D8D8E" stroke-width="10" x1="165" y1="259" x2="335" y2= "259" />
+  <line fill="none" stroke="#8D8D8E" stroke-width="10" x1="165" y1="349" x2="335" y2= "349" />
+ </g>
+</svg>

@@ -18,6 +18,7 @@ class DuskMapLookAndFeel   : public ExtendedLookAndFeel
 {
 public:
     DuskMapLookAndFeel();
+	~DuskMapLookAndFeel();
 
     void fillWithBackgroundTexture (Graphics&);
     static void fillWithBackgroundTexture (Component&, Graphics&);
@@ -26,6 +27,9 @@ public:
     //int getTabButtonSpaceAroundImage() override;
     //int getTabButtonBestWidth (TabBarButton&, int tabDepth) override;
     //static Colour getTabBackgroundColour (TabBarButton&);
+	void createTabButtonShape (TabBarButton& button, Path& p, bool isMouseOver, bool isMouseDown);
+	int getTabButtonOverlap (int tabDepth) override;
+	int getTabButtonSpaceAroundImage() override;
     void drawTabButton (TabBarButton& button, Graphics&, bool isMouseOver, bool isMouseDown) override;
 	void fillTabButtonShape (TabBarButton&, Graphics&, const Path& path, bool isMouseOver, bool isMouseDown) override;
 
@@ -53,13 +57,24 @@ public:
 	void drawPopupMenuBackground (Graphics &, int width, int height);
 	void drawMenuBarBackground (Graphics &, int width, int height, bool isMouseOverBar, MenuBarComponent &menuBar);
 	
-	void drawTreeviewPlusMinusBox (Graphics &, int x, int y, int w, int h, bool isPlus, bool isMouseOver);
+	void drawTreeviewPlusMinusBox (Graphics &, int x, int y, int w, int h, bool isPlus, bool isMouseOver) override;
+	void drawTreeviewPlusMinusBox (Graphics &, const Rectangle< float > &area, Colour backgroundColour, bool isOpen, bool isMouseOver) override;
 
 	int getDefaultScrollbarWidth ();
+
+	void drawFileBrowserRow (Graphics&, int width, int height,
+                            const String& filename, Image* icon,
+                            const String& fileSizeDescription,
+                            const String& fileTimeDescription,
+                            bool isDirectory,
+                            bool isItemSelected,
+                            int itemIndex,
+                            DirectoryContentsDisplayComponent& component);
 
 private:
     Image backgroundTexture;
     Colour backgroundTextureBaseColour;
+
 };
 
 

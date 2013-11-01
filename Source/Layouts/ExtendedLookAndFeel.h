@@ -19,7 +19,7 @@ class Panel;
 class InnerPanel;
 class MainLayout;
 
-class ExtendedLookAndFeel   : public LookAndFeel
+class ExtendedLookAndFeel   : public LookAndFeel_V3
 {
 public:
 

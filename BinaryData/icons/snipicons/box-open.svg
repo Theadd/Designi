@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW X6 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="100%" height="100%" version="1.1" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd"
+viewBox="0 0 500 500"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+   <linearGradient id="id0" gradientUnits="userSpaceOnUse" x1="149.127" y1="197.032" x2="149.127" y2="411.462">
+    <stop offset="0" stop-color="#FCFCFD"/>
+    <stop offset="1" stop-color="#FFFFFF"/>
+   </linearGradient>
+   <linearGradient id="id1" gradientUnits="userSpaceOnUse" x1="305.874" y1="411.462" x2="305.874" y2="197.032">
+    <stop offset="0" stop-color="#FCFCFD"/>
+    <stop offset="1" stop-color="#FFFFFF"/>
+   </linearGradient>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <polygon fill="#E5E5E6" stroke="#434242" stroke-width="10" stroke-linejoin="round" points="268,126 80,163 30,88 218,50 "/>
+  <polygon fill="#E5E5E6" stroke="#434242" stroke-width="10" stroke-linejoin="round" points="268,126 394,163 463,100 331,63 "/>
+  <polygon fill="url(#id0)" stroke="#434242" stroke-width="10" stroke-linejoin="round" points="80,163 218,201 218,445 80,408 "/>
+  <polygon fill="url(#id1)" stroke="#434242" stroke-width="10" stroke-linejoin="round" points="394,163 218,201 218,445 394,408 "/>
+  <rect fill="#008BFF" transform="matrix(1.25398 -0.239697 -0 1.25398 243.174 376.347)" width="100" height="20.002"/>
+  <polygon fill="#E5E5E6" stroke="#434242" stroke-width="10" stroke-linejoin="round" points="394,163 218,201 293,282 469,238 "/>
+  <polygon fill="#E5E5E6" stroke="#434242" stroke-width="10" stroke-linejoin="round" points="80,163 218,201 193,301 55,251 "/>
+  <polygon fill="#4D4D4D" stroke="#434242" stroke-width="10" stroke-linejoin="round" points="268,126 394,163 218,201 80,163 "/>
+ </g>
+</svg>

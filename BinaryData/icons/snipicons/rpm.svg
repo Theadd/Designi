@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW X6 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="100%" height="100%" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 500 500"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .str4 {stroke:red;stroke-width:0.1}
+    .str0 {stroke:#333333;stroke-width:10}
+    .str1 {stroke:#008BFF;stroke-width:20}
+    .str3 {stroke:#008BFF;stroke-width:25;stroke-linecap:round}
+    .str2 {stroke:#008BFF;stroke-width:40}
+    .fil1 {fill:none}
+    .fil2 {fill:#008BFF}
+    .fil0 {fill:url(#id0)}
+   ]]>
+  </style>
+  <radialGradient id="id0" gradientUnits="objectBoundingBox" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+   <stop offset="0" style="stop-color:white"/>
+   <stop offset="0.831373" style="stop-color:#F3F3F4"/>
+   <stop offset="1" style="stop-color:#DADADA"/>
+  </radialGradient>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <circle class="fil0 str0" cx="250" cy="250" r="220"/>
+  <path class="fil1 str1" d="M83 252c0,-92 75,-167 168,-167 92,0 167,75 167,167"/>
+  <circle class="fil2" cx="250" cy="350" r="35"/>
+  <path class="fil1 str2" d="M251 95c86,0 156,71 156,157"/>
+  <line class="fil1 str3" x1="250" y1="355" x2="250" y2= "165" />
+  
+ </g>
+</svg>

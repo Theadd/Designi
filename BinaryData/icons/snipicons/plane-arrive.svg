@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW X6 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="100%" height="100%" version="1.1" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd"
+viewBox="0 0 500 500"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+   <linearGradient id="id0" gradientUnits="userSpaceOnUse" x1="44.754" y1="189.872" x2="461.329" y2="189.872">
+    <stop offset="0" stop-color="#00AAFF"/>
+    <stop offset="1" stop-color="#008BFF"/>
+   </linearGradient>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <path fill="url(#id0)" stroke="#434242" stroke-width="10" stroke-linejoin="round" d="M49 192c-13,0 -4,18 13,21l331 110c28,5 42,7 64,-5 13,-10 -24,-41 -49,-61 -12,-9 -32,-16 -42,-18l-64 -15 1 0 -97 -141c-8,-12 -14,-20 -26,-27 -10,-4 -20,-6 -31,-7l35 138c0,5 -2,8 -6,7l-50 -12 -42 -64c-6,-8 -10,-16 -20,-20 -8,-3 -16,-3 -25,-3l8 97z"/>
+  <circle fill="#434242" cx="160" cy="280" r="13"/>
+  <circle fill="#434242" cx="207" cy="300" r="13"/>
+  <line fill="none" stroke="#434242" stroke-width="30" stroke-linecap="round" x1="440" y1="390" x2="195" y2= "390" />
+ </g>
+</svg>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="100%" height="100%" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 5000 5000"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .str0 {stroke:#434242;stroke-width:100;stroke-linejoin:round}
+    .fil0 {fill:url(#id0)}
+   ]]>
+  </style>
+  <linearGradient id="id0" gradientUnits="userSpaceOnUse" x1="2500" y1="5400" x2="2500" y2="1399.96">
+   <stop offset="0" style="stop-color:#008BFF"/>
+   <stop offset="1" style="stop-color:#00AAFF"/>
+  </linearGradient>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <path class="fil0 str0" d="M4061 3032c71,71 142,142 142,284 0,142 -142,284 -284,284 -1577,0 -1260,0 -2838,0 -142,0 -284,-142 -284,-284 0,-142 71,-213 142,-284l1180 -1182 -1269 0c-28,0 -50,-23 -50,-50l0 -350c0,-28 22,-50 50,-50l3300 0c28,0 50,22 50,50l0 350c0,27 -22,50 -50,50l-1272 0 1183 1182z"/>
+ </g>
+</svg>

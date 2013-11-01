@@ -369,7 +369,7 @@ FileBrowserPanel::ProjectFileFilter::~ProjectFileFilter ()
 
 bool FileBrowserPanel::ProjectFileFilter::isFileSuitable(const File &file) const
 {
-	return (file.getFileExtension().equalsIgnoreCase(".cpp") || file.getFileExtension().equalsIgnoreCase(".h"));
+	return (file.getFileExtension().equalsIgnoreCase(".cpp") || file.getFileExtension().equalsIgnoreCase(".h") || file.getFileExtension().equalsIgnoreCase(".design") || file.getFileExtension().equalsIgnoreCase(".txt"));
 }
 
 bool FileBrowserPanel::ProjectFileFilter::isDirectorySuitable (const File &file) const

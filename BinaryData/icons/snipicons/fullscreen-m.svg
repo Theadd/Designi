@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="100%" height="100%" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 5000 5000"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .str0 {stroke:#434242;stroke-width:200;stroke-linecap:round;stroke-linejoin:round}
+    .fil1 {fill:none}
+    .fil0 {fill:#434242}
+   ]]>
+  </style>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <path class="fil0" d="M2918 1282l117 117 -535 535 -535 -535 117 -117c100,-100 100,-150 100,-200 0,-100 -100,-200 -200,-200l-900 0c-100,0 -200,100 -200,200l0 900c0,100 100,200 200,200 50,0 100,0 200,-100l117 -117 535 535 -535 535 -117 -117c-100,-100 -150,-100 -200,-100 -100,0 -200,100 -200,200l0 900c0,100 100,200 200,200l900 0c100,0 200,-100 200,-200 0,-50 0,-100 -100,-200l-117 -117 535 -535 535 535 -117 117c-100,100 -100,150 -100,200 0,100 100,200 200,200l900 0c100,0 200,-100 200,-200l0 -900c0,-100 -100,-200 -200,-200 -50,0 -100,0 -200,100l-117 117 -535 -535 535 -535 117 117c100,100 150,100 200,100 100,0 200,-100 200,-200l0 -900c0,-100 -100,-200 -200,-200l-900 0c-100,0 -200,100 -200,200 0,50 0,100 100,200z"/>
+  <polyline class="fil1 str0" points="350,1250 350,350 1250,350 "/>
+  <polyline class="fil1 str0" points="4650,1250 4650,350 3750,350 "/>
+  <polyline class="fil1 str0" points="350,3734 350,4634 1250,4634 "/>
+  <polyline class="fil1 str0" points="4650,3734 4650,4634 3750,4634 "/>
+ </g>
+</svg>

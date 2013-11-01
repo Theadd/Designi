@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="100%" height="100%" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 5000 5000"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .str0 {stroke:#434242;stroke-width:200;stroke-linecap:round;stroke-linejoin:round}
+    .fil0 {fill:none}
+    .fil1 {fill:url(#id0)}
+   ]]>
+  </style>
+  <linearGradient id="id0" gradientUnits="userSpaceOnUse" x1="2500.01" y1="450" x2="2500.01" y2="4550">
+   <stop offset="0" style="stop-color:#008BFF"/>
+   <stop offset="1" style="stop-color:#00AAFF"/>
+  </linearGradient>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g>
+   <path class="fil0 str0" d="M2750 700c0,-137 -112,-250 -250,-250 -138,0 -250,113 -250,250 0,417 0,833 0,1249 0,25 -19,61 -49,77l-1650 896c-26,16 -51,53 -51,78l0 500c0,25 23,40 50,33l1650 -566c25,-9 50,8 50,33l0 801c0,49 -31,61 -51,68l-349 131c-24,12 -50,11 -50,46l0 463c0,26 21,41 45,41l605 -185 0 135c0,27 22,50 50,50 28,0 50,-23 50,-50l0 -135 605 185c24,0 45,-15 45,-41l0 -463c0,-35 -26,-34 -50,-46l-349 -131c-20,-7 -51,-19 -51,-68l0 -801c0,-25 25,-42 50,-33l1650 566c27,7 50,-8 50,-33l0 -500c0,-25 -25,-62 -51,-78l-1649 -896c-31,-16 -50,-52 -50,-77 0,-416 0,-832 0,-1249z"/>
+   <path id="1" class="fil1" d="M2750 700c0,-137 -112,-250 -250,-250 -138,0 -250,113 -250,250 0,417 0,833 0,1249 0,25 -19,61 -49,77l-1650 896c-26,16 -51,53 -51,78l0 500c0,25 23,40 50,33l1650 -566c25,-9 50,8 50,33l0 801c0,49 -31,61 -51,68l-349 131c-24,12 -50,11 -50,46l0 463c0,26 21,41 45,41l605 -185 0 135c0,27 22,50 50,50 28,0 50,-23 50,-50l0 -135 605 185c24,0 45,-15 45,-41l0 -463c0,-35 -26,-34 -50,-46l-349 -131c-20,-7 -51,-19 -51,-68l0 -801c0,-25 25,-42 50,-33l1650 566c27,7 50,-8 50,-33l0 -500c0,-25 -25,-62 -51,-78l-1649 -896c-31,-16 -50,-52 -50,-77 0,-416 0,-832 0,-1249z"/>
+  </g>
+ </g>
+</svg>
