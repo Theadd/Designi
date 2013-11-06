@@ -24,6 +24,7 @@ class Panel;
 class PanelContainer;
 class ExtendedLookAndFeel;
 class MainWindow;
+class Project;
 
 class FloatingComponentOverlay : public Component
 {
@@ -88,6 +89,8 @@ public:
 	void unloadDocumentAt(int index);
 	int getDocumentIndex(InnerPanel* innerPanel);
 
+	void setProject(Project* project);
+	void showOpenProjectDialog();
 
 	ScopedPointer <FloatingComponentOverlay> floatingComponentOverlay;
 
@@ -97,8 +100,6 @@ private:
 	Component panelContainerBox;
 	OwnedArray <PanelContainer> panelContainers;
 	OwnedArray <CodeEditorPanel> codeEditorPanels;
-	
-	ScopedPointer <File> workingPath;
 	//  --
 	ScopedPointer <HelpPanel> helpPanel;
 	ScopedPointer <FileBrowserPanel> fileBrowserPanel;

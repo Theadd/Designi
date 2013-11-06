@@ -1560,6 +1560,9 @@
     <ClInclude Include="..\..\Source\Globals.h">
       <Filter>JUCE Designer\Source</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Application.h">
+      <Filter>JUCE Designer\Source</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_audio_basics\buffers\juce_AudioDataConverters.h">
       <Filter>Juce Modules\juce_audio_basics\buffers</Filter>
     </ClInclude>

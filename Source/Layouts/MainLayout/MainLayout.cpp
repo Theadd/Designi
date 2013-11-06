@@ -19,6 +19,7 @@
 #include "../ExtendedLookAndFeel.h"
 #include "../MainWindow.h"
 #include "../../Core/Project.h"
+#include "../../Application.h"
 
 
 FloatingComponentOverlay::FloatingComponentOverlay()
@@ -64,9 +65,10 @@ MainLayout::MainLayout(MainWindow& _mainWindow) : Component(), mainWindow(_mainW
 	DBG("dbg: MainLayout()");
     //setBounds(0, 0, 490, 414);
     setName("MainLayout");
-	workingPath = new File("C:/Users/admin/JUCE Sample Project");
-	Project project(File("C:/Users/admin/JUCE Sample Project/JUCE Sample Project.jucer"));
-	DBG("END LOAD PROJECT");
+	//workingPath = new File("C:/Users/admin/JUCE Sample Project");
+	//JUCEDesignerApp::getApp().openProject(File("C:/Users/admin/JUCE Sample Project/JUCE Sample Project.jucer"));
+	//Project* project = JUCEDesignerApp::getApp().getProject();
+	//DBG("END LOAD PROJECT");
 
 	toolbarComponent = nullptr;
 	addAndMakeVisible(toolbarComponent = new ToolbarComponent(TOOLBARSIZE));
@@ -79,43 +81,14 @@ MainLayout::MainLayout(MainWindow& _mainWindow) : Component(), mainWindow(_mainW
 	panelContainers.add(new PanelContainer(Globals::left, this));
 	panelContainers.add(new PanelContainer(Globals::center, this));
 
-	//ADD EMPTY CODE EDITOR PANEL
-	String filename = "New File";
-	codeEditorPanels.add(new CodeEditorPanel(filename));
-
-	PanelContainer *leftPanelContainer = getPanelContainer(Globals::left);
-	PanelContainer *rightPanelContainer = getPanelContainer(Globals::right);
-	PanelContainer *topPanelContainer = getPanelContainer(Globals::top);
-	PanelContainer *bottomPanelContainer = getPanelContainer(Globals::bottom);
-	PanelContainer *centerPanelContainer = getPanelContainer(Globals::center);
-
-	panelContainerBox.addChildComponent(rightPanelContainer);
-	rightPanelContainer->setBounds(400,32,250,600);
-	panelContainerBox.addChildComponent(leftPanelContainer);
-	leftPanelContainer->setBounds(0,32,250,600);
-	panelContainerBox.addChildComponent(topPanelContainer);
-	topPanelContainer->setBounds(0,32,250,250);
-	panelContainerBox.addChildComponent(bottomPanelContainer);
-	bottomPanelContainer->setBounds(0,32,250,250);
-	panelContainerBox.addChildComponent(centerPanelContainer);
-	centerPanelContainer->setBounds(0,32,250,250);
-
-
-	rightPanelContainer->addInnerPanel(navigatorPanel = new NavigatorPanel());
-	//FileBrowserTab
-	fileBrowserPanel = nullptr;
-	leftPanelContainer->addInnerPanel(fileBrowserPanel = new FileBrowserPanel(), true);
-	fileBrowserPanel->setProjectName(project.info.name);
-	fileBrowserPanel->setBrowserRoot(project.info.path);//*workingPath);
-	//helpPanel
-	helpPanel = nullptr;
-	leftPanelContainer->addInnerPanel(helpPanel = new HelpPanel(), true);
-	//codeEditorPanel
-	centerPanelContainer->addInnerPanel(codeEditorPanels[0], true);
-
+	
 	//ADD COMPONENT LISTENERS TO PANEL CONTAINERS
 	for (int i = 0; i < panelContainers.size(); ++i)
 		panelContainers[i]->addComponentListener(this);
+
+	//set project layout if it is already loaded
+	if (JUCEDesignerApp::getApp().getProject() != nullptr)
+		setProject(JUCEDesignerApp::getApp().getProject());
 
 	resized();
 }
@@ -128,7 +101,7 @@ MainLayout::~MainLayout()
 	fileBrowserPanel = nullptr;
 	navigatorPanel = nullptr;
 	floatingComponentOverlay = nullptr;
-	workingPath = nullptr;
+	//workingPath = nullptr;
 }
 
 void MainLayout::resized()
@@ -556,6 +529,7 @@ bool MainLayout::perform (const InvocationInfo& info)
 	case newDesign:
 		break;
 	case openProject:
+		showOpenProjectDialog();
 		break;
 	case openRecentProject:
 		break;
@@ -669,7 +643,7 @@ void MainLayout::toggleInnerPanel(InnerPanel* innerPanel, Globals::Position posi
 					{
 					case 1:
 						//save
-						if (!codeEditorPanels[index]->save(*workingPath))
+						if (!codeEditorPanels[index]->save(JUCEDesignerApp::getApp().getProject()->info.path))//*workingPath))
 						{
 							AlertWindow::showMessageBox (AlertWindow::NoIcon, "Save error!", "File could not be written to disk!", "Ok");
 							return;
@@ -819,3 +793,66 @@ int MainLayout::getDocumentIndex(InnerPanel* innerPanel)
 	return -1;
 }
 
+void MainLayout::setProject(Project* project)
+{
+	//ADD EMPTY CODE EDITOR PANEL
+	String filename = "New File";
+	codeEditorPanels.add(new CodeEditorPanel(filename));
+
+	PanelContainer *leftPanelContainer = getPanelContainer(Globals::left);
+	PanelContainer *rightPanelContainer = getPanelContainer(Globals::right);
+	PanelContainer *topPanelContainer = getPanelContainer(Globals::top);
+	PanelContainer *bottomPanelContainer = getPanelContainer(Globals::bottom);
+	PanelContainer *centerPanelContainer = getPanelContainer(Globals::center);
+
+	panelContainerBox.addChildComponent(rightPanelContainer);
+	rightPanelContainer->setBounds(400,32,250,600);
+	panelContainerBox.addChildComponent(leftPanelContainer);
+	leftPanelContainer->setBounds(0,32,250,600);
+	panelContainerBox.addChildComponent(topPanelContainer);
+	topPanelContainer->setBounds(0,32,250,250);
+	panelContainerBox.addChildComponent(bottomPanelContainer);
+	bottomPanelContainer->setBounds(0,32,250,250);
+	panelContainerBox.addChildComponent(centerPanelContainer);
+	centerPanelContainer->setBounds(0,32,250,250);
+
+
+	rightPanelContainer->addInnerPanel(navigatorPanel = new NavigatorPanel());
+	//FileBrowserTab
+	fileBrowserPanel = nullptr;
+	leftPanelContainer->addInnerPanel(fileBrowserPanel = new FileBrowserPanel(), true);
+	fileBrowserPanel->setProjectName(project->info.name);
+	fileBrowserPanel->setBrowserRoot(project->info.path);//*workingPath);
+	//helpPanel
+	helpPanel = nullptr;
+	leftPanelContainer->addInnerPanel(helpPanel = new HelpPanel(), true);
+	//codeEditorPanel
+	centerPanelContainer->addInnerPanel(codeEditorPanels[0], true);
+
+}
+
+void MainLayout::showOpenProjectDialog()
+{
+	WildcardFileFilter wildcardFilter ("*.jucer", String::empty, "Open Project Filter");
+	FileBrowserComponent browser (FileBrowserComponent::openMode | FileBrowserComponent::canSelectFiles,
+	File::getSpecialLocation(File::userHomeDirectory),
+	&wildcardFilter,
+	nullptr);
+	FileChooserDialogBox dialogBox ("Open Project", "Specify description", browser, true, Colours::darkorange);
+	if (dialogBox.show())
+	{
+		File selectedFile = browser.getSelectedFile (0);
+		DBG("showOpenProjectDialog() selectedFile = "+selectedFile.getFullPathName());
+		if (!selectedFile.existsAsFile())
+			return;
+
+		if (selectedFile.existsAsFile() && selectedFile.hasWriteAccess())
+		{
+			JUCEDesignerApp::getApp().openProject(selectedFile);
+			setProject(JUCEDesignerApp::getApp().getProject());
+			resized();
+		}
+		else return;	//selected file cannot be written
+	}
+	else return;	//no file was selected
+}
