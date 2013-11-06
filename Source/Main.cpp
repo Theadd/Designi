@@ -14,11 +14,11 @@
 
 
 //==============================================================================
-class JUCEDesignerApplication  : public JUCEApplication
+class JUCEDesignerApp  : public JUCEApplication
 {
 public:
     //==============================================================================
-    JUCEDesignerApplication() {}
+    JUCEDesignerApp() {}
 
     const String getApplicationName()       { return ProjectInfo::projectName; }
     const String getApplicationVersion()    { return ProjectInfo::versionString; }
@@ -72,6 +72,13 @@ public:
 		DBG("INIT anotherInstanceStarted commandLine: " + commandLine);
     }
 
+	static JUCEDesignerApp& getApp()
+    {
+        JUCEDesignerApp* const app = dynamic_cast<JUCEDesignerApp*> (JUCEApplication::getInstance());
+        jassert (app != nullptr);
+        return *app;
+    }
+
 private:
     ScopedPointer<MainWindow> mainWindow;
 	ScopedPointer <PropertiesFile> propertiesFile;
@@ -79,4 +86,4 @@ private:
 
 //==============================================================================
 // This macro generates the main() routine that launches the app.
-START_JUCE_APPLICATION (JUCEDesignerApplication)
+START_JUCE_APPLICATION (JUCEDesignerApp)

@@ -11,6 +11,9 @@
     <Filter Include="JUCE Designer\Source">
       <UniqueIdentifier>{6785AD85-A22B-FF6F-5E95-94987FC5C695}</UniqueIdentifier>
     </Filter>
+    <Filter Include="JUCE Designer\Source\Core">
+      <UniqueIdentifier>{C46E2BA5-8CEA-A891-408F-BD0D91AAA45D}</UniqueIdentifier>
+    </Filter>
     <Filter Include="JUCE Designer\Source\Styles">
       <UniqueIdentifier>{0A6B7BF7-1686-AC1A-38B0-FAF73E4C53A2}</UniqueIdentifier>
     </Filter>
@@ -307,6 +310,12 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\Core\DocumentManager.cpp">
+      <Filter>JUCE Designer\Source\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Core\Project.cpp">
+      <Filter>JUCE Designer\Source\Core</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\Styles\DuskMap.cpp">
       <Filter>JUCE Designer\Source\Styles</Filter>
     </ClCompile>
@@ -1518,6 +1527,12 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\Core\DocumentManager.h">
+      <Filter>JUCE Designer\Source\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Core\Project.h">
+      <Filter>JUCE Designer\Source\Core</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\Styles\DuskMap.h">
       <Filter>JUCE Designer\Source\Styles</Filter>
     </ClInclude>

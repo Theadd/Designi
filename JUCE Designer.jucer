@@ -29,6 +29,14 @@
       <FILE id="QUijac" name="icons.zip" compile="0" resource="1" file="BinaryData/icons.zip"/>
     </GROUP>
     <GROUP id="{4DA873A5-1CD7-B3EE-C91A-A71EFEFD4243}" name="Source">
+      <GROUP id="{34F49C09-0E20-4FCB-428C-81CE32331E25}" name="Core">
+        <FILE id="HPi9A1" name="DocumentManager.cpp" compile="1" resource="0"
+              file="Source/Core/DocumentManager.cpp"/>
+        <FILE id="yE1Egt" name="DocumentManager.h" compile="0" resource="0"
+              file="Source/Core/DocumentManager.h"/>
+        <FILE id="gZLWIc" name="Project.cpp" compile="1" resource="0" file="Source/Core/Project.cpp"/>
+        <FILE id="bezGAR" name="Project.h" compile="0" resource="0" file="Source/Core/Project.h"/>
+      </GROUP>
       <GROUP id="{C9618E64-C7AC-8630-B754-8A531AFF8D4A}" name="Styles">
         <FILE id="aKhYcE" name="DuskMap.cpp" compile="1" resource="0" file="Source/Styles/DuskMap.cpp"/>
         <FILE id="RQ1u6g" name="DuskMap.h" compile="0" resource="0" file="Source/Styles/DuskMap.h"/>

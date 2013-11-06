@@ -18,6 +18,7 @@
 #include "InnerPanels.h"
 #include "../ExtendedLookAndFeel.h"
 #include "../MainWindow.h"
+#include "../../Core/Project.h"
 
 
 FloatingComponentOverlay::FloatingComponentOverlay()
@@ -64,6 +65,8 @@ MainLayout::MainLayout(MainWindow& _mainWindow) : Component(), mainWindow(_mainW
     //setBounds(0, 0, 490, 414);
     setName("MainLayout");
 	workingPath = new File("C:/Users/admin/JUCE Sample Project");
+	Project project(File("C:/Users/admin/JUCE Sample Project/JUCE Sample Project.jucer"));
+	DBG("END LOAD PROJECT");
 
 	toolbarComponent = nullptr;
 	addAndMakeVisible(toolbarComponent = new ToolbarComponent(TOOLBARSIZE));
@@ -102,8 +105,8 @@ MainLayout::MainLayout(MainWindow& _mainWindow) : Component(), mainWindow(_mainW
 	//FileBrowserTab
 	fileBrowserPanel = nullptr;
 	leftPanelContainer->addInnerPanel(fileBrowserPanel = new FileBrowserPanel(), true);
-	fileBrowserPanel->setProjectName(String("JUCE Sample Project"));
-	fileBrowserPanel->setBrowserRoot(*workingPath);
+	fileBrowserPanel->setProjectName(project.info.name);
+	fileBrowserPanel->setBrowserRoot(project.info.path);//*workingPath);
 	//helpPanel
 	helpPanel = nullptr;
 	leftPanelContainer->addInnerPanel(helpPanel = new HelpPanel(), true);
