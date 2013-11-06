@@ -65,6 +65,10 @@
       </GROUP>
       <FILE id="T8SRwC" name="Globals.cpp" compile="1" resource="0" file="Source/Globals.cpp"/>
       <FILE id="MIPbpq" name="Globals.h" compile="0" resource="0" file="Source/Globals.h"/>
+      <FILE id="tAh1Bu" name="StoredSettings.cpp" compile="1" resource="0"
+            file="Source/StoredSettings.cpp"/>
+      <FILE id="mYCUp9" name="StoredSettings.h" compile="0" resource="0"
+            file="Source/StoredSettings.h"/>
       <FILE id="RMrb2n" name="Application.h" compile="0" resource="0" file="Source/Application.h"/>
       <FILE id="PH6jHb" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
     </GROUP>

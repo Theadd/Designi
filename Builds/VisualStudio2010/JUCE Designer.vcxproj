@@ -136,6 +136,7 @@
     <ClCompile Include="..\..\Source\Layouts\MainLayout\Toolbars.cpp"/>
     <ClCompile Include="..\..\Source\Layouts\MainLayout\MainLayout.cpp"/>
     <ClCompile Include="..\..\Source\Globals.cpp"/>
+    <ClCompile Include="..\..\Source\StoredSettings.cpp"/>
     <ClCompile Include="..\..\Source\Main.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_audio_basics\buffers\juce_AudioDataConverters.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
@@ -1226,6 +1227,7 @@
     <ClInclude Include="..\..\Source\Layouts\MainLayout\Toolbars.h"/>
     <ClInclude Include="..\..\Source\Layouts\MainLayout\MainLayout.h"/>
     <ClInclude Include="..\..\Source\Globals.h"/>
+    <ClInclude Include="..\..\Source\StoredSettings.h"/>
     <ClInclude Include="..\..\Source\Application.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_audio_basics\buffers\juce_AudioDataConverters.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_audio_basics\buffers\juce_AudioSampleBuffer.h"/>

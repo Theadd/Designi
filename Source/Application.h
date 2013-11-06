@@ -15,6 +15,7 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "Core/Project.h"
 #include "Layouts/MainWindow.h"
+#include "StoredSettings.h"
 
 
 //==============================================================================
@@ -33,27 +34,20 @@ public:
     {
         // This method is where you should put your application's initialisation code..
 		DBG("INIT commandLine: " + commandLine);
-		PropertiesFile::Options options;
-		options.applicationName     = "JUCE Designer";
-		options.filenameSuffix      = "settings";
-		options.osxLibrarySubFolder = "Application Support";
-		#if JUCE_LINUX
-			options.folderName          = "~/.config/JUCE Designer";
-		#else
-			options.folderName          = "JUCE Designer";
-		#endif
+		
+		settings = new StoredSettings();
 
-		propertiesFile = new PropertiesFile(options);
-		if (!propertiesFile->getFile().existsAsFile())
-		{
-			propertiesFile->getFile().create();
-		}
-		DBG("PROPERTIES FILE: " + propertiesFile->getFile().getFullPathName());
 		project = nullptr;
 
 		if (commandLine.isNotEmpty() && File(commandLine).existsAsFile())
 		{
 			openProject(File(commandLine));
+		}
+		else
+		{
+			String lastOpenProject = settings->getValue("lastOpenProject");
+			if (lastOpenProject.isNotEmpty())
+				openProject(File(lastOpenProject));
 		}
 		//openProject(File("C:/Users/admin/JUCE Sample Project/JUCE Sample Project.jucer"));
 
@@ -65,7 +59,6 @@ public:
         // Add your application's shutdown code here..
 
         mainWindow = nullptr; // (deletes our window)
-		propertiesFile = nullptr;
 		project = nullptr;
     }
 
@@ -102,12 +95,15 @@ public:
 		project = new Project(file);
 		if (project->info.name.isEmpty())
 			project = nullptr;
+		else
+			settings->setValue("lastOpenProject", file.getFullPathName());
 	}
+
+	ScopedPointer <StoredSettings> settings;
 
 private:
 	ScopedPointer <Project> project;
     ScopedPointer <MainWindow> mainWindow;
-	ScopedPointer <PropertiesFile> propertiesFile;
 };
 
 

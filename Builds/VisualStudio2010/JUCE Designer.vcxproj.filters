@@ -343,6 +343,9 @@
     <ClCompile Include="..\..\Source\Globals.cpp">
       <Filter>JUCE Designer\Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\StoredSettings.cpp">
+      <Filter>JUCE Designer\Source</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\Main.cpp">
       <Filter>JUCE Designer\Source</Filter>
     </ClCompile>
@@ -1558,6 +1561,9 @@
       <Filter>JUCE Designer\Source\Layouts\MainLayout</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Globals.h">
+      <Filter>JUCE Designer\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\StoredSettings.h">
       <Filter>JUCE Designer\Source</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Application.h">
