@@ -51,6 +51,10 @@ public:
 		DBG("PROPERTIES FILE: " + propertiesFile->getFile().getFullPathName());
 		project = nullptr;
 
+		if (commandLine.isNotEmpty() && File(commandLine).existsAsFile())
+		{
+			openProject(File(commandLine));
+		}
 		//openProject(File("C:/Users/admin/JUCE Sample Project/JUCE Sample Project.jucer"));
 
         mainWindow = new MainWindow();
@@ -96,6 +100,8 @@ public:
 	void openProject(File& file)
 	{
 		project = new Project(file);
+		if (project->info.name.isEmpty())
+			project = nullptr;
 	}
 
 private:
