@@ -19,8 +19,8 @@ MainWindow::MainWindow()  : DocumentWindow ("JUCE GUI Designer",
 
 	setLookAndFeel(lookAndFeel = new DuskMapLookAndFeel());
 
-	LocalisedStrings::setCurrentMappings(new LocalisedStrings(File(File::addTrailingSeparator(File::getCurrentWorkingDirectory().getFullPathName()) + "translations" + File::separatorString + "spanish.txt"), true));
-	//LocalisedStrings::setCurrentMappings(0);
+	//LocalisedStrings::setCurrentMappings(new LocalisedStrings(File(File::addTrailingSeparator(File::getCurrentWorkingDirectory().getFullPathName()) + "translations" + File::separatorString + "spanish.txt"), true));
+	LocalisedStrings::setCurrentMappings(0);
 
     setBounds(55, 35, 900, 720);
     //setColour(DocumentWindow::backgroundColourId, Colour::fromString("FF202A32"));

@@ -101,6 +101,7 @@ private:
 	ScopedPointer <FileTreeComponent> fileTreeCompA;
 	ScopedPointer <FileTreeComponent> fileTreeCompB;
     ScopedPointer <DirectoryContentsList> directoryList;
+	ScopedPointer <WildcardFileFilter> fileFilter;
 	
     TimeSliceThread thread;
 	int refreshTimeCount;
@@ -110,7 +111,7 @@ private:
     TextButton selectFileTreeA;
 	TextButton selectFileTreeB;
 
-	class ProjectFileFilter : public FileFilter
+	/*class ProjectFileFilter : public FileFilter
 	{
 	public:
 
@@ -121,7 +122,7 @@ private:
 		bool isDirectorySuitable (const File &file) const;
 	};
 
-	ScopedPointer <ProjectFileFilter> projectFileFilter;
+	ScopedPointer <ProjectFileFilter> projectFileFilter;*/
 };
 
 

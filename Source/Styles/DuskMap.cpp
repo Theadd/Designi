@@ -779,7 +779,7 @@ void DuskMapLookAndFeel::drawFileBrowserRow (Graphics& g, int width, int height,
 			icon = &ImageCache::getFromMemory (BinaryData::folderclose_png, BinaryData::folderclose_pngSize);
 	}
 
-	LookAndFeel_V3::drawFileBrowserRow (g, width, height, filename, icon, fileSizeDescription, fileTimeDescription, false /*isDirectory*/, isItemSelected, itemIndex, dcc);
+	LookAndFeel_V3::drawFileBrowserRow (g, width, height, filename, icon, fileSizeDescription, fileTimeDescription, false /*isDirectory*/, false /*isItemSelected*/, itemIndex, dcc);
 
 }
 

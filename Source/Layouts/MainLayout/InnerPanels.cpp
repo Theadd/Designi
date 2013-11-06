@@ -227,10 +227,11 @@ FileBrowserPanel::FileBrowserPanel() : thread ("FileTreeComponent thread"), Inne
 	File folder (File::getSpecialLocation (File::userHomeDirectory));
     //while (folder.getParentDirectory() != folder)
     //    folder = folder.getParentDirectory();
-	projectFileFilter = new ProjectFileFilter();
+	//projectFileFilter = new ProjectFileFilter();
+	fileFilter = new WildcardFileFilter("*.cpp;*.h;*.design", "*", "C++ JUCE Files");
 	//DBG("two");
 
-    directoryList = new DirectoryContentsList(projectFileFilter, thread);
+    directoryList = new DirectoryContentsList(fileFilter, thread);
     directoryList->setDirectory (folder, true, true);
     thread.startThread (3);
 	//DBG("three");
@@ -270,7 +271,7 @@ FileBrowserPanel::~FileBrowserPanel() {
 	fileTreeCompA = nullptr;
 	fileTreeCompB = nullptr;
     directoryList = nullptr; // (need to make sure this is deleted before the TimeSliceThread)
-	projectFileFilter = nullptr;
+	fileFilter = nullptr;
 }
 
 void FileBrowserPanel::resized() {
@@ -356,7 +357,7 @@ void FileBrowserPanel::timerCallback()
 
 //////////////////////
 
-
+/*
 FileBrowserPanel::ProjectFileFilter::ProjectFileFilter() : FileFilter("FileFilter for project directory trees.")
 {
 
@@ -369,6 +370,7 @@ FileBrowserPanel::ProjectFileFilter::~ProjectFileFilter ()
 
 bool FileBrowserPanel::ProjectFileFilter::isFileSuitable(const File &file) const
 {
+	return true;
 	return (file.getFileExtension().equalsIgnoreCase(".cpp") || file.getFileExtension().equalsIgnoreCase(".h") || file.getFileExtension().equalsIgnoreCase(".design") || file.getFileExtension().equalsIgnoreCase(".txt"));
 }
 
@@ -376,7 +378,7 @@ bool FileBrowserPanel::ProjectFileFilter::isDirectorySuitable (const File &file)
 {
 	return file.isDirectory();
 }
-
+*/
 
 ///////////////////////////////////////////////////////////////
 

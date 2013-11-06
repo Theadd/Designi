@@ -63,7 +63,7 @@ MainLayout::MainLayout(MainWindow& _mainWindow) : Component(), mainWindow(_mainW
 	DBG("dbg: MainLayout()");
     //setBounds(0, 0, 490, 414);
     setName("MainLayout");
-	workingPath = new File("C:\\Users\\admin\\juced_");
+	workingPath = new File("C:/Users/admin/JUCE Sample Project");
 
 	toolbarComponent = nullptr;
 	addAndMakeVisible(toolbarComponent = new ToolbarComponent(TOOLBARSIZE));
@@ -102,7 +102,7 @@ MainLayout::MainLayout(MainWindow& _mainWindow) : Component(), mainWindow(_mainW
 	//FileBrowserTab
 	fileBrowserPanel = nullptr;
 	leftPanelContainer->addInnerPanel(fileBrowserPanel = new FileBrowserPanel(), true);
-	fileBrowserPanel->setProjectName(String("JUCE GUI Designer"));
+	fileBrowserPanel->setProjectName(String("JUCE Sample Project"));
 	fileBrowserPanel->setBrowserRoot(*workingPath);
 	//helpPanel
 	helpPanel = nullptr;
