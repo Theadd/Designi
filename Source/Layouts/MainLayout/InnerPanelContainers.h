@@ -109,6 +109,7 @@ public:
 	void componentChildrenChanged (Component & component);
 
 	bool addInnerPanel (InnerPanel *componentToAdd, bool asNewPanel = false);
+	void removePanel(Panel *panel);
 	bool removeInnerPanel(InnerPanel *innerPanel);
 	void removeAllInnerPanels();
 	void showInnerPanel(InnerPanel *innerPanel);

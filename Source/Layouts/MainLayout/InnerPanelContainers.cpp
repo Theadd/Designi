@@ -217,6 +217,7 @@ void Panel::itemDropped (const SourceDetails &dragSourceDetails)
 	}
 }
 
+
 void Panel::removeInnerPanelAt (int tabIndex)
 {
 	bool swapPanel = (tabbedComponent->getCurrentTabIndex() == tabIndex) ? true : false;
@@ -256,7 +257,10 @@ void Panel::removeAllInnerPanels()
 	if (tabbedComponent != nullptr)
 	{
 		while (tabbedComponent->getNumTabs() > 0)
+		{
+			DBG(String(tabbedComponent->getNumTabs()));
 			removeInnerPanelAt(0);
+		}
 	}
 }
 
@@ -465,7 +469,7 @@ void Panel::CustomTabbedComponent::mouseUp (const MouseEvent& event)
 PanelContainer::PanelContainer(Globals::Position positionThatWillBePlaced, DragAndDropContainer* _dragAndDropContainer) : Component(), position(positionThatWillBePlaced), dragAndDropContainer(_dragAndDropContainer)
 {
     setBounds(0, 32, 260, 340);
-	setName("PanelContainer");
+	setName("PanelContainer"+String(positionThatWillBePlaced));
 	//DBG("one");
 	resizableEdgeComponent = nullptr;
 	componentBoundsConstrainer = nullptr;
@@ -799,6 +803,11 @@ bool PanelContainer::isEmpty()
 	return (panels.size() == 0);
 }
 
+void PanelContainer::removePanel(Panel *panel)
+{
+	panels.removeObject(panel, true);
+}
+
 bool PanelContainer::removeInnerPanel(InnerPanel *innerPanel)
 {
 	for (int i = 0; i < panels.size(); ++i)
@@ -810,8 +819,13 @@ bool PanelContainer::removeInnerPanel(InnerPanel *innerPanel)
 
 void PanelContainer::removeAllInnerPanels()
 {
+	DBG("PanelContainer: "+getName());
 	while (panels.size() > 0)
+	{
+		DBG(String(panels.size()));
 		panels[0]->removeAllInnerPanels();
+		removePanel(panels[0]);
+	}
 	//for (int i = 0; i < panels.size(); ++i)
 	//	panels[i]->removeAllInnerPanels();
 }
