@@ -48,6 +48,24 @@ String T (const String& text);
 String T (const char* text);
 String T (CharPointer_UTF8 text);
 
+/*WIP ~= RIP
+class Literal
+{
+public:
+
+	struct Reference
+	{
+		Value value;	//its localised value (translated)
+		String text;	//string keyword to translate from
+	};
+
+	OwnedArray<Reference> references;
+
+	Value& getValueFor (String& text);
+
+};*/
+
+
 /*
 const char* T_UTF8 (const String& text);
 const char* T_UTF8 (const char* text);

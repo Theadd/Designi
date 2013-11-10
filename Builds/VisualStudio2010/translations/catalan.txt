@@ -1,9 +1,9 @@
 ﻿language: Catalan
 countries: es
 
-"File" = "Arxiu"
-"Edit" = "Editar"
+"Help" = "Ajuda"
 "File Browser" = "Explorador de fitxers"
+"Your project directory tree" = "L'arbre del directori del teu projecte"
 "Language" = "Idioma"
 "English" = "Anglès"
 "Español" = "Castellà"

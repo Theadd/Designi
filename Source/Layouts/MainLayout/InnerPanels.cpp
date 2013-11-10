@@ -224,7 +224,7 @@ var NavigatorPanel::TreeViewItemParser::getDragSourceDescription()
 
 FileBrowserPanel::FileBrowserPanel() : thread ("FileTreeComponent thread"), InnerPanel()
 {
-	setName(T("File Browser"));
+	setLocalisedName("File Browser", "Your project directory tree");
 	File folder (File::getSpecialLocation (File::userHomeDirectory));
     //while (folder.getParentDirectory() != folder)
     //    folder = folder.getParentDirectory();
@@ -386,7 +386,7 @@ bool FileBrowserPanel::ProjectFileFilter::isDirectorySuitable (const File &file)
 
 HelpPanel::HelpPanel() : lastComponentUnderMouse (nullptr), InnerPanel(true)
 {
-	setName("Help");
+	setLocalisedName("Help");
 	setBounds(0, 0, 150, 90);
 	_isHidden = false;
 

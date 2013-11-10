@@ -46,13 +46,53 @@ void InnerPanel::paint (Graphics& g)
 		((ExtendedLookAndFeel*) &getLookAndFeel())->drawInnerPanel (g, *this);
 }
 
-void InnerPanel::setNeedsToBeSaved(bool needs)
+void InnerPanel::setNeedsToBeSaved (bool needs)
 {
 	needsToBeSaved = needs;
 }
 
-bool InnerPanel::getNeedsToBeSaved()
+bool InnerPanel::getNeedsToBeSaved ()
 {
 	return needsToBeSaved;
 }
+
+void InnerPanel::setLocalisedName (String name, String tooltip)
+{
+	localisedName = name;
+	setName(T(localisedName));
+
+	if (tooltip.isNotEmpty())
+	{
+		localisedTooltip = tooltip;
+		setTooltip(T(localisedTooltip));
+	}
+}
+
+String& InnerPanel::getLocalisedName ()
+{
+	return localisedName;
+}
+
+void InnerPanel::updateLocalisedStrings ()
+{
+	setName(T(localisedName));
+	if (localisedTooltip.isNotEmpty())
+		setTooltip(T(localisedTooltip));
+	TabbedComponent *tabbedComponent = findParentComponentOfClass <TabbedComponent>();
+	if (tabbedComponent != 0)
+	{
+		for (int i = 0; i < tabbedComponent->getNumTabs(); ++i)
+		{
+			if (this == tabbedComponent->getTabContentComponent(i))
+			{
+				tabbedComponent->setTabName(i, getName());
+				if (localisedTooltip.isNotEmpty())
+					tabbedComponent->getTabbedButtonBar().getTabButton(i)->setTooltip(getTooltip());
+
+				return;
+			}
+		}
+	}
+}
+
 

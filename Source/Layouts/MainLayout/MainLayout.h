@@ -93,6 +93,8 @@ public:
 	void closeCurrentProject();
 	void showOpenProjectDialog();
 
+	void updateLocalisedStrings ();
+
 	ScopedPointer <FloatingComponentOverlay> floatingComponentOverlay;
 
 private:

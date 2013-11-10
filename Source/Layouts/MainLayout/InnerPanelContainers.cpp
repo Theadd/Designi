@@ -55,6 +55,7 @@ void Panel::resized()
 			resizableEdgeComponent->setBounds(0, 0, 0, 0);
 	}
 
+
 	//TODO: set bounds of child component
 	int numChilds = getNumChildComponents() - 1;
 	

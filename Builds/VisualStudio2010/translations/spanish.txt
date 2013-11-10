@@ -1,9 +1,9 @@
 ﻿language: Spanish
 countries: es
 
-"File" = "Archivo"
-"Edit" = "Editar"
+"Help" = "Ayuda"
 "File Browser" = "Explorador de archivos"
+"Your project directory tree" = "El contenido del directorio de tu proyecto"
 "Language" = "Idioma"
 "English" = "Inglés"
 "Català" = "Catalán"

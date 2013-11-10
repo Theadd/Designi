@@ -23,6 +23,23 @@ String T (CharPointer_UTF8 text)
 	return juce::translate (a, a);
 }
 
+/*WIP ~= RIP
+Value& Literal::getValueFor (String& text)
+{
+	for (int i = references.size(); --i >= 0;)
+	{
+		if (references[i]->text.compare(text) == 0)
+			return references[i]->value;
+	}
+
+	Reference *newRef;
+	newRef->text = text;
+	newRef->value = T(text);
+	references.add(newRef);
+
+	return references.getLast()->value;
+}*/
+
 /*
 const char* T_UTF8 (const String& text)
 {

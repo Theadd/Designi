@@ -225,14 +225,8 @@ void MainLayout::componentMovedOrResized (Component& /*component*/, bool /*wasMo
 
 StringArray MainLayout::getMenuBarNames()
 {
-	
-	//const char* const names[] = { T_UTF8("File"), T_UTF8("Edit"), T_UTF8("View"), T_UTF8("Window"), T_UTF8("Help"), nullptr };
-	if (JUCEDesignerApp::getApp().getLanguage().isEmpty())
-	{
-		const char* const names[] = { "File", "Edit", "View", "Window", "Help", nullptr };
-		return StringArray (names);
-	}
-	else if (JUCEDesignerApp::getApp().getLanguage().equalsIgnoreCase("spanish"))
+
+	if (JUCEDesignerApp::getApp().getLanguage().equalsIgnoreCase("spanish"))
 	{
 		const char* const names[] = { "Archivo", "Editar", "Ver", "Ventana", "Ayuda", nullptr };
 		return StringArray (names);
@@ -240,6 +234,11 @@ StringArray MainLayout::getMenuBarNames()
 	else if (JUCEDesignerApp::getApp().getLanguage().equalsIgnoreCase("catalan"))
 	{
 		const char* const names[] = { "Fitxer", "Editar", "Veure", "Finestra", "Ajuda", nullptr };
+		return StringArray (names);
+	}
+	else
+	{
+		const char* const names[] = { "File", "Edit", "View", "Window", "Help", nullptr };
 		return StringArray (names);
 	}
 
@@ -640,12 +639,15 @@ bool MainLayout::perform (const InvocationInfo& info)
 		break;
 	case englishLang:
 		JUCEDesignerApp::getApp().setLanguage("");
+		updateLocalisedStrings();
 		break;
 	case spanishLang:
 		JUCEDesignerApp::getApp().setLanguage("spanish");
+		updateLocalisedStrings();
 		break;
 	case catalanLang:
 		JUCEDesignerApp::getApp().setLanguage("catalan");
+		updateLocalisedStrings();
 		break;
 	case webpage:
 		break;
@@ -887,7 +889,7 @@ void MainLayout::closeCurrentProject()
 	codeEditorPanels.clear();
 }
 
-void MainLayout::showOpenProjectDialog()
+void MainLayout::showOpenProjectDialog ()
 {
 	WildcardFileFilter wildcardFilter ("*.jucer", String::empty, "Open Project Filter");
 	FileBrowserComponent browser (FileBrowserComponent::openMode | FileBrowserComponent::canSelectFiles,
@@ -915,4 +917,10 @@ void MainLayout::showOpenProjectDialog()
 		else return;	//selected file cannot be written
 	}
 	else return;	//no file was selected
+}
+
+void MainLayout::updateLocalisedStrings ()
+{
+	helpPanel->updateLocalisedStrings();
+	fileBrowserPanel->updateLocalisedStrings();
 }

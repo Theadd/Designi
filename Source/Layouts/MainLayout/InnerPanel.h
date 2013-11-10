@@ -41,8 +41,12 @@ public:
 	bool save (File initialDirectory = File::nonexistent) { return true; };
 	void refresh();	//update its content
 
-	Globals::Position position;
+	void setLocalisedName (String name, String tooltip = String::empty);
+	String& getLocalisedName ();
+	void updateLocalisedStrings ();
 
+	Globals::Position position;
+	
 
 private:
 	bool needsToBeSaved;	//if needs to be saved before closing
@@ -52,6 +56,9 @@ private:
 	int indent;
 	int headerNameMarginRight;
 	int headerNameMarginLeft;
+	String localisedName;
+	String localisedTooltip;
+
 };
 
 
