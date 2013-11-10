@@ -56,8 +56,8 @@ public:
 			}
 		}
 		//set gui language
-		String guiLanguage = settings->getValue("guiLanguage");
-		if (guiLanguage.isNotEmpty())
+		setLanguage(settings->getValue("guiLanguage"));
+		/*if (guiLanguage.isNotEmpty())
 		{
 			if (guiLanguage.equalsIgnoreCase("spanish"))
 			{
@@ -69,7 +69,7 @@ public:
 			//Load English as default language
 			LocalisedStrings::setCurrentMappings(0);
 			//settings->setValue("guiLanguage", "");
-		}
+		}*/
 
 		//openProject(File("C:/Users/admin/JUCE Sample Project/JUCE Sample Project.jucer"));
 
@@ -100,7 +100,7 @@ public:
 		DBG("INIT anotherInstanceStarted commandLine: " + commandLine);
     }
 
-	static JUCEDesignerApp& getApp()
+	static JUCEDesignerApp& getApp ()
     {
         JUCEDesignerApp* const app = dynamic_cast<JUCEDesignerApp*> (JUCEApplication::getInstance());
         jassert (app != nullptr);
@@ -112,7 +112,7 @@ public:
 		return project;
 	}
 
-	void openProject(File& file)
+	void openProject (File& file)
 	{
 		project = new Project(file);
 		if (project->info.name.isEmpty())
@@ -121,11 +121,28 @@ public:
 			settings->setValue("lastOpenProject", file.getFullPathName());
 	}
 
+	void setLanguage (String language)
+	{
+		if (language.isNotEmpty())
+			LocalisedStrings::setCurrentMappings(new LocalisedStrings(File(File::addTrailingSeparator(File::getCurrentWorkingDirectory().getFullPathName()) + "translations" + File::separatorString + language + ".txt"), true));
+		else
+			LocalisedStrings::setCurrentMappings(0);
+
+		languageString = language;
+		settings->setValue("guiLanguage", language);
+	}
+
+	String getLanguage ()
+	{
+		return languageString;
+	}
+
 	ScopedPointer <StoredSettings> settings;
 
 private:
 	ScopedPointer <Project> project;
     ScopedPointer <MainWindow> mainWindow;
+	String languageString;
 };
 
 

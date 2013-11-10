@@ -148,6 +148,10 @@ private:
 		modifiers				= 0x220B,
 		help					= 0x220C,
 		componentInspector		= 0x220F,
+			//Language
+			englishLang			= 0x2210,
+			spanishLang			= 0x2211,
+			catalanLang			= 0x2212,
 		//WINDOW
 		//...
 		//Help

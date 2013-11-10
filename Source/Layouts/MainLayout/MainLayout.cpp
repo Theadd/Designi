@@ -227,9 +227,23 @@ StringArray MainLayout::getMenuBarNames()
 {
 	
 	//const char* const names[] = { T_UTF8("File"), T_UTF8("Edit"), T_UTF8("View"), T_UTF8("Window"), T_UTF8("Help"), nullptr };
-	const char* const names[] = { "File", "Edit", "View", "Window", "Help", nullptr };
+	if (JUCEDesignerApp::getApp().getLanguage().isEmpty())
+	{
+		const char* const names[] = { "File", "Edit", "View", "Window", "Help", nullptr };
+		return StringArray (names);
+	}
+	else if (JUCEDesignerApp::getApp().getLanguage().equalsIgnoreCase("spanish"))
+	{
+		const char* const names[] = { "Archivo", "Editar", "Ver", "Ventana", "Ayuda", nullptr };
+		return StringArray (names);
+	}
+	else if (JUCEDesignerApp::getApp().getLanguage().equalsIgnoreCase("catalan"))
+	{
+		const char* const names[] = { "Fitxer", "Editar", "Veure", "Finestra", "Ajuda", nullptr };
+		return StringArray (names);
+	}
 
-	return StringArray (names);
+	
 }
 
 PopupMenu MainLayout::getMenuForIndex (int menuIndex, const String& /*menuName*/)
@@ -301,6 +315,15 @@ PopupMenu MainLayout::getMenuForIndex (int menuIndex, const String& /*menuName*/
 		menu.addCommandItem (commandManager, help);
 		menu.addSeparator();
 		menu.addCommandItem (commandManager, componentInspector);
+		menu.addSeparator();
+
+			PopupMenu languageSubMenu;
+			languageSubMenu.addCommandItem (commandManager, catalanLang);
+			languageSubMenu.addCommandItem (commandManager, englishLang);
+			languageSubMenu.addCommandItem (commandManager, spanishLang);
+			
+
+			menu.addSubMenu (T("Language"), languageSubMenu);
 	}
 	if (menuIndex == 3)
 	{
@@ -336,7 +359,7 @@ ApplicationCommandTarget* MainLayout::getNextCommandTarget()
 void MainLayout::getAllCommands (Array <CommandID>& commands)
 {
 	// this returns the set of all commands that this target can perform..
-	const CommandID ids[] = {newProject, newDesign, openProject, openRecentProject, closeProject, save, saveAs, saveAll, print, undo, redo, cut, copy, paste, delete_, find, replace, preferences, leftPanel, rightPanel, fileToolbar, clipboardToolbar, historyToolbar, drawableToolbar, toolbarOrientation, toolbarCustomize, fileBrowser, navigator, properties, toolbox, modifiers, help, componentInspector, webpage, about};
+	const CommandID ids[] = {newProject, newDesign, openProject, openRecentProject, closeProject, save, saveAs, saveAll, print, undo, redo, cut, copy, paste, delete_, find, replace, preferences, leftPanel, rightPanel, fileToolbar, clipboardToolbar, historyToolbar, drawableToolbar, toolbarOrientation, toolbarCustomize, fileBrowser, navigator, properties, toolbox, modifiers, help, componentInspector, englishLang, spanishLang, catalanLang, webpage, about};
 
 	commands.addArray (ids, numElementsInArray (ids));
 }
@@ -507,6 +530,18 @@ void MainLayout::getCommandInfo (CommandID commandID, ApplicationCommandInfo& re
 		result.setActive ((floatingComponentOverlay != nullptr) ? true : false);
 		result.addDefaultKeypress (KeyPress::F2Key, 0);
 		break;
+	case englishLang:
+		result.setInfo (T("English"), "", generalCategory, 0);
+		result.setTicked ((JUCEDesignerApp::getApp().getLanguage().isEmpty() ? true : false));
+		break;
+	case spanishLang:
+		result.setInfo (T(String(CharPointer_UTF8 ("Espa\xc3\xb1ol"))), "", generalCategory, 0);
+		result.setTicked ((JUCEDesignerApp::getApp().getLanguage().equalsIgnoreCase("spanish") ? true : false));
+		break;
+	case catalanLang:
+		result.setInfo (T(String(CharPointer_UTF8 ("Catal\xc3\xa0"))), "", generalCategory, 0);
+		result.setTicked ((JUCEDesignerApp::getApp().getLanguage().equalsIgnoreCase("catalan") ? true : false));
+		break;
 	case webpage:
 		result.setInfo ("Webpage", "", generalCategory, 0);
 		result.setTicked (false);
@@ -602,6 +637,15 @@ bool MainLayout::perform (const InvocationInfo& info)
 		break;
 	case componentInspector:
 		floatingComponentOverlay->setVisible(!floatingComponentOverlay->isVisible());
+		break;
+	case englishLang:
+		JUCEDesignerApp::getApp().setLanguage("");
+		break;
+	case spanishLang:
+		JUCEDesignerApp::getApp().setLanguage("spanish");
+		break;
+	case catalanLang:
+		JUCEDesignerApp::getApp().setLanguage("catalan");
 		break;
 	case webpage:
 		break;

@@ -1,0 +1,9 @@
+﻿language: Catalan
+countries: es
+
+"File" = "Arxiu"
+"Edit" = "Editar"
+"File Browser" = "Explorador de fitxers"
+"Language" = "Idioma"
+"English" = "Anglès"
+"Español" = "Castellà"
