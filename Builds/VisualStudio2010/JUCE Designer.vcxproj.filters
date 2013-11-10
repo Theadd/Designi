@@ -322,6 +322,18 @@
     <ClCompile Include="..\..\Source\Styles\DuskMap.cpp">
       <Filter>JUCE Designer\Source\Styles</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\Layouts\Extended\CodeHelpers.cpp">
+      <Filter>JUCE Designer\Source\Layouts\Extended</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Layouts\Extended\FileHelpers.cpp">
+      <Filter>JUCE Designer\Source\Layouts\Extended</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Layouts\Extended\SourceCodeEditor.cpp">
+      <Filter>JUCE Designer\Source\Layouts\Extended</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Layouts\Extended\DocumentEditorComponent.cpp">
+      <Filter>JUCE Designer\Source\Layouts\Extended</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\Layouts\Extended\plain-svg-icons.cpp">
       <Filter>JUCE Designer\Source\Layouts\Extended</Filter>
     </ClCompile>
@@ -1547,6 +1559,24 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Styles\DuskMap.h">
       <Filter>JUCE Designer\Source\Styles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Layouts\Extended\Colours.h">
+      <Filter>JUCE Designer\Source\Layouts\Extended</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Layouts\Extended\CodeHelpers.h">
+      <Filter>JUCE Designer\Source\Layouts\Extended</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Layouts\Extended\FileHelpers.h">
+      <Filter>JUCE Designer\Source\Layouts\Extended</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Layouts\Extended\SourceCodeEditor.h">
+      <Filter>JUCE Designer\Source\Layouts\Extended</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Layouts\Extended\DocumentEditorComponent.h">
+      <Filter>JUCE Designer\Source\Layouts\Extended</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Layouts\Extended\FilePreviewComponent.h">
+      <Filter>JUCE Designer\Source\Layouts\Extended</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Layouts\Extended\plain-svg-icons.h">
       <Filter>JUCE Designer\Source\Layouts\Extended</Filter>

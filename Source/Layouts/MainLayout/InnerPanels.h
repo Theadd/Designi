@@ -16,6 +16,7 @@
 class MainLayout;
 class ExtendedFileTreeComponent;
 
+/*
 class CodeEditorPanel : public InnerPanel
 {
 public:
@@ -38,7 +39,7 @@ private:
 	ScopedPointer <CPlusPlusCodeTokeniser> codeTokeniser;
 
 };
-
+*/
 
 class NavigatorPanel : public InnerPanel
 {
@@ -46,6 +47,8 @@ public:
 
 	NavigatorPanel ();
 	~NavigatorPanel ();
+
+	OpenDocumentManager::Document* getDocument() const override             { return nullptr; }
 
 	void resized ();
 
@@ -81,6 +84,8 @@ public:
 
 	FileBrowserPanel ();
 	~FileBrowserPanel ();
+
+	OpenDocumentManager::Document* getDocument() const override             { return nullptr; }
 
 	void resized ();
 	void mouseUp (const MouseEvent &event);
@@ -132,8 +137,9 @@ class HelpPanel : public InnerPanel, private Timer
 public:
 
 	HelpPanel();
-
 	~HelpPanel();
+
+	OpenDocumentManager::Document* getDocument() const override             { return nullptr; }
 
 	void resized();
 

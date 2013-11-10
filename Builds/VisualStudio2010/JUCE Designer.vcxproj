@@ -128,6 +128,10 @@
     <ClCompile Include="..\..\Source\Core\DocumentManager.cpp"/>
     <ClCompile Include="..\..\Source\Core\Project.cpp"/>
     <ClCompile Include="..\..\Source\Styles\DuskMap.cpp"/>
+    <ClCompile Include="..\..\Source\Layouts\Extended\CodeHelpers.cpp"/>
+    <ClCompile Include="..\..\Source\Layouts\Extended\FileHelpers.cpp"/>
+    <ClCompile Include="..\..\Source\Layouts\Extended\SourceCodeEditor.cpp"/>
+    <ClCompile Include="..\..\Source\Layouts\Extended\DocumentEditorComponent.cpp"/>
     <ClCompile Include="..\..\Source\Layouts\Extended\plain-svg-icons.cpp"/>
     <ClCompile Include="..\..\Source\Layouts\Extended\ExtendedFileTreeComponent.cpp"/>
     <ClCompile Include="..\..\Source\Layouts\ExtendedLookAndFeel.cpp"/>
@@ -1221,6 +1225,12 @@
     <ClInclude Include="..\..\Source\Core\DocumentManager.h"/>
     <ClInclude Include="..\..\Source\Core\Project.h"/>
     <ClInclude Include="..\..\Source\Styles\DuskMap.h"/>
+    <ClInclude Include="..\..\Source\Layouts\Extended\Colours.h"/>
+    <ClInclude Include="..\..\Source\Layouts\Extended\CodeHelpers.h"/>
+    <ClInclude Include="..\..\Source\Layouts\Extended\FileHelpers.h"/>
+    <ClInclude Include="..\..\Source\Layouts\Extended\SourceCodeEditor.h"/>
+    <ClInclude Include="..\..\Source\Layouts\Extended\DocumentEditorComponent.h"/>
+    <ClInclude Include="..\..\Source\Layouts\Extended\FilePreviewComponent.h"/>
     <ClInclude Include="..\..\Source\Layouts\Extended\plain-svg-icons.h"/>
     <ClInclude Include="..\..\Source\Layouts\Extended\ExtendedFileTreeComponent.h"/>
     <ClInclude Include="..\..\Source\Layouts\ExtendedLookAndFeel.h"/>

@@ -16,6 +16,7 @@
 #include "Core/Project.h"
 #include "Layouts/MainWindow.h"
 #include "StoredSettings.h"
+#include "Core/DocumentManager.h"
 
 
 //==============================================================================
@@ -147,7 +148,23 @@ public:
 		return settings->getValue(keyName, defaultReturnValue); 
 	}
 
+	static ApplicationCommandManager& getCommandManager()
+    {
+        ApplicationCommandManager* cm = JUCEDesignerApp::getApp().getApplicationCommandManager();
+        jassert (cm != nullptr);
+        return *cm;
+    }
+
+	ApplicationCommandManager* getApplicationCommandManager()
+    {
+        if (mainWindow != nullptr)
+			return &mainWindow->commandManager;
+		else
+			return nullptr;
+    }
+
 	ScopedPointer <StoredSettings> settings;
+	OpenDocumentManager openDocumentManager;
 
 private:
 	ScopedPointer <Project> project;

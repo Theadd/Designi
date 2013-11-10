@@ -18,7 +18,7 @@
 #include "../../Application.h"
 
 
-
+/*
 CodeEditorPanel::CodeEditorPanel (String& filename, File* file)
 {
 	setName(filename);
@@ -110,7 +110,7 @@ bool CodeEditorPanel::save (File initialDirectory)
 	}
 	return true;
 }
-
+*/
 
 ////////////////////////////////////////////////////////////////////////////
 
@@ -230,7 +230,7 @@ FileBrowserPanel::FileBrowserPanel() : thread ("FileTreeComponent thread"), Inne
     //while (folder.getParentDirectory() != folder)
     //    folder = folder.getParentDirectory();
 	//projectFileFilter = new ProjectFileFilter();
-	fileFilter = new WildcardFileFilter("*.cpp;*.h;*.design", "*", "C++ JUCE Files");
+	fileFilter = new WildcardFileFilter("*.cpp;*.h;*.design;*.png;*.svg", "*", "C++ JUCE Files");
 	//DBG("two");
 
     directoryList = new DirectoryContentsList(fileFilter, thread);

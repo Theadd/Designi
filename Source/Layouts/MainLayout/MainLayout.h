@@ -13,13 +13,14 @@
 
 
 #include "../../Globals.h"
+#include "../../Core/DocumentManager.h"
 
 class ToolbarComponent;
 class InnerPanel;
 class FileBrowserPanel;
 class NavigatorPanel;
 class HelpPanel;
-class CodeEditorPanel;
+//class CodeEditorPanel;
 class Panel;
 class PanelContainer;
 class ExtendedLookAndFeel;
@@ -97,20 +98,6 @@ public:
 
 	ScopedPointer <FloatingComponentOverlay> floatingComponentOverlay;
 
-private:
-	MainWindow& mainWindow;
-	//--
-	Component panelContainerBox;
-	OwnedArray <PanelContainer> panelContainers;
-	OwnedArray <CodeEditorPanel> codeEditorPanels;
-	//  --
-	ScopedPointer <HelpPanel> helpPanel;
-	ScopedPointer <FileBrowserPanel> fileBrowserPanel;
-	ScopedPointer <NavigatorPanel> navigatorPanel;
-	
-	//--
-	ScopedPointer <ToolbarComponent> toolbarComponent;
-
 	enum CommandIDs
     {
 		//FILE
@@ -133,6 +120,11 @@ private:
 		find					= 0x2106,
 		replace					= 0x2107,
 		preferences				= 0x2108,
+		showFindPanel			= 0x2109,
+        findSelection			= 0x210A,
+        findNext				= 0x210B,
+        findPrevious			= 0x210C,
+		
 		//VIEW
 		leftPanel				= 0x2200,
 		rightPanel				= 0x2201,
@@ -160,6 +152,31 @@ private:
 		webpage					= 0x2300,
 		about					= 0x2301
     };
+
+private:
+	MainWindow& mainWindow;
+	//--
+	Component panelContainerBox;
+	OwnedArray <PanelContainer> panelContainers;
+	//OwnedArray <CodeEditorPanel> codeEditorPanels;
+	//  --
+	ScopedPointer <HelpPanel> helpPanel;
+	ScopedPointer <FileBrowserPanel> fileBrowserPanel;
+	ScopedPointer <NavigatorPanel> navigatorPanel;
+	
+	//--
+	ScopedPointer <ToolbarComponent> toolbarComponent;
+
+	struct DocumentEditor
+	{
+		OpenDocumentManager::Document* document;
+		ScopedPointer<InnerPanel> innerPanel;
+	};
+
+	OwnedArray <DocumentEditor> editors;
+
+	InnerPanel* getInnerPanelForDocument(OpenDocumentManager::Document* document);
+	
 };
 
 

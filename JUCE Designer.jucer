@@ -36,6 +36,21 @@
       </GROUP>
       <GROUP id="{91FEA6B6-3B4B-9080-5F5C-93BA955508E8}" name="Layouts">
         <GROUP id="{C5EB7111-269A-703C-4F6A-1BAD2914A8C4}" name="Extended">
+          <FILE id="VL8I55" name="Colours.h" compile="0" resource="0" file="Source/Layouts/Extended/Colours.h"/>
+          <FILE id="ru3BNN" name="CodeHelpers.cpp" compile="1" resource="0" file="Source/Layouts/Extended/CodeHelpers.cpp"/>
+          <FILE id="CuMekW" name="CodeHelpers.h" compile="0" resource="0" file="Source/Layouts/Extended/CodeHelpers.h"/>
+          <FILE id="JFZZJk" name="FileHelpers.cpp" compile="1" resource="0" file="Source/Layouts/Extended/FileHelpers.cpp"/>
+          <FILE id="uEiAWh" name="FileHelpers.h" compile="0" resource="0" file="Source/Layouts/Extended/FileHelpers.h"/>
+          <FILE id="nhFZl1" name="SourceCodeEditor.cpp" compile="1" resource="0"
+                file="Source/Layouts/Extended/SourceCodeEditor.cpp"/>
+          <FILE id="gzWRxM" name="SourceCodeEditor.h" compile="0" resource="0"
+                file="Source/Layouts/Extended/SourceCodeEditor.h"/>
+          <FILE id="EpY1hH" name="DocumentEditorComponent.cpp" compile="1" resource="0"
+                file="Source/Layouts/Extended/DocumentEditorComponent.cpp"/>
+          <FILE id="Gr5Dlq" name="DocumentEditorComponent.h" compile="0" resource="0"
+                file="Source/Layouts/Extended/DocumentEditorComponent.h"/>
+          <FILE id="K6hem4" name="FilePreviewComponent.h" compile="0" resource="0"
+                file="Source/Layouts/Extended/FilePreviewComponent.h"/>
           <FILE id="Ouj3hB" name="plain-svg-icons.cpp" compile="1" resource="0"
                 file="Source/Layouts/Extended/plain-svg-icons.cpp"/>
           <FILE id="q0U6bO" name="plain-svg-icons.h" compile="0" resource="0"

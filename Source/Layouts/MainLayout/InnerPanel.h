@@ -11,6 +11,9 @@
 #ifndef __INNERPANEL_H_9AA31784__
 #define __INNERPANEL_H_9AA31784__
 
+#include "../../Globals.h"
+#include "../../Core/DocumentManager.h"
+
 class ExtendedLookAndFeel;
 
 class InnerPanel : public Component, public SettableTooltipClient
@@ -36,9 +39,11 @@ public:
 	void paint (Graphics& g);
 	bool showAsTab;
 
-	void setNeedsToBeSaved (bool needsToBeSaved = true);
-	bool getNeedsToBeSaved ();
-	bool save (File initialDirectory = File::nonexistent) { return true; };
+	//OpenDocumentManager::Document* getDocument() const override             { return nullptr; }
+	virtual OpenDocumentManager::Document* getDocument() const = 0;
+	//void setNeedsToBeSaved (bool needsToBeSaved = true);
+	//bool getNeedsToBeSaved ();
+	//bool save (File initialDirectory = File::nonexistent) { return true; };
 	void refresh();	//update its content
 
 	void setLocalisedName (String name, String tooltip = String::empty);
@@ -49,7 +54,7 @@ public:
 	
 
 private:
-	bool needsToBeSaved;	//if needs to be saved before closing
+	//bool needsToBeSaved;	//if needs to be saved before closing
 	bool isHeaderVisible;
 	String headerName;
 	int headerHeight;
@@ -58,6 +63,21 @@ private:
 	int headerNameMarginLeft;
 	String localisedName;
 	String localisedTooltip;
+
+};
+
+class FileBasedInnerPanel : public InnerPanel
+{
+public:
+
+	enum FileType
+	{
+		source,	//.cpp;.h;...
+		design,	//.design
+		unknown //images?
+	};
+
+private:
 
 };
 

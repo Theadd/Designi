@@ -14,10 +14,10 @@
 #include "InnerPanel.h"
 #include "../ExtendedLookAndFeel.h"
 
+
 InnerPanel::InnerPanel(bool showAsTab_, Globals::Position _position) : Component(), showAsTab(showAsTab_), position(_position)
 {
 	isHeaderVisible = false;
-	needsToBeSaved = false;
 }
 
 void InnerPanel::setHeader(bool showHeader_, String headerName_, int headerHeight_, int indent_, int headerNameMarginRight_, int headerNameMarginLeft_)
@@ -46,6 +46,7 @@ void InnerPanel::paint (Graphics& g)
 		((ExtendedLookAndFeel*) &getLookAndFeel())->drawInnerPanel (g, *this);
 }
 
+/*
 void InnerPanel::setNeedsToBeSaved (bool needs)
 {
 	needsToBeSaved = needs;
@@ -54,7 +55,7 @@ void InnerPanel::setNeedsToBeSaved (bool needs)
 bool InnerPanel::getNeedsToBeSaved ()
 {
 	return needsToBeSaved;
-}
+}*/
 
 void InnerPanel::setLocalisedName (String name, String tooltip)
 {

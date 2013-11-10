@@ -43,7 +43,6 @@ enum ColourIds
     treeviewHighlightColourId       = 0x2340002,
 };
 
-
 String T (const String& text);
 String T (const char* text);
 String T (CharPointer_UTF8 text);

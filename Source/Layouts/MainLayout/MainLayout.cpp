@@ -15,11 +15,13 @@
 
 #include "Toolbars.h"
 #include "InnerPanelContainers.h"
+//#include "InnerPanel.h"
 #include "InnerPanels.h"
 #include "../ExtendedLookAndFeel.h"
 #include "../MainWindow.h"
 #include "../../Core/Project.h"
 #include "../../Application.h"
+#include "../Extended/FilePreviewComponent.h"
 
 
 FloatingComponentOverlay::FloatingComponentOverlay()
@@ -681,16 +683,21 @@ void MainLayout::toggleInnerPanel(InnerPanel* innerPanel, Globals::Position posi
 			//check if needs to be saved before closing
 			if (isBeingClosed)
 			{
-				int index = getDocumentIndex(innerPanel);
-				if (index >= 0 && codeEditorPanels[index]->getNeedsToBeSaved())
+				//int index = getDocumentIndex(innerPanel);
+				//if (index >= 0 && codeEditorPanels[index]->getNeedsToBeSaved())
+				OpenDocumentManager::Document* document = innerPanel->getDocument();
+				if (document == nullptr)
+					DBG("INNER PANEL DOCUMENT = nullptr");
+
+				if (document != nullptr && document->needsSaving())
 				{
 					DBG("JOINS ALERT!");
-					int result = AlertWindow::showYesNoCancelBox (AlertWindow::NoIcon, "Save changes to the following items?", innerPanel->getHeaderName(), "Yes", "No", "Cancel", nullptr, nullptr);
+					int result = AlertWindow::showYesNoCancelBox (AlertWindow::NoIcon, "Save changes to the following items?", document->getFile().getFileName(), "Yes", "No", "Cancel", nullptr, nullptr);
 					switch (result)
 					{
 					case 1:
 						//save
-						if (!codeEditorPanels[index]->save(JUCEDesignerApp::getApp().getProject()->info.path))//*workingPath))
+						if (!document->save())
 						{
 							AlertWindow::showMessageBox (AlertWindow::NoIcon, "Save error!", "File could not be written to disk!", "Ok");
 							return;
@@ -791,60 +798,54 @@ PanelContainer* MainLayout::getPanelContainerOf(InnerPanel* innerPanel, Globals:
 
 void MainLayout::loadDocument(File& file)
 {
-	String filename(file.getFileName());
-	String filePath(file.getFullPathName());
 
-	//check if that file was already loaded
-	bool fileAlreadyLoaded = false;
-	CodeEditorPanel* existingEditor = nullptr;
-	for (int i = 0; i < codeEditorPanels.size(); ++i)
+	OpenDocumentManager::Document *document = JUCEDesignerApp::getApp().openDocumentManager.openFile(JUCEDesignerApp::getApp().getProject(), file);
+
+	if (document->loadedOk())
 	{
-		if (codeEditorPanels[i]->filePath.equalsIgnoreCase(filePath))
+		InnerPanel *innerPanel = getInnerPanelForDocument(document);
+		PanelContainer *container = getPanelContainerOf(innerPanel, Globals::center);
+		if (container != nullptr)
 		{
-			fileAlreadyLoaded = true;
-			existingEditor = codeEditorPanels[i];
-			break;
+			//its already inside a panel container, bring it to front
+			container->showInnerPanel(innerPanel);
+		}
+		else
+		{
+			//not attached to any panel container, place it on center
+			getPanelContainer(Globals::center)->addInnerPanel(innerPanel, false);
+			getPanelContainer(Globals::center)->showInnerPanel(innerPanel);
 		}
 	}
-
-	if (!fileAlreadyLoaded)
-	{
-		codeEditorPanels.add(new CodeEditorPanel(filename, &file));
-		DBG("[MainLayout::loadDocument] (Globals::center)->addInnerPanel()");
-		getPanelContainer(Globals::center)->addInnerPanel(codeEditorPanels.getLast(), false);
-		existingEditor = codeEditorPanels.getLast();
-	}
-
-	DBG("[MainLayout::loadDocument] \t\t(Globals::center)->showInnerPanel()");
-	getPanelContainer(Globals::center)->showInnerPanel(existingEditor);
 }
 
 void MainLayout::unloadDocument(InnerPanel* innerPanel)
 {
+	DBG("UNLOAD DOCUMENT "+innerPanel->getName());
 	int index = getDocumentIndex(innerPanel);
 	if (index >= 0)
 		unloadDocumentAt(index);
 }
 
-void MainLayout::unloadDocumentAt(int index)
+void MainLayout::unloadDocumentAt(int /*index*/)
 {
-	codeEditorPanels.remove(index, true);
+	//codeEditorPanels.remove(index, true);
 }
 
-int MainLayout::getDocumentIndex(InnerPanel* innerPanel)
+int MainLayout::getDocumentIndex(InnerPanel* /*innerPanel*/)
 {
-	for (int i = 0; i < codeEditorPanels.size(); ++i)
+	/*for (int i = 0; i < codeEditorPanels.size(); ++i)
 		if (codeEditorPanels[i] == innerPanel)
 			return i;
-
+	*/
 	return -1;
 }
 
 void MainLayout::setProject(Project* project)
 {
 	//ADD EMPTY CODE EDITOR PANEL
-	String filename = "New File";
-	codeEditorPanels.add(new CodeEditorPanel(filename));
+	//String filename = "New File";
+	//codeEditorPanels.add(new CodeEditorPanel(filename));
 
 	PanelContainer *leftPanelContainer = getPanelContainer(Globals::left);
 	PanelContainer *rightPanelContainer = getPanelContainer(Globals::right);
@@ -874,7 +875,7 @@ void MainLayout::setProject(Project* project)
 	helpPanel = nullptr;
 	leftPanelContainer->addInnerPanel(helpPanel = new HelpPanel(), true);
 	//codeEditorPanel
-	centerPanelContainer->addInnerPanel(codeEditorPanels[0], true);
+	//centerPanelContainer->addInnerPanel(codeEditorPanels[0], true);
 
 }
 
@@ -886,7 +887,8 @@ void MainLayout::closeCurrentProject()
 	navigatorPanel = nullptr;
 	fileBrowserPanel = nullptr;
 	helpPanel = nullptr;
-	codeEditorPanels.clear();
+	//codeEditorPanels.clear();
+	editors.clear();
 }
 
 void MainLayout::showOpenProjectDialog ()
@@ -923,4 +925,19 @@ void MainLayout::updateLocalisedStrings ()
 {
 	helpPanel->updateLocalisedStrings();
 	fileBrowserPanel->updateLocalisedStrings();
+}
+
+InnerPanel* MainLayout::getInnerPanelForDocument(OpenDocumentManager::Document* document)
+{
+	for (int i = editors.size(); --i >= 0;)
+		if (editors[i]->document == document)
+			return editors[i]->innerPanel;
+	
+	//Not found, create a new document <-> editor relation
+	DocumentEditor *editor = new DocumentEditor;
+	editor->document = document;
+	editor->innerPanel = (InnerPanel *) document->createViewer();
+	editors.add(editor);
+
+	return editor->innerPanel;
 }
