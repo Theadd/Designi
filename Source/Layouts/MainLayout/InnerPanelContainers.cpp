@@ -251,9 +251,13 @@ bool Panel::removeInnerPanel(InnerPanel *innerPanel)
 
 void Panel::removeAllInnerPanels()
 {
-	while (tabbedComponent != nullptr && tabbedComponent->getNumTabs() > 0)
-		removeInnerPanelAt(0);
-
+	//while (tabbedComponent != nullptr && tabbedComponent->getNumTabs() > 0)
+	//	removeInnerPanelAt(0);
+	if (tabbedComponent != nullptr)
+	{
+		while (tabbedComponent->getNumTabs() > 0)
+			removeInnerPanelAt(0);
+	}
 }
 
 void Panel::showInnerPanel(InnerPanel *innerPanel)

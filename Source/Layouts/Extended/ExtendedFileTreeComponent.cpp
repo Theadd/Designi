@@ -315,13 +315,16 @@ private:
 					String style = xmldefs->getStringAttribute("style");
 					if (style.isNotEmpty())
 					{
-						if (!blackAndWhite)
+						if (!blackAndWhite)	//yellow
 						{
-							style = style.replace("#008bff", "#e8d500", true);
+							/*style = style.replace("#008bff", "#e8d500", true);
 							style = style.replace("#00aaff", "#ffea00", true);
-							style = style.replace("#4eafff", "#ffdc00", true);
+							style = style.replace("#4eafff", "#ffdc00", true);*/
+							style = style.replace("#008bff", "#d9d392", true);
+							style = style.replace("#00aaff", "#d9d176", true);
+							style = style.replace("#4eafff", "#d8d3a4", true);
 						}
-						else
+						else	//light gray
 						{
 							style = style.replace("#008bff", "#eaeaea", true);
 							style = style.replace("#00aaff", "#d3d3d3", true);
@@ -367,9 +370,9 @@ private:
 		if (normalIcon == nullptr || openStateChanged == true)
 		{
 			String iconName = getIconNameForFile(file.getFileName());
-			normalIcon = getDrawableFromZipFile(iconName, 0);
+			normalIcon = getDrawableFromZipFile(iconName, 2);
 			hoverIcon = getDrawableFromZipFile(iconName, 1);
-			selectedIcon = getDrawableFromZipFile(iconName, 2);
+			selectedIcon = getDrawableFromZipFile(iconName, 0);
 
 			triggerAsyncUpdate();
 		}

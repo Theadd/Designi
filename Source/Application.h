@@ -137,6 +137,16 @@ public:
 		return languageString;
 	}
 
+	void setSettingsValue (const String &keyName, const var &value)
+	{
+		settings->setValue(keyName, value);
+	}
+
+	String getSettingsValue(StringRef keyName, String defaultReturnValue = String::empty)
+	{
+		return settings->getValue(keyName, defaultReturnValue); 
+	}
+
 	ScopedPointer <StoredSettings> settings;
 
 private:

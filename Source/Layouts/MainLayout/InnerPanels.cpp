@@ -15,6 +15,7 @@
 
 #include "MainLayout.h"
 #include "../Extended/ExtendedFileTreeComponent.h"
+#include "../../Application.h"
 
 
 
@@ -268,11 +269,20 @@ FileBrowserPanel::FileBrowserPanel() : thread ("FileTreeComponent thread"), Inne
 
 }
 
-FileBrowserPanel::~FileBrowserPanel() {
+FileBrowserPanel::~FileBrowserPanel()
+{
+	JUCEDesignerApp::getApp().setSettingsValue("lastProjectTreePath", directoryList->getDirectory().getFullPathName());
+	stateA = fileTreeCompA->getOpennessState(true);
+	stateB = fileTreeCompB->getOpennessState(true);
+	JUCEDesignerApp::getApp().setSettingsValue("fileTreeCompAOpennessState", stateA->createDocument("", true, true, "UTF-8", 9999999));
+	JUCEDesignerApp::getApp().setSettingsValue("fileTreeCompBOpennessState", stateB->createDocument("", true, true, "UTF-8", 9999999));
+
 	fileTreeCompA = nullptr;
 	fileTreeCompB = nullptr;
     directoryList = nullptr; // (need to make sure this is deleted before the TimeSliceThread)
 	fileFilter = nullptr;
+	delete stateA;
+	delete stateB;
 }
 
 void FileBrowserPanel::resized() {
@@ -312,6 +322,15 @@ void FileBrowserPanel::fileDoubleClicked (const File &file)
 void FileBrowserPanel::setBrowserRoot (const File &file)
 {
 	directoryList->setDirectory (file, true, true);
+
+	if (JUCEDesignerApp::getApp().getSettingsValue("lastProjectTreePath").equalsIgnoreCase(file.getFullPathName()))
+	{
+		stateA = (XmlDocument::parse (JUCEDesignerApp::getApp().getSettingsValue("fileTreeCompAOpennessState")));
+		stateB = (XmlDocument::parse (JUCEDesignerApp::getApp().getSettingsValue("fileTreeCompBOpennessState")));
+
+		refreshTimeCount = 10;
+		startTimer(100);
+	}
 }
 
 void FileBrowserPanel::setProjectName (const String &name)

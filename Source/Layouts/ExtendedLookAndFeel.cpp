@@ -25,7 +25,7 @@ ExtendedLookAndFeel::ExtendedLookAndFeel() : LookAndFeel_V3()
 	setColour (InnerPanel::headerNameTextColourId, Colours::white);
 	setColour (InnerPanel::nonHeaderBackgroundColourId, Colours::black.withAlpha(0.4f));
 	setColour (InnerPanel::backgroundColourId, Colours::transparentBlack);
-	setColour (DirectoryContentsDisplayComponent::highlightColourId, findColour (PanelContainer::backgroundColourId).interpolatedWith(Colours::black, 0.3f));
+	setColour (DirectoryContentsDisplayComponent::highlightColourId, findColour (PanelContainer::backgroundColourId).interpolatedWith(Colours::black, 0.4f));
 	
 }
 
@@ -103,9 +103,10 @@ void ExtendedLookAndFeel::drawFileBrowserRow (Graphics& g, int width, int height
 
     if (icon != nullptr)
     {
-        icon->drawWithin (g, Rectangle<float> (2.0f, 2.0f, x - 4.0f, height - 4.0f),
-                        RectanglePlacement::centred | RectanglePlacement::onlyReduceInSize, 1.0f);
-    }
+		float padding = 0.7f;
+        //icon->drawWithin (g, Rectangle<float> (2.0f, 2.0f, x - 4.0f, height - 4.0f), RectanglePlacement::centred | RectanglePlacement::onlyReduceInSize, 1.0f);
+		icon->drawWithin (g, Rectangle<float> (padding, padding, x - (2.0f * padding), height - (2.0f * padding)), RectanglePlacement::centred | RectanglePlacement::onlyReduceInSize, 1.0f);
+	}
 
     g.setColour (fileListComp != nullptr ? fileListComp->findColour (DirectoryContentsDisplayComponent::textColourId)
                                          : findColour (DirectoryContentsDisplayComponent::textColourId));
