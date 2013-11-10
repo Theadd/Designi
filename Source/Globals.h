@@ -48,10 +48,12 @@ String T (const String& text);
 String T (const char* text);
 String T (CharPointer_UTF8 text);
 
+/*
 const char* T_UTF8 (const String& text);
 const char* T_UTF8 (const char* text);
 
 const char* T_UTF8 (CharPointer_UTF8 text);
+*/
 
 
 

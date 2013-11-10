@@ -359,10 +359,10 @@ private:
 	}
 
 	/** Update icons for TreeView Item if they are not already set.
-	 * @param onlyUpdateIfCached bool unused
+	 * @param onlyUpdateIfCached bool unused since we don't have a cache for drawables like ImageCache
 	 * @param openStateChanged bool force update, used when a directory changes its open state.
 	 */
-    void updateIcon (const bool onlyUpdateIfCached, bool openStateChanged = false)
+    void updateIcon (const bool /*onlyUpdateIfCached*/, bool openStateChanged = false)
     {
 		if (normalIcon == nullptr || openStateChanged == true)
 		{
@@ -373,27 +373,6 @@ private:
 
 			triggerAsyncUpdate();
 		}
-
-		
-        //if (icon.isNull())
-        //{
-        //    const int hashCode = (file.getFullPathName() + "_iconCacheSalt").hashCode();
-        //    Image im (ImageCache::getFromHashCode (hashCode));
-
-        //    /*if (im.isNull() && ! onlyUpdateIfCached)
-        //    {
-        //        im = juce_createIconForFile (file);	//TODO: Get rid of this
-
-        //        if (im.isValid())
-        //            ImageCache::addImageToCache (im, hashCode);
-        //    }*/
-
-        //    if (im.isValid())
-        //    {
-        //        icon = im;
-        //        triggerAsyncUpdate();
-        //    }
-        //}
     }
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ExtendedFileListTreeItem)
@@ -416,20 +395,17 @@ ExtendedFileTreeComponent::~ExtendedFileTreeComponent()
  
 void ExtendedFileTreeComponent::mouseMove (const MouseEvent &event)
 {
-	//DBG("\tMOUSE Move ");
-	//ownerView->viewport->getContentComp()->isMouseOverButton (this)
 	int mousePosition = event.getPosition().getY() - getViewport()->getViewPositionY();
 	ExtendedFileListTreeItem* item = (ExtendedFileListTreeItem *) getItemAt(mousePosition);
-	//DBG("[MOVE] Y: "+String(event.getPosition().getY()));
+
 	if (item != nullptr && itemUnderMouse != item)
 	{
-		//DBG("\t\t[MOUSE HOVER] "+item->getName());
 		itemUnderMouse = item;
 		repaint();
 	}
 }
 
-void ExtendedFileTreeComponent::mouseExit (const MouseEvent &event)
+void ExtendedFileTreeComponent::mouseExit (const MouseEvent& /*event*/)
 {
 	itemUnderMouse = nullptr;
 	repaint();

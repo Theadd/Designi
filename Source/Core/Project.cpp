@@ -47,7 +47,7 @@ Result Project::loadDocument (const File& file)
     return Result::ok();
 }
 
-Result Project::saveDocument (const File& file)
+Result Project::saveDocument (const File& /*file*/)
 {
 	return Result::ok();
     //return saveProject (file, false);

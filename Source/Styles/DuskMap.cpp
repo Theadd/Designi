@@ -205,7 +205,7 @@ DuskMapLookAndFeel::DuskMapLookAndFeel()
 	//DirectoryContentsDisplayComponent (inherited by FileTreeComponent)
 	//ColourIds { highlightColourId = 0x1000540, textColourId = 0x1000541 }
 	setColour (DirectoryContentsDisplayComponent::textColourId, Colours::white);
-	setColour (DirectoryContentsDisplayComponent::highlightColourId, Colours::white.withAlpha(0.1f));
+	//setColour (DirectoryContentsDisplayComponent::highlightColourId, Colours::black.withAlpha(0.05f));
 }
 
 DuskMapLookAndFeel::~DuskMapLookAndFeel()
@@ -684,7 +684,7 @@ void DuskMapLookAndFeel::drawMenuBarBackground (Graphics& g, int /*width*/, int 
 
 void DuskMapLookAndFeel::drawTreeviewPlusMinusBox (Graphics& g, const Rectangle< float > &area, Colour backgroundColour, bool isOpen, bool isMouseOver)
 {
-	drawTreeviewPlusMinusBox (g, area.getX(), area.getY(), area.getWidth(), area.getHeight(), !isOpen, isMouseOver);
+	drawTreeviewPlusMinusBox (g, (int) area.getX(), (int) area.getY(), (int) area.getWidth(), (int) area.getHeight(), !isOpen, isMouseOver);
 }
 
 void DuskMapLookAndFeel::drawTreeviewPlusMinusBox (Graphics& g, int x, int y, int w, int h, bool isPlus, bool isMouseOver)
@@ -726,60 +726,4 @@ int DuskMapLookAndFeel::getDefaultScrollbarWidth ()
 	return 12;
 }
 
-
-void DuskMapLookAndFeel::drawFileBrowserRow (Graphics& g, int width, int height,
-                                      const String& filename, Image* icon,
-                                      const String& fileSizeDescription,
-                                      const String& fileTimeDescription,
-                                      const bool isDirectory,
-                                      const bool isItemSelected,
-                                      const int itemIndex,
-                                      DirectoryContentsDisplayComponent& dcc)
-{
-	String id;
-	if (!isDirectory)
-	{
-		id = filename.fromLastOccurrenceOf(".", true, true);
-		if (id.isEmpty())
-			id = "unknown";
-	}
-	else
-	{
-		id = "folder";
-	}
-	//DBG("[drawFileBrowserRow] filename = "+filename+", isItemSelected = "+String(isItemSelected)+", itemIndex = "+String(itemIndex));
-	//dcc.getOpennessState()
-	
-	//bool isOpen = (dynamic_cast <TreeView *> (&dcc))->getItemOnRow(itemIndex)->isOpen();
-
-	//TreeView *tree = dynamic_cast <TreeView *> (&dcc);
-	//DBG("\tgetting item from TreeView on index = "+String(itemIndex));
-	//TreeViewItem *item = tree->getItemOnRow(itemIndex);
-	//DBG("\tisOpen = "+String(item->isOpen())+" Identifier String = #"+String(item->getItemIdentifierString())+"#, unique name = "+item->getUniqueName());
-	//bool isOpen = item->isOpen();
-
-
-	//set icon for file type
-	if (!isDirectory)
-	{
-		if (id.equalsIgnoreCase(".cpp"))
-			icon = &ImageCache::getFromMemory (BinaryData::file_cpp_png, BinaryData::file_cpp_pngSize);
-		else if (id.equalsIgnoreCase(".h"))
-			icon = &ImageCache::getFromMemory (BinaryData::file_h_png, BinaryData::file_h_pngSize);
-		else if (id.equalsIgnoreCase(".design"))
-			icon = &ImageCache::getFromMemory (BinaryData::penbrush_png, BinaryData::penbrush_pngSize);
-		else 
-			icon = &ImageCache::getFromMemory (BinaryData::note_png, BinaryData::note_pngSize);
-	}
-	else
-	{
-		if (isItemSelected)
-			icon = &ImageCache::getFromMemory (BinaryData::folderopen_png, BinaryData::folderopen_pngSize);
-		else
-			icon = &ImageCache::getFromMemory (BinaryData::folderclose_png, BinaryData::folderclose_pngSize);
-	}
-
-	LookAndFeel_V3::drawFileBrowserRow (g, width, height, filename, icon, fileSizeDescription, fileTimeDescription, false /*isDirectory*/, false /*isItemSelected*/, itemIndex, dcc);
-
-}
 

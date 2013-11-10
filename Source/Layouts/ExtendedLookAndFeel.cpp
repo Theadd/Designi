@@ -25,6 +25,8 @@ ExtendedLookAndFeel::ExtendedLookAndFeel() : LookAndFeel_V3()
 	setColour (InnerPanel::headerNameTextColourId, Colours::white);
 	setColour (InnerPanel::nonHeaderBackgroundColourId, Colours::black.withAlpha(0.4f));
 	setColour (InnerPanel::backgroundColourId, Colours::transparentBlack);
+	setColour (DirectoryContentsDisplayComponent::highlightColourId, findColour (PanelContainer::backgroundColourId).interpolatedWith(Colours::black, 0.3f));
+	
 }
 
 void ExtendedLookAndFeel::drawPanelContainer (Graphics& g, Component& /*comp*/)
@@ -87,7 +89,7 @@ void ExtendedLookAndFeel::drawFileBrowserRow (Graphics& g, int width, int height
                                          const String& fileSizeDescription,
                                          const String& fileTimeDescription,
                                          const bool isDirectory, const bool isItemSelected,
-										 const bool isOpen, const bool isHover,
+										 const bool /*isOpen*/, const bool /*isHover*/,
                                          const int /*itemIndex*/, DirectoryContentsDisplayComponent& dcc)
 {
     Component* const fileListComp = dynamic_cast<Component*> (&dcc);

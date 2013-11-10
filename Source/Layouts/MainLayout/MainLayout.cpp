@@ -226,7 +226,8 @@ void MainLayout::componentMovedOrResized (Component& /*component*/, bool /*wasMo
 StringArray MainLayout::getMenuBarNames()
 {
 	
-	const char* const names[] = { T_UTF8("File"), T_UTF8("Edit"), T_UTF8("View"), T_UTF8("Window"), T_UTF8("Help"), nullptr };
+	//const char* const names[] = { T_UTF8("File"), T_UTF8("Edit"), T_UTF8("View"), T_UTF8("Window"), T_UTF8("Help"), nullptr };
+	const char* const names[] = { "File", "Edit", "View", "Window", "Help", nullptr };
 
 	return StringArray (names);
 }

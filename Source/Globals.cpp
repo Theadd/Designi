@@ -23,6 +23,7 @@ String T (CharPointer_UTF8 text)
 	return juce::translate (a, a);
 }
 
+/*
 const char* T_UTF8 (const String& text)
 {
 	char* t = new char;
@@ -44,3 +45,4 @@ const char* T_UTF8 (CharPointer_UTF8 text)
 	strcpy(t, juce::translate (a, a).toRawUTF8());
 	return t;
 }
+*/

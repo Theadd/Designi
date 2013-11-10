@@ -62,15 +62,6 @@ public:
 
 	int getDefaultScrollbarWidth ();
 
-	void drawFileBrowserRow (Graphics&, int width, int height,
-                            const String& filename, Image* icon,
-                            const String& fileSizeDescription,
-                            const String& fileTimeDescription,
-                            bool isDirectory,
-                            bool isItemSelected,
-                            int itemIndex,
-                            DirectoryContentsDisplayComponent& component);
-
 private:
     Image backgroundTexture;
     Colour backgroundTextureBaseColour;

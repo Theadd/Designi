@@ -39,16 +39,38 @@ public:
 
 		project = nullptr;
 
-		if (commandLine.isNotEmpty() && File(commandLine).existsAsFile())
+		//Open project
+		if (commandLine.isNotEmpty())
 		{
-			openProject(File(commandLine));
+			File argFile(commandLine);
+			if (argFile.existsAsFile())
+				openProject(argFile);
 		}
 		else
 		{
 			String lastOpenProject = settings->getValue("lastOpenProject");
 			if (lastOpenProject.isNotEmpty())
-				openProject(File(lastOpenProject));
+			{
+				File lastProjectFile(lastOpenProject);
+				openProject(lastProjectFile);
+			}
 		}
+		//set gui language
+		String guiLanguage = settings->getValue("guiLanguage");
+		if (guiLanguage.isNotEmpty())
+		{
+			if (guiLanguage.equalsIgnoreCase("spanish"))
+			{
+				LocalisedStrings::setCurrentMappings(new LocalisedStrings(File(File::addTrailingSeparator(File::getCurrentWorkingDirectory().getFullPathName()) + "translations" + File::separatorString + "spanish.txt"), true));
+			}
+		}
+		else
+		{
+			//Load English as default language
+			LocalisedStrings::setCurrentMappings(0);
+			//settings->setValue("guiLanguage", "");
+		}
+
 		//openProject(File("C:/Users/admin/JUCE Sample Project/JUCE Sample Project.jucer"));
 
         mainWindow = new MainWindow();
