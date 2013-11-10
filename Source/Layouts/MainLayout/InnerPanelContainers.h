@@ -41,6 +41,7 @@ public:
 	//void componentChildrenChanged (Component & component);
 	void removeInnerPanelAt (int tabIndex);
 	bool removeInnerPanel(InnerPanel *innerPanel);
+	void removeAllInnerPanels();
 	void showInnerPanel(InnerPanel *innerPanel);
 	bool isInnerPanelVisible(InnerPanel* innerPanel);
 
@@ -109,6 +110,7 @@ public:
 
 	bool addInnerPanel (InnerPanel *componentToAdd, bool asNewPanel = false);
 	bool removeInnerPanel(InnerPanel *innerPanel);
+	void removeAllInnerPanels();
 	void showInnerPanel(InnerPanel *innerPanel);
 	bool isInnerPanelVisible(InnerPanel* innerPanel);
 	bool isEmpty();

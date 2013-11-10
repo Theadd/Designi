@@ -90,6 +90,7 @@ public:
 	int getDocumentIndex(InnerPanel* innerPanel);
 
 	void setProject(Project* project);
+	void closeCurrentProject();
 	void showOpenProjectDialog();
 
 	ScopedPointer <FloatingComponentOverlay> floatingComponentOverlay;

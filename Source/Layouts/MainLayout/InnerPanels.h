@@ -14,6 +14,7 @@
 #include "InnerPanel.h"
 
 class MainLayout;
+class ExtendedFileTreeComponent;
 
 class CodeEditorPanel : public InnerPanel
 {
@@ -98,8 +99,8 @@ public:
 	String projectName;
 
 private:
-	ScopedPointer <FileTreeComponent> fileTreeCompA;
-	ScopedPointer <FileTreeComponent> fileTreeCompB;
+	ScopedPointer <ExtendedFileTreeComponent> fileTreeCompA;
+	ScopedPointer <ExtendedFileTreeComponent> fileTreeCompB;
     ScopedPointer <DirectoryContentsList> directoryList;
 	ScopedPointer <WildcardFileFilter> fileFilter;
 	

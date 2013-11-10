@@ -69,7 +69,7 @@ void ExtendedLookAndFeel::drawInnerPanel (Graphics& g, Component& comp, bool dra
 		g.drawHorizontalLine(panelHeaderHeight, 0.0f, (float) comp.getWidth());
 		
 
-		DBG("[ELAF] panelHeaderName: "+panelHeaderName);
+		//DBG("[ELAF] panelHeaderName: "+panelHeaderName);
 	}
 	else
 	{
@@ -80,4 +80,63 @@ void ExtendedLookAndFeel::drawInnerPanel (Graphics& g, Component& comp, bool dra
 void ExtendedLookAndFeel::drawMainLayout (Graphics& g, Component& /*comp*/)
 {
 	g.fillAll (findColour (MainLayout::backgroundColourId));
+}
+
+void ExtendedLookAndFeel::drawFileBrowserRow (Graphics& g, int width, int height,
+                                         const String& filename, Drawable* icon,
+                                         const String& fileSizeDescription,
+                                         const String& fileTimeDescription,
+                                         const bool isDirectory, const bool isItemSelected,
+										 const bool isOpen, const bool isHover,
+                                         const int /*itemIndex*/, DirectoryContentsDisplayComponent& dcc)
+{
+    Component* const fileListComp = dynamic_cast<Component*> (&dcc);
+
+    if (isItemSelected)
+        g.fillAll (fileListComp != nullptr ? fileListComp->findColour (DirectoryContentsDisplayComponent::highlightColourId)
+                                           : findColour (DirectoryContentsDisplayComponent::highlightColourId));
+
+    const int x = 32;
+    g.setColour (Colours::black);
+
+    if (icon != nullptr)
+    {
+        icon->drawWithin (g, Rectangle<float> (2.0f, 2.0f, x - 4.0f, height - 4.0f),
+                        RectanglePlacement::centred | RectanglePlacement::onlyReduceInSize, 1.0f);
+    }
+
+    g.setColour (fileListComp != nullptr ? fileListComp->findColour (DirectoryContentsDisplayComponent::textColourId)
+                                         : findColour (DirectoryContentsDisplayComponent::textColourId));
+    g.setFont (height * 0.7f);
+
+    if (width > 450 && ! isDirectory)
+    {
+        const int sizeX = roundToInt (width * 0.7f);
+        const int dateX = roundToInt (width * 0.8f);
+
+        g.drawFittedText (filename,
+                          x, 0, sizeX - x, height,
+                          Justification::centredLeft, 1);
+
+        g.setFont (height * 0.5f);
+        g.setColour (Colours::darkgrey);
+
+        if (! isDirectory)
+        {
+            g.drawFittedText (fileSizeDescription,
+                              sizeX, 0, dateX - sizeX - 8, height,
+                              Justification::centredRight, 1);
+
+            g.drawFittedText (fileTimeDescription,
+                              dateX, 0, width - 8 - dateX, height,
+                              Justification::centredRight, 1);
+        }
+    }
+    else
+    {
+        g.drawFittedText (filename,
+                          x, 0, width - x, height,
+                          Justification::centredLeft, 1);
+
+    }
 }

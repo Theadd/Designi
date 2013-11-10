@@ -20,6 +20,9 @@
     <Filter Include="JUCE Designer\Source\Layouts">
       <UniqueIdentifier>{D1C067F8-4108-8747-229F-0212CCED88B8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="JUCE Designer\Source\Layouts\Extended">
+      <UniqueIdentifier>{563FCF7C-3AFB-5ED1-4ACD-8EF1729A3E59}</UniqueIdentifier>
+    </Filter>
     <Filter Include="JUCE Designer\Source\Layouts\MainLayout">
       <UniqueIdentifier>{F811085C-0CF9-F1CB-CD8A-44666E4063DF}</UniqueIdentifier>
     </Filter>
@@ -318,6 +321,12 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\Styles\DuskMap.cpp">
       <Filter>JUCE Designer\Source\Styles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Layouts\Extended\plain-svg-icons.cpp">
+      <Filter>JUCE Designer\Source\Layouts\Extended</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Layouts\Extended\ExtendedFileTreeComponent.cpp">
+      <Filter>JUCE Designer\Source\Layouts\Extended</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\Layouts\ExtendedLookAndFeel.cpp">
       <Filter>JUCE Designer\Source\Layouts</Filter>
@@ -1538,6 +1547,12 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Styles\DuskMap.h">
       <Filter>JUCE Designer\Source\Styles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Layouts\Extended\plain-svg-icons.h">
+      <Filter>JUCE Designer\Source\Layouts\Extended</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Layouts\Extended\ExtendedFileTreeComponent.h">
+      <Filter>JUCE Designer\Source\Layouts\Extended</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Layouts\ExtendedLookAndFeel.h">
       <Filter>JUCE Designer\Source\Layouts</Filter>
@@ -2867,6 +2882,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\BinaryData\plain-svg-icons.zip">
+      <Filter>JUCE Designer\BinaryData</Filter>
+    </None>
     <None Include="..\..\BinaryData\file_cpp.png">
       <Filter>JUCE Designer\BinaryData</Filter>
     </None>
@@ -2885,24 +2903,6 @@
     <None Include="..\..\BinaryData\pen-brush.png">
       <Filter>JUCE Designer\BinaryData</Filter>
     </None>
-    <None Include="..\..\BinaryData\application-code.svg">
-      <Filter>JUCE Designer\BinaryData</Filter>
-    </None>
-    <None Include="..\..\BinaryData\application.svg">
-      <Filter>JUCE Designer\BinaryData</Filter>
-    </None>
-    <None Include="..\..\BinaryData\file.svg">
-      <Filter>JUCE Designer\BinaryData</Filter>
-    </None>
-    <None Include="..\..\BinaryData\folder-close.svg">
-      <Filter>JUCE Designer\BinaryData</Filter>
-    </None>
-    <None Include="..\..\BinaryData\folder-open.svg">
-      <Filter>JUCE Designer\BinaryData</Filter>
-    </None>
-    <None Include="..\..\BinaryData\note.svg">
-      <Filter>JUCE Designer\BinaryData</Filter>
-    </None>
     <None Include="..\..\BinaryData\background.png">
       <Filter>JUCE Designer\BinaryData</Filter>
     </None>
@@ -2916,9 +2916,6 @@
       <Filter>JUCE Designer\BinaryData</Filter>
     </None>
     <None Include="..\..\BinaryData\navigator.xml">
-      <Filter>JUCE Designer\BinaryData</Filter>
-    </None>
-    <None Include="..\..\BinaryData\icons.zip">
       <Filter>JUCE Designer\BinaryData</Filter>
     </None>
     <None Include="..\..\JuceLibraryCode\modules\juce_audio_basics\juce_module_info">

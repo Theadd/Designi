@@ -31,6 +31,14 @@ public:
 	void drawInnerPanel	(Graphics& g, Component& comp, bool drawHeader = false, String panelHeaderName = String::empty, int headerNameMarginRight = 0, int headerNameMarginLeft = 0, int panelHeaderHeight = 30, int indent = 5, float borderRadius = 5.0f);
 	void drawMainLayout (Graphics& g, Component& comp);
 
+	void drawFileBrowserRow (Graphics& g, int width, int height,
+                                         const String& filename, Drawable* icon,
+                                         const String& fileSizeDescription,
+                                         const String& fileTimeDescription,
+                                         const bool isDirectory, const bool isItemSelected,
+										 const bool isOpen, const bool isHover,
+                                         const int /*itemIndex*/, DirectoryContentsDisplayComponent& dcc);
+
 private:
 
 };

@@ -831,6 +831,17 @@ void MainLayout::setProject(Project* project)
 
 }
 
+void MainLayout::closeCurrentProject()
+{
+	for (int i = 0; i < panelContainers.size(); ++i)
+		panelContainers[i]->removeAllInnerPanels();
+
+	navigatorPanel = nullptr;
+	fileBrowserPanel = nullptr;
+	helpPanel = nullptr;
+	codeEditorPanels.clear();
+}
+
 void MainLayout::showOpenProjectDialog()
 {
 	WildcardFileFilter wildcardFilter ("*.jucer", String::empty, "Open Project Filter");
@@ -849,8 +860,12 @@ void MainLayout::showOpenProjectDialog()
 		if (selectedFile.existsAsFile() && selectedFile.hasWriteAccess())
 		{
 			JUCEDesignerApp::getApp().openProject(selectedFile);
-			setProject(JUCEDesignerApp::getApp().getProject());
-			resized();
+			if (JUCEDesignerApp::getApp().getProject() != nullptr)	//if its a valid JUCE project
+			{
+				closeCurrentProject();
+				setProject(JUCEDesignerApp::getApp().getProject());
+				resized();
+			}
 		}
 		else return;	//selected file cannot be written
 	}

@@ -5,6 +5,8 @@
               userNotes="https://github.com/Theadd/JUCE-Designer">
   <MAINGROUP id="DchWjp" name="JUCE Designer">
     <GROUP id="{2B5D31AE-D997-CE08-BF14-D7345862A558}" name="BinaryData">
+      <FILE id="bGbKCG" name="plain-svg-icons.zip" compile="0" resource="1"
+            file="BinaryData/plain-svg-icons.zip"/>
       <FILE id="SCH0SW" name="file_cpp.png" compile="0" resource="1" file="BinaryData/file_cpp.png"/>
       <FILE id="mXfZf5" name="file_h.png" compile="0" resource="1" file="BinaryData/file_h.png"/>
       <FILE id="Jx6OwV" name="folder-close.png" compile="0" resource="1"
@@ -12,21 +14,12 @@
       <FILE id="K8La8e" name="folder-open.png" compile="0" resource="1" file="BinaryData/folder-open.png"/>
       <FILE id="h3Qhl1" name="note.png" compile="0" resource="1" file="BinaryData/note.png"/>
       <FILE id="AnxtVQ" name="pen-brush.png" compile="0" resource="1" file="BinaryData/pen-brush.png"/>
-      <FILE id="maGyhk" name="application-code.svg" compile="0" resource="1"
-            file="BinaryData/application-code.svg"/>
-      <FILE id="D5YiPg" name="application.svg" compile="0" resource="1" file="BinaryData/application.svg"/>
-      <FILE id="Js21iA" name="file.svg" compile="0" resource="1" file="BinaryData/file.svg"/>
-      <FILE id="s9MLeH" name="folder-close.svg" compile="0" resource="1"
-            file="BinaryData/folder-close.svg"/>
-      <FILE id="R9zqP7" name="folder-open.svg" compile="0" resource="1" file="BinaryData/folder-open.svg"/>
-      <FILE id="DFK2pk" name="note.svg" compile="0" resource="1" file="BinaryData/note.svg"/>
       <FILE id="ldNCCr" name="background.png" compile="0" resource="1" file="BinaryData/background.png"/>
       <FILE id="IcewsI" name="icons2.zip" compile="0" resource="1" file="BinaryData/icons2.zip"/>
       <FILE id="q8kvg0" name="background_tile.png" compile="0" resource="1"
             file="BinaryData/background_tile.png"/>
       <FILE id="VWiZvI" name="treedemo.xml" compile="0" resource="1" file="BinaryData/treedemo.xml"/>
       <FILE id="q3J4fY" name="navigator.xml" compile="0" resource="1" file="BinaryData/navigator.xml"/>
-      <FILE id="QUijac" name="icons.zip" compile="0" resource="1" file="BinaryData/icons.zip"/>
     </GROUP>
     <GROUP id="{4DA873A5-1CD7-B3EE-C91A-A71EFEFD4243}" name="Source">
       <GROUP id="{34F49C09-0E20-4FCB-428C-81CE32331E25}" name="Core">
@@ -42,6 +35,16 @@
         <FILE id="RQ1u6g" name="DuskMap.h" compile="0" resource="0" file="Source/Styles/DuskMap.h"/>
       </GROUP>
       <GROUP id="{91FEA6B6-3B4B-9080-5F5C-93BA955508E8}" name="Layouts">
+        <GROUP id="{C5EB7111-269A-703C-4F6A-1BAD2914A8C4}" name="Extended">
+          <FILE id="Ouj3hB" name="plain-svg-icons.cpp" compile="1" resource="0"
+                file="Source/Layouts/Extended/plain-svg-icons.cpp"/>
+          <FILE id="q0U6bO" name="plain-svg-icons.h" compile="0" resource="0"
+                file="Source/Layouts/Extended/plain-svg-icons.h"/>
+          <FILE id="RXl6ms" name="ExtendedFileTreeComponent.cpp" compile="1"
+                resource="0" file="Source/Layouts/Extended/ExtendedFileTreeComponent.cpp"/>
+          <FILE id="CaGyzO" name="ExtendedFileTreeComponent.h" compile="0" resource="0"
+                file="Source/Layouts/Extended/ExtendedFileTreeComponent.h"/>
+        </GROUP>
         <FILE id="P4IznY" name="ExtendedLookAndFeel.cpp" compile="1" resource="0"
               file="Source/Layouts/ExtendedLookAndFeel.cpp"/>
         <FILE id="GTdNxN" name="ExtendedLookAndFeel.h" compile="0" resource="0"

@@ -14,6 +14,7 @@
 #include "InnerPanels.h"
 
 #include "MainLayout.h"
+#include "../Extended/ExtendedFileTreeComponent.h"
 
 
 
@@ -238,8 +239,8 @@ FileBrowserPanel::FileBrowserPanel() : thread ("FileTreeComponent thread"), Inne
     fileTreeCompA = nullptr;
 	fileTreeCompB = nullptr;
 
-    addAndMakeVisible (fileTreeCompA = new FileTreeComponent (*directoryList));
-	addAndMakeVisible (fileTreeCompB = new FileTreeComponent (*directoryList));
+    addAndMakeVisible (fileTreeCompA = new ExtendedFileTreeComponent (*directoryList));
+	addAndMakeVisible (fileTreeCompB = new ExtendedFileTreeComponent (*directoryList));
 	fileTreeCompB->setVisible(false);
 	//Add listeners for double clicking files
 	fileTreeCompA->addListener(this);

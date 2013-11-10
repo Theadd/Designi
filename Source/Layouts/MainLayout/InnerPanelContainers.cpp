@@ -248,6 +248,13 @@ bool Panel::removeInnerPanel(InnerPanel *innerPanel)
 	return false;
 }
 
+void Panel::removeAllInnerPanels()
+{
+	while (tabbedComponent != nullptr && tabbedComponent->getNumTabs() > 0)
+		removeInnerPanelAt(0);
+
+}
+
 void Panel::showInnerPanel(InnerPanel *innerPanel)
 {
 	if (tabbedComponent != nullptr)
@@ -794,6 +801,14 @@ bool PanelContainer::removeInnerPanel(InnerPanel *innerPanel)
 			return true;
 
 	return false;
+}
+
+void PanelContainer::removeAllInnerPanels()
+{
+	while (panels.size() > 0)
+		panels[0]->removeAllInnerPanels();
+	//for (int i = 0; i < panels.size(); ++i)
+	//	panels[i]->removeAllInnerPanels();
 }
 
 void PanelContainer::showInnerPanel(InnerPanel *innerPanel)
