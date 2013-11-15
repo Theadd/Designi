@@ -40,9 +40,13 @@ public:
     DocumentEditorComponent (OpenDocumentManager::Document* document);
     ~DocumentEditorComponent();
 
-    OpenDocumentManager::Document* getDocument() const override              { DBG("!!!!!! Document* getDocument()"); return document; }
+    OpenDocumentManager::Document* getDocument() const override				{ return document; }
+	virtual CodeDocument& getCodeDocument () = 0;
+	ValueTree getNavigatorTree () override									{ return ValueTree::invalid; }
 
     bool documentAboutToClose (OpenDocumentManager::Document*) override;
+
+	ValueTree navigatorTree;
 
 protected:
     OpenDocumentManager::Document* document;

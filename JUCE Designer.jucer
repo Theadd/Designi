@@ -22,6 +22,46 @@
       <FILE id="q3J4fY" name="navigator.xml" compile="0" resource="1" file="BinaryData/navigator.xml"/>
     </GROUP>
     <GROUP id="{4DA873A5-1CD7-B3EE-C91A-A71EFEFD4243}" name="Source">
+      <GROUP id="{A9A03A8B-8216-A554-9BCD-8A7D18C625E1}" name="Libraries">
+        <FILE id="koKitM" name="ejuce_RegularExpression.cpp" compile="1" resource="0"
+              file="Source/Libraries/ejuce_RegularExpression.cpp"/>
+        <FILE id="fvs73s" name="ejuce_RegularExpression.h" compile="0" resource="0"
+              file="Source/Libraries/ejuce_RegularExpression.h"/>
+        <GROUP id="{F1261EE6-0D38-25A5-259B-DFB4C7B0BDC8}" name="pcre">
+          <FILE id="kZjpX9" name="config.h" compile="0" resource="0" file="Source/Libraries/pcre/config.h"/>
+          <FILE id="SUcxuy" name="pcre.h" compile="0" resource="0" file="Source/Libraries/pcre/pcre.h"/>
+          <FILE id="wdAxIj" name="pcre_chartables.c" compile="1" resource="0"
+                file="Source/Libraries/pcre/pcre_chartables.c"/>
+          <FILE id="Bwz1cd" name="pcre_compile.c" compile="1" resource="0" file="Source/Libraries/pcre/pcre_compile.c"/>
+          <FILE id="Q0jgjZ" name="pcre_config.c" compile="1" resource="0" file="Source/Libraries/pcre/pcre_config.c"/>
+          <FILE id="l4qgrg" name="pcre_dfa_exec.c" compile="1" resource="0" file="Source/Libraries/pcre/pcre_dfa_exec.c"/>
+          <FILE id="szny2b" name="pcre_exec.c" compile="1" resource="0" file="Source/Libraries/pcre/pcre_exec.c"/>
+          <FILE id="NQdP1T" name="pcre_fullinfo.c" compile="1" resource="0" file="Source/Libraries/pcre/pcre_fullinfo.c"/>
+          <FILE id="Svv6dm" name="pcre_get.c" compile="1" resource="0" file="Source/Libraries/pcre/pcre_get.c"/>
+          <FILE id="aaV77G" name="pcre_globals.c" compile="1" resource="0" file="Source/Libraries/pcre/pcre_globals.c"/>
+          <FILE id="SCxMpT" name="pcre_info.c" compile="1" resource="0" file="Source/Libraries/pcre/pcre_info.c"/>
+          <FILE id="mvqziz" name="pcre_internal.h" compile="0" resource="0" file="Source/Libraries/pcre/pcre_internal.h"/>
+          <FILE id="MQdz3x" name="pcre_maketables.c" compile="1" resource="0"
+                file="Source/Libraries/pcre/pcre_maketables.c"/>
+          <FILE id="X241MB" name="pcre_ord2utf8.c" compile="1" resource="0" file="Source/Libraries/pcre/pcre_ord2utf8.c"/>
+          <FILE id="D7X6hS" name="pcre_refcount.c" compile="1" resource="0" file="Source/Libraries/pcre/pcre_refcount.c"/>
+          <FILE id="GDXC1v" name="pcre_study.c" compile="1" resource="0" file="Source/Libraries/pcre/pcre_study.c"/>
+          <FILE id="ZvfA20" name="pcre_tables.c" compile="1" resource="0" file="Source/Libraries/pcre/pcre_tables.c"/>
+          <FILE id="MYUKy0" name="pcre_try_flipped.c" compile="1" resource="0"
+                file="Source/Libraries/pcre/pcre_try_flipped.c"/>
+          <FILE id="rKAxni" name="pcre_ucp_findchar.c" compile="1" resource="0"
+                file="Source/Libraries/pcre/pcre_ucp_findchar.c"/>
+          <FILE id="B7OZju" name="pcre_valid_utf8.c" compile="1" resource="0"
+                file="Source/Libraries/pcre/pcre_valid_utf8.c"/>
+          <FILE id="mESNn1" name="pcre_version.c" compile="1" resource="0" file="Source/Libraries/pcre/pcre_version.c"/>
+          <FILE id="u22nlr" name="pcre_xclass.c" compile="1" resource="0" file="Source/Libraries/pcre/pcre_xclass.c"/>
+          <FILE id="AkNQMm" name="pcreposix.c" compile="1" resource="0" file="Source/Libraries/pcre/pcreposix.c"/>
+          <FILE id="Lp9M7V" name="pcreposix.h" compile="0" resource="0" file="Source/Libraries/pcre/pcreposix.h"/>
+          <FILE id="ntT6nF" name="ucp.h" compile="0" resource="0" file="Source/Libraries/pcre/ucp.h"/>
+          <FILE id="LaUT6o" name="ucpinternal.h" compile="0" resource="0" file="Source/Libraries/pcre/ucpinternal.h"/>
+          <FILE id="NLOnx6" name="ucptable.c" compile="1" resource="0" file="Source/Libraries/pcre/ucptable.c"/>
+        </GROUP>
+      </GROUP>
       <GROUP id="{34F49C09-0E20-4FCB-428C-81CE32331E25}" name="Core">
         <FILE id="HPi9A1" name="DocumentManager.cpp" compile="1" resource="0"
               file="Source/Core/DocumentManager.cpp"/>
@@ -36,6 +76,10 @@
       </GROUP>
       <GROUP id="{91FEA6B6-3B4B-9080-5F5C-93BA955508E8}" name="Layouts">
         <GROUP id="{C5EB7111-269A-703C-4F6A-1BAD2914A8C4}" name="Extended">
+          <FILE id="tJ1X1G" name="NavigatorTreeBuilder.cpp" compile="1" resource="0"
+                file="Source/Layouts/Extended/NavigatorTreeBuilder.cpp"/>
+          <FILE id="Za5czF" name="NavigatorTreeBuilder.h" compile="0" resource="0"
+                file="Source/Layouts/Extended/NavigatorTreeBuilder.h"/>
           <FILE id="VL8I55" name="Colours.h" compile="0" resource="0" file="Source/Layouts/Extended/Colours.h"/>
           <FILE id="ru3BNN" name="CodeHelpers.cpp" compile="1" resource="0" file="Source/Layouts/Extended/CodeHelpers.cpp"/>
           <FILE id="CuMekW" name="CodeHelpers.h" compile="0" resource="0" file="Source/Layouts/Extended/CodeHelpers.h"/>
@@ -108,7 +152,8 @@
     <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="1"/>
   </MODULES>
   <EXPORTFORMATS>
-    <VS2010 targetFolder="Builds/VisualStudio2010" libraryType="1" juceFolder="..\JUCE\modules">
+    <VS2010 targetFolder="Builds/VisualStudio2010" libraryType="1" juceFolder="..\JUCE\modules"
+            extraCompilerFlags="">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
                        isDebug="1" optimisation="1" targetName="JUCE Designer"/>

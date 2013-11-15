@@ -32,7 +32,7 @@
 
 //==============================================================================
 DocumentEditorComponent::DocumentEditorComponent (OpenDocumentManager::Document* doc)
-    : document (doc)
+    : document (doc), navigatorTree ("navigator")
 {
 	DBG("DocumentEditorComponent getName(): "+getName());
     JUCEDesignerApp::getApp().openDocumentManager.addListener (this);

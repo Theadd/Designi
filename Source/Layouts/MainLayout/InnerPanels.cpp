@@ -133,8 +133,10 @@ NavigatorPanel::NavigatorPanel () : InnerPanel()
     addAndMakeVisible (treeView = new TreeView());
     treeView->setRootItem (rootItem);
     treeView->setMultiSelectEnabled (true);
-	treeView->setName("Navigator");
-	setTooltip("Direct access to your design components and its modifiers.");
+	treeView->setRootItemVisible (false);
+	treeView->setDefaultOpenness (true);
+	treeView->setName ("Navigator");
+	setTooltip ("Direct access to your design components and its modifiers.");
 }
 
 NavigatorPanel::~NavigatorPanel ()
@@ -150,14 +152,35 @@ void NavigatorPanel::resized ()
 		treeView->setBoundsInset(BorderSize<int> (0, 0, 0, 0));
 }
 
+void NavigatorPanel::refresh()
+{
+    const String treeXmlString (JUCEDesignerApp::getApp().navigatorTree.toXmlString());
+    XmlDocument parser (treeXmlString);
+	treeXml = nullptr;
+    treeXml = parser.getDocumentElement();
+    jassert (treeXml != nullptr);
+	treeView->setRootItem (nullptr);
+	rootItem = nullptr;
+    rootItem = new TreeViewItemParser (*treeXml);
+    treeView->setRootItem (rootItem);
+
+}
+
+void NavigatorPanel::valueTreePropertyChanged (ValueTree&, const Identifier&)   { refresh(); }
+void NavigatorPanel::valueTreeChildAdded (ValueTree&, ValueTree&)               { refresh(); }
+void NavigatorPanel::valueTreeChildRemoved (ValueTree&, ValueTree&)             { refresh(); }
+void NavigatorPanel::valueTreeChildOrderChanged (ValueTree&)                    { refresh(); }
+void NavigatorPanel::valueTreeParentChanged (ValueTree&)                        { refresh(); }
+void NavigatorPanel::valueTreeRedirected (ValueTree&)                           { refresh(); }
+
 NavigatorPanel::TreeViewItemParser::TreeViewItemParser (XmlElement& xml_)
-    : xml (xml_)
+    : xml (xml_), icon (nullptr)
 {
 }
 
 int NavigatorPanel::TreeViewItemParser::getItemWidth() const
 {
-    return xml.getIntAttribute ("width", -1);
+    return -1;	//xml.getIntAttribute ("width", -1);
 }
 
 String NavigatorPanel::TreeViewItemParser::getUniqueName() const
@@ -177,14 +200,41 @@ void NavigatorPanel::TreeViewItemParser::paintItem (Graphics& g, int width, int 
         g.fillAll (Colours::blue.withAlpha (0.3f));
 
     // use a "colour" attribute in the xml tag for this node to set the text colour..
-    g.setColour (Colour::fromString (xml.getStringAttribute ("colour", "ff000000")));
+    //g.setColour (Colour::fromString (xml.getStringAttribute ("colour", "ffffffff")));
 
-    g.setFont (height * 0.7f);
+    g.setFont (height * 0.6f);
 
     // draw the xml element's tag name..
-    g.drawText (xml.getTagName(),
+	bool isClassDefinition = xml.getBoolAttribute("isClassDefinition", false);
+	
+	g.setColour ((isClassDefinition) ? Colours::lightgrey : Colours::white);
+
+    g.drawText (xml.getStringAttribute ("name", "unknown"),
                 4, 0, width - 4, height,
                 Justification::centredLeft, true);
+	
+	//draw icon
+	/*if (icon == nullptr)
+	{
+		String iconName;
+		if (xml.getTagName().compare("class") == 0)
+		{
+			iconName = "box-open.svg";
+		}
+		else if (xml.getTagName().compare("method") == 0)
+		{
+			iconName = "fire.svg";
+		}
+		else
+		{
+			iconName = "leaf.svg";
+		}
+		icon = getDrawableFromZipFile(iconName);
+	}
+	float padding = 0.7f;
+        //icon->drawWithin (g, Rectangle<float> (2.0f, 2.0f, x - 4.0f, height - 4.0f), RectanglePlacement::centred | RectanglePlacement::onlyReduceInSize, 1.0f);
+		icon->drawWithin (g, Rectangle<float> (0, 0, height, height), RectanglePlacement::centred | RectanglePlacement::onlyReduceInSize, 1.0f);
+		*/
 }
 
 void NavigatorPanel::TreeViewItemParser::itemOpennessChanged (bool isNowOpen)
@@ -230,7 +280,7 @@ FileBrowserPanel::FileBrowserPanel() : thread ("FileTreeComponent thread"), Inne
     //while (folder.getParentDirectory() != folder)
     //    folder = folder.getParentDirectory();
 	//projectFileFilter = new ProjectFileFilter();
-	fileFilter = new WildcardFileFilter("*.cpp;*.h;*.design;*.png;*.svg", "*", "C++ JUCE Files");
+	fileFilter = new WildcardFileFilter("*.cpp;*.h;*.design;*.png;*.svg;*.zip;*.gz;*.bz2", "*", "C++ JUCE Files");
 	//DBG("two");
 
     directoryList = new DirectoryContentsList(fileFilter, thread);

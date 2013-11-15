@@ -12,6 +12,7 @@
 #define __INNERPANELS_H_B9C0D563__
 
 #include "InnerPanel.h"
+#include "../Extended/plain-svg-icons.h"
 
 class MainLayout;
 class ExtendedFileTreeComponent;
@@ -41,7 +42,7 @@ private:
 };
 */
 
-class NavigatorPanel : public InnerPanel
+class NavigatorPanel : public InnerPanel, public ValueTree::Listener
 {
 public:
 
@@ -49,13 +50,22 @@ public:
 	~NavigatorPanel ();
 
 	OpenDocumentManager::Document* getDocument() const override             { return nullptr; }
+	ValueTree getNavigatorTree () override									{ return ValueTree::invalid; }
 
 	void resized ();
+	void refresh() override;
 
 private:
 	ScopedPointer <XmlElement> treeXml;
     ScopedPointer <TreeViewItem> rootItem;
     ScopedPointer <TreeView> treeView;
+
+	void valueTreePropertyChanged (ValueTree&, const Identifier&) override;
+    void valueTreeChildAdded (ValueTree&, ValueTree&) override;
+    void valueTreeChildRemoved (ValueTree&, ValueTree&) override;
+    void valueTreeChildOrderChanged (ValueTree&) override;
+    void valueTreeParentChanged (ValueTree&) override;
+    void valueTreeRedirected (ValueTree&) override;
 
 	class TreeViewItemParser  : public TreeViewItem
 	{
@@ -71,6 +81,25 @@ private:
 
 	private:
 		XmlElement& xml;
+		Drawable* icon;
+
+		/** highlight: {0 = blue, 1 = yellow, 2 = light gray} */
+		Drawable* getDrawableFromZipFile(String filename)
+		{
+			MemoryInputStream iconsFileStream (plainsvgicons_zip, plainsvgicons_zipSize, false);
+			ZipFile icons (&iconsFileStream, false);
+
+			const ZipFile::ZipEntry* zipEntry = icons.getEntry(filename);
+			InputStream* stream = icons.createStreamForEntry(*zipEntry);
+			String xmldata = stream->readEntireStreamAsString();
+			delete stream;
+			ScopedPointer<XmlElement> svg (XmlDocument::parse (xmldata));//(BinaryData::wrench_svg));
+
+			if (svg != nullptr)
+				return Drawable::createFromSVG (*svg);
+
+			return nullptr;
+		}
 	};
 
 };
@@ -86,6 +115,7 @@ public:
 	~FileBrowserPanel ();
 
 	OpenDocumentManager::Document* getDocument() const override             { return nullptr; }
+	ValueTree getNavigatorTree () override									{ return ValueTree::invalid; }
 
 	void resized ();
 	void mouseUp (const MouseEvent &event);
@@ -140,6 +170,7 @@ public:
 	~HelpPanel();
 
 	OpenDocumentManager::Document* getDocument() const override             { return nullptr; }
+	ValueTree getNavigatorTree () override									{ return ValueTree::invalid; }
 
 	void resized();
 

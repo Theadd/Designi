@@ -125,9 +125,32 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\Libraries\ejuce_RegularExpression.cpp"/>
+    <ClCompile Include="..\..\Source\Libraries\pcre\pcre_chartables.c"/>
+    <ClCompile Include="..\..\Source\Libraries\pcre\pcre_compile.c"/>
+    <ClCompile Include="..\..\Source\Libraries\pcre\pcre_config.c"/>
+    <ClCompile Include="..\..\Source\Libraries\pcre\pcre_dfa_exec.c"/>
+    <ClCompile Include="..\..\Source\Libraries\pcre\pcre_exec.c"/>
+    <ClCompile Include="..\..\Source\Libraries\pcre\pcre_fullinfo.c"/>
+    <ClCompile Include="..\..\Source\Libraries\pcre\pcre_get.c"/>
+    <ClCompile Include="..\..\Source\Libraries\pcre\pcre_globals.c"/>
+    <ClCompile Include="..\..\Source\Libraries\pcre\pcre_info.c"/>
+    <ClCompile Include="..\..\Source\Libraries\pcre\pcre_maketables.c"/>
+    <ClCompile Include="..\..\Source\Libraries\pcre\pcre_ord2utf8.c"/>
+    <ClCompile Include="..\..\Source\Libraries\pcre\pcre_refcount.c"/>
+    <ClCompile Include="..\..\Source\Libraries\pcre\pcre_study.c"/>
+    <ClCompile Include="..\..\Source\Libraries\pcre\pcre_tables.c"/>
+    <ClCompile Include="..\..\Source\Libraries\pcre\pcre_try_flipped.c"/>
+    <ClCompile Include="..\..\Source\Libraries\pcre\pcre_ucp_findchar.c"/>
+    <ClCompile Include="..\..\Source\Libraries\pcre\pcre_valid_utf8.c"/>
+    <ClCompile Include="..\..\Source\Libraries\pcre\pcre_version.c"/>
+    <ClCompile Include="..\..\Source\Libraries\pcre\pcre_xclass.c"/>
+    <ClCompile Include="..\..\Source\Libraries\pcre\pcreposix.c"/>
+    <ClCompile Include="..\..\Source\Libraries\pcre\ucptable.c"/>
     <ClCompile Include="..\..\Source\Core\DocumentManager.cpp"/>
     <ClCompile Include="..\..\Source\Core\Project.cpp"/>
     <ClCompile Include="..\..\Source\Styles\DuskMap.cpp"/>
+    <ClCompile Include="..\..\Source\Layouts\Extended\NavigatorTreeBuilder.cpp"/>
     <ClCompile Include="..\..\Source\Layouts\Extended\CodeHelpers.cpp"/>
     <ClCompile Include="..\..\Source\Layouts\Extended\FileHelpers.cpp"/>
     <ClCompile Include="..\..\Source\Layouts\Extended\SourceCodeEditor.cpp"/>
@@ -1222,9 +1245,17 @@
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_video\juce_video.cpp"/>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\Libraries\ejuce_RegularExpression.h"/>
+    <ClInclude Include="..\..\Source\Libraries\pcre\config.h"/>
+    <ClInclude Include="..\..\Source\Libraries\pcre\pcre.h"/>
+    <ClInclude Include="..\..\Source\Libraries\pcre\pcre_internal.h"/>
+    <ClInclude Include="..\..\Source\Libraries\pcre\pcreposix.h"/>
+    <ClInclude Include="..\..\Source\Libraries\pcre\ucp.h"/>
+    <ClInclude Include="..\..\Source\Libraries\pcre\ucpinternal.h"/>
     <ClInclude Include="..\..\Source\Core\DocumentManager.h"/>
     <ClInclude Include="..\..\Source\Core\Project.h"/>
     <ClInclude Include="..\..\Source\Styles\DuskMap.h"/>
+    <ClInclude Include="..\..\Source\Layouts\Extended\NavigatorTreeBuilder.h"/>
     <ClInclude Include="..\..\Source\Layouts\Extended\Colours.h"/>
     <ClInclude Include="..\..\Source\Layouts\Extended\CodeHelpers.h"/>
     <ClInclude Include="..\..\Source\Layouts\Extended\FileHelpers.h"/>

@@ -11,6 +11,12 @@
     <Filter Include="JUCE Designer\Source">
       <UniqueIdentifier>{6785AD85-A22B-FF6F-5E95-94987FC5C695}</UniqueIdentifier>
     </Filter>
+    <Filter Include="JUCE Designer\Source\Libraries">
+      <UniqueIdentifier>{9F4E231F-9BA5-1B8D-BE13-FE24936A86AD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="JUCE Designer\Source\Libraries\pcre">
+      <UniqueIdentifier>{B4F4854D-A4CB-D78F-BB99-0365945366D0}</UniqueIdentifier>
+    </Filter>
     <Filter Include="JUCE Designer\Source\Core">
       <UniqueIdentifier>{C46E2BA5-8CEA-A891-408F-BD0D91AAA45D}</UniqueIdentifier>
     </Filter>
@@ -313,6 +319,72 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\Libraries\ejuce_RegularExpression.cpp">
+      <Filter>JUCE Designer\Source\Libraries</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Libraries\pcre\pcre_chartables.c">
+      <Filter>JUCE Designer\Source\Libraries\pcre</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Libraries\pcre\pcre_compile.c">
+      <Filter>JUCE Designer\Source\Libraries\pcre</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Libraries\pcre\pcre_config.c">
+      <Filter>JUCE Designer\Source\Libraries\pcre</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Libraries\pcre\pcre_dfa_exec.c">
+      <Filter>JUCE Designer\Source\Libraries\pcre</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Libraries\pcre\pcre_exec.c">
+      <Filter>JUCE Designer\Source\Libraries\pcre</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Libraries\pcre\pcre_fullinfo.c">
+      <Filter>JUCE Designer\Source\Libraries\pcre</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Libraries\pcre\pcre_get.c">
+      <Filter>JUCE Designer\Source\Libraries\pcre</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Libraries\pcre\pcre_globals.c">
+      <Filter>JUCE Designer\Source\Libraries\pcre</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Libraries\pcre\pcre_info.c">
+      <Filter>JUCE Designer\Source\Libraries\pcre</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Libraries\pcre\pcre_maketables.c">
+      <Filter>JUCE Designer\Source\Libraries\pcre</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Libraries\pcre\pcre_ord2utf8.c">
+      <Filter>JUCE Designer\Source\Libraries\pcre</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Libraries\pcre\pcre_refcount.c">
+      <Filter>JUCE Designer\Source\Libraries\pcre</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Libraries\pcre\pcre_study.c">
+      <Filter>JUCE Designer\Source\Libraries\pcre</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Libraries\pcre\pcre_tables.c">
+      <Filter>JUCE Designer\Source\Libraries\pcre</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Libraries\pcre\pcre_try_flipped.c">
+      <Filter>JUCE Designer\Source\Libraries\pcre</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Libraries\pcre\pcre_ucp_findchar.c">
+      <Filter>JUCE Designer\Source\Libraries\pcre</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Libraries\pcre\pcre_valid_utf8.c">
+      <Filter>JUCE Designer\Source\Libraries\pcre</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Libraries\pcre\pcre_version.c">
+      <Filter>JUCE Designer\Source\Libraries\pcre</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Libraries\pcre\pcre_xclass.c">
+      <Filter>JUCE Designer\Source\Libraries\pcre</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Libraries\pcre\pcreposix.c">
+      <Filter>JUCE Designer\Source\Libraries\pcre</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Libraries\pcre\ucptable.c">
+      <Filter>JUCE Designer\Source\Libraries\pcre</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\Core\DocumentManager.cpp">
       <Filter>JUCE Designer\Source\Core</Filter>
     </ClCompile>
@@ -321,6 +393,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\Styles\DuskMap.cpp">
       <Filter>JUCE Designer\Source\Styles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Layouts\Extended\NavigatorTreeBuilder.cpp">
+      <Filter>JUCE Designer\Source\Layouts\Extended</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\Layouts\Extended\CodeHelpers.cpp">
       <Filter>JUCE Designer\Source\Layouts\Extended</Filter>
@@ -1551,6 +1626,27 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\Libraries\ejuce_RegularExpression.h">
+      <Filter>JUCE Designer\Source\Libraries</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Libraries\pcre\config.h">
+      <Filter>JUCE Designer\Source\Libraries\pcre</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Libraries\pcre\pcre.h">
+      <Filter>JUCE Designer\Source\Libraries\pcre</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Libraries\pcre\pcre_internal.h">
+      <Filter>JUCE Designer\Source\Libraries\pcre</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Libraries\pcre\pcreposix.h">
+      <Filter>JUCE Designer\Source\Libraries\pcre</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Libraries\pcre\ucp.h">
+      <Filter>JUCE Designer\Source\Libraries\pcre</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Libraries\pcre\ucpinternal.h">
+      <Filter>JUCE Designer\Source\Libraries\pcre</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\Core\DocumentManager.h">
       <Filter>JUCE Designer\Source\Core</Filter>
     </ClInclude>
@@ -1559,6 +1655,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Styles\DuskMap.h">
       <Filter>JUCE Designer\Source\Styles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Layouts\Extended\NavigatorTreeBuilder.h">
+      <Filter>JUCE Designer\Source\Layouts\Extended</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Layouts\Extended\Colours.h">
       <Filter>JUCE Designer\Source\Layouts\Extended</Filter>

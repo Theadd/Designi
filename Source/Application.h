@@ -17,6 +17,8 @@
 #include "Layouts/MainWindow.h"
 #include "StoredSettings.h"
 #include "Core/DocumentManager.h"
+#include "Layouts/MainLayout/InnerPanel.h"
+#include "Layouts/Extended/NavigatorTreeBuilder.h"
 
 
 //==============================================================================
@@ -24,7 +26,7 @@ class JUCEDesignerApp  : public JUCEApplication
 {
 public:
     //==============================================================================
-    JUCEDesignerApp() {}
+    JUCEDesignerApp() : navigatorTreeBuilder() {}
 
     const String getApplicationName()       { return ProjectInfo::projectName; }
     const String getApplicationVersion()    { return ProjectInfo::versionString; }
@@ -148,14 +150,14 @@ public:
 		return settings->getValue(keyName, defaultReturnValue); 
 	}
 
-	static ApplicationCommandManager& getCommandManager()
+	static ApplicationCommandManager& getCommandManager ()
     {
         ApplicationCommandManager* cm = JUCEDesignerApp::getApp().getApplicationCommandManager();
         jassert (cm != nullptr);
         return *cm;
     }
 
-	ApplicationCommandManager* getApplicationCommandManager()
+	ApplicationCommandManager* getApplicationCommandManager ()
     {
         if (mainWindow != nullptr)
 			return &mainWindow->commandManager;
@@ -163,8 +165,38 @@ public:
 			return nullptr;
     }
 
+	static OpenDocumentManager::Document* getActiveDocument ()
+	{
+		return JUCEDesignerApp::getApp().activeDocument;
+	}
+
+	static void setActiveDocument (OpenDocumentManager::Document* document)
+	{
+		JUCEDesignerApp::getApp().activeDocument = document;
+	}
+
+	static InnerPanel* getActiveInnerPanel ()
+	{
+		return JUCEDesignerApp::getApp().activeInnerPanel;
+	}
+
+	static void setActiveInnerPanel (InnerPanel* innerPanel)
+	{
+		JUCEDesignerApp::getApp().activeInnerPanel = innerPanel;
+		DBG("init getNavigatorTree()");
+		JUCEDesignerApp::getApp().navigatorTree = ((DocumentEditorComponent *) innerPanel)->navigatorTree;
+		JUCEDesignerApp::getApp().navigatorTreeBuilder.setDocumentEditorComponent((DocumentEditorComponent *) innerPanel);
+		//innerPanel->getNavigatorTree();
+		DBG("end getNavigatorTree()");
+		//TODO: update navigator tree
+	}
+
 	ScopedPointer <StoredSettings> settings;
 	OpenDocumentManager openDocumentManager;
+	OpenDocumentManager::Document* activeDocument;
+	InnerPanel* activeInnerPanel;
+	ValueTree navigatorTree;
+	NavigatorTreeBuilder navigatorTreeBuilder;
 
 private:
 	ScopedPointer <Project> project;

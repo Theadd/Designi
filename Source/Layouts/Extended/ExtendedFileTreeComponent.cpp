@@ -289,6 +289,16 @@ private:
 					id = "file-header.svg";
 				else if (id.equalsIgnoreCase(".design"))
 					id = "pen-brush.svg";
+				else if (id.equalsIgnoreCase(".zip"))
+					id = "archive.svg";
+				else if (id.equalsIgnoreCase(".gz"))
+					id = "archive.svg";
+				else if (id.equalsIgnoreCase(".bz2"))
+					id = "archive.svg";
+				else if (id.equalsIgnoreCase(".png"))
+					id = "picture.svg";
+				else if (id.equalsIgnoreCase(".svg"))
+					id = "picture.svg";
 				else
 					id = "file.svg";
 			}

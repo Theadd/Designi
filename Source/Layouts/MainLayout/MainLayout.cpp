@@ -283,6 +283,10 @@ PopupMenu MainLayout::getMenuForIndex (int menuIndex, const String& /*menuName*/
 		menu.addSeparator();
 		menu.addCommandItem (commandManager, find);
 		menu.addCommandItem (commandManager, replace);
+		menu.addCommandItem (commandManager, showFindPanel);
+		menu.addCommandItem (commandManager, findSelection);
+		menu.addCommandItem (commandManager, findNext);
+		menu.addCommandItem (commandManager, findPrevious);
 		menu.addSeparator();
 		menu.addCommandItem (commandManager, preferences);
 	}
@@ -360,7 +364,7 @@ ApplicationCommandTarget* MainLayout::getNextCommandTarget()
 void MainLayout::getAllCommands (Array <CommandID>& commands)
 {
 	// this returns the set of all commands that this target can perform..
-	const CommandID ids[] = {newProject, newDesign, openProject, openRecentProject, closeProject, save, saveAs, saveAll, print, undo, redo, cut, copy, paste, delete_, find, replace, preferences, leftPanel, rightPanel, fileToolbar, clipboardToolbar, historyToolbar, drawableToolbar, toolbarOrientation, toolbarCustomize, fileBrowser, navigator, properties, toolbox, modifiers, help, componentInspector, englishLang, spanishLang, catalanLang, webpage, about};
+	const CommandID ids[] = {newProject, newDesign, openProject, openRecentProject, closeProject, save, saveAs, saveAll, print, undo, redo, cut, copy, paste, delete_, find, replace, preferences, showFindPanel, findSelection, findNext, findPrevious, leftPanel, rightPanel, fileToolbar, clipboardToolbar, historyToolbar, drawableToolbar, toolbarOrientation, toolbarCustomize, fileBrowser, navigator, properties, toolbox, modifiers, help, componentInspector, englishLang, spanishLang, catalanLang, webpage, about};
 
 	commands.addArray (ids, numElementsInArray (ids));
 }
@@ -453,6 +457,27 @@ void MainLayout::getCommandInfo (CommandID commandID, ApplicationCommandInfo& re
 		result.setTicked (false);
 		result.addDefaultKeypress ('h', ModifierKeys::commandModifier);
 		break;
+	case showFindPanel:
+        result.setInfo (TRANS ("Find"), TRANS ("Searches for text in the current document."), "Editing", 0);
+        result.defaultKeypresses.add (KeyPress ('f', ModifierKeys::commandModifier, 0));
+        break;
+
+    case findSelection:
+        result.setInfo (TRANS ("Find Selection"), TRANS ("Searches for the currently selected text."), "Editing", 0);
+        result.setActive (false);
+        result.defaultKeypresses.add (KeyPress ('l', ModifierKeys::commandModifier, 0));
+        break;
+
+    case findNext:
+        result.setInfo (TRANS ("Find Next"), TRANS ("Searches for the next occurrence of the current search-term."), "Editing", 0);
+        result.defaultKeypresses.add (KeyPress ('g', ModifierKeys::commandModifier, 0));
+        break;
+
+    case findPrevious:
+        result.setInfo (TRANS ("Find Previous"), TRANS ("Searches for the previous occurrence of the current search-term."), "Editing", 0);
+        result.defaultKeypresses.add (KeyPress ('g', ModifierKeys::commandModifier | ModifierKeys::shiftModifier, 0));
+        result.defaultKeypresses.add (KeyPress ('d', ModifierKeys::commandModifier, 0));
+        break;
 	case preferences:
 		result.setInfo ("Preferences...", "", generalCategory, 0);
 		result.setTicked (false);
@@ -809,12 +834,14 @@ void MainLayout::loadDocument(File& file)
 		{
 			//its already inside a panel container, bring it to front
 			container->showInnerPanel(innerPanel);
+			JUCEDesignerApp::setActiveInnerPanel(innerPanel);
 		}
 		else
 		{
 			//not attached to any panel container, place it on center
 			getPanelContainer(Globals::center)->addInnerPanel(innerPanel, false);
 			getPanelContainer(Globals::center)->showInnerPanel(innerPanel);
+			JUCEDesignerApp::setActiveInnerPanel(innerPanel);
 		}
 	}
 }
@@ -866,6 +893,11 @@ void MainLayout::setProject(Project* project)
 
 
 	rightPanelContainer->addInnerPanel(navigatorPanel = new NavigatorPanel());
+	//if (JUCEDesignerApp::getApp().navigatorTree.isValid())
+	{
+		JUCEDesignerApp::getApp().navigatorTree.addListener(navigatorPanel);
+		DBG("####> JUCEDesignerApp::getApp().navigatorTree.addListener(navigatorPanel);");
+	}
 	//FileBrowserTab
 	fileBrowserPanel = nullptr;
 	leftPanelContainer->addInnerPanel(fileBrowserPanel = new FileBrowserPanel(), true);
@@ -881,6 +913,12 @@ void MainLayout::setProject(Project* project)
 
 void MainLayout::closeCurrentProject()
 {
+	//if (JUCEDesignerApp::getApp().navigatorTree.isValid())
+	{
+		JUCEDesignerApp::getApp().navigatorTree.removeListener(navigatorPanel);
+		DBG("#### JUCEDesignerApp::getApp().navigatorTree.removeListener(navigatorPanel);");
+	}
+
 	for (int i = 0; i < panelContainers.size(); ++i)
 		panelContainers[i]->removeAllInnerPanels();
 

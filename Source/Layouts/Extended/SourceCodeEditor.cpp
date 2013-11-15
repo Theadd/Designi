@@ -28,6 +28,7 @@
 #include "../../Core/DocumentManager.h"
 #include "../MainLayout/MainLayout.h"
 #include "CodeHelpers.h"
+#include "../../Libraries/ejuce_RegularExpression.h"
 
 
 //==============================================================================
@@ -186,6 +187,25 @@ void SourceCodeEditor::highlight (Range<int> range, bool cursorAtStart)
     }
 }
 
+ValueTree SourceCodeEditor::getNavigatorTree ()
+{
+	return navigatorTree;
+}
+
+CodeDocument& SourceCodeEditor::getCodeDocument ()
+{
+	return editor->getDocument();
+}
+
+void SourceCodeEditor::focusGained (FocusChangeType cause)
+{
+	if (JUCEDesignerApp::getActiveInnerPanel() != this)
+	{
+		JUCEDesignerApp::setActiveInnerPanel(this);
+		JUCEDesignerApp::setActiveDocument(getDocument());
+	}
+}
+
 void SourceCodeEditor::resized()
 {
     editor->setBounds (getLocalBounds());
@@ -196,6 +216,9 @@ void SourceCodeEditor::updateColourScheme()     { };	//getAppSettings().appearan
 
 void SourceCodeEditor::checkSaveState()
 {
+	DBG("void SourceCodeEditor::checkSaveState()");
+	ValueTree tree (getNavigatorTree());
+
     setEditedState (getDocument()->needsSaving());
 }
 
@@ -261,7 +284,7 @@ void GenericCodeEditorComponent::getAllCommands (Array <CommandID>& commands)
 void GenericCodeEditorComponent::getCommandInfo (const CommandID commandID, ApplicationCommandInfo& result)
 {
     const bool anythingSelected = isHighlightActive();
-
+	DBG("getCommandInfo anythingSelected = "+String(anythingSelected));
     switch (commandID)
     {
         case MainLayout::showFindPanel:
@@ -315,11 +338,21 @@ public:
     FindPanel()
         : caseButton ("Case-sensitive"),
           findPrev ("<"),
-          findNext (">")
+          findNext (">")/*,
+		  replaceLabel ("Replace"),
+		  regexpButton ("Regular expressions"),
+		  currentDocButton ("Current document"),
+		  openDocsButton ("Open documents"),
+		  currentProjectButton ("Current project"),
+		  replaceButton ("Replace"),
+		  replaceAllButton ("Replace All")*/
+
     {
         editor.setColour (CaretComponent::caretColourId, Colours::black);
+		//replaceEditor.setColour (CaretComponent::caretColourId, Colours::black);
 
         addAndMakeVisible (&editor);
+
         label.setText ("Find:", dontSendNotification);
         label.setColour (Label::textColourId, Colours::white);
         label.attachToComponent (&editor, false);
@@ -334,10 +367,20 @@ public:
         addAndMakeVisible (&findPrev);
         addAndMakeVisible (&findNext);
 
-        setWantsKeyboardFocus (false);
+        setWantsKeyboardFocus (true);
         setFocusContainer (true);
         findPrev.setWantsKeyboardFocus (false);
         findNext.setWantsKeyboardFocus (false);
+
+		//Extended FindPanel
+		/*addAndMakeVisible (&replaceLabel);
+		addAndMakeVisible (&regexpButton);
+		addAndMakeVisible (&currentDocButton);
+		addAndMakeVisible (&openDocsButton);
+		addAndMakeVisible (&currentProjectButton);
+		addAndMakeVisible (&replaceButton);
+		addAndMakeVisible (&replaceAllButton)
+		//~*/
 
         editor.setText (getSearchString());
         editor.addListener (this);
@@ -401,10 +444,11 @@ public:
         return findParentComponentOfClass <GenericCodeEditorComponent>();
     }
 
-    TextEditor editor;
+    TextEditor editor;//, replaceEditor;
     Label label;
-    ToggleButton caseButton;
-    TextButton findPrev, findNext;
+    ToggleButton caseButton;//, regexpButton, replaceLabel;
+    TextButton findPrev, findNext;//, replaceButton, replaceAllButton;
+	//ToggleButton currentDocButton, openDocsButton, currentProjectButton;
 };
 
 void GenericCodeEditorComponent::resized()
@@ -586,8 +630,8 @@ void CppCodeEditorComponent::addPopupMenuItems (PopupMenu& menu, const MouseEven
 {
     GenericCodeEditorComponent::addPopupMenuItems (menu, e);
 
-    menu.addSeparator();
-    menu.addItem (insertComponentID, TRANS("Insert code for a new Component class..."));
+    //menu.addSeparator();
+    //menu.addItem (insertComponentID, TRANS("Insert code for a new Component class..."));
 }
 
 void CppCodeEditorComponent::performPopupMenuAction (int menuItemID)

@@ -7,3 +7,8 @@ countries: es
 "Language" = "Idioma"
 "English" = "Inglés"
 "Català" = "Catalán"
+"Find" = "Buscar"
+"Find Selection" = "Buscar en la selección"
+"Find Next" = "Buscar siguente"
+"Find Previous" = "Buscar anterior"
+"Save As..." = "Guardar Como..."

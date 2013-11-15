@@ -151,6 +151,13 @@ public:
     void scrollToKeepRangeOnScreen (Range<int> range);
     void highlight (Range<int> range, bool cursorAtStart);
 
+	ValueTree getNavigatorTree () override;
+	CodeDocument& getCodeDocument () override;
+	//void updateNavigatorTree (ValueTree& parentTree, String& code, bool isInsideClass = false);
+	//int getPosOfMatchingBracket(const String& code, const int startPosition, juce_wchar openBracket, juce_wchar closeBracket);
+	//ValueTree getValueTreeFor(String& classOrMethodRawString, bool isInsideClass = false, bool isClassDefinition = false);
+	void focusGained (FocusChangeType cause) override;
+
     ScopedPointer<CodeEditorComponent> editor;
 
 private:

@@ -41,6 +41,8 @@ public:
 
 	//OpenDocumentManager::Document* getDocument() const override             { return nullptr; }
 	virtual OpenDocumentManager::Document* getDocument() const = 0;
+	//ValueTree* getNavigatorTree () override { return nullptr; }
+	virtual ValueTree getNavigatorTree () = 0;
 	//void setNeedsToBeSaved (bool needsToBeSaved = true);
 	//bool getNeedsToBeSaved ();
 	//bool save (File initialDirectory = File::nonexistent) { return true; };
