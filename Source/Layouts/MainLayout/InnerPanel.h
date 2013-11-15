@@ -53,7 +53,7 @@ public:
 	void updateLocalisedStrings ();
 
 	Globals::Position position;
-	
+	bool shouldBeVisible;
 
 private:
 	//bool needsToBeSaved;	//if needs to be saved before closing

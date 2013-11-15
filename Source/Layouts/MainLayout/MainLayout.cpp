@@ -67,6 +67,7 @@ MainLayout::MainLayout(MainWindow& _mainWindow) : Component(), mainWindow(_mainW
 	DBG("dbg: MainLayout()");
     //setBounds(0, 0, 490, 414);
     setName("MainLayout");
+	JUCEDesignerApp::getApp().mainLayout = this;
 	//workingPath = new File("C:/Users/admin/JUCE Sample Project");
 	//JUCEDesignerApp::getApp().openProject(File("C:/Users/admin/JUCE Sample Project/JUCE Sample Project.jucer"));
 	//Project* project = JUCEDesignerApp::getApp().getProject();
@@ -647,10 +648,10 @@ bool MainLayout::perform (const InvocationInfo& info)
 		toolbarComponent->showCustomisationDialog();
 		break;
 	case fileBrowser:
-		toggleInnerPanel(fileBrowserPanel, Globals::left);
+		toggleInnerPanel(fileBrowserPanel, Globals::left, true);
 		break;
 	case navigator:
-		toggleInnerPanel(navigatorPanel, Globals::right);
+		toggleInnerPanel(navigatorPanel, Globals::right, true);
 		break;
 	case properties:
 		break;
@@ -659,7 +660,7 @@ bool MainLayout::perform (const InvocationInfo& info)
 	case modifiers:
 		break;
 	case help:
-		toggleInnerPanel(helpPanel, Globals::left);
+		toggleInnerPanel(helpPanel, Globals::left, true);
 		break;
 	case componentInspector:
 		floatingComponentOverlay->setVisible(!floatingComponentOverlay->isVisible());
@@ -708,6 +709,7 @@ void MainLayout::toggleInnerPanel(InnerPanel* innerPanel, Globals::Position posi
 			//check if needs to be saved before closing
 			if (isBeingClosed)
 			{
+				innerPanel->shouldBeVisible = false;
 				//int index = getDocumentIndex(innerPanel);
 				//if (index >= 0 && codeEditorPanels[index]->getNeedsToBeSaved())
 				OpenDocumentManager::Document* document = innerPanel->getDocument();
@@ -746,6 +748,8 @@ void MainLayout::toggleInnerPanel(InnerPanel* innerPanel, Globals::Position posi
 		}
 		else
 		{
+			innerPanel->shouldBeVisible = true;
+
 			if (position == Globals::left)
 			{
 				getPanelContainer(Globals::left)->addInnerPanel(innerPanel, true);

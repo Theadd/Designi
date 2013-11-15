@@ -78,6 +78,7 @@ private:
 		bool mightContainSubItems();
 		void paintItem (Graphics& g, int width, int height);
 		void itemOpennessChanged (bool isNowOpen);
+		void itemDoubleClicked (const MouseEvent &e);
 		var getDragSourceDescription();
 
 	private:

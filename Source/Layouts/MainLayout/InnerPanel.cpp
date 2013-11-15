@@ -18,6 +18,7 @@
 InnerPanel::InnerPanel(bool showAsTab_, Globals::Position _position) : Component(), showAsTab(showAsTab_), position(_position)
 {
 	isHeaderVisible = false;
+	shouldBeVisible = true;
 }
 
 void InnerPanel::setHeader(bool showHeader_, String headerName_, int headerHeight_, int indent_, int headerNameMarginRight_, int headerNameMarginLeft_)

@@ -25,9 +25,10 @@ public:
 	ValueTree getNavigatorTree (String& code);
 	void stripUnsafeCode (String& code);
 	bool isValidSource (String& code);
-	void updateNavigatorTree (ValueTree& parentTree, String& code, bool isInsideClass = false);
+	int getLineNumber(String& code, int startPosition, int currentPosition);
+	void updateNavigatorTree (ValueTree& parentTree, String& code, int lineNumber = 0, bool isInsideClass = false);
 	int getPosOfMatchingBracket(const String& code, const int startPosition, juce_wchar openBracket, juce_wchar closeBracket);
-	ValueTree getValueTreeFor(String& classOrMethodRawString, bool isInsideClass = false, bool isClassDefinition = false);
+	ValueTree getValueTreeFor(String& classOrMethodRawString, bool isInsideClass = false, bool isClassDefinition = false, int lineNumber = 0);
 
 	TimeSliceThread thread;
 	DocumentEditorComponent* editor;

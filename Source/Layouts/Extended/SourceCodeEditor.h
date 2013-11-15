@@ -150,6 +150,7 @@ public:
 
     void scrollToKeepRangeOnScreen (Range<int> range);
     void highlight (Range<int> range, bool cursorAtStart);
+	void scrollToLine (int lineNumber, bool firstLineOnScreen = true, bool alsoMoveCaretToLine = true);
 
 	ValueTree getNavigatorTree () override;
 	CodeDocument& getCodeDocument () override;

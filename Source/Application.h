@@ -19,6 +19,8 @@
 #include "Core/DocumentManager.h"
 #include "Layouts/MainLayout/InnerPanel.h"
 #include "Layouts/Extended/NavigatorTreeBuilder.h"
+#include "Layouts/MainLayout/MainLayout.h"
+#include "Layouts/MainLayout/InnerPanels.h"
 
 
 //==============================================================================
@@ -183,12 +185,20 @@ public:
 	static void setActiveInnerPanel (InnerPanel* innerPanel)
 	{
 		JUCEDesignerApp::getApp().activeInnerPanel = innerPanel;
-		DBG("init getNavigatorTree()");
-		JUCEDesignerApp::getApp().navigatorTree = ((DocumentEditorComponent *) innerPanel)->navigatorTree;
-		JUCEDesignerApp::getApp().navigatorTreeBuilder.setDocumentEditorComponent((DocumentEditorComponent *) innerPanel);
-		//innerPanel->getNavigatorTree();
-		DBG("end getNavigatorTree()");
-		//TODO: update navigator tree
+		if (innerPanel->getNavigatorTree() != ValueTree::invalid)
+		{
+			JUCEDesignerApp::getApp().navigatorTree = ((DocumentEditorComponent *) innerPanel)->navigatorTree;
+			JUCEDesignerApp::getApp().navigatorTreeBuilder.setDocumentEditorComponent((DocumentEditorComponent *) innerPanel);
+			MainLayout* mainLayout = JUCEDesignerApp::getApp().mainLayout;
+			if (mainLayout->navigatorPanel != nullptr && mainLayout->navigatorPanel->shouldBeVisible && !mainLayout->isInnerPanelVisible(mainLayout->navigatorPanel))
+				mainLayout->toggleInnerPanel(mainLayout->navigatorPanel, mainLayout->navigatorPanel->position);
+		}
+		else
+		{
+			MainLayout* mainLayout = JUCEDesignerApp::getApp().mainLayout;
+			if (mainLayout->navigatorPanel != nullptr && mainLayout->isInnerPanelVisible(mainLayout->navigatorPanel))
+				mainLayout->toggleInnerPanel(mainLayout->navigatorPanel, mainLayout->navigatorPanel->position);
+		}
 	}
 
 	ScopedPointer <StoredSettings> settings;
@@ -197,6 +207,7 @@ public:
 	InnerPanel* activeInnerPanel;
 	ValueTree navigatorTree;
 	NavigatorTreeBuilder navigatorTreeBuilder;
+	MainLayout* mainLayout;
 
 private:
 	ScopedPointer <Project> project;

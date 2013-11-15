@@ -44,15 +44,12 @@ int NavigatorTreeBuilder::useTimeSlice()
 		{
 			getNavigatorTree(code);
 			const MessageManagerLock mmLock;
-			if (!editor->navigatorTree.getProperty("hash").equals(navigatorTree.getProperty("hash")))
+			if (!editor->navigatorTree.getProperty("hash").equals(navigatorTree.getProperty("hash")) && !thread.threadShouldExit())
 			{
 				DBG("\tnavigatorTree hash differs!");
 				editor->navigatorTree = navigatorTree;
 				JUCEDesignerApp::getApp().navigatorTree = navigatorTree;
 			}
-			
-			//if (!editor->navigatorTree.isEquivalentTo(JUCEDesignerApp::getApp().navigatorTree))
-				
 
 			nextCallTime = 5000;
 		}
@@ -70,20 +67,25 @@ int NavigatorTreeBuilder::useTimeSlice()
 
 ValueTree NavigatorTreeBuilder::getNavigatorTree (String& code)
 {
-	DBG("\tValueTree SourceCodeEditor::getNavigatorTree ()");
+	//DBG("\tValueTree SourceCodeEditor::getNavigatorTree ()");
 	/*CodeDocument& codeDocument = editor->getCodeDocument();
 	String code = codeDocument.getAllContent();
 	
 	stripUnsafeCode (code);*/
 
-	/*File temp("C:/multiline.txt");
-	temp.create();
-	temp.replaceWithText(code);*/
+	
 	navigatorTree = ValueTree("navigator");
 	updateNavigatorTree(navigatorTree, code);
 	int64 hashCode64 = navigatorTree.toXmlString().hashCode64();
 	navigatorTree.setProperty("hash", hashCode64, 0);
 	
+	/*File temp("C:/multiline.txt");
+	temp.create();
+	temp.replaceWithText(code);
+	File temp2("C:/navigator.txt");
+	temp2.create();
+	temp2.replaceWithText(navigatorTree.toXmlString());*/
+
 	return navigatorTree;
 }
 
@@ -114,7 +116,10 @@ void NavigatorTreeBuilder::stripUnsafeCode (String& code)
 		start = code.indexOf(start, "/*");
 		end = code.indexOf(start + 1, "*/");
 		if (start != -1 && end > start)
-			code = code.replaceSection(start, end - start + 2, "");
+		{
+			String retainedCode = code.substring (start, end + 2).retainCharacters("\n");
+			code = code.replaceSection(start, end - start + 2, retainedCode);
+		}
 	}
 	//strip line comments
 	start = 0;
@@ -130,14 +135,12 @@ void NavigatorTreeBuilder::stripUnsafeCode (String& code)
 	}
 	//strip preprocessor definitions, empty lines and whitespaces at the start and the end of each line
 	StringArray lines = StringArray::fromLines(code);
-	lines.removeEmptyStrings();
+	//lines.removeEmptyStrings();
 	lines.trim();
-	for (int i = 0; i < lines.size();)
+	for (int i = 0; i < lines.size(); ++i)
 	{
 		if (lines[i].startsWith("#"))
-			lines.remove(i);
-		else
-			++i;
+			lines.getReference(i) = "";	//lines.remove(i);
 	}
 	code = lines.joinIntoString("\n");
 }
@@ -149,6 +152,23 @@ bool NavigatorTreeBuilder::isValidSource (String& code)
 		return true;
 
 	return false;
+}
+
+int NavigatorTreeBuilder::getLineNumber(String& code, int startPosition, int currentPosition)
+{
+	jassert (startPosition <= currentPosition);
+	int pos = startPosition;
+	int len = code.length();
+	int numLines = 0;
+	while (pos <= currentPosition && pos < len)
+	{
+		if (code[pos] == '\n')
+			++numLines;
+
+		++pos;
+	}
+
+	return numLines;
 }
 
 int NavigatorTreeBuilder::getPosOfMatchingBracket(const String& code, const int startPosition, juce_wchar openBracket, juce_wchar closeBracket)
@@ -176,7 +196,7 @@ int NavigatorTreeBuilder::getPosOfMatchingBracket(const String& code, const int 
 	return -1;	//not found!
 }
 
-ValueTree NavigatorTreeBuilder::getValueTreeFor(String& code, bool isInsideClass, bool isClassDefinition)
+ValueTree NavigatorTreeBuilder::getValueTreeFor(String& code, bool isInsideClass, bool isClassDefinition, int lineNumber)
 {
 	String memberName, memberClass;
 	String memberType = (isClassDefinition) ? "class" : "method";
@@ -214,13 +234,15 @@ ValueTree NavigatorTreeBuilder::getValueTreeFor(String& code, bool isInsideClass
 
 	tree.setProperty("name", memberName, 0);
 	tree.setProperty("class", memberClass, 0);
+	tree.setProperty("line", lineNumber, 0);
+	DBG("getValueTreeFor "+memberName+" line: "+String(lineNumber));
 	//tree.setProperty("raw", code, 0);
 	tree.setProperty("isInsideClass", isInsideClass, 0);
 	tree.setProperty("isClassDefinition", isClassDefinition, 0);
 	return tree;
 }
 
-void NavigatorTreeBuilder::updateNavigatorTree (ValueTree& parentTree, String& code, bool isInsideClass)
+void NavigatorTreeBuilder::updateNavigatorTree (ValueTree& parentTree, String& code, int lineNumber, bool isInsideClass)
 {
 	//DBG("\t\tvoid SourceCodeEditor::updateNavigatorTree (ValueTree& parentTree, String& code)");
 	//DBG("%"+code.substring (0, 10)+"%...%"+code.getLastCharacters(10)+"% parentTreeName: "+parentTree.getType().toString());
@@ -229,7 +251,7 @@ void NavigatorTreeBuilder::updateNavigatorTree (ValueTree& parentTree, String& c
 	String block;					//substring from "{" to "}"
 	int aux;
 
-	while (k != -1)		//for each code block start "{"
+	while (k != -1 && !thread.threadShouldExit())		//for each code block start "{"
 	{
 		if (k != 0)			//if we already got matching close block "}"
 		{
@@ -240,6 +262,7 @@ void NavigatorTreeBuilder::updateNavigatorTree (ValueTree& parentTree, String& c
 		k = code.indexOf (k, "{");
 		kClose = getPosOfMatchingBracket (code, k, '{', '}');
 		//DBG("'{' = "+String (k)+" '}' = "+String (kClose));
+		int lineBreaks = 0;
 		while (k != -1)		//for each newline "\n" up to code block start "{"
 		{
 			if (p != -1 && p < k)
@@ -255,10 +278,10 @@ void NavigatorTreeBuilder::updateNavigatorTree (ValueTree& parentTree, String& c
 							{
 								//CLASS DECLARATION BLOCK FOUND!
 								//DBG("CLASS DECLARATION BLOCK FOUND: #"+sub+"#");
-								
+								int lineNumberMod = lineNumber + getLineNumber(code, 0, k) + lineBreaks;
 								block = code.substring (k + 1, kClose - 1);
-								ValueTree node = getValueTreeFor(sub, isInsideClass, true);
-								updateNavigatorTree(node, block, true);
+								ValueTree node = getValueTreeFor(sub, isInsideClass, true, lineNumberMod);
+								updateNavigatorTree(node, block, lineNumberMod, true);
 								parentTree.addChild(node, -1, 0);
 								break;
 							}
@@ -269,7 +292,8 @@ void NavigatorTreeBuilder::updateNavigatorTree (ValueTree& parentTree, String& c
 						{
 							//METHOD DECLARATION BLOCK FOUND!
 							//DBG("METHOD DECLARATION BLOCK FOUND: #"+sub+"#");
-							parentTree.addChild(getValueTreeFor(sub, isInsideClass, false), -1, 0);
+							int lineNumberMod = lineNumber + getLineNumber(code, 0, k) + lineBreaks;
+							parentTree.addChild(getValueTreeFor(sub, isInsideClass, false, lineNumberMod), -1, 0);
 							break;
 						}
 						
@@ -282,6 +306,7 @@ void NavigatorTreeBuilder::updateNavigatorTree (ValueTree& parentTree, String& c
 				break;
 			}
 			p = code.indexOf(p + 1, "\n");	//next newline
+			lineBreaks = 1;
 		}
 	}
 }

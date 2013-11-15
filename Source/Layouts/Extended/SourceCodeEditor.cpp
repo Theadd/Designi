@@ -187,6 +187,35 @@ void SourceCodeEditor::highlight (Range<int> range, bool cursorAtStart)
     }
 }
 
+void SourceCodeEditor::scrollToLine (int lineNumber, bool firstLineOnScreen, bool alsoMoveCaretToLine)
+{
+	int rawLineNumber = lineNumber;
+	int numLinesOnScreen = editor->getNumLinesOnScreen();
+
+	if (!firstLineOnScreen)
+	{
+		if ((numLinesOnScreen / 2) - 1 > lineNumber)
+		{
+			lineNumber = 0;
+		}
+		else
+		{
+			lineNumber -= (numLinesOnScreen / 2) - 1;
+		}
+	}
+	//stop at end of screen
+	int lineMod = lineNumber + numLinesOnScreen - editor->getDocument().getNumLines() + 1;
+	if (lineMod > 0)
+		lineNumber -= lineMod;
+
+	editor->scrollToLine(lineNumber);
+	if (alsoMoveCaretToLine)
+	{
+		editor->moveCaretTo (CodeDocument::Position (editor->getDocument(), rawLineNumber, 0), false);
+		editor->grabKeyboardFocus();
+	}
+}
+
 ValueTree SourceCodeEditor::getNavigatorTree ()
 {
 	return navigatorTree;
@@ -367,7 +396,7 @@ public:
         addAndMakeVisible (&findPrev);
         addAndMakeVisible (&findNext);
 
-        setWantsKeyboardFocus (true);
+        setWantsKeyboardFocus (false);
         setFocusContainer (true);
         findPrev.setWantsKeyboardFocus (false);
         findNext.setWantsKeyboardFocus (false);

@@ -153,18 +153,16 @@ public:
 		about					= 0x2301
     };
 
+	ScopedPointer <HelpPanel> helpPanel;
+	ScopedPointer <FileBrowserPanel> fileBrowserPanel;
+	ScopedPointer <NavigatorPanel> navigatorPanel;
+
 private:
 	MainWindow& mainWindow;
 	//--
 	Component panelContainerBox;
 	OwnedArray <PanelContainer> panelContainers;
-	//OwnedArray <CodeEditorPanel> codeEditorPanels;
-	//  --
-	ScopedPointer <HelpPanel> helpPanel;
-	ScopedPointer <FileBrowserPanel> fileBrowserPanel;
-	ScopedPointer <NavigatorPanel> navigatorPanel;
-	
-	//--
+
 	ScopedPointer <ToolbarComponent> toolbarComponent;
 
 	struct DocumentEditor

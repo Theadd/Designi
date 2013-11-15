@@ -16,6 +16,7 @@
 #include "MainLayout.h"
 #include "../Extended/ExtendedFileTreeComponent.h"
 #include "../../Application.h"
+#include "../Extended/SourceCodeEditor.h"
 
 
 /*
@@ -267,6 +268,19 @@ void NavigatorPanel::TreeViewItemParser::itemOpennessChanged (bool isNowOpen)
         // though you could choose to delete them if that's more appropriate for
         // your application.
     }
+}
+
+void NavigatorPanel::TreeViewItemParser::itemDoubleClicked (const MouseEvent &e)
+{
+	int numLine = xml.getIntAttribute("line", -1);
+	if (numLine != -1)
+	{
+		SourceCodeEditor* editor = (SourceCodeEditor *) JUCEDesignerApp::getActiveInnerPanel();
+		if (editor != nullptr)
+		{
+			editor->scrollToLine(numLine, false);
+		}
+	}
 }
 
 var NavigatorPanel::TreeViewItemParser::getDragSourceDescription()
