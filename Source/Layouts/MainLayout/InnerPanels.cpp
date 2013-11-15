@@ -178,6 +178,11 @@ NavigatorPanel::TreeViewItemParser::TreeViewItemParser (XmlElement& xml_)
 {
 }
 
+NavigatorPanel::TreeViewItemParser::~TreeViewItemParser ()
+{
+	icon = nullptr;
+}
+
 int NavigatorPanel::TreeViewItemParser::getItemWidth() const
 {
     return -1;	//xml.getIntAttribute ("width", -1);
@@ -195,6 +200,7 @@ bool NavigatorPanel::TreeViewItemParser::mightContainSubItems()
 
 void NavigatorPanel::TreeViewItemParser::paintItem (Graphics& g, int width, int height)
 {
+	float padding = 0.7f;	//space reduced from icon
     // if this item is selected, fill it with a background colour..
     if (isSelected())
         g.fillAll (Colours::blue.withAlpha (0.3f));
@@ -202,19 +208,20 @@ void NavigatorPanel::TreeViewItemParser::paintItem (Graphics& g, int width, int 
     // use a "colour" attribute in the xml tag for this node to set the text colour..
     //g.setColour (Colour::fromString (xml.getStringAttribute ("colour", "ffffffff")));
 
-    g.setFont (height * 0.6f);
+    //g.setFont (height * 0.6f);
 
     // draw the xml element's tag name..
 	bool isClassDefinition = xml.getBoolAttribute("isClassDefinition", false);
 	
 	g.setColour ((isClassDefinition) ? Colours::lightgrey : Colours::white);
 
+	int horizontalTextShift = 8 + (int) ((float) height * padding);
     g.drawText (xml.getStringAttribute ("name", "unknown"),
-                4, 0, width - 4, height,
+                horizontalTextShift, 0, width - horizontalTextShift, height,
                 Justification::centredLeft, true);
 	
 	//draw icon
-	/*if (icon == nullptr)
+	if (icon == nullptr)
 	{
 		String iconName;
 		if (xml.getTagName().compare("class") == 0)
@@ -231,10 +238,8 @@ void NavigatorPanel::TreeViewItemParser::paintItem (Graphics& g, int width, int 
 		}
 		icon = getDrawableFromZipFile(iconName);
 	}
-	float padding = 0.7f;
-        //icon->drawWithin (g, Rectangle<float> (2.0f, 2.0f, x - 4.0f, height - 4.0f), RectanglePlacement::centred | RectanglePlacement::onlyReduceInSize, 1.0f);
-		icon->drawWithin (g, Rectangle<float> (0, 0, height, height), RectanglePlacement::centred | RectanglePlacement::onlyReduceInSize, 1.0f);
-		*/
+	icon->drawWithin (g, Rectangle<float> (4.0f, padding, (float) height * padding, (float) height - (2.0f * padding)), RectanglePlacement::centred | RectanglePlacement::onlyReduceInSize, 1.0f);
+		
 }
 
 void NavigatorPanel::TreeViewItemParser::itemOpennessChanged (bool isNowOpen)

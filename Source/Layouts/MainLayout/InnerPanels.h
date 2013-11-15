@@ -71,6 +71,7 @@ private:
 	{
 	public:
 		TreeViewItemParser (XmlElement& xml_);
+		~TreeViewItemParser ();
 
 		int getItemWidth() const;
 		String getUniqueName() const;
@@ -81,7 +82,7 @@ private:
 
 	private:
 		XmlElement& xml;
-		Drawable* icon;
+		ScopedPointer <Drawable> icon;
 
 		/** highlight: {0 = blue, 1 = yellow, 2 = light gray} */
 		Drawable* getDrawableFromZipFile(String filename)
