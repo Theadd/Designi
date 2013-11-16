@@ -237,7 +237,7 @@ void NavigatorPanel::TreeViewItemParser::paintItem (Graphics& g, int width, int 
 		{
 			iconName = "leaf.svg";
 		}
-		icon = getDrawableFromZipFile(iconName);
+		icon = Icons::get(iconName, Icons::blue);
 	}
 	icon->drawWithin (g, Rectangle<float> (4.0f, padding, (float) height * padding, (float) height - (2.0f * padding)), RectanglePlacement::centred | RectanglePlacement::onlyReduceInSize, 1.0f);
 		

@@ -314,62 +314,7 @@ private:
 		return id;
 	}
 
-	void HighlightActiveColorFromSVG(XmlElement* xmlSource, bool blackAndWhite = false)
-	{
-		forEachXmlChildElement (*xmlSource, xmlnode)
-		{
-			forEachXmlChildElement (*xmlnode, xmlouterdefs)
-			{
-				forEachXmlChildElement (*xmlouterdefs, xmldefs)
-				{
-					String style = xmldefs->getStringAttribute("style");
-					if (style.isNotEmpty())
-					{
-						if (!blackAndWhite)	//yellow
-						{
-							/*style = style.replace("#008bff", "#e8d500", true);
-							style = style.replace("#00aaff", "#ffea00", true);
-							style = style.replace("#4eafff", "#ffdc00", true);*/
-							style = style.replace("#008bff", "#d9d392", true);
-							style = style.replace("#00aaff", "#d9d176", true);
-							style = style.replace("#4eafff", "#d8d3a4", true);
-						}
-						else	//light gray
-						{
-							style = style.replace("#008bff", "#eaeaea", true);
-							style = style.replace("#00aaff", "#d3d3d3", true);
-							style = style.replace("#4eafff", "#d8d8d8", true);
-						}
-						
-						xmldefs->setAttribute("style", style);
-					}
-				}
-			}
-		}
-	}
-
-	/** highlight: {0 = blue, 1 = yellow, 2 = light gray} */
-	Drawable* getDrawableFromZipFile(String filename, int highlight = 0)
-	{
-		MemoryInputStream iconsFileStream (plainsvgicons_zip, plainsvgicons_zipSize, false);
-		ZipFile icons (&iconsFileStream, false);
-
-		const ZipFile::ZipEntry* zipEntry = icons.getEntry(filename);
-		InputStream* stream = icons.createStreamForEntry(*zipEntry);
-		String xmldata = stream->readEntireStreamAsString();
-		delete stream;
-		ScopedPointer<XmlElement> svg (XmlDocument::parse (xmldata));//(BinaryData::wrench_svg));
-
-		if (highlight == 1)
-			HighlightActiveColorFromSVG(svg);
-		if (highlight == 2)
-			HighlightActiveColorFromSVG(svg, true);
-
-		if (svg != nullptr)
-			return Drawable::createFromSVG (*svg);
-
-		return nullptr;
-	}
+	
 
 	/** Update icons for TreeView Item if they are not already set.
 	 * @param onlyUpdateIfCached bool unused since we don't have a cache for drawables like ImageCache
@@ -380,9 +325,9 @@ private:
 		if (normalIcon == nullptr || openStateChanged == true)
 		{
 			String iconName = getIconNameForFile(file.getFileName());
-			normalIcon = getDrawableFromZipFile(iconName, 2);
-			hoverIcon = getDrawableFromZipFile(iconName, 1);
-			selectedIcon = getDrawableFromZipFile(iconName, 0);
+			normalIcon = Icons::get (iconName, Icons::lightgray);
+			hoverIcon = Icons::get(iconName, Icons::yellow);
+			selectedIcon = Icons::get(iconName, Icons::blue);
 
 			triggerAsyncUpdate();
 		}

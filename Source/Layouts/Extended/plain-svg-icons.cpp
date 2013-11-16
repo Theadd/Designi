@@ -7,7 +7,7 @@
 
   ==============================================================================
 */
-
+#include "../../../JuceLibraryCode/JuceHeader.h"
 #include "plain-svg-icons.h"
 
 

@@ -84,24 +84,6 @@ private:
 	private:
 		XmlElement& xml;
 		ScopedPointer <Drawable> icon;
-
-		/** highlight: {0 = blue, 1 = yellow, 2 = light gray} */
-		Drawable* getDrawableFromZipFile(String filename)
-		{
-			MemoryInputStream iconsFileStream (plainsvgicons_zip, plainsvgicons_zipSize, false);
-			ZipFile icons (&iconsFileStream, false);
-
-			const ZipFile::ZipEntry* zipEntry = icons.getEntry(filename);
-			InputStream* stream = icons.createStreamForEntry(*zipEntry);
-			String xmldata = stream->readEntireStreamAsString();
-			delete stream;
-			ScopedPointer<XmlElement> svg (XmlDocument::parse (xmldata));//(BinaryData::wrench_svg));
-
-			if (svg != nullptr)
-				return Drawable::createFromSVG (*svg);
-
-			return nullptr;
-		}
 	};
 
 };
