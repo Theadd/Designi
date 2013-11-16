@@ -6,6 +6,9 @@
 
 namespace BinaryData
 {
+    extern const char*   icon_png;
+    const int            icon_pngSize = 16598;
+
     extern const char*   plainsvgicons_zip;
     const int            plainsvgicons_zipSize = 666697;
 

@@ -2,9 +2,10 @@
 
 <JUCERPROJECT id="R3ehq3" name="Designi" projectType="guiapp" version="2.0.0"
               bundleIdentifier="io.github.Theadd" jucerVersion="3.0.0" defines=""
-              userNotes="https://github.com/Theadd/JUCE-Designer">
+              userNotes="https://github.com/Theadd/Designi">
   <MAINGROUP id="DchWjp" name="Designi">
     <GROUP id="{2B5D31AE-D997-CE08-BF14-D7345862A558}" name="BinaryData">
+      <FILE id="kZm6RI" name="icon.png" compile="0" resource="1" file="BinaryData/icon.png"/>
       <FILE id="bGbKCG" name="plain-svg-icons.zip" compile="0" resource="1"
             file="BinaryData/plain-svg-icons.zip"/>
       <FILE id="SCH0SW" name="file_cpp.png" compile="0" resource="1" file="BinaryData/file_cpp.png"/>
@@ -153,12 +154,12 @@
   </MODULES>
   <EXPORTFORMATS>
     <VS2010 targetFolder="Builds/VisualStudio2010" libraryType="1" juceFolder="..\JUCE\modules"
-            extraCompilerFlags="">
+            extraCompilerFlags="" smallIcon="kZm6RI" bigIcon="kZm6RI">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
-                       isDebug="1" optimisation="1" targetName="Designi"/>
+                       isDebug="1" optimisation="1" targetName="designi"/>
         <CONFIGURATION name="Release" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
-                       isDebug="0" optimisation="2" targetName="Designi"/>
+                       isDebug="0" optimisation="2" targetName="designi"/>
       </CONFIGURATIONS>
     </VS2010>
   </EXPORTFORMATS>

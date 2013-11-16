@@ -3011,6 +3011,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\BinaryData\icon.png">
+      <Filter>Designi\BinaryData</Filter>
+    </None>
     <None Include="..\..\BinaryData\plain-svg-icons.zip">
       <Filter>Designi\BinaryData</Filter>
     </None>
@@ -3085,6 +3088,9 @@
     </None>
     <None Include="..\..\JuceLibraryCode\modules\juce_video\juce_module_info">
       <Filter>Juce Modules\juce_video</Filter>
+    </None>
+    <None Include=".\icon.ico">
+      <Filter>Juce Library Code</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

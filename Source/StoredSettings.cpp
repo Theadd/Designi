@@ -14,7 +14,7 @@
 StoredSettings::StoredSettings()
 {
 	PropertiesFile::Options options;
-	options.applicationName     = "Designi";
+	options.applicationName     = "designi";
 	options.filenameSuffix      = "settings";
 	options.osxLibrarySubFolder = "Application Support";
 	#if JUCE_LINUX
