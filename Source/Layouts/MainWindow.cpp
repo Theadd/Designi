@@ -13,7 +13,7 @@
 #include "Extended/SourceCodeEditor.h"
 
 
-MainWindow::MainWindow()  : DocumentWindow ("JUCE GUI Designer",
+MainWindow::MainWindow()  : DocumentWindow ("Designi : JUCE GUI Designer",
                                         Colours::lightgrey,
                                         DocumentWindow::allButtons)
 {
@@ -24,7 +24,7 @@ MainWindow::MainWindow()  : DocumentWindow ("JUCE GUI Designer",
 
     setBounds(55, 35, 900, 720);
     //setColour(DocumentWindow::backgroundColourId, Colour::fromString("FF202A32"));
-    setName("JUCE Designer");
+    setName("Designi : JUCE GUI Designer");
     setTitleBarHeight(26);
     setTitleBarButtonsRequired(7, 0);
     setTitleBarTextCentred(0);

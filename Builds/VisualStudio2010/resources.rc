@@ -13,9 +13,9 @@ BEGIN
   BEGIN
     BLOCK "040904E4"
     BEGIN
-      VALUE "FileDescription",  "JUCE Designer\0"
+      VALUE "FileDescription",  "Designi\0"
       VALUE "FileVersion",  "2.0.0\0"
-      VALUE "ProductName",  "JUCE Designer\0"
+      VALUE "ProductName",  "Designi\0"
       VALUE "ProductVersion",  "2.0.0\0"
     END
   END

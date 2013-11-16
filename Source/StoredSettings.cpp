@@ -14,13 +14,13 @@
 StoredSettings::StoredSettings()
 {
 	PropertiesFile::Options options;
-	options.applicationName     = "JUCE Designer";
+	options.applicationName     = "Designi";
 	options.filenameSuffix      = "settings";
 	options.osxLibrarySubFolder = "Application Support";
 	#if JUCE_LINUX
-		options.folderName          = "~/.config/JUCE Designer";
+		options.folderName          = "~/.config/Designi";
 	#else
-		options.folderName          = "JUCE Designer";
+		options.folderName          = "Designi";
 	#endif
 
 	propertiesFile = new PropertiesFile(options);

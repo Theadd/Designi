@@ -37,7 +37,7 @@
 
 namespace ProjectInfo
 {
-    const char* const  projectName    = "JUCE Designer";
+    const char* const  projectName    = "Designi";
     const char* const  versionString  = "2.0.0";
     const int          versionNumber  = 0x20000;
 }

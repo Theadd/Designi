@@ -581,7 +581,7 @@ void MainLayout::getCommandInfo (CommandID commandID, ApplicationCommandInfo& re
 		result.setTicked (false);
 		break;
 	case about:
-		result.setInfo ("About JUCE Designer", "", generalCategory, 0);
+		result.setInfo ("About Designi", "", generalCategory, 0);
 		result.setTicked (false);
 		break;
 

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<JUCERPROJECT id="R3ehq3" name="JUCE Designer" projectType="guiapp" version="2.0.0"
+<JUCERPROJECT id="R3ehq3" name="Designi" projectType="guiapp" version="2.0.0"
               bundleIdentifier="io.github.Theadd" jucerVersion="3.0.0" defines=""
               userNotes="https://github.com/Theadd/JUCE-Designer">
-  <MAINGROUP id="DchWjp" name="JUCE Designer">
+  <MAINGROUP id="DchWjp" name="Designi">
     <GROUP id="{2B5D31AE-D997-CE08-BF14-D7345862A558}" name="BinaryData">
       <FILE id="bGbKCG" name="plain-svg-icons.zip" compile="0" resource="1"
             file="BinaryData/plain-svg-icons.zip"/>
@@ -156,9 +156,9 @@
             extraCompilerFlags="">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
-                       isDebug="1" optimisation="1" targetName="JUCE Designer"/>
+                       isDebug="1" optimisation="1" targetName="Designi"/>
         <CONFIGURATION name="Release" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
-                       isDebug="0" optimisation="2" targetName="JUCE Designer"/>
+                       isDebug="0" optimisation="2" targetName="Designi"/>
       </CONFIGURATIONS>
     </VS2010>
   </EXPORTFORMATS>
