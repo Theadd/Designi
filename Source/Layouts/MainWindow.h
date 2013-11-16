@@ -20,8 +20,6 @@ public:
     MainWindow();
 	~MainWindow();
 
-	void loadLayout ();
-
     void closeButtonPressed();
 
     void mouseUp (const MouseEvent& event);

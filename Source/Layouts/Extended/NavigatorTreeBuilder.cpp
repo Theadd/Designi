@@ -23,7 +23,7 @@ NavigatorTreeBuilder::NavigatorTreeBuilder () :	thread ("NavigatorTreeBuilder"),
 
 NavigatorTreeBuilder::~NavigatorTreeBuilder ()
 {
-	thread.stopThread(500);
+	thread.stopThread(300);
 	thread.removeTimeSliceClient (this);
 }
 

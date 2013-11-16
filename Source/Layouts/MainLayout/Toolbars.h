@@ -52,16 +52,8 @@ private:
             edit_paste      = 7*/
 			doc_open		= 1,
 			doc_save		= 2,
-			project_close	= 3,
-			edit_undo		= 4,
-			edit_redo		= 5,
-			edit_cut		= 6,
-			edit_copy		= 7,
-			edit_paste		= 8,
-			panel_browser	= 9,
-			panel_navigator	= 10,
-			panel_help		= 11,
-			component_inspector	=12
+			edit_undo		= 3,
+			edit_redo		= 4
         };
 
         void getAllToolbarItemIds (Array <int>& ids);
@@ -71,8 +63,8 @@ private:
         ToolbarItemComponent* createItem (int itemId);
 
     private:
-        //StringArray iconNames;
-        OwnedArray <Drawable> icons;
+        StringArray iconNames;
+        OwnedArray <Drawable> iconsFromZipFile;
 
         // This is a little utility to create a button with one of the SVG images in
         // our embedded ZIP file "icons.zip"

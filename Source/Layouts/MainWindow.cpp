@@ -10,7 +10,6 @@
 #include "../../JuceLibraryCode/JuceHeader.h"
 
 #include "MainWindow.h"
-#include "Extended/SourceCodeEditor.h"
 
 
 MainWindow::MainWindow()  : DocumentWindow ("JUCE GUI Designer",
@@ -52,8 +51,11 @@ MainWindow::MainWindow()  : DocumentWindow ("JUCE GUI Designer",
     // changes, and send change messages accordingly.
     mainLayout->setApplicationCommandManagerToWatch (&commandManager);
 
-    setResizable (true, true);
+    setResizable(true, true);
     setVisible (true);
+
+	mainLayout->addChildComponent(mainLayout->floatingComponentOverlay = new FloatingComponentOverlay());
+	addMouseListener(mainLayout->floatingComponentOverlay, true);
 }
 
 MainWindow::~MainWindow()
@@ -76,23 +78,6 @@ MainWindow::~MainWindow()
 	mainLayout = nullptr;
 	lookAndFeel = nullptr;
 	DBG("END ~MainWindow()");
-}
-
-void MainWindow::loadLayout ()
-{
-
-	{	//Register commands for SourceCodeEditor
-        CodeDocument doc;
-        CppCodeEditorComponent ed (File::nonexistent, doc);
-        commandManager.registerAllCommandsForTarget (&ed);
-    }
-
-	mainLayout->loadLayout ();
-
-
-
-	mainLayout->addChildComponent (mainLayout->floatingComponentOverlay = new FloatingComponentOverlay());
-	addMouseListener (mainLayout->floatingComponentOverlay, true);
 }
 
 void MainWindow::closeButtonPressed()

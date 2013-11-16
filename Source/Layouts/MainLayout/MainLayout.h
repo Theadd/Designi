@@ -56,7 +56,6 @@ public:
     MainLayout(MainWindow& _mainWindow);
 	~MainLayout();
 
-	void loadLayout ();
 	void resized();
 	void paint (Graphics& g);
 
@@ -112,16 +111,14 @@ public:
 		saveAll					= 0x2007,
 		print					= 0x2008,
 		//EDIT
-		//undo					= 0x2100,
-		//redo					= 0x2101,
-		//cut						= 0x2102,
-		//copy					= 0x2103,
-		//paste					= 0x2104,
-		//delete_					= 0x2105,
-		//selectall
-		//deselectall
-		//find					= 0x2106,
-		//replace					= 0x2107,
+		undo					= 0x2100,
+		redo					= 0x2101,
+		cut						= 0x2102,
+		copy					= 0x2103,
+		paste					= 0x2104,
+		delete_					= 0x2105,
+		find					= 0x2106,
+		replace					= 0x2107,
 		preferences				= 0x2108,
 		showFindPanel			= 0x2109,
         findSelection			= 0x210A,
