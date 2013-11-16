@@ -28,7 +28,7 @@ class JUCEDesignerApp  : public JUCEApplication
 {
 public:
     //==============================================================================
-    JUCEDesignerApp() : navigatorTreeBuilder() {}
+    JUCEDesignerApp() : navigatorTreeBuilder (), shouldBeComponentInspectorActive (var(false)) {}
 
     const String getApplicationName()       { return ProjectInfo::projectName; }
     const String getApplicationVersion()    { return ProjectInfo::versionString; }
@@ -78,7 +78,8 @@ public:
 
 		//openProject(File("C:/Users/admin/JUCE Sample Project/JUCE Sample Project.jucer"));
 
-        mainWindow = new MainWindow();
+        mainWindow = new MainWindow ();
+		mainWindow->loadLayout ();
     }
 
     void shutdown()
@@ -201,6 +202,18 @@ public:
 		}
 	}
 
+	void toggleComponentInspector ()
+	{
+		shouldBeComponentInspectorActive.setValue (var (! (bool) shouldBeComponentInspectorActive.getValue ()));
+		mainLayout->floatingComponentOverlay->setVisible (isComponentInspectorActive());
+	}
+
+	bool isComponentInspectorActive ()
+	{
+		bool isActive = (bool) shouldBeComponentInspectorActive.getValue ();
+		return isActive;
+	}
+
 	ScopedPointer <StoredSettings> settings;
 	OpenDocumentManager openDocumentManager;
 	OpenDocumentManager::Document* activeDocument;
@@ -208,6 +221,7 @@ public:
 	ValueTree navigatorTree;
 	NavigatorTreeBuilder navigatorTreeBuilder;
 	MainLayout* mainLayout;
+	Value shouldBeComponentInspectorActive;
 
 private:
 	ScopedPointer <Project> project;

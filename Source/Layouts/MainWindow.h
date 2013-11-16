@@ -19,6 +19,8 @@ class MainWindow    : public DocumentWindow
 public:
     MainWindow();
 	~MainWindow();
+	
+	void loadLayout ();
 
     void closeButtonPressed();
 
