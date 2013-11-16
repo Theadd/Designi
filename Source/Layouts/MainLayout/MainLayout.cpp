@@ -73,7 +73,23 @@ MainLayout::MainLayout(MainWindow& _mainWindow) : Component(), mainWindow(_mainW
 	//Project* project = JUCEDesignerApp::getApp().getProject();
 	//DBG("END LOAD PROJECT");
 
+	
+}
+
+MainLayout::~MainLayout()
+{
+	panelContainerBox.removeAllChildren();
 	toolbarComponent = nullptr;
+	helpPanel = nullptr;
+	fileBrowserPanel = nullptr;
+	navigatorPanel = nullptr;
+	floatingComponentOverlay = nullptr;
+	//workingPath = nullptr;
+}
+
+void MainLayout::loadLayout ()
+{
+	
 	addAndMakeVisible(toolbarComponent = new ToolbarComponent(TOOLBARSIZE));
 	addAndMakeVisible(&panelContainerBox);
 	
@@ -96,18 +112,7 @@ MainLayout::MainLayout(MainWindow& _mainWindow) : Component(), mainWindow(_mainW
 	resized();
 }
 
-MainLayout::~MainLayout()
-{
-	panelContainerBox.removeAllChildren();
-	toolbarComponent = nullptr;
-	helpPanel = nullptr;
-	fileBrowserPanel = nullptr;
-	navigatorPanel = nullptr;
-	floatingComponentOverlay = nullptr;
-	//workingPath = nullptr;
-}
-
-void MainLayout::resized()
+void MainLayout::resized ()
 {
 	DBG("MainLayout::resized()");
 	Rectangle<int> r = this->getLocalBounds();
@@ -274,16 +279,17 @@ PopupMenu MainLayout::getMenuForIndex (int menuIndex, const String& /*menuName*/
 	if (menuIndex == 1)
 	{
 		//EDIT
-		menu.addCommandItem (commandManager, undo);
-		menu.addCommandItem (commandManager, redo);
+		menu.addCommandItem (commandManager, StandardApplicationCommandIDs::undo);
+		menu.addCommandItem (commandManager, StandardApplicationCommandIDs::redo);
 		menu.addSeparator();
-		menu.addCommandItem (commandManager, cut);
-		menu.addCommandItem (commandManager, copy);
-		menu.addCommandItem (commandManager, paste);
-		menu.addCommandItem (commandManager, delete_);
+		menu.addCommandItem (commandManager, StandardApplicationCommandIDs::cut);
+		menu.addCommandItem (commandManager, StandardApplicationCommandIDs::copy);
+		menu.addCommandItem (commandManager, StandardApplicationCommandIDs::paste);
+		menu.addCommandItem (commandManager, StandardApplicationCommandIDs::del);
 		menu.addSeparator();
-		menu.addCommandItem (commandManager, find);
-		menu.addCommandItem (commandManager, replace);
+		menu.addCommandItem (commandManager, StandardApplicationCommandIDs::selectAll);
+		menu.addCommandItem (commandManager, StandardApplicationCommandIDs::deselectAll);
+		menu.addSeparator();
 		menu.addCommandItem (commandManager, showFindPanel);
 		menu.addCommandItem (commandManager, findSelection);
 		menu.addCommandItem (commandManager, findNext);
@@ -365,7 +371,7 @@ ApplicationCommandTarget* MainLayout::getNextCommandTarget()
 void MainLayout::getAllCommands (Array <CommandID>& commands)
 {
 	// this returns the set of all commands that this target can perform..
-	const CommandID ids[] = {newProject, newDesign, openProject, openRecentProject, closeProject, save, saveAs, saveAll, print, undo, redo, cut, copy, paste, delete_, find, replace, preferences, showFindPanel, findSelection, findNext, findPrevious, leftPanel, rightPanel, fileToolbar, clipboardToolbar, historyToolbar, drawableToolbar, toolbarOrientation, toolbarCustomize, fileBrowser, navigator, properties, toolbox, modifiers, help, componentInspector, englishLang, spanishLang, catalanLang, webpage, about};
+	const CommandID ids[] = {newProject, newDesign, openProject, openRecentProject, closeProject, save, saveAs, saveAll, print, preferences, showFindPanel, findSelection, findNext, findPrevious, leftPanel, rightPanel, fileToolbar, clipboardToolbar, historyToolbar, drawableToolbar, toolbarOrientation, toolbarCustomize, fileBrowser, navigator, properties, toolbox, modifiers, help, componentInspector, englishLang, spanishLang, catalanLang, webpage, about};
 
 	commands.addArray (ids, numElementsInArray (ids));
 }
@@ -397,6 +403,7 @@ void MainLayout::getCommandInfo (CommandID commandID, ApplicationCommandInfo& re
 		break;
 	case closeProject:
 		result.setInfo ("Close Project", "", generalCategory, 0);
+		result.setActive ((fileBrowserPanel != nullptr));
 		result.setTicked (false);
 		break;
 	case save:
@@ -418,7 +425,7 @@ void MainLayout::getCommandInfo (CommandID commandID, ApplicationCommandInfo& re
 		result.setTicked (false);
 		result.addDefaultKeypress ('p', ModifierKeys::commandModifier | ModifierKeys::shiftModifier | ModifierKeys::altModifier);
 		break;
-	case undo:
+	/*case undo:
 		result.setInfo ("Undo", "", generalCategory, 0);
 		result.setTicked (false);
 		result.addDefaultKeypress ('z', ModifierKeys::commandModifier);
@@ -457,7 +464,7 @@ void MainLayout::getCommandInfo (CommandID commandID, ApplicationCommandInfo& re
 		result.setInfo ("Replace...", "", generalCategory, 0);
 		result.setTicked (false);
 		result.addDefaultKeypress ('h', ModifierKeys::commandModifier);
-		break;
+		break;*/
 	case showFindPanel:
         result.setInfo (TRANS ("Find"), TRANS ("Searches for text in the current document."), "Editing", 0);
         result.defaultKeypresses.add (KeyPress ('f', ModifierKeys::commandModifier, 0));
@@ -597,6 +604,7 @@ bool MainLayout::perform (const InvocationInfo& info)
 	case openRecentProject:
 		break;
 	case closeProject:
+		closeCurrentProject ();
 		break;
 	case save:
 		break;
@@ -606,7 +614,7 @@ bool MainLayout::perform (const InvocationInfo& info)
 		break;
 	case print:
 		break;
-	case undo:
+	/*case undo:
 		break;
 	case redo:
 		break;
@@ -621,7 +629,7 @@ bool MainLayout::perform (const InvocationInfo& info)
 	case find:
 		break;
 	case replace:
-		break;
+		break;*/
 	case preferences:
 		break;
 	case leftPanel:
@@ -663,7 +671,8 @@ bool MainLayout::perform (const InvocationInfo& info)
 		toggleInnerPanel(helpPanel, Globals::left, true);
 		break;
 	case componentInspector:
-		floatingComponentOverlay->setVisible(!floatingComponentOverlay->isVisible());
+		//floatingComponentOverlay->setVisible(!floatingComponentOverlay->isVisible());
+		JUCEDesignerApp::getApp().toggleComponentInspector();
 		break;
 	case englishLang:
 		JUCEDesignerApp::getApp().setLanguage("");
@@ -917,20 +926,23 @@ void MainLayout::setProject(Project* project)
 
 void MainLayout::closeCurrentProject()
 {
-	//if (JUCEDesignerApp::getApp().navigatorTree.isValid())
+	if (fileBrowserPanel != nullptr)
 	{
-		JUCEDesignerApp::getApp().navigatorTree.removeListener(navigatorPanel);
-		DBG("#### JUCEDesignerApp::getApp().navigatorTree.removeListener(navigatorPanel);");
+		//if (JUCEDesignerApp::getApp().navigatorTree.isValid())
+		{
+			JUCEDesignerApp::getApp().navigatorTree.removeListener(navigatorPanel);
+			DBG("#### JUCEDesignerApp::getApp().navigatorTree.removeListener(navigatorPanel);");
+		}
+
+		for (int i = 0; i < panelContainers.size(); ++i)
+			panelContainers[i]->removeAllInnerPanels();
+
+		navigatorPanel = nullptr;
+		fileBrowserPanel = nullptr;
+		helpPanel = nullptr;
+		//codeEditorPanels.clear();
+		editors.clear();
 	}
-
-	for (int i = 0; i < panelContainers.size(); ++i)
-		panelContainers[i]->removeAllInnerPanels();
-
-	navigatorPanel = nullptr;
-	fileBrowserPanel = nullptr;
-	helpPanel = nullptr;
-	//codeEditorPanels.clear();
-	editors.clear();
 }
 
 void MainLayout::showOpenProjectDialog ()

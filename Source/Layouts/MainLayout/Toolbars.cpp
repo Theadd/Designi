@@ -10,6 +10,9 @@
 
 #include "../../../JuceLibraryCode/JuceHeader.h"
 #include "Toolbars.h"
+#include "../Extended/plain-svg-icons.h"
+#include "../../Application.h"
+#include "MainLayout.h"
 
 ToolbarComponent::ToolbarComponent(int _toolbarThickness) : toolbarThickness(_toolbarThickness)
 {
@@ -72,8 +75,13 @@ void ToolbarComponent::ToolbarComponentItemFactory::getAllToolbarItemIds (Array 
 
     ids.add (doc_open);
     ids.add (doc_save);
+	ids.add (project_close);
     ids.add (edit_undo);
     ids.add (edit_redo);
+	ids.add (edit_cut);
+	ids.add (edit_copy);
+	ids.add (edit_paste);
+	ids.add (component_inspector);
 	/*
 				doc_open		= 1,
 			doc_save		= 2,
@@ -95,9 +103,16 @@ void ToolbarComponent::ToolbarComponentItemFactory::getDefaultItemSet (Array <in
     // items can appear multiple times (e.g. the separators used here).
     ids.add (doc_open);
     ids.add (doc_save);
+	ids.add (project_close);
     ids.add (separatorBarId);
     ids.add (edit_undo);
     ids.add (edit_redo);
+	ids.add (separatorBarId);
+	ids.add (edit_cut);
+	ids.add (edit_copy);
+	ids.add (edit_paste);
+	ids.add (separatorBarId);
+	ids.add (component_inspector);
     ids.add (flexibleSpacerId);
 
 }
@@ -109,20 +124,42 @@ ToolbarItemComponent* ToolbarComponent::ToolbarComponentItemFactory::createItem 
     switch (itemId)
     {
         case doc_open:
-			button = createButtonFromZipFileSVG (itemId, "Open", "Download.svg");
+			button = createButtonFromZipFileSVG (itemId, "Open", "folder-open.svg");
 			button->setTooltip("Open file");
 			return button;
         case doc_save:
-			button = createButtonFromZipFileSVG (itemId, "Save", "Upload.svg");
+			button = createButtonFromZipFileSVG (itemId, "Save", "save.svg");
 			button->setTooltip("Save file");
 			return button;
+		case project_close:
+			button = createButtonFromZipFileSVG (itemId, "Close Project", "remove.svg");
+			button->setCommandToTrigger (&JUCEDesignerApp::getCommandManager (), MainLayout::closeProject, true);
+			return button;
         case edit_undo:
-			button = createButtonFromZipFileSVG (itemId, "Undo", "Undo.svg");
+			button = createButtonFromZipFileSVG (itemId, "Undo", "chevron-left.svg");
 			button->setTooltip("Undo");
 			return button;
         case edit_redo:
-			button = createButtonFromZipFileSVG (itemId, "Redo", "Redo.svg");
+			button = createButtonFromZipFileSVG (itemId, "Redo", "chevron-right.svg");
 			button->setTooltip("Redo");
+			return button;
+		case edit_cut:
+			button = createButtonFromZipFileSVG (itemId, "Cut", "scissors.svg");
+			button->setTooltip("Cut");
+			return button;
+		case edit_copy:
+			button = createButtonFromZipFileSVG (itemId, "Copy", "document-copy.svg");
+			button->setTooltip("Copy");
+			return button;
+		case edit_paste:
+			button = createButtonFromZipFileSVG (itemId, "Paste", "document-import.svg");
+			button->setTooltip("Paste");
+			return button;
+		case component_inspector:
+			button = createButtonFromZipFileSVG (itemId, "Inspector", "screenshot.svg");
+			//button->setTooltip("Component Inspector");
+			button->setCommandToTrigger (&JUCEDesignerApp::getCommandManager (), MainLayout::componentInspector, true);
+			button->getToggleStateValue ().referTo (JUCEDesignerApp::getApp().shouldBeComponentInspectorActive);
 			return button;
         default:
 			break;
@@ -133,26 +170,11 @@ ToolbarItemComponent* ToolbarComponent::ToolbarComponentItemFactory::createItem 
 
 ToolbarButton* ToolbarComponent::ToolbarComponentItemFactory::createButtonFromZipFileSVG (const int itemId, const String& text, const String& filename)
 {
-    if (iconsFromZipFile.size() == 0)
-    {
-        // If we've not already done so, load all the images from the zip file..
-        MemoryInputStream iconsFileStream (BinaryData::icons2_zip, BinaryData::icons2_zipSize, false);
-        ZipFile icons (&iconsFileStream, false);
-
-        for (int i = 0; i < icons.getNumEntries(); ++i)
-        {
-            ScopedPointer<InputStream> svgFileStream (icons.createStreamForEntry (i));
-
-            if (svgFileStream != 0)
-            {
-                iconNames.add (icons.getEntry(i)->filename);
-                iconsFromZipFile.add (Drawable::createFromImageDataStream (*svgFileStream));
-            }
-        }
-    }
-
-    Drawable* image = iconsFromZipFile [iconNames.indexOf (filename)]->createCopy();
-    return new ToolbarButton (itemId, text, image, 0);
+	icons.add(Icons::get(filename, Icons::blue));
+	Drawable* image = icons.getLast()->createCopy();
+	icons.add(Icons::get(filename, Icons::yellow));
+	Drawable* activeImage = icons.getLast()->createCopy();
+	return new ToolbarButton (itemId, text, image, activeImage);
 }
 
 
