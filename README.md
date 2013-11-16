@@ -1,4 +1,4 @@
-JUCE-Designer
+Designi : JUCE GUI Designer
 =============
 
 A RAD WYSIWYG GUI Designer for JUCE C++ Toolkit
