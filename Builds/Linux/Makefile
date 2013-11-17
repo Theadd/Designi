@@ -20,7 +20,7 @@ ifeq ($(CONFIG),Debug)
   CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode
   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -g -ggdb -O0
   CXXFLAGS += $(CFLAGS) 
-  LDFLAGS += -L$(BINDIR) -L$(LIBDIR) -L/usr/X11R6/lib/ -lGL -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt 
+  LDFLAGS += -L$(BINDIR) -L$(LIBDIR) -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -ldl -lfreetype -lpthread -lrt 
   LDDEPS :=
   RESFLAGS :=  -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode
   TARGET := Designi
@@ -35,7 +35,7 @@ ifeq ($(CONFIG),Release)
   CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode
   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -Os
   CXXFLAGS += $(CFLAGS) 
-  LDFLAGS += -L$(BINDIR) -L$(LIBDIR) -L/usr/X11R6/lib/ -lGL -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt 
+  LDFLAGS += -L$(BINDIR) -L$(LIBDIR) -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -ldl -lfreetype -lpthread -lrt 
   LDDEPS :=
   RESFLAGS :=  -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode
   TARGET := Designi
@@ -43,28 +43,6 @@ ifeq ($(CONFIG),Release)
 endif
 
 OBJECTS := \
-  $(OBJDIR)/ejuce_RegularExpression_b5386072.o \
-  $(OBJDIR)/pcre_chartables_e066a44a.o \
-  $(OBJDIR)/pcre_compile_dc4bb5ce.o \
-  $(OBJDIR)/pcre_config_a52a4591.o \
-  $(OBJDIR)/pcre_dfa_exec_30afcc0.o \
-  $(OBJDIR)/pcre_exec_9e91d1a0.o \
-  $(OBJDIR)/pcre_fullinfo_c84568cc.o \
-  $(OBJDIR)/pcre_get_91945131.o \
-  $(OBJDIR)/pcre_globals_4732018b.o \
-  $(OBJDIR)/pcre_info_a4d8ea7d.o \
-  $(OBJDIR)/pcre_maketables_1e7afee2.o \
-  $(OBJDIR)/pcre_ord2utf8_7ba82831.o \
-  $(OBJDIR)/pcre_refcount_b6b411ab.o \
-  $(OBJDIR)/pcre_study_124f3d64.o \
-  $(OBJDIR)/pcre_tables_925fc3f4.o \
-  $(OBJDIR)/pcre_try_flipped_f8b26cd9.o \
-  $(OBJDIR)/pcre_ucp_findchar_7a5574db.o \
-  $(OBJDIR)/pcre_valid_utf8_e2121ea3.o \
-  $(OBJDIR)/pcre_version_dc336333.o \
-  $(OBJDIR)/pcre_xclass_ac2cbecf.o \
-  $(OBJDIR)/pcreposix_32a7e1f3.o \
-  $(OBJDIR)/ucptable_a3e4d7e0.o \
   $(OBJDIR)/DocumentManager_ab56030b.o \
   $(OBJDIR)/Project_4328492.o \
   $(OBJDIR)/DuskMap_9b56ba2f.o \
@@ -86,10 +64,6 @@ OBJECTS := \
   $(OBJDIR)/StoredSettings_dfdf196f.o \
   $(OBJDIR)/Main_90ebc5c2.o \
   $(OBJDIR)/BinaryData_ce4232d4.o \
-  $(OBJDIR)/juce_audio_basics_2442e4ea.o \
-  $(OBJDIR)/juce_audio_devices_a4c8a728.o \
-  $(OBJDIR)/juce_audio_formats_d349f0c8.o \
-  $(OBJDIR)/juce_audio_processors_44a134a2.o \
   $(OBJDIR)/juce_core_aff681cc.o \
   $(OBJDIR)/juce_cryptography_25c7e826.o \
   $(OBJDIR)/juce_data_structures_bdd6d488.o \
@@ -97,8 +71,6 @@ OBJECTS := \
   $(OBJDIR)/juce_graphics_c8f1e7a4.o \
   $(OBJDIR)/juce_gui_basics_a630dd20.o \
   $(OBJDIR)/juce_gui_extra_7767d6a8.o \
-  $(OBJDIR)/juce_opengl_c7e3506c.o \
-  $(OBJDIR)/juce_video_184321c8.o \
 
 .PHONY: clean
 
@@ -118,116 +90,6 @@ clean:
 strip:
 	@echo Stripping Designi
 	-@strip --strip-unneeded $(OUTDIR)/$(TARGET)
-
-$(OBJDIR)/ejuce_RegularExpression_b5386072.o: ../../Source/Libraries/ejuce_RegularExpression.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling ejuce_RegularExpression.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/pcre_chartables_e066a44a.o: ../../Source/Libraries/pcre/pcre_chartables.c
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling pcre_chartables.c"
-	@$(CC) $(CFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/pcre_compile_dc4bb5ce.o: ../../Source/Libraries/pcre/pcre_compile.c
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling pcre_compile.c"
-	@$(CC) $(CFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/pcre_config_a52a4591.o: ../../Source/Libraries/pcre/pcre_config.c
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling pcre_config.c"
-	@$(CC) $(CFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/pcre_dfa_exec_30afcc0.o: ../../Source/Libraries/pcre/pcre_dfa_exec.c
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling pcre_dfa_exec.c"
-	@$(CC) $(CFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/pcre_exec_9e91d1a0.o: ../../Source/Libraries/pcre/pcre_exec.c
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling pcre_exec.c"
-	@$(CC) $(CFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/pcre_fullinfo_c84568cc.o: ../../Source/Libraries/pcre/pcre_fullinfo.c
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling pcre_fullinfo.c"
-	@$(CC) $(CFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/pcre_get_91945131.o: ../../Source/Libraries/pcre/pcre_get.c
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling pcre_get.c"
-	@$(CC) $(CFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/pcre_globals_4732018b.o: ../../Source/Libraries/pcre/pcre_globals.c
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling pcre_globals.c"
-	@$(CC) $(CFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/pcre_info_a4d8ea7d.o: ../../Source/Libraries/pcre/pcre_info.c
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling pcre_info.c"
-	@$(CC) $(CFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/pcre_maketables_1e7afee2.o: ../../Source/Libraries/pcre/pcre_maketables.c
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling pcre_maketables.c"
-	@$(CC) $(CFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/pcre_ord2utf8_7ba82831.o: ../../Source/Libraries/pcre/pcre_ord2utf8.c
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling pcre_ord2utf8.c"
-	@$(CC) $(CFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/pcre_refcount_b6b411ab.o: ../../Source/Libraries/pcre/pcre_refcount.c
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling pcre_refcount.c"
-	@$(CC) $(CFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/pcre_study_124f3d64.o: ../../Source/Libraries/pcre/pcre_study.c
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling pcre_study.c"
-	@$(CC) $(CFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/pcre_tables_925fc3f4.o: ../../Source/Libraries/pcre/pcre_tables.c
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling pcre_tables.c"
-	@$(CC) $(CFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/pcre_try_flipped_f8b26cd9.o: ../../Source/Libraries/pcre/pcre_try_flipped.c
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling pcre_try_flipped.c"
-	@$(CC) $(CFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/pcre_ucp_findchar_7a5574db.o: ../../Source/Libraries/pcre/pcre_ucp_findchar.c
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling pcre_ucp_findchar.c"
-	@$(CC) $(CFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/pcre_valid_utf8_e2121ea3.o: ../../Source/Libraries/pcre/pcre_valid_utf8.c
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling pcre_valid_utf8.c"
-	@$(CC) $(CFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/pcre_version_dc336333.o: ../../Source/Libraries/pcre/pcre_version.c
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling pcre_version.c"
-	@$(CC) $(CFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/pcre_xclass_ac2cbecf.o: ../../Source/Libraries/pcre/pcre_xclass.c
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling pcre_xclass.c"
-	@$(CC) $(CFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/pcreposix_32a7e1f3.o: ../../Source/Libraries/pcre/pcreposix.c
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling pcreposix.c"
-	@$(CC) $(CFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/ucptable_a3e4d7e0.o: ../../Source/Libraries/pcre/ucptable.c
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling ucptable.c"
-	@$(CC) $(CFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/DocumentManager_ab56030b.o: ../../Source/Core/DocumentManager.cpp
 	-@mkdir -p $(OBJDIR)
@@ -334,26 +196,6 @@ $(OBJDIR)/BinaryData_ce4232d4.o: ../../JuceLibraryCode/BinaryData.cpp
 	@echo "Compiling BinaryData.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/juce_audio_basics_2442e4ea.o: ../../JuceLibraryCode/modules/juce_audio_basics/juce_audio_basics.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling juce_audio_basics.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/juce_audio_devices_a4c8a728.o: ../../JuceLibraryCode/modules/juce_audio_devices/juce_audio_devices.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling juce_audio_devices.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/juce_audio_formats_d349f0c8.o: ../../JuceLibraryCode/modules/juce_audio_formats/juce_audio_formats.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling juce_audio_formats.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/juce_audio_processors_44a134a2.o: ../../JuceLibraryCode/modules/juce_audio_processors/juce_audio_processors.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling juce_audio_processors.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
 $(OBJDIR)/juce_core_aff681cc.o: ../../JuceLibraryCode/modules/juce_core/juce_core.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling juce_core.cpp"
@@ -387,16 +229,6 @@ $(OBJDIR)/juce_gui_basics_a630dd20.o: ../../JuceLibraryCode/modules/juce_gui_bas
 $(OBJDIR)/juce_gui_extra_7767d6a8.o: ../../JuceLibraryCode/modules/juce_gui_extra/juce_gui_extra.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling juce_gui_extra.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/juce_opengl_c7e3506c.o: ../../JuceLibraryCode/modules/juce_opengl/juce_opengl.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling juce_opengl.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/juce_video_184321c8.o: ../../JuceLibraryCode/modules/juce_video/juce_video.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling juce_video.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 -include $(OBJECTS:%.o=%.d)

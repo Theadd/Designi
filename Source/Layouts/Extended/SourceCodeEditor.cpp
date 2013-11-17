@@ -28,7 +28,6 @@
 #include "../../Core/DocumentManager.h"
 #include "../MainLayout/MainLayout.h"
 #include "CodeHelpers.h"
-#include "../../Libraries/ejuce_RegularExpression.h"
 
 
 //==============================================================================
