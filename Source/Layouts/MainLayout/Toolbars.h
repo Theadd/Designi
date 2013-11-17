@@ -58,10 +58,11 @@ private:
 			edit_cut		= 6,
 			edit_copy		= 7,
 			edit_paste		= 8,
-			panel_browser	= 9,
-			panel_navigator	= 10,
-			panel_help		= 11,
-			component_inspector	=12
+			edit_delete		= 9,
+			panel_browser	= 10,
+			panel_navigator	= 11,
+			panel_help		= 12,
+			component_inspector	= 13
         };
 
         void getAllToolbarItemIds (Array <int>& ids);

@@ -81,6 +81,7 @@ void ToolbarComponent::ToolbarComponentItemFactory::getAllToolbarItemIds (Array 
 	ids.add (edit_cut);
 	ids.add (edit_copy);
 	ids.add (edit_paste);
+	ids.add (edit_delete);
 	ids.add (component_inspector);
 	/*
 				doc_open		= 1,
@@ -111,6 +112,7 @@ void ToolbarComponent::ToolbarComponentItemFactory::getDefaultItemSet (Array <in
 	ids.add (edit_cut);
 	ids.add (edit_copy);
 	ids.add (edit_paste);
+	ids.add (edit_delete);
 	ids.add (separatorBarId);
 	ids.add (component_inspector);
     ids.add (flexibleSpacerId);
@@ -137,23 +139,27 @@ ToolbarItemComponent* ToolbarComponent::ToolbarComponentItemFactory::createItem 
 			return button;
         case edit_undo:
 			button = createButtonFromZipFileSVG (itemId, "Undo", "chevron-left.svg");
-			button->setTooltip("Undo");
+			button->setCommandToTrigger (&JUCEDesignerApp::getCommandManager (), StandardApplicationCommandIDs::undo, true);
 			return button;
         case edit_redo:
 			button = createButtonFromZipFileSVG (itemId, "Redo", "chevron-right.svg");
-			button->setTooltip("Redo");
+			button->setCommandToTrigger (&JUCEDesignerApp::getCommandManager (), StandardApplicationCommandIDs::redo, true);
 			return button;
 		case edit_cut:
 			button = createButtonFromZipFileSVG (itemId, "Cut", "scissors.svg");
-			button->setTooltip("Cut");
+			button->setCommandToTrigger (&JUCEDesignerApp::getCommandManager (), StandardApplicationCommandIDs::cut, true);
 			return button;
 		case edit_copy:
 			button = createButtonFromZipFileSVG (itemId, "Copy", "document-copy.svg");
-			button->setTooltip("Copy");
+			button->setCommandToTrigger (&JUCEDesignerApp::getCommandManager (), StandardApplicationCommandIDs::copy, true);
 			return button;
 		case edit_paste:
 			button = createButtonFromZipFileSVG (itemId, "Paste", "document-import.svg");
-			button->setTooltip("Paste");
+			button->setCommandToTrigger (&JUCEDesignerApp::getCommandManager (), StandardApplicationCommandIDs::paste, true);
+			return button;
+		case edit_delete:
+			button = createButtonFromZipFileSVG (itemId, "Delete", "trash.svg");
+			button->setCommandToTrigger (&JUCEDesignerApp::getCommandManager (), StandardApplicationCommandIDs::del, true);
 			return button;
 		case component_inspector:
 			button = createButtonFromZipFileSVG (itemId, "Inspector", "screenshot.svg");

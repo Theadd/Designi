@@ -162,6 +162,15 @@
                        isDebug="0" optimisation="2" targetName="designi"/>
       </CONFIGURATIONS>
     </VS2010>
+    <LINUX_MAKE targetFolder="Builds/Linux" juceFolder="..\JUCE\modules" smallIcon="kZm6RI"
+                bigIcon="kZm6RI">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug" libraryPath="/usr/X11R6/lib/" isDebug="1" optimisation="1"
+                       targetName="Designi"/>
+        <CONFIGURATION name="Release" libraryPath="/usr/X11R6/lib/" isDebug="0" optimisation="2"
+                       targetName="Designi"/>
+      </CONFIGURATIONS>
+    </LINUX_MAKE>
   </EXPORTFORMATS>
   <JUCEOPTIONS/>
 </JUCERPROJECT>
