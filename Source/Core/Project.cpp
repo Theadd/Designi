@@ -7,8 +7,7 @@
 
   ==============================================================================
 */
-#include "../../JuceLibraryCode/JuceHeader.h"
-#include "../Globals.h"
+#include "../Headers.h"
 #include "Project.h"
 
 

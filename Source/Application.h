@@ -12,15 +12,15 @@
 #define __APPLICATION_H_5F9C8BE0__
 
 
-#include "../JuceLibraryCode/JuceHeader.h"
+#include "Headers.h"
 #include "Core/Project.h"
-#include "Layouts/MainWindow.h"
-#include "StoredSettings.h"
+#include "UI/Windows/MainWindow.h"
+#include "Core/StoredSettings.h"
 #include "Core/DocumentManager.h"
-#include "Layouts/MainLayout/InnerPanel.h"
-#include "Layouts/Extended/NavigatorTreeBuilder.h"
-#include "Layouts/MainLayout/MainLayout.h"
-#include "Layouts/MainLayout/InnerPanels.h"
+#include "UI/Components/Basics/InnerPanel.h"
+#include "UI/Workers/NavigatorTreeBuilder.h"
+#include "UI/Windows/MainWindow/MainLayout.h"
+#include "UI/Components/Panels/InnerPanels.h"
 
 
 //==============================================================================

@@ -31,10 +31,10 @@
 
   ==============================================================================
 */
-#include "../../JuceLibraryCode/JuceHeader.h"
+#include "../Headers.h"
 #include "DocumentManager.h"
-#include "../Layouts/Extended/FilePreviewComponent.h"
-#include "../Layouts/Extended/SourceCodeEditor.h"
+#include "../UI/Components/Editors/FilePreviewComponent.h"
+#include "../UI/Components/Editors/SourceCodeEditor.h"
 #include "../Application.h"
 
 

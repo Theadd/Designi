@@ -53,7 +53,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <AdditionalIncludeDirectories>..\..\JuceLibraryCode;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\JuceLibraryCode;..\..\JuceLibraryCode\modules;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;DEBUG;_DEBUG;JUCER_VS2010_78A501D=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
@@ -77,6 +77,7 @@
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <LargeAddressAware>true</LargeAddressAware>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -93,7 +94,7 @@
     </Midl>
     <ClCompile>
       <Optimization>MinSpace</Optimization>
-      <AdditionalIncludeDirectories>..\..\JuceLibraryCode;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\JuceLibraryCode;..\..\JuceLibraryCode\modules;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;JUCER_VS2010_78A501D=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
@@ -118,6 +119,7 @@
       <TargetMachine>MachineX86</TargetMachine>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <LargeAddressAware>true</LargeAddressAware>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -125,25 +127,26 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\UI\Windows\MainWindow.cpp"/>
+    <ClCompile Include="..\..\Source\UI\Windows\MainWindow\MainLayout.cpp"/>
+    <ClCompile Include="..\..\Source\UI\Windows\MainWindow\Toolbars.cpp"/>
+    <ClCompile Include="..\..\Source\UI\Components\Extended\ExtendedFileTreeComponent.cpp"/>
+    <ClCompile Include="..\..\Source\UI\Components\Panels\InnerPanels.cpp"/>
+    <ClCompile Include="..\..\Source\UI\Components\Editors\SourceCodeEditor.cpp"/>
+    <ClCompile Include="..\..\Source\UI\Components\Basics\DocumentEditorComponent.cpp"/>
+    <ClCompile Include="..\..\Source\UI\Components\Basics\InnerPanel.cpp"/>
+    <ClCompile Include="..\..\Source\UI\Components\Basics\InnerPanelContainers.cpp"/>
+    <ClCompile Include="..\..\Source\UI\Styles\ExtendedLookAndFeel.cpp"/>
+    <ClCompile Include="..\..\Source\UI\Styles\plain-svg-icons.cpp"/>
+    <ClCompile Include="..\..\Source\UI\Styles\DuskMap\DuskMap.cpp"/>
+    <ClCompile Include="..\..\Source\UI\Styles\BaseOnly\BaseOnly.cpp"/>
+    <ClCompile Include="..\..\Source\UI\Workers\NavigatorTreeBuilder.cpp"/>
+    <ClCompile Include="..\..\Source\UI\Misc\CodeHelpers.cpp"/>
+    <ClCompile Include="..\..\Source\UI\Misc\FileHelpers.cpp"/>
+    <ClCompile Include="..\..\Source\UI\Misc\Globals.cpp"/>
+    <ClCompile Include="..\..\Source\Core\StoredSettings.cpp"/>
     <ClCompile Include="..\..\Source\Core\DocumentManager.cpp"/>
     <ClCompile Include="..\..\Source\Core\Project.cpp"/>
-    <ClCompile Include="..\..\Source\Styles\DuskMap.cpp"/>
-    <ClCompile Include="..\..\Source\Layouts\Extended\NavigatorTreeBuilder.cpp"/>
-    <ClCompile Include="..\..\Source\Layouts\Extended\CodeHelpers.cpp"/>
-    <ClCompile Include="..\..\Source\Layouts\Extended\FileHelpers.cpp"/>
-    <ClCompile Include="..\..\Source\Layouts\Extended\SourceCodeEditor.cpp"/>
-    <ClCompile Include="..\..\Source\Layouts\Extended\DocumentEditorComponent.cpp"/>
-    <ClCompile Include="..\..\Source\Layouts\Extended\plain-svg-icons.cpp"/>
-    <ClCompile Include="..\..\Source\Layouts\Extended\ExtendedFileTreeComponent.cpp"/>
-    <ClCompile Include="..\..\Source\Layouts\ExtendedLookAndFeel.cpp"/>
-    <ClCompile Include="..\..\Source\Layouts\MainWindow.cpp"/>
-    <ClCompile Include="..\..\Source\Layouts\MainLayout\InnerPanel.cpp"/>
-    <ClCompile Include="..\..\Source\Layouts\MainLayout\InnerPanels.cpp"/>
-    <ClCompile Include="..\..\Source\Layouts\MainLayout\InnerPanelContainers.cpp"/>
-    <ClCompile Include="..\..\Source\Layouts\MainLayout\Toolbars.cpp"/>
-    <ClCompile Include="..\..\Source\Layouts\MainLayout\MainLayout.cpp"/>
-    <ClCompile Include="..\..\Source\Globals.cpp"/>
-    <ClCompile Include="..\..\Source\StoredSettings.cpp"/>
     <ClCompile Include="..\..\Source\Main.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_core\text\juce_CharacterFunctions.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
@@ -968,27 +971,29 @@
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_gui_extra\juce_gui_extra.cpp"/>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\UI\Windows\MainWindow.h"/>
+    <ClInclude Include="..\..\Source\UI\Windows\MainWindow\MainLayout.h"/>
+    <ClInclude Include="..\..\Source\UI\Windows\MainWindow\Toolbars.h"/>
+    <ClInclude Include="..\..\Source\UI\Components\Extended\ExtendedFileTreeComponent.h"/>
+    <ClInclude Include="..\..\Source\UI\Components\Panels\InnerPanels.h"/>
+    <ClInclude Include="..\..\Source\UI\Components\Editors\FilePreviewComponent.h"/>
+    <ClInclude Include="..\..\Source\UI\Components\Editors\SourceCodeEditor.h"/>
+    <ClInclude Include="..\..\Source\UI\Components\Basics\DocumentEditorComponent.h"/>
+    <ClInclude Include="..\..\Source\UI\Components\Basics\InnerPanel.h"/>
+    <ClInclude Include="..\..\Source\UI\Components\Basics\InnerPanelContainers.h"/>
+    <ClInclude Include="..\..\Source\UI\Styles\ExtendedLookAndFeel.h"/>
+    <ClInclude Include="..\..\Source\UI\Styles\plain-svg-icons.h"/>
+    <ClInclude Include="..\..\Source\UI\Styles\DuskMap\DuskMap.h"/>
+    <ClInclude Include="..\..\Source\UI\Styles\BaseOnly\BaseOnly.h"/>
+    <ClInclude Include="..\..\Source\UI\Workers\NavigatorTreeBuilder.h"/>
+    <ClInclude Include="..\..\Source\UI\Misc\CodeHelpers.h"/>
+    <ClInclude Include="..\..\Source\UI\Misc\Colours.h"/>
+    <ClInclude Include="..\..\Source\UI\Misc\FileHelpers.h"/>
+    <ClInclude Include="..\..\Source\UI\Misc\Globals.h"/>
+    <ClInclude Include="..\..\Source\Core\StoredSettings.h"/>
     <ClInclude Include="..\..\Source\Core\DocumentManager.h"/>
     <ClInclude Include="..\..\Source\Core\Project.h"/>
-    <ClInclude Include="..\..\Source\Styles\DuskMap.h"/>
-    <ClInclude Include="..\..\Source\Layouts\Extended\NavigatorTreeBuilder.h"/>
-    <ClInclude Include="..\..\Source\Layouts\Extended\Colours.h"/>
-    <ClInclude Include="..\..\Source\Layouts\Extended\CodeHelpers.h"/>
-    <ClInclude Include="..\..\Source\Layouts\Extended\FileHelpers.h"/>
-    <ClInclude Include="..\..\Source\Layouts\Extended\SourceCodeEditor.h"/>
-    <ClInclude Include="..\..\Source\Layouts\Extended\DocumentEditorComponent.h"/>
-    <ClInclude Include="..\..\Source\Layouts\Extended\FilePreviewComponent.h"/>
-    <ClInclude Include="..\..\Source\Layouts\Extended\plain-svg-icons.h"/>
-    <ClInclude Include="..\..\Source\Layouts\Extended\ExtendedFileTreeComponent.h"/>
-    <ClInclude Include="..\..\Source\Layouts\ExtendedLookAndFeel.h"/>
-    <ClInclude Include="..\..\Source\Layouts\MainWindow.h"/>
-    <ClInclude Include="..\..\Source\Layouts\MainLayout\InnerPanel.h"/>
-    <ClInclude Include="..\..\Source\Layouts\MainLayout\InnerPanels.h"/>
-    <ClInclude Include="..\..\Source\Layouts\MainLayout\InnerPanelContainers.h"/>
-    <ClInclude Include="..\..\Source\Layouts\MainLayout\Toolbars.h"/>
-    <ClInclude Include="..\..\Source\Layouts\MainLayout\MainLayout.h"/>
-    <ClInclude Include="..\..\Source\Globals.h"/>
-    <ClInclude Include="..\..\Source\StoredSettings.h"/>
+    <ClInclude Include="..\..\Source\Headers.h"/>
     <ClInclude Include="..\..\Source\Application.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_core\text\juce_CharacterFunctions.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_core\text\juce_CharPointer_ASCII.h"/>

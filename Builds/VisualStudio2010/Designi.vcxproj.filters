@@ -11,23 +11,47 @@
     <Filter Include="Designi\Source">
       <UniqueIdentifier>{890BCCDD-9864-BF70-3FFF-764557515A89}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Designi\Source\Libraries">
-      <UniqueIdentifier>{3326851C-B079-2087-EA58-4087B46979AD}</UniqueIdentifier>
+    <Filter Include="Designi\Source\UI">
+      <UniqueIdentifier>{A1990FC5-167B-6242-5B8C-EAE7B6B10EA7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Designi\Source\UI\Windows">
+      <UniqueIdentifier>{66EF1238-6589-30F6-DEAD-CCBFAF460853}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Designi\Source\UI\Windows\MainWindow">
+      <UniqueIdentifier>{CC48B9F5-4150-2854-2E9A-600269F43236}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Designi\Source\UI\Components">
+      <UniqueIdentifier>{8EC30868-9F62-FE52-3354-EAF5AF6E04E8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Designi\Source\UI\Components\Extended">
+      <UniqueIdentifier>{114393BE-60F7-884F-6942-EB2087927BF0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Designi\Source\UI\Components\Panels">
+      <UniqueIdentifier>{0D12D87A-7CCD-EB8F-40F5-4E95A15E55C1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Designi\Source\UI\Components\Editors">
+      <UniqueIdentifier>{3F3E97A9-3798-63FC-A199-6DF0B7172F43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Designi\Source\UI\Components\Basics">
+      <UniqueIdentifier>{3B813CC9-CA0E-D157-BBE4-57B565F2CC6B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Designi\Source\UI\Styles">
+      <UniqueIdentifier>{30A7268B-5BDE-3AC0-2BDD-D7A91C345BED}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Designi\Source\UI\Styles\DuskMap">
+      <UniqueIdentifier>{DBD7D612-0A54-C479-1F76-7366774FD6F9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Designi\Source\UI\Styles\BaseOnly">
+      <UniqueIdentifier>{A66ED127-B58A-A23A-EC28-78969B12C8EE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Designi\Source\UI\Workers">
+      <UniqueIdentifier>{B43FB17D-3CA7-AB86-EDC4-BDD9482012EA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Designi\Source\UI\Misc">
+      <UniqueIdentifier>{B1440538-14B5-8040-2CBC-D4808CD9ABCA}</UniqueIdentifier>
     </Filter>
     <Filter Include="Designi\Source\Core">
       <UniqueIdentifier>{4352D380-DAE5-CBD9-352D-0D0836473A88}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Designi\Source\Styles">
-      <UniqueIdentifier>{AE5F1FE0-31F1-AF27-4628-59D17DC37AC3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Designi\Source\Layouts">
-      <UniqueIdentifier>{CABCDFBD-7AA6-C0C5-363A-1BB389BECC73}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Designi\Source\Layouts\Extended">
-      <UniqueIdentifier>{3CBCCBEE-DC03-923B-BAB0-C861C5C03E01}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Designi\Source\Layouts\MainLayout">
-      <UniqueIdentifier>{5B0E8921-EFE6-243F-A5C7-BB39E9766DF1}</UniqueIdentifier>
     </Filter>
     <Filter Include="Juce Modules">
       <UniqueIdentifier>{422C46B7-0467-2DB0-BF3C-16DFCAFD69AC}</UniqueIdentifier>
@@ -232,62 +256,65 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\UI\Windows\MainWindow.cpp">
+      <Filter>Designi\Source\UI\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\UI\Windows\MainWindow\MainLayout.cpp">
+      <Filter>Designi\Source\UI\Windows\MainWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\UI\Windows\MainWindow\Toolbars.cpp">
+      <Filter>Designi\Source\UI\Windows\MainWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\UI\Components\Extended\ExtendedFileTreeComponent.cpp">
+      <Filter>Designi\Source\UI\Components\Extended</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\UI\Components\Panels\InnerPanels.cpp">
+      <Filter>Designi\Source\UI\Components\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\UI\Components\Editors\SourceCodeEditor.cpp">
+      <Filter>Designi\Source\UI\Components\Editors</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\UI\Components\Basics\DocumentEditorComponent.cpp">
+      <Filter>Designi\Source\UI\Components\Basics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\UI\Components\Basics\InnerPanel.cpp">
+      <Filter>Designi\Source\UI\Components\Basics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\UI\Components\Basics\InnerPanelContainers.cpp">
+      <Filter>Designi\Source\UI\Components\Basics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\UI\Styles\ExtendedLookAndFeel.cpp">
+      <Filter>Designi\Source\UI\Styles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\UI\Styles\plain-svg-icons.cpp">
+      <Filter>Designi\Source\UI\Styles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\UI\Styles\DuskMap\DuskMap.cpp">
+      <Filter>Designi\Source\UI\Styles\DuskMap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\UI\Styles\BaseOnly\BaseOnly.cpp">
+      <Filter>Designi\Source\UI\Styles\BaseOnly</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\UI\Workers\NavigatorTreeBuilder.cpp">
+      <Filter>Designi\Source\UI\Workers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\UI\Misc\CodeHelpers.cpp">
+      <Filter>Designi\Source\UI\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\UI\Misc\FileHelpers.cpp">
+      <Filter>Designi\Source\UI\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\UI\Misc\Globals.cpp">
+      <Filter>Designi\Source\UI\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Core\StoredSettings.cpp">
+      <Filter>Designi\Source\Core</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\Core\DocumentManager.cpp">
       <Filter>Designi\Source\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\Core\Project.cpp">
       <Filter>Designi\Source\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Styles\DuskMap.cpp">
-      <Filter>Designi\Source\Styles</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Layouts\Extended\NavigatorTreeBuilder.cpp">
-      <Filter>Designi\Source\Layouts\Extended</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Layouts\Extended\CodeHelpers.cpp">
-      <Filter>Designi\Source\Layouts\Extended</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Layouts\Extended\FileHelpers.cpp">
-      <Filter>Designi\Source\Layouts\Extended</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Layouts\Extended\SourceCodeEditor.cpp">
-      <Filter>Designi\Source\Layouts\Extended</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Layouts\Extended\DocumentEditorComponent.cpp">
-      <Filter>Designi\Source\Layouts\Extended</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Layouts\Extended\plain-svg-icons.cpp">
-      <Filter>Designi\Source\Layouts\Extended</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Layouts\Extended\ExtendedFileTreeComponent.cpp">
-      <Filter>Designi\Source\Layouts\Extended</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Layouts\ExtendedLookAndFeel.cpp">
-      <Filter>Designi\Source\Layouts</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Layouts\MainWindow.cpp">
-      <Filter>Designi\Source\Layouts</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Layouts\MainLayout\InnerPanel.cpp">
-      <Filter>Designi\Source\Layouts\MainLayout</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Layouts\MainLayout\InnerPanels.cpp">
-      <Filter>Designi\Source\Layouts\MainLayout</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Layouts\MainLayout\InnerPanelContainers.cpp">
-      <Filter>Designi\Source\Layouts\MainLayout</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Layouts\MainLayout\Toolbars.cpp">
-      <Filter>Designi\Source\Layouts\MainLayout</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Layouts\MainLayout\MainLayout.cpp">
-      <Filter>Designi\Source\Layouts\MainLayout</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Globals.cpp">
-      <Filter>Designi\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\StoredSettings.cpp">
-      <Filter>Designi\Source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\Main.cpp">
       <Filter>Designi\Source</Filter>
@@ -1191,67 +1218,73 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\UI\Windows\MainWindow.h">
+      <Filter>Designi\Source\UI\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\UI\Windows\MainWindow\MainLayout.h">
+      <Filter>Designi\Source\UI\Windows\MainWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\UI\Windows\MainWindow\Toolbars.h">
+      <Filter>Designi\Source\UI\Windows\MainWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\UI\Components\Extended\ExtendedFileTreeComponent.h">
+      <Filter>Designi\Source\UI\Components\Extended</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\UI\Components\Panels\InnerPanels.h">
+      <Filter>Designi\Source\UI\Components\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\UI\Components\Editors\FilePreviewComponent.h">
+      <Filter>Designi\Source\UI\Components\Editors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\UI\Components\Editors\SourceCodeEditor.h">
+      <Filter>Designi\Source\UI\Components\Editors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\UI\Components\Basics\DocumentEditorComponent.h">
+      <Filter>Designi\Source\UI\Components\Basics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\UI\Components\Basics\InnerPanel.h">
+      <Filter>Designi\Source\UI\Components\Basics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\UI\Components\Basics\InnerPanelContainers.h">
+      <Filter>Designi\Source\UI\Components\Basics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\UI\Styles\ExtendedLookAndFeel.h">
+      <Filter>Designi\Source\UI\Styles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\UI\Styles\plain-svg-icons.h">
+      <Filter>Designi\Source\UI\Styles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\UI\Styles\DuskMap\DuskMap.h">
+      <Filter>Designi\Source\UI\Styles\DuskMap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\UI\Styles\BaseOnly\BaseOnly.h">
+      <Filter>Designi\Source\UI\Styles\BaseOnly</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\UI\Workers\NavigatorTreeBuilder.h">
+      <Filter>Designi\Source\UI\Workers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\UI\Misc\CodeHelpers.h">
+      <Filter>Designi\Source\UI\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\UI\Misc\Colours.h">
+      <Filter>Designi\Source\UI\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\UI\Misc\FileHelpers.h">
+      <Filter>Designi\Source\UI\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\UI\Misc\Globals.h">
+      <Filter>Designi\Source\UI\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Core\StoredSettings.h">
+      <Filter>Designi\Source\Core</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\Core\DocumentManager.h">
       <Filter>Designi\Source\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Core\Project.h">
       <Filter>Designi\Source\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Styles\DuskMap.h">
-      <Filter>Designi\Source\Styles</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Layouts\Extended\NavigatorTreeBuilder.h">
-      <Filter>Designi\Source\Layouts\Extended</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Layouts\Extended\Colours.h">
-      <Filter>Designi\Source\Layouts\Extended</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Layouts\Extended\CodeHelpers.h">
-      <Filter>Designi\Source\Layouts\Extended</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Layouts\Extended\FileHelpers.h">
-      <Filter>Designi\Source\Layouts\Extended</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Layouts\Extended\SourceCodeEditor.h">
-      <Filter>Designi\Source\Layouts\Extended</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Layouts\Extended\DocumentEditorComponent.h">
-      <Filter>Designi\Source\Layouts\Extended</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Layouts\Extended\FilePreviewComponent.h">
-      <Filter>Designi\Source\Layouts\Extended</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Layouts\Extended\plain-svg-icons.h">
-      <Filter>Designi\Source\Layouts\Extended</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Layouts\Extended\ExtendedFileTreeComponent.h">
-      <Filter>Designi\Source\Layouts\Extended</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Layouts\ExtendedLookAndFeel.h">
-      <Filter>Designi\Source\Layouts</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Layouts\MainWindow.h">
-      <Filter>Designi\Source\Layouts</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Layouts\MainLayout\InnerPanel.h">
-      <Filter>Designi\Source\Layouts\MainLayout</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Layouts\MainLayout\InnerPanels.h">
-      <Filter>Designi\Source\Layouts\MainLayout</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Layouts\MainLayout\InnerPanelContainers.h">
-      <Filter>Designi\Source\Layouts\MainLayout</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Layouts\MainLayout\Toolbars.h">
-      <Filter>Designi\Source\Layouts\MainLayout</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Layouts\MainLayout\MainLayout.h">
-      <Filter>Designi\Source\Layouts\MainLayout</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Globals.h">
-      <Filter>Designi\Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\StoredSettings.h">
+    <ClInclude Include="..\..\Source\Headers.h">
       <Filter>Designi\Source</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Application.h">

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="R3ehq3" name="Designi" projectType="guiapp" version="2.0.0"
-              bundleIdentifier="io.github.Theadd" jucerVersion="3.0.0" defines=""
-              userNotes="https://github.com/Theadd/Designi">
+              bundleIdentifier="io.github.Theadd" jucerVersion="3.1.0" defines=""
+              userNotes="https://github.com/Theadd/Designi" includeBinaryInAppConfig="1">
   <MAINGROUP id="DchWjp" name="Designi">
     <GROUP id="{2B5D31AE-D997-CE08-BF14-D7345862A558}" name="BinaryData">
       <FILE id="kZm6RI" name="icon.png" compile="0" resource="1" file="BinaryData/icon.png"/>
@@ -23,8 +23,88 @@
       <FILE id="q3J4fY" name="navigator.xml" compile="0" resource="1" file="BinaryData/navigator.xml"/>
     </GROUP>
     <GROUP id="{4DA873A5-1CD7-B3EE-C91A-A71EFEFD4243}" name="Source">
-      <GROUP id="{A9A03A8B-8216-A554-9BCD-8A7D18C625E1}" name="Libraries"/>
+      <GROUP id="{B5EBC51E-7127-C63B-A18F-FB4F5547371B}" name="UI">
+        <GROUP id="{6E2FA894-115D-0C03-0945-1C39F9FAFD79}" name="Windows">
+          <FILE id="mCZZMW" name="MainWindow.cpp" compile="1" resource="0" file="Source/UI/Windows/MainWindow.cpp"/>
+          <FILE id="WW2EYF" name="MainWindow.h" compile="0" resource="0" file="Source/UI/Windows/MainWindow.h"/>
+          <GROUP id="{3FAD3CFB-7060-C421-B9E6-02537E96FB56}" name="MainWindow">
+            <FILE id="F933FB" name="MainLayout.cpp" compile="1" resource="0" file="Source/UI/Windows/MainWindow/MainLayout.cpp"/>
+            <FILE id="W1hgXx" name="MainLayout.h" compile="0" resource="0" file="Source/UI/Windows/MainWindow/MainLayout.h"/>
+            <FILE id="HCQYv6" name="Toolbars.cpp" compile="1" resource="0" file="Source/UI/Windows/MainWindow/Toolbars.cpp"/>
+            <FILE id="R7N5y1" name="Toolbars.h" compile="0" resource="0" file="Source/UI/Windows/MainWindow/Toolbars.h"/>
+          </GROUP>
+        </GROUP>
+        <GROUP id="{295C671D-668F-B372-E5CC-F3A2967B69C9}" name="Components">
+          <GROUP id="{36D05E6A-B186-AD4F-38FC-DC44CE3C749F}" name="Extended">
+            <FILE id="MGDYE3" name="ExtendedFileTreeComponent.cpp" compile="1"
+                  resource="0" file="Source/UI/Components/Extended/ExtendedFileTreeComponent.cpp"/>
+            <FILE id="RrhIvR" name="ExtendedFileTreeComponent.h" compile="0" resource="0"
+                  file="Source/UI/Components/Extended/ExtendedFileTreeComponent.h"/>
+          </GROUP>
+          <GROUP id="{BB01E873-7C3E-41C3-CCDC-7F8BD2C4A406}" name="Panels">
+            <FILE id="UW9ChW" name="InnerPanels.cpp" compile="1" resource="0" file="Source/UI/Components/Panels/InnerPanels.cpp"/>
+            <FILE id="rGoEps" name="InnerPanels.h" compile="0" resource="0" file="Source/UI/Components/Panels/InnerPanels.h"/>
+          </GROUP>
+          <GROUP id="{35CEC6B6-F0AF-717E-02C9-83AFE86B94D8}" name="Editors">
+            <FILE id="cgWwz5" name="FilePreviewComponent.h" compile="0" resource="0"
+                  file="Source/UI/Components/Editors/FilePreviewComponent.h"/>
+            <FILE id="Ip5MMY" name="SourceCodeEditor.cpp" compile="1" resource="0"
+                  file="Source/UI/Components/Editors/SourceCodeEditor.cpp"/>
+            <FILE id="W9GjVu" name="SourceCodeEditor.h" compile="0" resource="0"
+                  file="Source/UI/Components/Editors/SourceCodeEditor.h"/>
+          </GROUP>
+          <GROUP id="{358CFC88-CAB4-A1D2-FC6B-593A91AEB304}" name="Basics">
+            <FILE id="m7SbvK" name="DocumentEditorComponent.cpp" compile="1" resource="0"
+                  file="Source/UI/Components/Basics/DocumentEditorComponent.cpp"/>
+            <FILE id="bgr7RH" name="DocumentEditorComponent.h" compile="0" resource="0"
+                  file="Source/UI/Components/Basics/DocumentEditorComponent.h"/>
+            <FILE id="RVrdcB" name="InnerPanel.cpp" compile="1" resource="0" file="Source/UI/Components/Basics/InnerPanel.cpp"/>
+            <FILE id="KCsiGB" name="InnerPanel.h" compile="0" resource="0" file="Source/UI/Components/Basics/InnerPanel.h"/>
+            <FILE id="N6cfFq" name="InnerPanelContainers.cpp" compile="1" resource="0"
+                  file="Source/UI/Components/Basics/InnerPanelContainers.cpp"/>
+            <FILE id="emNjrt" name="InnerPanelContainers.h" compile="0" resource="0"
+                  file="Source/UI/Components/Basics/InnerPanelContainers.h"/>
+          </GROUP>
+        </GROUP>
+        <GROUP id="{1C4BE82C-59C2-0206-CAF4-021A74747B74}" name="Styles">
+          <FILE id="WZN9Fo" name="ExtendedLookAndFeel.cpp" compile="1" resource="0"
+                file="Source/UI/Styles/ExtendedLookAndFeel.cpp"/>
+          <FILE id="SGs5nB" name="ExtendedLookAndFeel.h" compile="0" resource="0"
+                file="Source/UI/Styles/ExtendedLookAndFeel.h"/>
+          <FILE id="R7kK6H" name="plain-svg-icons.cpp" compile="1" resource="0"
+                file="Source/UI/Styles/plain-svg-icons.cpp"/>
+          <FILE id="UyBqbJ" name="plain-svg-icons.h" compile="0" resource="0"
+                file="Source/UI/Styles/plain-svg-icons.h"/>
+          <GROUP id="{1605A586-8262-D256-3AA0-8E3526B6F499}" name="DuskMap">
+            <FILE id="hfQtke" name="DuskMap.cpp" compile="1" resource="0" file="Source/UI/Styles/DuskMap/DuskMap.cpp"/>
+            <FILE id="wpXH4u" name="DuskMap.h" compile="0" resource="0" file="Source/UI/Styles/DuskMap/DuskMap.h"/>
+          </GROUP>
+          <GROUP id="{2B484EBA-8C88-8EB4-E4A2-E45456A2D319}" name="BaseOnly">
+            <FILE id="sDePIF" name="BaseOnly.cpp" compile="1" resource="0" file="Source/UI/Styles/BaseOnly/BaseOnly.cpp"/>
+            <FILE id="WqYVYc" name="BaseOnly.h" compile="0" resource="0" file="Source/UI/Styles/BaseOnly/BaseOnly.h"/>
+          </GROUP>
+        </GROUP>
+        <GROUP id="{438C1826-D495-7BD1-7DB6-A23C68EBFACC}" name="Workers">
+          <FILE id="j6MlEF" name="NavigatorTreeBuilder.cpp" compile="1" resource="0"
+                file="Source/UI/Workers/NavigatorTreeBuilder.cpp"/>
+          <FILE id="qIXggv" name="NavigatorTreeBuilder.h" compile="0" resource="0"
+                file="Source/UI/Workers/NavigatorTreeBuilder.h"/>
+        </GROUP>
+        <GROUP id="{CC981DD7-D8D7-F2D3-F5C2-C040671E0AAF}" name="Misc">
+          <FILE id="rXRenk" name="CodeHelpers.cpp" compile="1" resource="0" file="Source/UI/Misc/CodeHelpers.cpp"/>
+          <FILE id="qIG1Ku" name="CodeHelpers.h" compile="0" resource="0" file="Source/UI/Misc/CodeHelpers.h"/>
+          <FILE id="GL3Azf" name="Colours.h" compile="0" resource="0" file="Source/UI/Misc/Colours.h"/>
+          <FILE id="fDOkoy" name="FileHelpers.cpp" compile="1" resource="0" file="Source/UI/Misc/FileHelpers.cpp"/>
+          <FILE id="t9WdRt" name="FileHelpers.h" compile="0" resource="0" file="Source/UI/Misc/FileHelpers.h"/>
+          <FILE id="VjZ8PU" name="Globals.cpp" compile="1" resource="0" file="Source/UI/Misc/Globals.cpp"/>
+          <FILE id="SfLmFQ" name="Globals.h" compile="0" resource="0" file="Source/UI/Misc/Globals.h"/>
+        </GROUP>
+      </GROUP>
       <GROUP id="{34F49C09-0E20-4FCB-428C-81CE32331E25}" name="Core">
+        <FILE id="SeAhTI" name="StoredSettings.cpp" compile="1" resource="0"
+              file="Source/Core/StoredSettings.cpp"/>
+        <FILE id="yQha72" name="StoredSettings.h" compile="0" resource="0"
+              file="Source/Core/StoredSettings.h"/>
         <FILE id="HPi9A1" name="DocumentManager.cpp" compile="1" resource="0"
               file="Source/Core/DocumentManager.cpp"/>
         <FILE id="yE1Egt" name="DocumentManager.h" compile="0" resource="0"
@@ -32,99 +112,58 @@
         <FILE id="gZLWIc" name="Project.cpp" compile="1" resource="0" file="Source/Core/Project.cpp"/>
         <FILE id="bezGAR" name="Project.h" compile="0" resource="0" file="Source/Core/Project.h"/>
       </GROUP>
-      <GROUP id="{C9618E64-C7AC-8630-B754-8A531AFF8D4A}" name="Styles">
-        <FILE id="aKhYcE" name="DuskMap.cpp" compile="1" resource="0" file="Source/Styles/DuskMap.cpp"/>
-        <FILE id="RQ1u6g" name="DuskMap.h" compile="0" resource="0" file="Source/Styles/DuskMap.h"/>
-      </GROUP>
-      <GROUP id="{91FEA6B6-3B4B-9080-5F5C-93BA955508E8}" name="Layouts">
-        <GROUP id="{C5EB7111-269A-703C-4F6A-1BAD2914A8C4}" name="Extended">
-          <FILE id="tJ1X1G" name="NavigatorTreeBuilder.cpp" compile="1" resource="0"
-                file="Source/Layouts/Extended/NavigatorTreeBuilder.cpp"/>
-          <FILE id="Za5czF" name="NavigatorTreeBuilder.h" compile="0" resource="0"
-                file="Source/Layouts/Extended/NavigatorTreeBuilder.h"/>
-          <FILE id="VL8I55" name="Colours.h" compile="0" resource="0" file="Source/Layouts/Extended/Colours.h"/>
-          <FILE id="ru3BNN" name="CodeHelpers.cpp" compile="1" resource="0" file="Source/Layouts/Extended/CodeHelpers.cpp"/>
-          <FILE id="CuMekW" name="CodeHelpers.h" compile="0" resource="0" file="Source/Layouts/Extended/CodeHelpers.h"/>
-          <FILE id="JFZZJk" name="FileHelpers.cpp" compile="1" resource="0" file="Source/Layouts/Extended/FileHelpers.cpp"/>
-          <FILE id="uEiAWh" name="FileHelpers.h" compile="0" resource="0" file="Source/Layouts/Extended/FileHelpers.h"/>
-          <FILE id="nhFZl1" name="SourceCodeEditor.cpp" compile="1" resource="0"
-                file="Source/Layouts/Extended/SourceCodeEditor.cpp"/>
-          <FILE id="gzWRxM" name="SourceCodeEditor.h" compile="0" resource="0"
-                file="Source/Layouts/Extended/SourceCodeEditor.h"/>
-          <FILE id="EpY1hH" name="DocumentEditorComponent.cpp" compile="1" resource="0"
-                file="Source/Layouts/Extended/DocumentEditorComponent.cpp"/>
-          <FILE id="Gr5Dlq" name="DocumentEditorComponent.h" compile="0" resource="0"
-                file="Source/Layouts/Extended/DocumentEditorComponent.h"/>
-          <FILE id="K6hem4" name="FilePreviewComponent.h" compile="0" resource="0"
-                file="Source/Layouts/Extended/FilePreviewComponent.h"/>
-          <FILE id="Ouj3hB" name="plain-svg-icons.cpp" compile="1" resource="0"
-                file="Source/Layouts/Extended/plain-svg-icons.cpp"/>
-          <FILE id="q0U6bO" name="plain-svg-icons.h" compile="0" resource="0"
-                file="Source/Layouts/Extended/plain-svg-icons.h"/>
-          <FILE id="RXl6ms" name="ExtendedFileTreeComponent.cpp" compile="1"
-                resource="0" file="Source/Layouts/Extended/ExtendedFileTreeComponent.cpp"/>
-          <FILE id="CaGyzO" name="ExtendedFileTreeComponent.h" compile="0" resource="0"
-                file="Source/Layouts/Extended/ExtendedFileTreeComponent.h"/>
-        </GROUP>
-        <FILE id="P4IznY" name="ExtendedLookAndFeel.cpp" compile="1" resource="0"
-              file="Source/Layouts/ExtendedLookAndFeel.cpp"/>
-        <FILE id="GTdNxN" name="ExtendedLookAndFeel.h" compile="0" resource="0"
-              file="Source/Layouts/ExtendedLookAndFeel.h"/>
-        <FILE id="DPnXNo" name="MainWindow.cpp" compile="1" resource="0" file="Source/Layouts/MainWindow.cpp"/>
-        <FILE id="qZn2IT" name="MainWindow.h" compile="0" resource="0" file="Source/Layouts/MainWindow.h"/>
-        <GROUP id="{DBE84A0F-BC8A-CF79-40F6-663BDD809E90}" name="MainLayout">
-          <FILE id="tPKH3P" name="InnerPanel.cpp" compile="1" resource="0" file="Source/Layouts/MainLayout/InnerPanel.cpp"/>
-          <FILE id="UJdSjB" name="InnerPanel.h" compile="0" resource="0" file="Source/Layouts/MainLayout/InnerPanel.h"/>
-          <FILE id="WylhU8" name="InnerPanels.cpp" compile="1" resource="0" file="Source/Layouts/MainLayout/InnerPanels.cpp"/>
-          <FILE id="R7Z86F" name="InnerPanels.h" compile="0" resource="0" file="Source/Layouts/MainLayout/InnerPanels.h"/>
-          <FILE id="bgOjlR" name="InnerPanelContainers.cpp" compile="1" resource="0"
-                file="Source/Layouts/MainLayout/InnerPanelContainers.cpp"/>
-          <FILE id="P2CAnD" name="InnerPanelContainers.h" compile="0" resource="0"
-                file="Source/Layouts/MainLayout/InnerPanelContainers.h"/>
-          <FILE id="vOB6qs" name="Toolbars.cpp" compile="1" resource="0" file="Source/Layouts/MainLayout/Toolbars.cpp"/>
-          <FILE id="T1xM3B" name="Toolbars.h" compile="0" resource="0" file="Source/Layouts/MainLayout/Toolbars.h"/>
-          <FILE id="DMereG" name="MainLayout.cpp" compile="1" resource="0" file="Source/Layouts/MainLayout/MainLayout.cpp"/>
-          <FILE id="pnbj67" name="MainLayout.h" compile="0" resource="0" file="Source/Layouts/MainLayout/MainLayout.h"/>
-        </GROUP>
-      </GROUP>
-      <FILE id="T8SRwC" name="Globals.cpp" compile="1" resource="0" file="Source/Globals.cpp"/>
-      <FILE id="MIPbpq" name="Globals.h" compile="0" resource="0" file="Source/Globals.h"/>
-      <FILE id="tAh1Bu" name="StoredSettings.cpp" compile="1" resource="0"
-            file="Source/StoredSettings.cpp"/>
-      <FILE id="mYCUp9" name="StoredSettings.h" compile="0" resource="0"
-            file="Source/StoredSettings.h"/>
+      <FILE id="Krw9HO" name="Headers.h" compile="0" resource="0" file="Source/Headers.h"/>
       <FILE id="RMrb2n" name="Application.h" compile="0" resource="0" file="Source/Application.h"/>
       <FILE id="PH6jHb" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
     </GROUP>
   </MAINGROUP>
   <MODULES>
     <MODULE id="juce_core" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_cryptography" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="1"/>
     <MODULE id="juce_events" showAllCode="1" useLocalCopy="1"/>
     <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="1"/>
-    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_gui_audio" showAllCode="1" useLocalCopy="1"/>
     <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="1"/>
     <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="1"/>
-    <MODULE id="juce_gui_audio" showAllCode="1" useLocalCopy="1"/>
-    <MODULE id="juce_cryptography" showAllCode="1" useLocalCopy="1"/>
   </MODULES>
   <EXPORTFORMATS>
-    <VS2010 targetFolder="Builds/VisualStudio2010" libraryType="1" juceFolder="..\JUCE\modules"
-            extraCompilerFlags="" smallIcon="kZm6RI" bigIcon="kZm6RI">
+    <VS2010 targetFolder="Builds/VisualStudio2010" libraryType="1" extraCompilerFlags=""
+            smallIcon="kZm6RI" bigIcon="kZm6RI">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
                        isDebug="1" optimisation="1" targetName="designi"/>
         <CONFIGURATION name="Release" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
                        isDebug="0" optimisation="2" targetName="designi"/>
       </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_gui_extra" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_gui_audio" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_graphics" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_events" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_data_structures" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_cryptography" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_core" path="JuceLibraryCode/modules"/>
+      </MODULEPATHS>
     </VS2010>
-    <LINUX_MAKE targetFolder="Builds/Linux" juceFolder="..\JUCE\modules" smallIcon="kZm6RI"
-                bigIcon="kZm6RI">
+    <LINUX_MAKE targetFolder="Builds/Linux" smallIcon="kZm6RI" bigIcon="kZm6RI">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" libraryPath="/usr/X11R6/lib/" isDebug="1" optimisation="1"
                        targetName="Designi"/>
         <CONFIGURATION name="Release" libraryPath="/usr/X11R6/lib/" isDebug="0" optimisation="2"
                        targetName="Designi"/>
       </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_gui_extra" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_gui_audio" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_graphics" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_events" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_data_structures" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_cryptography" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_core" path="JuceLibraryCode/modules"/>
+      </MODULEPATHS>
     </LINUX_MAKE>
   </EXPORTFORMATS>
   <JUCEOPTIONS/>

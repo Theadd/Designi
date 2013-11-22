@@ -1,28 +1,29 @@
 # Automatically generated makefile, created by the Introjucer
 # Don't edit this file! Your changes will be overwritten when you re-save the Introjucer project!
 
+# (this disables dependency generation if multiple architectures are set)
+DEPFLAGS := $(if $(word 2, $(TARGET_ARCH)), , -MMD)
+
 ifndef CONFIG
   CONFIG=Debug
 endif
-
-ifeq ($(TARGET_ARCH),)
-  TARGET_ARCH := -march=native
-endif
-
-# (this disables dependency generation if multiple architectures are set)
-DEPFLAGS := $(if $(word 2, $(TARGET_ARCH)), , -MMD)
 
 ifeq ($(CONFIG),Debug)
   BINDIR := build
   LIBDIR := build
   OBJDIR := build/intermediate/Debug
   OUTDIR := build
-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode
+
+  ifeq ($(TARGET_ARCH),)
+    TARGET_ARCH := -march=native
+  endif
+
+  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../JuceLibraryCode/modules
   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -g -ggdb -O0
-  CXXFLAGS += $(CFLAGS) 
-  LDFLAGS += -L$(BINDIR) -L$(LIBDIR) -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -ldl -lfreetype -lpthread -lrt 
+  CXXFLAGS += $(CFLAGS)
+  LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -ldl -lfreetype -lpthread -lrt 
   LDDEPS :=
-  RESFLAGS :=  -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode
+  RESFLAGS :=  -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../JuceLibraryCode/modules
   TARGET := Designi
   BLDCMD = $(CXX) -o $(OUTDIR)/$(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(TARGET_ARCH)
 endif
@@ -32,36 +33,42 @@ ifeq ($(CONFIG),Release)
   LIBDIR := build
   OBJDIR := build/intermediate/Release
   OUTDIR := build
-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode
+
+  ifeq ($(TARGET_ARCH),)
+    TARGET_ARCH := -march=native
+  endif
+
+  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../JuceLibraryCode/modules
   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -Os
-  CXXFLAGS += $(CFLAGS) 
-  LDFLAGS += -L$(BINDIR) -L$(LIBDIR) -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -ldl -lfreetype -lpthread -lrt 
+  CXXFLAGS += $(CFLAGS)
+  LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -fvisibility=hidden -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -ldl -lfreetype -lpthread -lrt 
   LDDEPS :=
-  RESFLAGS :=  -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode
+  RESFLAGS :=  -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../JuceLibraryCode/modules
   TARGET := Designi
   BLDCMD = $(CXX) -o $(OUTDIR)/$(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(TARGET_ARCH)
 endif
 
 OBJECTS := \
+  $(OBJDIR)/MainWindow_f4cdd931.o \
+  $(OBJDIR)/MainLayout_4de6c98b.o \
+  $(OBJDIR)/Toolbars_3bf305e0.o \
+  $(OBJDIR)/ExtendedFileTreeComponent_f94a5bfb.o \
+  $(OBJDIR)/InnerPanels_4958efec.o \
+  $(OBJDIR)/SourceCodeEditor_d7215ee5.o \
+  $(OBJDIR)/DocumentEditorComponent_582dd592.o \
+  $(OBJDIR)/InnerPanel_5073d21b.o \
+  $(OBJDIR)/InnerPanelContainers_8f6901cd.o \
+  $(OBJDIR)/ExtendedLookAndFeel_8c7c4334.o \
+  $(OBJDIR)/plain-svg-icons_b414307d.o \
+  $(OBJDIR)/DuskMap_5723f766.o \
+  $(OBJDIR)/BaseOnly_f3ecfd1e.o \
+  $(OBJDIR)/NavigatorTreeBuilder_6f3593c.o \
+  $(OBJDIR)/CodeHelpers_2b8707d1.o \
+  $(OBJDIR)/FileHelpers_61fec0e2.o \
+  $(OBJDIR)/Globals_61599329.o \
+  $(OBJDIR)/StoredSettings_68a600d7.o \
   $(OBJDIR)/DocumentManager_ab56030b.o \
   $(OBJDIR)/Project_4328492.o \
-  $(OBJDIR)/DuskMap_9b56ba2f.o \
-  $(OBJDIR)/NavigatorTreeBuilder_5453e5b7.o \
-  $(OBJDIR)/CodeHelpers_da0e0051.o \
-  $(OBJDIR)/FileHelpers_1085b962.o \
-  $(OBJDIR)/SourceCodeEditor_2a28b126.o \
-  $(OBJDIR)/DocumentEditorComponent_da903b6e.o \
-  $(OBJDIR)/plain-svg-icons_b76931c7.o \
-  $(OBJDIR)/ExtendedFileTreeComponent_138def23.o \
-  $(OBJDIR)/ExtendedLookAndFeel_eebc17c0.o \
-  $(OBJDIR)/MainWindow_d6f61478.o \
-  $(OBJDIR)/InnerPanel_b294a6f5.o \
-  $(OBJDIR)/InnerPanels_a3b44568.o \
-  $(OBJDIR)/InnerPanelContainers_f8510e27.o \
-  $(OBJDIR)/Toolbars_9776797f.o \
-  $(OBJDIR)/MainLayout_d65bd16a.o \
-  $(OBJDIR)/Globals_d339a991.o \
-  $(OBJDIR)/StoredSettings_dfdf196f.o \
   $(OBJDIR)/Main_90ebc5c2.o \
   $(OBJDIR)/BinaryData_ce4232d4.o \
   $(OBJDIR)/juce_core_aff681cc.o \
@@ -91,6 +98,96 @@ strip:
 	@echo Stripping Designi
 	-@strip --strip-unneeded $(OUTDIR)/$(TARGET)
 
+$(OBJDIR)/MainWindow_f4cdd931.o: ../../Source/UI/Windows/MainWindow.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling MainWindow.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/MainLayout_4de6c98b.o: ../../Source/UI/Windows/MainWindow/MainLayout.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling MainLayout.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/Toolbars_3bf305e0.o: ../../Source/UI/Windows/MainWindow/Toolbars.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling Toolbars.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/ExtendedFileTreeComponent_f94a5bfb.o: ../../Source/UI/Components/Extended/ExtendedFileTreeComponent.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling ExtendedFileTreeComponent.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/InnerPanels_4958efec.o: ../../Source/UI/Components/Panels/InnerPanels.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling InnerPanels.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/SourceCodeEditor_d7215ee5.o: ../../Source/UI/Components/Editors/SourceCodeEditor.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling SourceCodeEditor.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/DocumentEditorComponent_582dd592.o: ../../Source/UI/Components/Basics/DocumentEditorComponent.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling DocumentEditorComponent.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/InnerPanel_5073d21b.o: ../../Source/UI/Components/Basics/InnerPanel.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling InnerPanel.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/InnerPanelContainers_8f6901cd.o: ../../Source/UI/Components/Basics/InnerPanelContainers.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling InnerPanelContainers.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/ExtendedLookAndFeel_8c7c4334.o: ../../Source/UI/Styles/ExtendedLookAndFeel.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling ExtendedLookAndFeel.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/plain-svg-icons_b414307d.o: ../../Source/UI/Styles/plain-svg-icons.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling plain-svg-icons.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/DuskMap_5723f766.o: ../../Source/UI/Styles/DuskMap/DuskMap.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling DuskMap.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/BaseOnly_f3ecfd1e.o: ../../Source/UI/Styles/BaseOnly/BaseOnly.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling BaseOnly.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/NavigatorTreeBuilder_6f3593c.o: ../../Source/UI/Workers/NavigatorTreeBuilder.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling NavigatorTreeBuilder.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/CodeHelpers_2b8707d1.o: ../../Source/UI/Misc/CodeHelpers.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling CodeHelpers.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/FileHelpers_61fec0e2.o: ../../Source/UI/Misc/FileHelpers.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling FileHelpers.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/Globals_61599329.o: ../../Source/UI/Misc/Globals.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling Globals.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/StoredSettings_68a600d7.o: ../../Source/Core/StoredSettings.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling StoredSettings.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
 $(OBJDIR)/DocumentManager_ab56030b.o: ../../Source/Core/DocumentManager.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling DocumentManager.cpp"
@@ -99,91 +196,6 @@ $(OBJDIR)/DocumentManager_ab56030b.o: ../../Source/Core/DocumentManager.cpp
 $(OBJDIR)/Project_4328492.o: ../../Source/Core/Project.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling Project.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/DuskMap_9b56ba2f.o: ../../Source/Styles/DuskMap.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling DuskMap.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/NavigatorTreeBuilder_5453e5b7.o: ../../Source/Layouts/Extended/NavigatorTreeBuilder.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling NavigatorTreeBuilder.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/CodeHelpers_da0e0051.o: ../../Source/Layouts/Extended/CodeHelpers.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling CodeHelpers.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/FileHelpers_1085b962.o: ../../Source/Layouts/Extended/FileHelpers.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling FileHelpers.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/SourceCodeEditor_2a28b126.o: ../../Source/Layouts/Extended/SourceCodeEditor.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling SourceCodeEditor.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/DocumentEditorComponent_da903b6e.o: ../../Source/Layouts/Extended/DocumentEditorComponent.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling DocumentEditorComponent.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/plain-svg-icons_b76931c7.o: ../../Source/Layouts/Extended/plain-svg-icons.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling plain-svg-icons.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/ExtendedFileTreeComponent_138def23.o: ../../Source/Layouts/Extended/ExtendedFileTreeComponent.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling ExtendedFileTreeComponent.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/ExtendedLookAndFeel_eebc17c0.o: ../../Source/Layouts/ExtendedLookAndFeel.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling ExtendedLookAndFeel.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/MainWindow_d6f61478.o: ../../Source/Layouts/MainWindow.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling MainWindow.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/InnerPanel_b294a6f5.o: ../../Source/Layouts/MainLayout/InnerPanel.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling InnerPanel.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/InnerPanels_a3b44568.o: ../../Source/Layouts/MainLayout/InnerPanels.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling InnerPanels.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/InnerPanelContainers_f8510e27.o: ../../Source/Layouts/MainLayout/InnerPanelContainers.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling InnerPanelContainers.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/Toolbars_9776797f.o: ../../Source/Layouts/MainLayout/Toolbars.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling Toolbars.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/MainLayout_d65bd16a.o: ../../Source/Layouts/MainLayout/MainLayout.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling MainLayout.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/Globals_d339a991.o: ../../Source/Globals.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling Globals.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/StoredSettings_dfdf196f.o: ../../Source/StoredSettings.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling StoredSettings.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/Main_90ebc5c2.o: ../../Source/Main.cpp
