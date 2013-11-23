@@ -34,6 +34,12 @@ StoredSettings::StoredSettings()
 StoredSettings::~StoredSettings()
 {
 	propertiesFile = nullptr;
+	for (int i = propertyFiles.size(); --i >= 0;)
+    {
+        PropertiesFile* props = propertyFiles.getUnchecked(i);
+        if (props != nullptr)
+			props->save();
+    }
 }
 
 String StoredSettings::getValue(StringRef keyName, const String &defaultReturnValue)
@@ -79,6 +85,11 @@ PropertiesFile& StoredSettings::getProjectProperties (const String& projectUID)
     }
 
     PropertiesFile* p = createPropsFile (filename);
+	if (!p->getFile().existsAsFile())
+	{
+		p->getFile().create();
+	}
+	DBG("PROPERTIES FILE FOR PROJECT: " + p->getFile().getFullPathName());
     propertyFiles.add (p);
     return *p;
 }

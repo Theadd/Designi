@@ -53,6 +53,7 @@ OBJECTS := \
   $(OBJDIR)/MainLayout_4de6c98b.o \
   $(OBJDIR)/Toolbars_3bf305e0.o \
   $(OBJDIR)/ExtendedFileTreeComponent_f94a5bfb.o \
+  $(OBJDIR)/JucerTreeViewBase_80b6c139.o \
   $(OBJDIR)/ProjectExplorerPanel_18f9c08f.o \
   $(OBJDIR)/InnerPanels_4958efec.o \
   $(OBJDIR)/SourceCodeEditor_d7215ee5.o \
@@ -122,6 +123,11 @@ $(OBJDIR)/Toolbars_3bf305e0.o: ../../Source/UI/Windows/MainWindow/Toolbars.cpp
 $(OBJDIR)/ExtendedFileTreeComponent_f94a5bfb.o: ../../Source/UI/Components/Extended/ExtendedFileTreeComponent.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling ExtendedFileTreeComponent.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/JucerTreeViewBase_80b6c139.o: ../../Source/UI/Components/Panels/ProjectExplorerPanel/JucerTreeViewBase.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling JucerTreeViewBase.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/ProjectExplorerPanel_18f9c08f.o: ../../Source/UI/Components/Panels/ProjectExplorerPanel.cpp

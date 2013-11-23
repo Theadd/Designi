@@ -18,6 +18,10 @@
 #define MINIMUMPANELSIZE 90
 #define MENUBARHEIGHT 24
 
+const char* const projectItemDragType   = "Project Items";
+const char* const drawableItemDragType  = "Drawable Items";
+const char* const componentItemDragType = "Components";
+
 namespace Globals
 {
     enum Position

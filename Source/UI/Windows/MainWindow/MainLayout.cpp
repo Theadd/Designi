@@ -16,6 +16,7 @@
 #include "../../Components/Basics/InnerPanelContainers.h"
 //#include "InnerPanel.h"
 #include "../../Components/Panels/InnerPanels.h"
+#include "../../Components/Panels/ProjectExplorerPanel.h"
 #include "../../Styles/ExtendedLookAndFeel.h"
 #include "../MainWindow.h"
 #include "../../../Core/Project.h"
@@ -1080,6 +1081,9 @@ void MainLayout::setProject(Project* project)
 	leftPanelContainer->addInnerPanel(fileBrowserPanel = new FileBrowserPanel(), true);
 	fileBrowserPanel->setProjectName(project->getTitle());
 	fileBrowserPanel->setBrowserRoot(project->getProjectFolder());//*workingPath);
+	//ProjectExplorerPanel
+	projectExplorerPanel = nullptr;
+	leftPanelContainer->addInnerPanel(projectExplorerPanel = new ProjectExplorerPanel(*project), false);
 	//helpPanel
 	helpPanel = nullptr;
 	leftPanelContainer->addInnerPanel(helpPanel = new HelpPanel(), true);
@@ -1104,6 +1108,7 @@ void MainLayout::closeCurrentProject()
 		navigatorPanel = nullptr;
 		fileBrowserPanel = nullptr;
 		helpPanel = nullptr;
+		projectExplorerPanel = nullptr;
 		//codeEditorPanels.clear();
 		editors.clear();
 	}

@@ -18,6 +18,7 @@ class InnerPanel;
 class FileBrowserPanel;
 class NavigatorPanel;
 class HelpPanel;
+class ProjectExplorerPanel;
 //class CodeEditorPanel;
 class Panel;
 class PanelContainer;
@@ -157,6 +158,7 @@ public:
 	ScopedPointer <HelpPanel> helpPanel;
 	ScopedPointer <FileBrowserPanel> fileBrowserPanel;
 	ScopedPointer <NavigatorPanel> navigatorPanel;
+	ScopedPointer <ProjectExplorerPanel> projectExplorerPanel;
 
 private:
 	MainWindow& mainWindow;

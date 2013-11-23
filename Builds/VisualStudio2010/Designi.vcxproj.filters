@@ -29,6 +29,9 @@
     <Filter Include="Designi\Source\UI\Components\Panels">
       <UniqueIdentifier>{0D12D87A-7CCD-EB8F-40F5-4E95A15E55C1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Designi\Source\UI\Components\Panels\ProjectExplorerPanel">
+      <UniqueIdentifier>{B35ACF2F-92FF-4EB0-B71B-2735331F05A2}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Designi\Source\UI\Components\Editors">
       <UniqueIdentifier>{3F3E97A9-3798-63FC-A199-6DF0B7172F43}</UniqueIdentifier>
     </Filter>
@@ -273,6 +276,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\UI\Components\Extended\ExtendedFileTreeComponent.cpp">
       <Filter>Designi\Source\UI\Components\Extended</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\UI\Components\Panels\ProjectExplorerPanel\JucerTreeViewBase.cpp">
+      <Filter>Designi\Source\UI\Components\Panels\ProjectExplorerPanel</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\UI\Components\Panels\ProjectExplorerPanel.cpp">
       <Filter>Designi\Source\UI\Components\Panels</Filter>
@@ -1253,6 +1259,18 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\UI\Components\Extended\ExtendedFileTreeComponent.h">
       <Filter>Designi\Source\UI\Components\Extended</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\UI\Components\Panels\ProjectExplorerPanel\JucerTreeViewBase.h">
+      <Filter>Designi\Source\UI\Components\Panels\ProjectExplorerPanel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\UI\Components\Panels\ProjectExplorerPanel\ProjectTree_Base.h">
+      <Filter>Designi\Source\UI\Components\Panels\ProjectExplorerPanel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\UI\Components\Panels\ProjectExplorerPanel\ProjectTree_File.h">
+      <Filter>Designi\Source\UI\Components\Panels\ProjectExplorerPanel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\UI\Components\Panels\ProjectExplorerPanel\ProjectTree_Group.h">
+      <Filter>Designi\Source\UI\Components\Panels\ProjectExplorerPanel</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\UI\Components\Panels\ProjectExplorerPanel.h">
       <Filter>Designi\Source\UI\Components\Panels</Filter>

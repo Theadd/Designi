@@ -131,8 +131,12 @@ public:
 	void openProject (File& file)
 	{
 		project = new Project(file);
-		if (project->getTitle().isEmpty())
+		Result result = project->loadDocument(file);
+		if (!result.wasOk())
+		{
+			DBG("FAILED TO OPEN PROJECT!");
 			project = nullptr;
+		}
 		else
 			settings->setValue("lastOpenProject", file.getFullPathName());
 	}

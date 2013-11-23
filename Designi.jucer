@@ -46,6 +46,18 @@
                   file="Source/UI/Components/Extended/ExtendedFileTreeComponent.h"/>
           </GROUP>
           <GROUP id="{BB01E873-7C3E-41C3-CCDC-7F8BD2C4A406}" name="Panels">
+            <GROUP id="{A390BCD7-7268-397D-E162-37EAFFD0308F}" name="ProjectExplorerPanel">
+              <FILE id="gynckR" name="JucerTreeViewBase.cpp" compile="1" resource="0"
+                    file="Source/UI/Components/Panels/ProjectExplorerPanel/JucerTreeViewBase.cpp"/>
+              <FILE id="XxzB2l" name="JucerTreeViewBase.h" compile="0" resource="0"
+                    file="Source/UI/Components/Panels/ProjectExplorerPanel/JucerTreeViewBase.h"/>
+              <FILE id="rOpCIb" name="ProjectTree_Base.h" compile="0" resource="0"
+                    file="Source/UI/Components/Panels/ProjectExplorerPanel/ProjectTree_Base.h"/>
+              <FILE id="GamZ3R" name="ProjectTree_File.h" compile="0" resource="0"
+                    file="Source/UI/Components/Panels/ProjectExplorerPanel/ProjectTree_File.h"/>
+              <FILE id="VaHeze" name="ProjectTree_Group.h" compile="0" resource="0"
+                    file="Source/UI/Components/Panels/ProjectExplorerPanel/ProjectTree_Group.h"/>
+            </GROUP>
             <FILE id="c4ZV64" name="ProjectExplorerPanel.cpp" compile="1" resource="0"
                   file="Source/UI/Components/Panels/ProjectExplorerPanel.cpp"/>
             <FILE id="frcS97" name="ProjectExplorerPanel.h" compile="0" resource="0"

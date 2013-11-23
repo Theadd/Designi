@@ -131,6 +131,7 @@
     <ClCompile Include="..\..\Source\UI\Windows\MainWindow\MainLayout.cpp"/>
     <ClCompile Include="..\..\Source\UI\Windows\MainWindow\Toolbars.cpp"/>
     <ClCompile Include="..\..\Source\UI\Components\Extended\ExtendedFileTreeComponent.cpp"/>
+    <ClCompile Include="..\..\Source\UI\Components\Panels\ProjectExplorerPanel\JucerTreeViewBase.cpp"/>
     <ClCompile Include="..\..\Source\UI\Components\Panels\ProjectExplorerPanel.cpp"/>
     <ClCompile Include="..\..\Source\UI\Components\Panels\InnerPanels.cpp"/>
     <ClCompile Include="..\..\Source\UI\Components\Editors\SourceCodeEditor.cpp"/>
@@ -981,6 +982,10 @@
     <ClInclude Include="..\..\Source\UI\Windows\MainWindow\MainLayout.h"/>
     <ClInclude Include="..\..\Source\UI\Windows\MainWindow\Toolbars.h"/>
     <ClInclude Include="..\..\Source\UI\Components\Extended\ExtendedFileTreeComponent.h"/>
+    <ClInclude Include="..\..\Source\UI\Components\Panels\ProjectExplorerPanel\JucerTreeViewBase.h"/>
+    <ClInclude Include="..\..\Source\UI\Components\Panels\ProjectExplorerPanel\ProjectTree_Base.h"/>
+    <ClInclude Include="..\..\Source\UI\Components\Panels\ProjectExplorerPanel\ProjectTree_File.h"/>
+    <ClInclude Include="..\..\Source\UI\Components\Panels\ProjectExplorerPanel\ProjectTree_Group.h"/>
     <ClInclude Include="..\..\Source\UI\Components\Panels\ProjectExplorerPanel.h"/>
     <ClInclude Include="..\..\Source\UI\Components\Panels\InnerPanels.h"/>
     <ClInclude Include="..\..\Source\UI\Components\Editors\FilePreviewComponent.h"/>
