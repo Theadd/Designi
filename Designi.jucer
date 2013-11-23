@@ -5,6 +5,10 @@
               userNotes="https://github.com/Theadd/Designi" includeBinaryInAppConfig="1">
   <MAINGROUP id="DchWjp" name="Designi">
     <GROUP id="{2B5D31AE-D997-CE08-BF14-D7345862A558}" name="BinaryData">
+      <FILE id="FEWILk" name="AudioPluginXCodeScript.txt" compile="0" resource="1"
+            file="BinaryData/AudioPluginXCodeScript.txt"/>
+      <FILE id="OY6pMr" name="RecentFilesMenuTemplate.nib" compile="0" resource="1"
+            file="BinaryData/RecentFilesMenuTemplate.nib"/>
       <FILE id="kZm6RI" name="icon.png" compile="0" resource="1" file="BinaryData/icon.png"/>
       <FILE id="bGbKCG" name="plain-svg-icons.zip" compile="0" resource="1"
             file="BinaryData/plain-svg-icons.zip"/>
@@ -42,6 +46,10 @@
                   file="Source/UI/Components/Extended/ExtendedFileTreeComponent.h"/>
           </GROUP>
           <GROUP id="{BB01E873-7C3E-41C3-CCDC-7F8BD2C4A406}" name="Panels">
+            <FILE id="c4ZV64" name="ProjectExplorerPanel.cpp" compile="1" resource="0"
+                  file="Source/UI/Components/Panels/ProjectExplorerPanel.cpp"/>
+            <FILE id="frcS97" name="ProjectExplorerPanel.h" compile="0" resource="0"
+                  file="Source/UI/Components/Panels/ProjectExplorerPanel.h"/>
             <FILE id="UW9ChW" name="InnerPanels.cpp" compile="1" resource="0" file="Source/UI/Components/Panels/InnerPanels.cpp"/>
             <FILE id="rGoEps" name="InnerPanels.h" compile="0" resource="0" file="Source/UI/Components/Panels/InnerPanels.h"/>
           </GROUP>
@@ -101,6 +109,38 @@
         </GROUP>
       </GROUP>
       <GROUP id="{34F49C09-0E20-4FCB-428C-81CE32331E25}" name="Core">
+        <GROUP id="{D5374B24-93FB-DFA2-5445-D453576C8ED7}" name="Misc">
+          <FILE id="S9mmVL" name="MiscUtilities.cpp" compile="1" resource="0"
+                file="Source/Core/Misc/MiscUtilities.cpp"/>
+          <FILE id="D59gTa" name="MiscUtilities.h" compile="0" resource="0" file="Source/Core/Misc/MiscUtilities.h"/>
+          <FILE id="ejPzVI" name="RelativePath.h" compile="0" resource="0" file="Source/Core/Misc/RelativePath.h"/>
+        </GROUP>
+        <GROUP id="{F0C129F0-0A6D-99A9-64BD-B203B24B31BD}" name="Project">
+          <FILE id="qJFWeC" name="AudioPluginModule.h" compile="0" resource="0"
+                file="Source/Core/Project/AudioPluginModule.h"/>
+          <FILE id="jd1RPS" name="Module.cpp" compile="1" resource="0" file="Source/Core/Project/Module.cpp"/>
+          <FILE id="P3hgR3" name="Module.h" compile="0" resource="0" file="Source/Core/Project/Module.h"/>
+          <FILE id="bAgOAH" name="ProjectExport_Android.h" compile="0" resource="0"
+                file="Source/Core/Project/ProjectExport_Android.h"/>
+          <FILE id="otnfwY" name="ProjectExport_CodeBlocks.h" compile="0" resource="0"
+                file="Source/Core/Project/ProjectExport_CodeBlocks.h"/>
+          <FILE id="gux8Uu" name="ProjectExport_Make.h" compile="0" resource="0"
+                file="Source/Core/Project/ProjectExport_Make.h"/>
+          <FILE id="qsBGGZ" name="ProjectExport_MSVC.h" compile="0" resource="0"
+                file="Source/Core/Project/ProjectExport_MSVC.h"/>
+          <FILE id="VdDy42" name="ProjectExport_XCode.h" compile="0" resource="0"
+                file="Source/Core/Project/ProjectExport_XCode.h"/>
+          <FILE id="TRaGlG" name="ProjectExporter.cpp" compile="1" resource="0"
+                file="Source/Core/Project/ProjectExporter.cpp"/>
+          <FILE id="M6q8Nm" name="ProjectExporter.h" compile="0" resource="0"
+                file="Source/Core/Project/ProjectExporter.h"/>
+          <FILE id="MO8L3s" name="ProjectSaver.h" compile="0" resource="0" file="Source/Core/Project/ProjectSaver.h"/>
+          <FILE id="OKJ7C3" name="ProjectType.cpp" compile="1" resource="0" file="Source/Core/Project/ProjectType.cpp"/>
+          <FILE id="jTKIU6" name="ProjectType.h" compile="0" resource="0" file="Source/Core/Project/ProjectType.h"/>
+          <FILE id="Wrb5vq" name="ResourceFile.cpp" compile="1" resource="0"
+                file="Source/Core/Project/ResourceFile.cpp"/>
+          <FILE id="OazY7l" name="ResourceFile.h" compile="0" resource="0" file="Source/Core/Project/ResourceFile.h"/>
+        </GROUP>
         <FILE id="SeAhTI" name="StoredSettings.cpp" compile="1" resource="0"
               file="Source/Core/StoredSettings.cpp"/>
         <FILE id="yQha72" name="StoredSettings.h" compile="0" resource="0"

@@ -28,7 +28,7 @@ class JUCEDesignerApp  : public JUCEApplication
 {
 public:
     //==============================================================================
-    JUCEDesignerApp() : navigatorTreeBuilder (), shouldBeComponentInspectorActive (var(false)) {}
+    JUCEDesignerApp() : navigatorTreeBuilder (), shouldBeComponentInspectorActive (var(false)), isRunningCommandLine (false) {}
 
     const String getApplicationName()       { return ProjectInfo::projectName; }
     const String getApplicationVersion()    { return ProjectInfo::versionString; }
@@ -85,9 +85,19 @@ public:
     void shutdown()
     {
         // Add your application's shutdown code here..
+		#if JUCE_MAC
+         MenuBarModel::setMacMainMenu (nullptr);
+		#endif
 
         mainWindow = nullptr; // (deletes our window)
+        openDocumentManager.clear();
+        //commandManager = nullptr;
+        settings = nullptr;
+
+        LookAndFeel::setDefaultLookAndFeel (nullptr);
+        
 		project = nullptr;
+		
     }
 
     //==============================================================================
@@ -121,11 +131,13 @@ public:
 	void openProject (File& file)
 	{
 		project = new Project(file);
-		if (project->info.name.isEmpty())
+		if (project->getTitle().isEmpty())
 			project = nullptr;
 		else
 			settings->setValue("lastOpenProject", file.getFullPathName());
 	}
+
+	virtual void updateNewlyOpenedProject (Project&) {}
 
 	void setLanguage (String language)
 	{
@@ -222,6 +234,7 @@ public:
 	NavigatorTreeBuilder navigatorTreeBuilder;
 	MainLayout* mainLayout;
 	Value shouldBeComponentInspectorActive;
+	bool isRunningCommandLine;
 
 private:
 	ScopedPointer <Project> project;

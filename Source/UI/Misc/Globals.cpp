@@ -10,6 +10,29 @@
 #include "../../Headers.h"
 #include "Globals.h"
 
+/*String createAlphaNumericUID()
+{
+    String uid;
+    const char chars[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    Random r;
+
+    uid << chars [r.nextInt (52)]; // make sure the first character is always a letter
+
+    for (int i = 5; --i >= 0;)
+    {
+        r.setSeedRandomly();
+        uid << chars [r.nextInt (62)];
+    }
+
+    return uid;
+}
+
+void setValueIfVoid (Value value, const var& defaultValue)
+{
+    if (value.getValue().isVoid())
+        value = defaultValue;
+}*/
+
 String T (const String& text)       { return juce::translate (text, text); }
 String T (const char* text)
 {
@@ -22,6 +45,10 @@ String T (CharPointer_UTF8 text)
 	String a(text);
 	return juce::translate (a, a);
 }
+
+
+
+
 
 /*WIP ~= RIP
 Value& Literal::getValueFor (String& text)

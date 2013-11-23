@@ -46,3 +46,39 @@ void StoredSettings::setValue (const String &keyName, const var &value)
 	propertiesFile->setValue(keyName, value);
 	propertiesFile->save();
 }
+
+PropertiesFile::Options StoredSettings::getPropertyFileOptionsFor (const String& filename)
+{
+    PropertiesFile::Options options;
+    options.applicationName     = filename;
+    options.filenameSuffix      = "settings";
+    options.osxLibrarySubFolder = "Application Support";
+    #if JUCE_LINUX
+    options.folderName          = "~/.config/Designi";
+    #else
+    options.folderName          = "Designi";
+    #endif
+
+    return options;
+}
+
+PropertiesFile* StoredSettings::createPropsFile (const String& filename)
+{
+    return new PropertiesFile (getPropertyFileOptionsFor (filename));
+}
+
+PropertiesFile& StoredSettings::getProjectProperties (const String& projectUID)
+{
+    const String filename ("Introjucer_Project_" + projectUID);
+
+    for (int i = propertyFiles.size(); --i >= 0;)
+    {
+        PropertiesFile* const props = propertyFiles.getUnchecked(i);
+        if (props->getFile().getFileNameWithoutExtension() == filename)
+            return *props;
+    }
+
+    PropertiesFile* p = createPropsFile (filename);
+    propertyFiles.add (p);
+    return *p;
+}

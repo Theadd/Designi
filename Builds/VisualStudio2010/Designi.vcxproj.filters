@@ -53,6 +53,12 @@
     <Filter Include="Designi\Source\Core">
       <UniqueIdentifier>{4352D380-DAE5-CBD9-352D-0D0836473A88}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Designi\Source\Core\Misc">
+      <UniqueIdentifier>{69366F40-EE2D-D00C-30A8-957B8A9C4DE3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Designi\Source\Core\Project">
+      <UniqueIdentifier>{5759D33A-D414-5BE0-882C-60C8B0E9AB70}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Juce Modules">
       <UniqueIdentifier>{422C46B7-0467-2DB0-BF3C-16DFCAFD69AC}</UniqueIdentifier>
     </Filter>
@@ -268,6 +274,9 @@
     <ClCompile Include="..\..\Source\UI\Components\Extended\ExtendedFileTreeComponent.cpp">
       <Filter>Designi\Source\UI\Components\Extended</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\UI\Components\Panels\ProjectExplorerPanel.cpp">
+      <Filter>Designi\Source\UI\Components\Panels</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\UI\Components\Panels\InnerPanels.cpp">
       <Filter>Designi\Source\UI\Components\Panels</Filter>
     </ClCompile>
@@ -306,6 +315,21 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\UI\Misc\Globals.cpp">
       <Filter>Designi\Source\UI\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Core\Misc\MiscUtilities.cpp">
+      <Filter>Designi\Source\Core\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Core\Project\Module.cpp">
+      <Filter>Designi\Source\Core\Project</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Core\Project\ProjectExporter.cpp">
+      <Filter>Designi\Source\Core\Project</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Core\Project\ProjectType.cpp">
+      <Filter>Designi\Source\Core\Project</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Core\Project\ResourceFile.cpp">
+      <Filter>Designi\Source\Core\Project</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\Core\StoredSettings.cpp">
       <Filter>Designi\Source\Core</Filter>
@@ -1230,6 +1254,9 @@
     <ClInclude Include="..\..\Source\UI\Components\Extended\ExtendedFileTreeComponent.h">
       <Filter>Designi\Source\UI\Components\Extended</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\UI\Components\Panels\ProjectExplorerPanel.h">
+      <Filter>Designi\Source\UI\Components\Panels</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\UI\Components\Panels\InnerPanels.h">
       <Filter>Designi\Source\UI\Components\Panels</Filter>
     </ClInclude>
@@ -1274,6 +1301,45 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\UI\Misc\Globals.h">
       <Filter>Designi\Source\UI\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Core\Misc\MiscUtilities.h">
+      <Filter>Designi\Source\Core\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Core\Misc\RelativePath.h">
+      <Filter>Designi\Source\Core\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Core\Project\AudioPluginModule.h">
+      <Filter>Designi\Source\Core\Project</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Core\Project\Module.h">
+      <Filter>Designi\Source\Core\Project</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Core\Project\ProjectExport_Android.h">
+      <Filter>Designi\Source\Core\Project</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Core\Project\ProjectExport_CodeBlocks.h">
+      <Filter>Designi\Source\Core\Project</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Core\Project\ProjectExport_Make.h">
+      <Filter>Designi\Source\Core\Project</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Core\Project\ProjectExport_MSVC.h">
+      <Filter>Designi\Source\Core\Project</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Core\Project\ProjectExport_XCode.h">
+      <Filter>Designi\Source\Core\Project</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Core\Project\ProjectExporter.h">
+      <Filter>Designi\Source\Core\Project</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Core\Project\ProjectSaver.h">
+      <Filter>Designi\Source\Core\Project</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Core\Project\ProjectType.h">
+      <Filter>Designi\Source\Core\Project</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Core\Project\ResourceFile.h">
+      <Filter>Designi\Source\Core\Project</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Core\StoredSettings.h">
       <Filter>Designi\Source\Core</Filter>
@@ -2294,6 +2360,12 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\BinaryData\AudioPluginXCodeScript.txt">
+      <Filter>Designi\BinaryData</Filter>
+    </None>
+    <None Include="..\..\BinaryData\RecentFilesMenuTemplate.nib">
+      <Filter>Designi\BinaryData</Filter>
+    </None>
     <None Include="..\..\BinaryData\icon.png">
       <Filter>Designi\BinaryData</Filter>
     </None>

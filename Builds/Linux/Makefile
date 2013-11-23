@@ -53,6 +53,7 @@ OBJECTS := \
   $(OBJDIR)/MainLayout_4de6c98b.o \
   $(OBJDIR)/Toolbars_3bf305e0.o \
   $(OBJDIR)/ExtendedFileTreeComponent_f94a5bfb.o \
+  $(OBJDIR)/ProjectExplorerPanel_18f9c08f.o \
   $(OBJDIR)/InnerPanels_4958efec.o \
   $(OBJDIR)/SourceCodeEditor_d7215ee5.o \
   $(OBJDIR)/DocumentEditorComponent_582dd592.o \
@@ -66,6 +67,11 @@ OBJECTS := \
   $(OBJDIR)/CodeHelpers_2b8707d1.o \
   $(OBJDIR)/FileHelpers_61fec0e2.o \
   $(OBJDIR)/Globals_61599329.o \
+  $(OBJDIR)/MiscUtilities_3f9b06ec.o \
+  $(OBJDIR)/Module_a8092c33.o \
+  $(OBJDIR)/ProjectExporter_f4e7a7d.o \
+  $(OBJDIR)/ProjectType_5b72fd56.o \
+  $(OBJDIR)/ResourceFile_34d717f1.o \
   $(OBJDIR)/StoredSettings_68a600d7.o \
   $(OBJDIR)/DocumentManager_ab56030b.o \
   $(OBJDIR)/Project_4328492.o \
@@ -116,6 +122,11 @@ $(OBJDIR)/Toolbars_3bf305e0.o: ../../Source/UI/Windows/MainWindow/Toolbars.cpp
 $(OBJDIR)/ExtendedFileTreeComponent_f94a5bfb.o: ../../Source/UI/Components/Extended/ExtendedFileTreeComponent.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling ExtendedFileTreeComponent.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/ProjectExplorerPanel_18f9c08f.o: ../../Source/UI/Components/Panels/ProjectExplorerPanel.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling ProjectExplorerPanel.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/InnerPanels_4958efec.o: ../../Source/UI/Components/Panels/InnerPanels.cpp
@@ -181,6 +192,31 @@ $(OBJDIR)/FileHelpers_61fec0e2.o: ../../Source/UI/Misc/FileHelpers.cpp
 $(OBJDIR)/Globals_61599329.o: ../../Source/UI/Misc/Globals.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling Globals.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/MiscUtilities_3f9b06ec.o: ../../Source/Core/Misc/MiscUtilities.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling MiscUtilities.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/Module_a8092c33.o: ../../Source/Core/Project/Module.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling Module.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/ProjectExporter_f4e7a7d.o: ../../Source/Core/Project/ProjectExporter.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling ProjectExporter.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/ProjectType_5b72fd56.o: ../../Source/Core/Project/ProjectType.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling ProjectType.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/ResourceFile_34d717f1.o: ../../Source/Core/Project/ResourceFile.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling ResourceFile.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/StoredSettings_68a600d7.o: ../../Source/Core/StoredSettings.cpp

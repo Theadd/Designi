@@ -22,8 +22,13 @@ public:
 	String getValue(StringRef keyName, const String &defaultReturnValue=String::empty);
 	void setValue (const String &keyName, const var &value);
 
+	static PropertiesFile::Options getPropertyFileOptionsFor (const String& filename);
+	static PropertiesFile* createPropsFile (const String& filename);
+	PropertiesFile& getProjectProperties (const String& projectUID);
+
 private:
-	ScopedPointer <PropertiesFile> propertiesFile;
+	ScopedPointer <PropertiesFile> propertiesFile;	//application properties file
+	OwnedArray<PropertiesFile> propertyFiles;	//contains property files for opened projects
 };
 
 

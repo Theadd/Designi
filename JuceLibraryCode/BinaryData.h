@@ -6,6 +6,12 @@
 
 namespace BinaryData
 {
+    extern const char*   AudioPluginXCodeScript_txt;
+    const int            AudioPluginXCodeScript_txtSize = 2464;
+
+    extern const char*   RecentFilesMenuTemplate_nib;
+    const int            RecentFilesMenuTemplate_nibSize = 2842;
+
     extern const char*   icon_png;
     const int            icon_pngSize = 16598;
 

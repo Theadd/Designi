@@ -237,12 +237,7 @@ MainLayout::MainLayout(MainWindow& _mainWindow) : Component(), mainWindow(_mainW
     //setBounds(0, 0, 490, 414);
     setName("MainLayout");
 	JUCEDesignerApp::getApp().mainLayout = this;
-	//workingPath = new File("C:/Users/admin/JUCE Sample Project");
-	//JUCEDesignerApp::getApp().openProject(File("C:/Users/admin/JUCE Sample Project/JUCE Sample Project.jucer"));
-	//Project* project = JUCEDesignerApp::getApp().getProject();
-	//DBG("END LOAD PROJECT");
 
-	
 }
 
 MainLayout::~MainLayout()
@@ -1083,8 +1078,8 @@ void MainLayout::setProject(Project* project)
 	//FileBrowserTab
 	fileBrowserPanel = nullptr;
 	leftPanelContainer->addInnerPanel(fileBrowserPanel = new FileBrowserPanel(), true);
-	fileBrowserPanel->setProjectName(project->info.name);
-	fileBrowserPanel->setBrowserRoot(project->info.path);//*workingPath);
+	fileBrowserPanel->setProjectName(project->getTitle());
+	fileBrowserPanel->setBrowserRoot(project->getProjectFolder());//*workingPath);
 	//helpPanel
 	helpPanel = nullptr;
 	leftPanelContainer->addInnerPanel(helpPanel = new HelpPanel(), true);
