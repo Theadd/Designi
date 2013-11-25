@@ -315,8 +315,6 @@ FileBrowserPanel::FileBrowserPanel() : thread ("FileTreeComponent thread"), Inne
 	fileTreeCompA->addListener(this);
 	fileTreeCompB->addListener(this);
 
-	projectName = "Project Name";
-
 	selectFileTreeA.setBounds(120, 5, 20, 20);
 	selectFileTreeA.setName("selectFileTreeA");
 	selectFileTreeA.setButtonText("A");
@@ -399,12 +397,21 @@ void FileBrowserPanel::setBrowserRoot (const File &file)
 		refreshTimeCount = 10;
 		startTimer(100);
 	}
+	setHeader(true, file.getFullPathName(), 30, 5, 45, 0);
 }
 
-void FileBrowserPanel::setProjectName (const String &name)
+void FileBrowserPanel::mouseDoubleClick (const MouseEvent &event)
 {
-	projectName = String(name);
-	setHeader(true, projectName, 30, 5, 45, 0);
+	FileChooser fc ("Choose a directory...",
+                                File::getCurrentWorkingDirectory(),
+                                "*", true);
+
+    if (fc.browseForDirectory())
+    {
+        File chosenDirectory = fc.getResult();
+
+        setBrowserRoot(chosenDirectory);
+    }
 }
 
 void FileBrowserPanel::refresh()

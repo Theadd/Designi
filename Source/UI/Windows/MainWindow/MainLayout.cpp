@@ -270,6 +270,34 @@ void MainLayout::loadLayout ()
 	for (int i = 0; i < panelContainers.size(); ++i)
 		panelContainers[i]->addComponentListener(this);
 
+	PanelContainer *leftPanelContainer = getPanelContainer(Globals::left);
+	PanelContainer *rightPanelContainer = getPanelContainer(Globals::right);
+	PanelContainer *topPanelContainer = getPanelContainer(Globals::top);
+	PanelContainer *bottomPanelContainer = getPanelContainer(Globals::bottom);
+	PanelContainer *centerPanelContainer = getPanelContainer(Globals::center);
+
+	panelContainerBox.addChildComponent(rightPanelContainer);
+	rightPanelContainer->setBounds(400,32,250,600);
+	panelContainerBox.addChildComponent(leftPanelContainer);
+	leftPanelContainer->setBounds(0,32,250,600);
+	panelContainerBox.addChildComponent(topPanelContainer);
+	topPanelContainer->setBounds(0,32,250,250);
+	panelContainerBox.addChildComponent(bottomPanelContainer);
+	bottomPanelContainer->setBounds(0,32,250,250);
+	panelContainerBox.addChildComponent(centerPanelContainer);
+	centerPanelContainer->setBounds(0,32,250,250);
+
+	//navigatorPanel
+	rightPanelContainer->addInnerPanel(navigatorPanel = new NavigatorPanel());
+	JUCEDesignerApp::getApp().navigatorTree.addListener(navigatorPanel);
+	//fileBrowserPanel
+	fileBrowserPanel = nullptr;
+	leftPanelContainer->addInnerPanel(fileBrowserPanel = new FileBrowserPanel(), true);
+	fileBrowserPanel->setBrowserRoot(File::getSpecialLocation(File::userHomeDirectory));//(project->getProjectFolder());//*workingPath);
+	//helpPanel
+	helpPanel = nullptr;
+	leftPanelContainer->addInnerPanel(helpPanel = new HelpPanel(), true);
+
 	//set project layout if it is already loaded
 	if (JUCEDesignerApp::getApp().getProject() != nullptr)
 		setProject(JUCEDesignerApp::getApp().getProject());
@@ -1048,70 +1076,34 @@ int MainLayout::getDocumentIndex(InnerPanel* /*innerPanel*/)
 
 void MainLayout::setProject(Project* project)
 {
-	//ADD EMPTY CODE EDITOR PANEL
-	//String filename = "New File";
-	//codeEditorPanels.add(new CodeEditorPanel(filename));
-
 	PanelContainer *leftPanelContainer = getPanelContainer(Globals::left);
-	PanelContainer *rightPanelContainer = getPanelContainer(Globals::right);
-	PanelContainer *topPanelContainer = getPanelContainer(Globals::top);
-	PanelContainer *bottomPanelContainer = getPanelContainer(Globals::bottom);
-	PanelContainer *centerPanelContainer = getPanelContainer(Globals::center);
 
-	panelContainerBox.addChildComponent(rightPanelContainer);
-	rightPanelContainer->setBounds(400,32,250,600);
-	panelContainerBox.addChildComponent(leftPanelContainer);
-	leftPanelContainer->setBounds(0,32,250,600);
-	panelContainerBox.addChildComponent(topPanelContainer);
-	topPanelContainer->setBounds(0,32,250,250);
-	panelContainerBox.addChildComponent(bottomPanelContainer);
-	bottomPanelContainer->setBounds(0,32,250,250);
-	panelContainerBox.addChildComponent(centerPanelContainer);
-	centerPanelContainer->setBounds(0,32,250,250);
-
-
-	rightPanelContainer->addInnerPanel(navigatorPanel = new NavigatorPanel());
-	//if (JUCEDesignerApp::getApp().navigatorTree.isValid())
-	{
-		JUCEDesignerApp::getApp().navigatorTree.addListener(navigatorPanel);
-		DBG("####> JUCEDesignerApp::getApp().navigatorTree.addListener(navigatorPanel);");
-	}
-	//FileBrowserTab
-	fileBrowserPanel = nullptr;
-	leftPanelContainer->addInnerPanel(fileBrowserPanel = new FileBrowserPanel(), true);
-	fileBrowserPanel->setProjectName(project->getTitle());
-	fileBrowserPanel->setBrowserRoot(project->getProjectFolder());//*workingPath);
 	//ProjectExplorerPanel
 	projectExplorerPanel = nullptr;
-	leftPanelContainer->addInnerPanel(projectExplorerPanel = new ProjectExplorerPanel(*project), false);
-	//helpPanel
-	helpPanel = nullptr;
-	leftPanelContainer->addInnerPanel(helpPanel = new HelpPanel(), true);
-	//codeEditorPanel
-	//centerPanelContainer->addInnerPanel(codeEditorPanels[0], true);
+	leftPanelContainer->addInnerPanel(projectExplorerPanel = new ProjectExplorerPanel(*project), (int) 0);
 
 }
 
 void MainLayout::closeCurrentProject()
 {
-	if (fileBrowserPanel != nullptr)
-	{
-		//if (JUCEDesignerApp::getApp().navigatorTree.isValid())
-		{
-			JUCEDesignerApp::getApp().navigatorTree.removeListener(navigatorPanel);
-			DBG("#### JUCEDesignerApp::getApp().navigatorTree.removeListener(navigatorPanel);");
-		}
+	//if (fileBrowserPanel != nullptr)
+	//{
+	//	//if (JUCEDesignerApp::getApp().navigatorTree.isValid())
+	//	{
+	//		JUCEDesignerApp::getApp().navigatorTree.removeListener(navigatorPanel);
+	//		DBG("#### JUCEDesignerApp::getApp().navigatorTree.removeListener(navigatorPanel);");
+	//	}
 
-		for (int i = 0; i < panelContainers.size(); ++i)
-			panelContainers[i]->removeAllInnerPanels();
+	//	for (int i = 0; i < panelContainers.size(); ++i)
+	//		panelContainers[i]->removeAllInnerPanels();
 
-		navigatorPanel = nullptr;
-		fileBrowserPanel = nullptr;
-		helpPanel = nullptr;
+	//	navigatorPanel = nullptr;
+	//	fileBrowserPanel = nullptr;
+	//	helpPanel = nullptr;
 		projectExplorerPanel = nullptr;
 		//codeEditorPanels.clear();
-		editors.clear();
-	}
+		editors.clear();	//TODO: close only editors for opened project files
+	//}
 }
 
 void MainLayout::showOpenProjectDialog ()

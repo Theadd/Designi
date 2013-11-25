@@ -17,31 +17,6 @@
 class MainLayout;
 class ExtendedFileTreeComponent;
 
-/*
-class CodeEditorPanel : public InnerPanel
-{
-public:
-
-	CodeEditorPanel (String& filename, File* file = nullptr);
-	~CodeEditorPanel ();
-
-	void resized ();
-
-	void loadContent (const String &newContent);
-	bool getNeedsToBeSaved () override;
-	bool save (File initialDirectory = File::nonexistent) override;	//returns true if successful, false if we don't have write access
-
-	ScopedPointer <File> loadedFile;
-	String filePath;
-private:
-	//CodeEditorComponent (CodeDocument &document, CodeTokeniser *codeTokeniser)
-	ScopedPointer <CodeEditorComponent> codeEditorComponent;
-	ScopedPointer <CodeDocument> codeDocument;
-	ScopedPointer <CPlusPlusCodeTokeniser> codeTokeniser;
-
-};
-*/
-
 class NavigatorPanel : public InnerPanel, public ValueTree::Listener
 {
 public:
@@ -109,13 +84,13 @@ public:
 	void fileDoubleClicked (const File &file);
 	void browserRootChanged (const File& /*newRoot*/){};
 
+	/** Sets the root directory that is displayed at the File Browser. */
 	void setBrowserRoot (const File &file);
-	void setProjectName (const String &name);
+
+	void mouseDoubleClick (const MouseEvent &event);
 
 	void refresh() override;
 	void timerCallback ();
-
-	String projectName;
 
 private:
 	ScopedPointer <ExtendedFileTreeComponent> fileTreeCompA;

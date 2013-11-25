@@ -799,6 +799,18 @@ bool PanelContainer::addInnerPanel (InnerPanel *componentToAdd, bool asNewPanel)
 
 }
 
+bool PanelContainer::addInnerPanel (InnerPanel *componentToAdd, int atPanelIndex)
+{
+	if (atPanelIndex >= panels.size())
+	{
+		return addInnerPanel(componentToAdd, true);	//adds it to a new panel
+	}
+	else
+	{
+		return panels[atPanelIndex]->addInnerPanel(componentToAdd);
+	}
+}
+
 bool PanelContainer::isEmpty()
 {
 	return (panels.size() == 0);
