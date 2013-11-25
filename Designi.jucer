@@ -48,6 +48,10 @@
                   file="Source/UI/Components/Extended/ExtendedFileTreeComponent.h"/>
           </GROUP>
           <GROUP id="{BB01E873-7C3E-41C3-CCDC-7F8BD2C4A406}" name="Panels">
+            <FILE id="Si9IBG" name="KeyMappingsPanel.cpp" compile="1" resource="0"
+                  file="Source/UI/Components/Panels/KeyMappingsPanel.cpp"/>
+            <FILE id="K3MtIV" name="KeyMappingsPanel.h" compile="0" resource="0"
+                  file="Source/UI/Components/Panels/KeyMappingsPanel.h"/>
             <GROUP id="{A390BCD7-7268-397D-E162-37EAFFD0308F}" name="ProjectExplorerPanel">
               <FILE id="gynckR" name="JucerTreeViewBase.cpp" compile="1" resource="0"
                     file="Source/UI/Components/Panels/ProjectExplorerPanel/JucerTreeViewBase.cpp"/>

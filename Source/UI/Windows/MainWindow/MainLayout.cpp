@@ -17,6 +17,7 @@
 //#include "InnerPanel.h"
 #include "../../Components/Panels/InnerPanels.h"
 #include "../../Components/Panels/ProjectExplorerPanel.h"
+#include "../../Components/Panels/KeyMappingsPanel.h"
 #include "../../Styles/ExtendedLookAndFeel.h"
 #include "../MainWindow.h"
 #include "../../../Core/Project.h"
@@ -297,6 +298,9 @@ void MainLayout::loadLayout ()
 	//helpPanel
 	helpPanel = nullptr;
 	leftPanelContainer->addInnerPanel(helpPanel = new HelpPanel(), true);
+	//keyMappingsPanel
+	keyMappingsPanel = nullptr;
+	centerPanelContainer->addInnerPanel(keyMappingsPanel = new KeyMappingsPanel(), (int) 0);
 
 	//set project layout if it is already loaded
 	if (JUCEDesignerApp::getApp().getProject() != nullptr)

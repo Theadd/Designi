@@ -277,6 +277,9 @@
     <ClCompile Include="..\..\Source\UI\Components\Extended\ExtendedFileTreeComponent.cpp">
       <Filter>Designi\Source\UI\Components\Extended</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\UI\Components\Panels\KeyMappingsPanel.cpp">
+      <Filter>Designi\Source\UI\Components\Panels</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\UI\Components\Panels\ProjectExplorerPanel\JucerTreeViewBase.cpp">
       <Filter>Designi\Source\UI\Components\Panels\ProjectExplorerPanel</Filter>
     </ClCompile>
@@ -1262,6 +1265,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\UI\Components\Extended\ExtendedFileTreeComponent.h">
       <Filter>Designi\Source\UI\Components\Extended</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\UI\Components\Panels\KeyMappingsPanel.h">
+      <Filter>Designi\Source\UI\Components\Panels</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\UI\Components\Panels\ProjectExplorerPanel\JucerTreeViewBase.h">
       <Filter>Designi\Source\UI\Components\Panels\ProjectExplorerPanel</Filter>

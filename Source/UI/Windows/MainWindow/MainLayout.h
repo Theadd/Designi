@@ -19,6 +19,7 @@ class FileBrowserPanel;
 class NavigatorPanel;
 class HelpPanel;
 class ProjectExplorerPanel;
+class KeyMappingsPanel;
 //class CodeEditorPanel;
 class Panel;
 class PanelContainer;
@@ -159,6 +160,7 @@ public:
 	ScopedPointer <FileBrowserPanel> fileBrowserPanel;
 	ScopedPointer <NavigatorPanel> navigatorPanel;
 	ScopedPointer <ProjectExplorerPanel> projectExplorerPanel;
+	ScopedPointer <KeyMappingsPanel> keyMappingsPanel;
 
 private:
 	MainWindow& mainWindow;
