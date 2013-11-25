@@ -338,7 +338,7 @@ protected:
     virtual ProjectTreeItemBase* createSubItem (const Project::Item& node) = 0;
 
     
-	Drawable* getIcon() const override           { return nullptr; }//{ return item.getIcon().withContrastingColourTo (getBackgroundColour()); }
+	Drawable* getIcon() override           { return item.getIcon(); }
     bool isIconCrossedOut() const override  { return item.isIconCrossedOut(); }
 
     void treeChildrenChanged (const ValueTree& parentTree)

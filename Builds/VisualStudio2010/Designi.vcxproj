@@ -981,6 +981,7 @@
     <ClInclude Include="..\..\Source\UI\Windows\MainWindow.h"/>
     <ClInclude Include="..\..\Source\UI\Windows\MainWindow\MainLayout.h"/>
     <ClInclude Include="..\..\Source\UI\Windows\MainWindow\Toolbars.h"/>
+    <ClInclude Include="..\..\Source\UI\Components\Extended\ExtendedFileListTreeItem.h"/>
     <ClInclude Include="..\..\Source\UI\Components\Extended\ExtendedFileTreeComponent.h"/>
     <ClInclude Include="..\..\Source\UI\Components\Panels\ProjectExplorerPanel\JucerTreeViewBase.h"/>
     <ClInclude Include="..\..\Source\UI\Components\Panels\ProjectExplorerPanel\ProjectTree_Base.h"/>

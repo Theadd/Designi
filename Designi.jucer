@@ -40,6 +40,8 @@
         </GROUP>
         <GROUP id="{295C671D-668F-B372-E5CC-F3A2967B69C9}" name="Components">
           <GROUP id="{36D05E6A-B186-AD4F-38FC-DC44CE3C749F}" name="Extended">
+            <FILE id="SIjDZ7" name="ExtendedFileListTreeItem.h" compile="0" resource="0"
+                  file="Source/UI/Components/Extended/ExtendedFileListTreeItem.h"/>
             <FILE id="MGDYE3" name="ExtendedFileTreeComponent.cpp" compile="1"
                   resource="0" file="Source/UI/Components/Extended/ExtendedFileTreeComponent.cpp"/>
             <FILE id="RrhIvR" name="ExtendedFileTreeComponent.h" compile="0" resource="0"

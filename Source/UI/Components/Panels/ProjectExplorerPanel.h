@@ -31,10 +31,10 @@ public:
 
 private:
 	ScopedPointer <FileTreePanel> fileTreePanelA;
-	//ScopedPointer <ExtendedFileTreeComponent> fileTreeCompB;
+	ScopedPointer <FileTreePanel> fileTreePanelB;
 
     TextButton selectfileTreePanelA;
-	//TextButton selectFileTreeB;
+	TextButton selectfileTreePanelB;
 };
 
 

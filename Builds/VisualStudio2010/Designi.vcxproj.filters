@@ -1257,6 +1257,9 @@
     <ClInclude Include="..\..\Source\UI\Windows\MainWindow\Toolbars.h">
       <Filter>Designi\Source\UI\Windows\MainWindow</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\UI\Components\Extended\ExtendedFileListTreeItem.h">
+      <Filter>Designi\Source\UI\Components\Extended</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\UI\Components\Extended\ExtendedFileTreeComponent.h">
       <Filter>Designi\Source\UI\Components\Extended</Filter>
     </ClInclude>

@@ -54,7 +54,7 @@ public:
     virtual String getDisplayName() const = 0;
     virtual void setName (const String& newName) = 0;
     virtual bool isMissing() = 0;
-    virtual Drawable* getIcon() const = 0;
+    virtual Drawable* getIcon() = 0;
     virtual float getIconSize() const;
     virtual bool isIconCrossedOut() const               { return false; }
     virtual void paintContent (Graphics& g, const Rectangle<int>& area);
@@ -201,8 +201,10 @@ public:
 
     void paintIcon (Graphics& g)
     {
-        /*item.getIcon().draw (g, Rectangle<float> (4.0f, 2.0f, item.getIconSize(), getHeight() - 4.0f),
-                             item.isIconCrossedOut());*/
+		float opacity = (item.isIconCrossedOut()) ? 0.4f : 1.0f;
+        item.getIcon()->drawWithin (g, Rectangle<float> (4.0f, 2.0f, item.getIconSize(), getHeight() - 4.0f),
+                             RectanglePlacement::centred | RectanglePlacement::onlyReduceInSize, opacity);
+		//icon->drawWithin (g, Rectangle<float> (4.0f, padding, (float) height * padding, (float) height - (2.0f * padding)), RectanglePlacement::centred | RectanglePlacement::onlyReduceInSize, 1.0f);
     }
 
     void resized() override

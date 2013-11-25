@@ -41,25 +41,29 @@ public:
 
 ProjectExplorerPanel::ProjectExplorerPanel (Project& p)
 {
-	setName ("Project Explorer");
+	setLocalisedName("Project Explorer", "Your project directory tree");
 	addAndMakeVisible(fileTreePanelA = new FileTreePanel(p));
+	addAndMakeVisible(fileTreePanelB = new FileTreePanel(p));
+	fileTreePanelB->setVisible(false);
+
 	selectfileTreePanelA.setBounds(120, 5, 20, 20);
-	selectfileTreePanelA.setName("selectFileTreeA");
+	selectfileTreePanelA.setName("selectProjectTreeA");
 	selectfileTreePanelA.setButtonText("A");
 	selectfileTreePanelA.setConnectedEdges(Button::ConnectedOnRight);
-	selectfileTreePanelA.setTooltip("File browser remembers two locations, A and B. Use these buttons to switch between them.");
+	selectfileTreePanelA.setTooltip("Project explorer remembers two locations, A and B. Use these buttons to switch between them.");
 	addAndMakeVisible(&selectfileTreePanelA);
 
-	/*selectfileTreePanelB.setBounds(140, 5, 20, 20);
-	selectfileTreePanelB.setName("selectFileTreeB");
+	selectfileTreePanelB.setBounds(140, 5, 20, 20);
+	selectfileTreePanelB.setName("selectProjectTreeB");
 	selectfileTreePanelB.setButtonText("B");
 	selectfileTreePanelB.setConnectedEdges(Button::ConnectedOnLeft);
-	selectfileTreePanelB.setTooltip("File browser remembers two locations, A and B. Use these buttons to switch between them.");
-	addAndMakeVisible(&selectfileTreePanelB);*/
+	selectfileTreePanelB.setTooltip("Project explorer remembers two locations, A and B. Use these buttons to switch between them.");
+	addAndMakeVisible(&selectfileTreePanelB);
 
 	//ADD this to the mouse listeners of "A" and "B" buttons.
 	selectfileTreePanelA.addMouseListener(this, false);
-	//selectFileTreeB.addMouseListener(this, false);
+	selectfileTreePanelB.addMouseListener(this, false);
+	setHeader(true, p.getTitle(), 30, 5, 45, 0);
 }
 
 ProjectExplorerPanel::~ProjectExplorerPanel ()
@@ -71,14 +75,22 @@ void ProjectExplorerPanel::resized ()
 {
 	if (fileTreePanelA != nullptr)
 		fileTreePanelA->setBoundsInset (BorderSize<int> (31, 0, 0, 0));
-	/*if (fileTreeCompB != nullptr)
-		fileTreeCompB->setBoundsInset (BorderSize<int> (31, 0, 0, 0));*/
+	if (fileTreePanelB != nullptr)
+		fileTreePanelB->setBoundsInset (BorderSize<int> (31, 0, 0, 0));
 
 	selectfileTreePanelA.setBounds(getWidth() - 45, 5, 20, 20);
-	//selectfileTreePanelB.setBounds(getWidth() - 25, 5, 20, 20);
+	selectfileTreePanelB.setBounds(getWidth() - 25, 5, 20, 20);
 }
 
 void ProjectExplorerPanel::mouseUp (const MouseEvent &event)
 {
-
+	if (event.mouseWasClicked()) {
+		if (event.eventComponent == &selectfileTreePanelA) {
+			fileTreePanelA->setVisible(true);
+			fileTreePanelB->setVisible(false);
+		} else if (event.eventComponent == &selectfileTreePanelB) {
+			fileTreePanelA->setVisible(false);
+			fileTreePanelB->setVisible(true);
+		}
+	}
 }

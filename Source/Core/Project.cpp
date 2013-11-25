@@ -28,6 +28,7 @@
 #include "Project/ProjectSaver.h"
 #include "DocumentManager.h"
 #include "../Application.h"
+#include "../UI/Styles/plain-svg-icons.h"
 
 
 //==============================================================================
@@ -853,23 +854,60 @@ bool Project::Item::addRelativeFile (const RelativePath& file, int insertIndex, 
     return false;
 }
 
-/*Icon Project::Item::getIcon() const
+Drawable* Project::Item::getIcon()
 {
-    const Icons& icons = getIcons();
+    //if (isFile())
+    //{
+		String iconName = getIconNameForFile();
+		return Icons::get(iconName, Icons::blue);
+    //}
 
-    if (isFile())
-    {
-        if (isImageFile())
-            return Icon (icons.imageDoc, Colours::blue);
+    /*if (isMainGroup())
+        return Icon (icons.juceLogo, Colours::orange);*/
 
-        return Icon (icons.document, Colours::yellow);
-    }
+    //return nullptr;//Icon (icons.folder, Colours::darkgrey);
+}
 
-    if (isMainGroup())
-        return Icon (icons.juceLogo, Colours::orange);
+String Project::Item::getIconNameForFile()
+{
+	String id;
+	
+	if (isFile())
+	{
+		String filename = getFile().getFileName();
+		id = filename.fromLastOccurrenceOf(".", true, true);
+		//DBG("[getIconNameForFile] "+filename+" id=["+id+"]");
+		if (id.isEmpty())
+			id = "note.svg";
+		else
+		{
+			if (id.equalsIgnoreCase(".cpp"))
+				id = "file-cpp.svg";
+			else if (id.equalsIgnoreCase(".h"))
+				id = "file-header.svg";
+			else if (id.equalsIgnoreCase(".design"))
+				id = "pen-brush.svg";
+			else if (id.equalsIgnoreCase(".zip"))
+				id = "archive.svg";
+			else if (id.equalsIgnoreCase(".gz"))
+				id = "archive.svg";
+			else if (id.equalsIgnoreCase(".bz2"))
+				id = "archive.svg";
+			else if (id.equalsIgnoreCase(".png"))
+				id = "picture.svg";
+			else if (id.equalsIgnoreCase(".svg"))
+				id = "picture.svg";
+			else
+				id = "file.svg";
+		}
+	}
+	else
+	{
+		id = "folder-close.svg";
+	}
 
-    return Icon (icons.folder, Colours::darkgrey);
-}*/
+	return id;
+}
 
 bool Project::Item::isIconCrossedOut() const
 {

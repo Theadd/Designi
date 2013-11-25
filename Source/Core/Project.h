@@ -194,7 +194,8 @@ public:
 
         UndoManager* getUndoManager() const              { return project.getUndoManagerFor (state); }
 
-        //Icon getIcon() const;
+        Drawable* getIcon();
+		String getIconNameForFile();
         bool isIconCrossedOut() const;
 
         Project& project;
