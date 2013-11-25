@@ -42,6 +42,7 @@ public:
 ProjectExplorerPanel::ProjectExplorerPanel (Project& p)
 {
 	setLocalisedName("Project Explorer", "Your project directory tree");
+	DBG("INIT ProjectExplorerPanel");
 	addAndMakeVisible(fileTreePanelA = new FileTreePanel(p));
 	addAndMakeVisible(fileTreePanelB = new FileTreePanel(p));
 	fileTreePanelB->setVisible(false);

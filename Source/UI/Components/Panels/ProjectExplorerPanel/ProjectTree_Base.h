@@ -26,14 +26,16 @@ class ProjectTreeItemBase   : public JucerTreeViewBase,
                               public ValueTree::Listener
 {
 public:
-    ProjectTreeItemBase (const Project::Item& projectItem)
-        : item (projectItem), isFileMissing (false)
+    ProjectTreeItemBase (const Project::Item& projectItem_)
+        : item (projectItem_), isFileMissing (false)
     {
         item.state.addListener (this);
+		projectItem = new Project::Item(projectItem_);
     }
 
     ~ProjectTreeItemBase()
     {
+		projectItem = nullptr;
         item.state.removeListener (this);
     }
 

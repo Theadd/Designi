@@ -856,10 +856,11 @@ bool Project::Item::addRelativeFile (const RelativePath& file, int insertIndex, 
 
 Drawable* Project::Item::getIcon()
 {
+	return nullptr;
     //if (isFile())
     //{
-		String iconName = getIconNameForFile();
-		return Icons::get(iconName, Icons::blue);
+	//	String iconName = getIconNameForFile();
+	//	return Icons::get(iconName, Icons::blue);
     //}
 
     /*if (isMainGroup())

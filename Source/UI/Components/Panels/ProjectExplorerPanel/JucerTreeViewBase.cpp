@@ -24,9 +24,8 @@
 
 #include "JucerTreeViewBase.h"
 //#include "../Project/jucer_ProjectContentComponent.h"
-#include "../../../../Core/Project.h"
-#include "../../../Windows/MainWindow/MainLayout.h"
 
+#include "../../../Windows/MainWindow/MainLayout.h"
 
 //==============================================================================
 void TreePanelBase::setRoot (JucerTreeViewBase* root)
@@ -67,6 +66,8 @@ void TreePanelBase::saveOpenness()
 JucerTreeViewBase::JucerTreeViewBase()  : textX (0)
 {
     setLinesDrawnForSubItems (false);
+	isItemSelected = false;
+	isItemMouseHover = false;
 }
 
 JucerTreeViewBase::~JucerTreeViewBase()
@@ -118,7 +119,6 @@ Colour JucerTreeViewBase::getContrastingColour (Colour target, float minContrast
 
 void JucerTreeViewBase::paintContent (Graphics& g, const Rectangle<int>& area)
 {
-	DBG("JucerTreeViewBase paint getDisplayName(): "+getDisplayName());
     g.setFont (getFont());
     g.setColour (isMissing() ? getContrastingColour (Colours::red, 0.8f)
                              : getContrastingColour (0.8f));
@@ -242,11 +242,13 @@ void JucerTreeViewBase::itemSelectionChanged (bool isNowSelected)
 {
     if (isNowSelected)
     {
+		isItemSelected = true;
         delayedSelectionTimer = new ItemSelectionTimer (*this);
         delayedSelectionTimer->startTimer (getMillisecsAllowedForDragGesture());
     }
     else
     {
+		isItemSelected = false;
         cancelDelayedSelectionTimer();
     }
 }

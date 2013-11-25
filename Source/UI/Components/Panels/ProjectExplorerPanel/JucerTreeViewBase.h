@@ -26,14 +26,18 @@
 #define __JUCER_JUCERTREEVIEWBASE_JUCEHEADER__
 
 #include "../../../../Headers.h"
+#include "../../../Styles/plain-svg-icons.h"
 //class ProjectContentComponent;
-class Project;
+#include "../../../../Core/Project.h"
+//class Project;
 class MainLayout;
+//class Project::Item;
 
 //==============================================================================
 class JucerTreeViewBase   : public TreeViewItem
 {
 public:
+
     JucerTreeViewBase();
     ~JucerTreeViewBase();
 
@@ -92,6 +96,9 @@ public:
     };
 
     int textX;
+	bool isItemSelected;
+	bool isItemMouseHover;
+	ScopedPointer <Project::Item> projectItem;
 
 protected:
     MainLayout* getProjectContentComponent() const;
@@ -120,17 +127,44 @@ public:
         : project (p), opennessStateKey (treeviewID)
     {
         addAndMakeVisible (&tree);
-        tree.setRootItemVisible (true);
+        tree.setRootItemVisible (false);
         tree.setDefaultOpenness (true);
-        tree.setColour (TreeView::backgroundColourId, Colours::transparentBlack);
-        tree.setIndentSize (14);
-        tree.getViewport()->setScrollBarThickness (14);
+        //tree.setColour (TreeView::backgroundColourId, Colours::transparentBlack);
+        //tree.setIndentSize (14);
+        //tree.getViewport()->setScrollBarThickness (14);
+		itemUnderMouse = nullptr;
+		addMouseListener(this, true);
     }
 
     ~TreePanelBase()
     {
         tree.setRootItem (nullptr);
     }
+
+	void mouseMove (const MouseEvent &event)
+	{
+		int mousePosition = event.getPosition().getY() - tree.getViewport()->getViewPositionY();
+		JucerTreeViewBase* item = (JucerTreeViewBase *) tree.getItemAt(mousePosition);
+
+		if (item != nullptr && itemUnderMouse != item)
+		{
+			if (itemUnderMouse != nullptr)
+				itemUnderMouse->isItemMouseHover = false;	//unset mouse hover from last mouse hovered item
+
+			itemUnderMouse = item;
+			item->isItemMouseHover = true;
+			repaint();
+		}
+	}
+
+	void mouseExit (const MouseEvent &event)
+	{
+		if (itemUnderMouse != nullptr)
+				itemUnderMouse->isItemMouseHover = false;	//unset mouse hover from last mouse hovered item
+
+		itemUnderMouse = nullptr;
+		repaint();
+	}
 
     void setRoot (JucerTreeViewBase* root);
     void saveOpenness();
@@ -172,12 +206,13 @@ public:
 
     Rectangle<int> getAvailableBounds() const
     {
-        return Rectangle<int> (0, 2, getWidth() - 2, getHeight() - 2);
+        return Rectangle<int> (0, 0, getWidth(), getHeight());
     }
 
     const Project* project;
     TreeView tree;
     ScopedPointer<JucerTreeViewBase> rootItem;
+	JucerTreeViewBase* itemUnderMouse;
 
 private:
     String opennessStateKey, emptyTreeMessage;
@@ -187,9 +222,13 @@ private:
 class TreeItemComponent   : public Component
 {
 public:
-    TreeItemComponent (JucerTreeViewBase& i)  : item (i)
+    TreeItemComponent (JucerTreeViewBase& i)  : item (i), activeItemIconName("")
     {
         setInterceptsMouseClicks (false, true);
+		normalIcon = nullptr;
+		hoverIcon = nullptr;
+		selectedIcon = nullptr;
+		isIconForOpenState = false;
     }
 
     void paint (Graphics& g) override
@@ -201,11 +240,18 @@ public:
 
     void paintIcon (Graphics& g)
     {
+		if (normalIcon == nullptr || isIconForOpenState != item.isOpen())
+		{
+			String activeItemIconName = getIconNameForItem();
+			normalIcon = Icons::get (activeItemIconName, Icons::lightgray);
+			hoverIcon = Icons::get(activeItemIconName, Icons::yellow);
+			selectedIcon = Icons::get(activeItemIconName, Icons::blue);
+		}
 		float opacity = (item.isIconCrossedOut()) ? 0.4f : 1.0f;
-        item.getIcon()->drawWithin (g, Rectangle<float> (4.0f, 2.0f, item.getIconSize(), getHeight() - 4.0f),
+		Drawable* icon = (item.isItemSelected) ? selectedIcon : ((item.isItemMouseHover) ? hoverIcon : normalIcon);
+        icon->drawWithin (g, Rectangle<float> (4.0f, 2.0f, item.getIconSize(), getHeight() - 4.0f),
                              RectanglePlacement::centred | RectanglePlacement::onlyReduceInSize, opacity);
-		//icon->drawWithin (g, Rectangle<float> (4.0f, padding, (float) height * padding, (float) height - (2.0f * padding)), RectanglePlacement::centred | RectanglePlacement::onlyReduceInSize, 1.0f);
-    }
+	}
 
     void resized() override
     {
@@ -213,6 +259,57 @@ public:
     }
 
     JucerTreeViewBase& item;
+	Drawable* normalIcon;
+	Drawable* hoverIcon;
+	Drawable* selectedIcon;
+	String activeItemIconName;
+	bool isIconForOpenState;
+
+private:
+
+	String getIconNameForItem ()
+	{
+		if (item.projectItem == nullptr || !item.projectItem->isValid())
+			return String("note.svg");
+
+		String id;
+		if (item.projectItem->isFile())
+		{
+			id = item.getDisplayName().fromLastOccurrenceOf(".", true, true);
+
+			if (id.isEmpty())
+				id = "note.svg";
+			else
+			{
+				if (id.equalsIgnoreCase(".cpp"))
+					id = "file-cpp.svg";
+				else if (id.equalsIgnoreCase(".h"))
+					id = "file-header.svg";
+				else if (id.equalsIgnoreCase(".design"))
+					id = "pen-brush.svg";
+				else if (id.equalsIgnoreCase(".zip"))
+					id = "archive.svg";
+				else if (id.equalsIgnoreCase(".gz"))
+					id = "archive.svg";
+				else if (id.equalsIgnoreCase(".bz2"))
+					id = "archive.svg";
+				else if (id.equalsIgnoreCase(".png"))
+					id = "picture.svg";
+				else if (id.equalsIgnoreCase(".svg"))
+					id = "picture.svg";
+				else
+					id = "file.svg";
+			}
+		}
+		else
+		{
+			if (item.isOpen())
+				id = "folder-open.svg";
+			else
+				id = "folder-close.svg";
+		}
+		return id;
+	}
 };
 
 
