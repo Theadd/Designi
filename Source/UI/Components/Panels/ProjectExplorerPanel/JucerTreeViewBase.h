@@ -259,9 +259,9 @@ public:
     }
 
     JucerTreeViewBase& item;
-	Drawable* normalIcon;
-	Drawable* hoverIcon;
-	Drawable* selectedIcon;
+	ScopedPointer <Drawable> normalIcon;
+	ScopedPointer <Drawable> hoverIcon;
+	ScopedPointer <Drawable> selectedIcon;
 	String activeItemIconName;
 	bool isIconForOpenState;
 
