@@ -32,7 +32,7 @@ void setValueIfVoid (Value value, const var& defaultValue)
     if (value.getValue().isVoid())
         value = defaultValue;
 }*/
-
+/*
 String T (const String& text)       { return juce::translate (text, text); }
 String T (const char* text)
 {
@@ -45,7 +45,7 @@ String T (CharPointer_UTF8 text)
 	String a(text);
 	return juce::translate (a, a);
 }
-
+*/
 
 
 
@@ -61,7 +61,7 @@ Value& Literal::getValueFor (String& text)
 
 	Reference *newRef;
 	newRef->text = text;
-	newRef->value = T(text);
+	newRef->value = translate(text);
 	references.add(newRef);
 
 	return references.getLast()->value;

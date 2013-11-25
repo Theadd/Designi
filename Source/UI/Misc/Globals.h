@@ -182,11 +182,11 @@ namespace Ids
 
 //String createAlphaNumericUID();
 //void setValueIfVoid (Value value, const var& defaultValue);
-
+/*
 String T (const String& text);
 String T (const char* text);
 String T (CharPointer_UTF8 text);
-
+*/
 
 
 

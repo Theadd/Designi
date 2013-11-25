@@ -21,6 +21,8 @@ public:
 
 	String getValue(StringRef keyName, const String &defaultReturnValue=String::empty);
 	void setValue (const String &keyName, const var &value);
+	XmlElement* getXmlValue (StringRef keyName);
+	void setValue (const String &keyName, const XmlElement *xml);
 
 	static PropertiesFile::Options getPropertyFileOptionsFor (const String& filename);
 	static PropertiesFile* createPropsFile (const String& filename);

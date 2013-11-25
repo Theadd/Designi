@@ -53,6 +53,17 @@ void StoredSettings::setValue (const String &keyName, const var &value)
 	propertiesFile->save();
 }
 
+XmlElement* StoredSettings::getXmlValue (StringRef keyName)
+{
+	return propertiesFile->getXmlValue(keyName);
+}
+
+void StoredSettings::setValue (const String &keyName, const XmlElement *xml)
+{
+	propertiesFile->setValue(keyName, xml);
+	propertiesFile->save();
+}
+
 PropertiesFile::Options StoredSettings::getPropertyFileOptionsFor (const String& filename)
 {
     PropertiesFile::Options options;

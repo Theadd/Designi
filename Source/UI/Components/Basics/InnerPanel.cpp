@@ -60,12 +60,12 @@ bool InnerPanel::getNeedsToBeSaved ()
 void InnerPanel::setLocalisedName (String name, String tooltip)
 {
 	localisedName = name;
-	setName(T(localisedName));
+	setName(translate(localisedName));
 
 	if (tooltip.isNotEmpty())
 	{
 		localisedTooltip = tooltip;
-		setTooltip(T(localisedTooltip));
+		setTooltip(translate(localisedTooltip));
 	}
 }
 
@@ -76,9 +76,9 @@ String& InnerPanel::getLocalisedName ()
 
 void InnerPanel::updateLocalisedStrings ()
 {
-	setName(T(localisedName));
+	setName(translate(localisedName));
 	if (localisedTooltip.isNotEmpty())
-		setTooltip(T(localisedTooltip));
+		setTooltip(translate(localisedTooltip));
 	TabbedComponent *tabbedComponent = findParentComponentOfClass <TabbedComponent>();
 	if (tabbedComponent != 0)
 	{

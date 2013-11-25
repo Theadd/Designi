@@ -80,11 +80,22 @@ public:
 
         mainWindow = new MainWindow ();
 		mainWindow->loadLayout ();
+		//set stored key mappings
+		XmlElement *xml = settings->getXmlValue("keyMappings");
+		if (xml != nullptr)
+		{
+			getApplicationCommandManager()->getKeyMappings()->restoreFromXml(*xml);
+			delete xml;
+		}
     }
 
     void shutdown()
     {
         // Add your application's shutdown code here..
+		XmlElement *xml = getApplicationCommandManager()->getKeyMappings()->createXml(true);
+		settings->setValue("keyMappings", xml);
+		delete xml;
+
 		#if JUCE_MAC
          MenuBarModel::setMacMainMenu (nullptr);
 		#endif

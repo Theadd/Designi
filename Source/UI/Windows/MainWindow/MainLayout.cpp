@@ -311,7 +311,6 @@ void MainLayout::loadLayout ()
 
 void MainLayout::resized ()
 {
-	DBG("MainLayout::resized()");
 	Rectangle<int> r = this->getLocalBounds();
 	PanelContainer *leftPanelContainer = getPanelContainer(Globals::left);
 	PanelContainer *rightPanelContainer = getPanelContainer(Globals::right);
@@ -512,7 +511,7 @@ PopupMenu MainLayout::getMenuForIndex (int menuIndex, const String& /*menuName*/
 			toolbarsSubMenu.addSeparator();
 			toolbarsSubMenu.addCommandItem (commandManager, toolbarCustomize);
 
-			menu.addSubMenu ("Toolbars", toolbarsSubMenu);
+			menu.addSubMenu (translate("Toolbars"), toolbarsSubMenu);
 
 		menu.addSeparator();
 		//fileBrowser, navigator, properties, toolbox, modifiers,
@@ -532,7 +531,7 @@ PopupMenu MainLayout::getMenuForIndex (int menuIndex, const String& /*menuName*/
 			languageSubMenu.addCommandItem (commandManager, spanishLang);
 			
 
-			menu.addSubMenu (T("Language"), languageSubMenu);
+			menu.addSubMenu (translate("Language"), languageSubMenu);
 	}
 	if (menuIndex == 3)
 	{
@@ -576,6 +575,11 @@ void MainLayout::getAllCommands (Array <CommandID>& commands)
 void MainLayout::getCommandInfo (CommandID commandID, ApplicationCommandInfo& result)
 {
 	const String generalCategory ("General");
+	const String editCategory ("Editing");
+	const String viewCategory ("View");
+	const String windowCategory ("Window");
+	const String helpCategory ("Help");
+
 
 	switch (commandID)
 	{
@@ -595,7 +599,7 @@ void MainLayout::getCommandInfo (CommandID commandID, ApplicationCommandInfo& re
 		result.addDefaultKeypress ('o', ModifierKeys::commandModifier | ModifierKeys::shiftModifier);
 		break;
 	case openRecentProject:
-		result.setInfo ("Open Recent Project", "", generalCategory, 0);
+		result.setInfo ("Open Recent Project", "", generalCategory, ApplicationCommandInfo::hiddenFromKeyEditor);
 		result.setTicked (false);
 		break;
 	case closeProject:
@@ -663,122 +667,122 @@ void MainLayout::getCommandInfo (CommandID commandID, ApplicationCommandInfo& re
 		result.addDefaultKeypress ('h', ModifierKeys::commandModifier);
 		break;*/
 	case showFindPanel:
-        result.setInfo (TRANS ("Find"), TRANS ("Searches for text in the current document."), "Editing", 0);
+        result.setInfo (translate ("Find"), translate ("Searches for text in the current document."), editCategory, 0);
         result.defaultKeypresses.add (KeyPress ('f', ModifierKeys::commandModifier, 0));
         break;
 
     case findSelection:
-        result.setInfo (TRANS ("Find Selection"), TRANS ("Searches for the currently selected text."), "Editing", 0);
+        result.setInfo (translate ("Find Selection"), translate ("Searches for the currently selected text."), editCategory, 0);
         result.setActive (false);
         result.defaultKeypresses.add (KeyPress ('l', ModifierKeys::commandModifier, 0));
         break;
 
     case findNext:
-        result.setInfo (TRANS ("Find Next"), TRANS ("Searches for the next occurrence of the current search-term."), "Editing", 0);
+        result.setInfo (translate ("Find Next"), translate ("Searches for the next occurrence of the current search-term."), editCategory, 0);
         result.defaultKeypresses.add (KeyPress ('g', ModifierKeys::commandModifier, 0));
         break;
 
     case findPrevious:
-        result.setInfo (TRANS ("Find Previous"), TRANS ("Searches for the previous occurrence of the current search-term."), "Editing", 0);
+        result.setInfo (translate ("Find Previous"), translate ("Searches for the previous occurrence of the current search-term."), editCategory, 0);
         result.defaultKeypresses.add (KeyPress ('g', ModifierKeys::commandModifier | ModifierKeys::shiftModifier, 0));
         result.defaultKeypresses.add (KeyPress ('d', ModifierKeys::commandModifier, 0));
         break;
 	case preferences:
-		result.setInfo ("Preferences...", "", generalCategory, 0);
+		result.setInfo ("Preferences...", "", editCategory, 0);
 		result.setTicked (false);
 		break;
 	case leftPanel:
-		result.setInfo ("Left Panel", "", generalCategory, 0);
+		result.setInfo ("Left Panel", "", viewCategory, ApplicationCommandInfo::hiddenFromKeyEditor);
 		result.addDefaultKeypress ('l', ModifierKeys::commandModifier | ModifierKeys::altModifier);
 		break;
 	case rightPanel:
-		result.setInfo ("Right Panel", "", generalCategory, 0);
+		result.setInfo ("Right Panel", "", viewCategory, ApplicationCommandInfo::hiddenFromKeyEditor);
 		result.addDefaultKeypress ('r', ModifierKeys::commandModifier | ModifierKeys::altModifier);
 		break;
 	case fileToolbar:
-		result.setInfo ("File", "", generalCategory, 0);
+		result.setInfo ("File", "", viewCategory, ApplicationCommandInfo::hiddenFromKeyEditor);
 		result.setTicked (true);
 		break;
 	case clipboardToolbar:
-		result.setInfo ("Clipboard", "", generalCategory, 0);
+		result.setInfo ("Clipboard", "", viewCategory, ApplicationCommandInfo::hiddenFromKeyEditor);
 		result.setTicked (true);
 		break;
 	case historyToolbar:
-		result.setInfo ("History", "", generalCategory, 0);
+		result.setInfo ("History", "", viewCategory, ApplicationCommandInfo::hiddenFromKeyEditor);
 		result.setTicked (true);
 		break;
 	case drawableToolbar:
-		result.setInfo ("Drawable Components", "", generalCategory, 0);
+		result.setInfo ("Drawable Components", "", viewCategory, ApplicationCommandInfo::hiddenFromKeyEditor);
 		result.setTicked (true);
 		break;
 	case toolbarOrientation:
-		result.setInfo ("Vertical/Horizontal", "", generalCategory, 0);
+		result.setInfo ("Vertical/Horizontal", "", viewCategory, ApplicationCommandInfo::hiddenFromKeyEditor);
 		result.setTicked (false);
 		break;
 	case toolbarCustomize:
-		result.setInfo ("Customize...", "", generalCategory, 0);
+		result.setInfo ("Customize...", "", viewCategory, ApplicationCommandInfo::hiddenFromKeyEditor);
 		result.setTicked (false);
 		break;
 	case fileBrowser:
-		result.setInfo ("File Browser", "", generalCategory, 0);
+		result.setInfo (translate("File Browser"), "", viewCategory, 0);
 		result.setTicked ((fileBrowserPanel != nullptr && isInnerPanelVisible(fileBrowserPanel) ? true : false));
 		result.setActive ((fileBrowserPanel != nullptr) ? true : false);
 		result.addDefaultKeypress ('b', ModifierKeys::commandModifier | ModifierKeys::altModifier);
 		break;
 	case navigator:
-		result.setInfo ("Navigator", "", generalCategory, 0);
+		result.setInfo (translate("Navigator"), "", viewCategory, 0);
 		result.setTicked ((navigatorPanel != nullptr && isInnerPanelVisible(navigatorPanel) ? true : false));
 		result.setActive ((navigatorPanel != nullptr) ? true : false);
 		result.addDefaultKeypress ('n', ModifierKeys::commandModifier | ModifierKeys::altModifier);
 		break;
 	case properties:
-		result.setInfo ("Properties", "", generalCategory, 0);
+		result.setInfo (translate("Properties"), "", viewCategory, 0);
 		//result.setTicked ((navigatorPanel != nullptr && isInnerPanelVisible(navigatorPanel) ? true : false));
 		result.setActive (false);//((navigatorPanel != nullptr) ? true : false);
 		result.addDefaultKeypress ('p', ModifierKeys::commandModifier | ModifierKeys::altModifier);
 		break;
 	case toolbox:
-		result.setInfo ("Toolbox", "", generalCategory, 0);
+		result.setInfo (translate("Toolbox"), "", viewCategory, 0);
 		//result.setTicked ((navigatorPanel != nullptr && isInnerPanelVisible(navigatorPanel) ? true : false));
 		result.setActive (false);//((navigatorPanel != nullptr) ? true : false);
 		result.addDefaultKeypress ('t', ModifierKeys::commandModifier | ModifierKeys::altModifier);
 		break;
 	case modifiers:
-		result.setInfo ("Modifiers", "", generalCategory, 0);
+		result.setInfo ("Modifiers", "", viewCategory, 0);
 		//result.setTicked ((navigatorPanel != nullptr && isInnerPanelVisible(navigatorPanel) ? true : false));
 		result.setActive (false);//((navigatorPanel != nullptr) ? true : false);
 		result.addDefaultKeypress ('m', ModifierKeys::commandModifier | ModifierKeys::altModifier);
 		break;
 	case help:
-		result.setInfo ("Help", "", generalCategory, 0);
+		result.setInfo ("Help", "", viewCategory, 0);
 		result.setTicked ((helpPanel != nullptr && isInnerPanelVisible(helpPanel) ? true : false));
 		result.setActive ((helpPanel != nullptr) ? true : false);
 		result.addDefaultKeypress ('h', ModifierKeys::commandModifier | ModifierKeys::altModifier);
 		break;
 	case componentInspector:
-		result.setInfo ("Component Inspector", "Shows a floating overlay over a component when mouse hover on it.", generalCategory, 0);
+		result.setInfo ("Component Inspector", "Shows a floating overlay over a component when mouse hover on it.", viewCategory, 0);
 		result.setTicked ((floatingComponentOverlay != nullptr && floatingComponentOverlay->isVisible() ? true : false));
 		result.setActive ((floatingComponentOverlay != nullptr) ? true : false);
 		result.addDefaultKeypress (KeyPress::F2Key, 0);
 		break;
 	case englishLang:
-		result.setInfo (T("English"), "", generalCategory, 0);
+		result.setInfo (translate("English"), "", viewCategory, ApplicationCommandInfo::hiddenFromKeyEditor);
 		result.setTicked ((JUCEDesignerApp::getApp().getLanguage().isEmpty() ? true : false));
 		break;
 	case spanishLang:
-		result.setInfo (T(String(CharPointer_UTF8 ("Espa\xc3\xb1ol"))), "", generalCategory, 0);
+		result.setInfo (translate(String(CharPointer_UTF8 ("Espa\xc3\xb1ol"))), "", viewCategory, ApplicationCommandInfo::hiddenFromKeyEditor);
 		result.setTicked ((JUCEDesignerApp::getApp().getLanguage().equalsIgnoreCase("spanish") ? true : false));
 		break;
 	case catalanLang:
-		result.setInfo (T(String(CharPointer_UTF8 ("Catal\xc3\xa0"))), "", generalCategory, 0);
+		result.setInfo (translate(String(CharPointer_UTF8 ("Catal\xc3\xa0"))), "", viewCategory, ApplicationCommandInfo::hiddenFromKeyEditor);
 		result.setTicked ((JUCEDesignerApp::getApp().getLanguage().equalsIgnoreCase("catalan") ? true : false));
 		break;
 	case webpage:
-		result.setInfo ("Webpage", "", generalCategory, 0);
+		result.setInfo ("Webpage", "", helpCategory, ApplicationCommandInfo::hiddenFromKeyEditor);
 		result.setTicked (false);
 		break;
 	case about:
-		result.setInfo ("About Designi", "", generalCategory, 0);
+		result.setInfo ("About Designi", "", helpCategory, ApplicationCommandInfo::hiddenFromKeyEditor);
 		result.setTicked (false);
 		break;
 
