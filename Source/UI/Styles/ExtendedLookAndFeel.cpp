@@ -18,6 +18,7 @@ ExtendedLookAndFeel::ExtendedLookAndFeel() : LookAndFeel_V3()
 {
 	setColour (PanelContainer::backgroundColourId, Colour((juce::uint8) 51, (juce::uint8) 57, (juce::uint8) 61, (juce::uint8) 255));
 	setColour (Panel::backgroundColourId, Colours::transparentBlack);
+	setColour (Panel::tabColourId, Colours::grey);
 	setColour (MainLayout::backgroundColourId, Colour((juce::uint8) 51, (juce::uint8) 57, (juce::uint8) 61, (juce::uint8) 255));
 	setColour (InnerPanel::headerNameBackgroundColourId, Colours::white.withAlpha(0.2f));
 	setColour (InnerPanel::headerNameBorderColourId, Colours::black);

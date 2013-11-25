@@ -21,7 +21,7 @@ public:
 	OpenDocumentManager::Document* getDocument() const override             { return nullptr; }
 	ValueTree getNavigatorTree () override									{ return ValueTree::invalid; }
 
-    void paint (Graphics& g) override;
+    //void paint (Graphics& g) override;
 
     void resized() override;
 

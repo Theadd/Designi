@@ -62,25 +62,10 @@ public:
 		}
 		//set gui language
 		setLanguage(settings->getValue("guiLanguage"));
-		/*if (guiLanguage.isNotEmpty())
-		{
-			if (guiLanguage.equalsIgnoreCase("spanish"))
-			{
-				LocalisedStrings::setCurrentMappings(new LocalisedStrings(File(File::addTrailingSeparator(File::getCurrentWorkingDirectory().getFullPathName()) + "translations" + File::separatorString + "spanish.txt"), true));
-			}
-		}
-		else
-		{
-			//Load English as default language
-			LocalisedStrings::setCurrentMappings(0);
-			//settings->setValue("guiLanguage", "");
-		}*/
-
-		//openProject(File("C:/Users/admin/JUCE Sample Project/JUCE Sample Project.jucer"));
 
         mainWindow = new MainWindow ();
 		mainWindow->loadLayout ();
-		//set stored key mappings
+		//apply stored key mappings
 		XmlElement *xml = settings->getXmlValue("keyMappings");
 		if (xml != nullptr)
 		{

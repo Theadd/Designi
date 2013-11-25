@@ -10,6 +10,7 @@
 
 #include "../../../Headers.h"
 #include "DuskMap.h"
+#include "../../Components/Basics/InnerPanelContainers.h"
 
 //================== folder-open.svg ==================
 static const unsigned char temp_82949625[] =
@@ -205,6 +206,12 @@ DuskMapLookAndFeel::DuskMapLookAndFeel()
 	//ColourIds { highlightColourId = 0x1000540, textColourId = 0x1000541 }
 	setColour (DirectoryContentsDisplayComponent::textColourId, Colours::white);
 	//setColour (DirectoryContentsDisplayComponent::highlightColourId, Colours::black.withAlpha(0.05f));
+	//PANEL
+	setColour (Panel::tabColourId, Colour((juce::uint8) 22, (juce::uint8) 25, (juce::uint8) 27, (juce::uint8) 255));
+	//KEYMAPPINGEDITORCOMPONENT
+	setColour (KeyMappingEditorComponent::backgroundColourId, Colour(findColour (Panel::tabColourId)));
+	setColour (KeyMappingEditorComponent::textColourId, findColour (Label::textColourId));
+	
 }
 
 DuskMapLookAndFeel::~DuskMapLookAndFeel()
@@ -718,6 +725,16 @@ void DuskMapLookAndFeel::drawTreeviewPlusMinusBox (Graphics& g, int x, int y, in
 		g.setColour(Colours::white);
 
     g.fillPath (p);
+}
+
+bool DuskMapLookAndFeel::areLinesDrawnForTreeView (TreeView&)
+{
+    return false;
+}
+
+int DuskMapLookAndFeel::getTreeViewIndentSize (TreeView&)
+{
+    return 20;
 }
 
 int DuskMapLookAndFeel::getDefaultScrollbarWidth ()

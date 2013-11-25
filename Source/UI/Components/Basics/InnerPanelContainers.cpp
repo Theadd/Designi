@@ -94,7 +94,8 @@ void Panel::paint (Graphics& g)
 
 bool Panel::addInnerPanel (InnerPanel *componentToAdd)
 {
-	Colour tabsColour((juce::uint8) 22, (juce::uint8) 25, (juce::uint8) 27, (juce::uint8) 255);
+	//Colour tabsColour((juce::uint8) 22, (juce::uint8) 25, (juce::uint8) 27, (juce::uint8) 255);
+	Colour tabsColour(((ExtendedLookAndFeel*) &getLookAndFeel())->findColour(Panel::tabColourId));
 	DBG("TABS COLOUR: "+tabsColour.toDisplayString(false));
 	int numChilds = getNumChildComponents() - 1;
 	bool asTab = componentToAdd->showAsTab;

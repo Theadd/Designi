@@ -316,23 +316,23 @@ void GenericCodeEditorComponent::getCommandInfo (const CommandID commandID, Appl
     switch (commandID)
     {
         case MainLayout::showFindPanel:
-            result.setInfo (TRANS ("Find"), TRANS ("Searches for text in the current document."), "Editing", 0);
+            result.setInfo (translate ("Find"), translate ("Searches for text in the current document."), "Editing", 0);
             result.defaultKeypresses.add (KeyPress ('f', ModifierKeys::commandModifier, 0));
             break;
 
         case MainLayout::findSelection:
-            result.setInfo (TRANS ("Find Selection"), TRANS ("Searches for the currently selected text."), "Editing", 0);
+            result.setInfo (translate ("Find Selection"), translate ("Searches for the currently selected text."), "Editing", 0);
             result.setActive (anythingSelected);
             result.defaultKeypresses.add (KeyPress ('l', ModifierKeys::commandModifier, 0));
             break;
 
         case MainLayout::findNext:
-            result.setInfo (TRANS ("Find Next"), TRANS ("Searches for the next occurrence of the current search-term."), "Editing", 0);
+            result.setInfo (translate ("Find Next"), translate ("Searches for the next occurrence of the current search-term."), "Editing", 0);
             result.defaultKeypresses.add (KeyPress ('g', ModifierKeys::commandModifier, 0));
             break;
 
         case MainLayout::findPrevious:
-            result.setInfo (TRANS ("Find Previous"), TRANS ("Searches for the previous occurrence of the current search-term."), "Editing", 0);
+            result.setInfo (translate ("Find Previous"), translate ("Searches for the previous occurrence of the current search-term."), "Editing", 0);
             result.defaultKeypresses.add (KeyPress ('g', ModifierKeys::commandModifier | ModifierKeys::shiftModifier, 0));
             result.defaultKeypresses.add (KeyPress ('d', ModifierKeys::commandModifier, 0));
             break;

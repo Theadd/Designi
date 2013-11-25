@@ -23,7 +23,8 @@ public:
 
 	enum ColourIds
     {
-        backgroundColourId     = 0x2900001 /**< The background colour to fill the panel with. */
+        backgroundColourId		= 0x2900001,	/**< The background colour to fill the panel with. */
+		tabColourId				= 0x2900002		/**< The colour used to draw each TabBarButton. */
     };
 
 	Panel(const String& componentName = String::empty, DragAndDropContainer* _dragAndDropContainer = nullptr, int _id = 0);

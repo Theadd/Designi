@@ -13,15 +13,15 @@
 
 KeyMappingsPanel::KeyMappingsPanel() : keyMappingEditor (*(JUCEDesignerApp::getApp().getApplicationCommandManager()->getKeyMappings()), true)
 {
-    setOpaque (true);
+    //setOpaque (true);
 	setLocalisedName("Key Mappings", "Options page to view/change shortcut key mappings.");
     addAndMakeVisible (&keyMappingEditor);
 }
 
-void KeyMappingsPanel::paint (Graphics& g) override
+/*void KeyMappingsPanel::paint (Graphics& g) override
 {
     g.fillAll (Colour::greyLevel (0.93f));
-}
+}*/
 
 void KeyMappingsPanel::resized() override
 {

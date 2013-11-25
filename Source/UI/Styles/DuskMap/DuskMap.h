@@ -52,15 +52,17 @@ public:
 
     //void drawTableHeaderBackground (Graphics&, TableHeaderComponent&) override;
 
-    static Colour getScrollbarColourForBackground (Colour background);
+    static Colour getScrollbarColourForBackground (Colour background) override;
 
-	void drawPopupMenuBackground (Graphics &, int width, int height);
-	void drawMenuBarBackground (Graphics &, int width, int height, bool isMouseOverBar, MenuBarComponent &menuBar);
+	void drawPopupMenuBackground (Graphics &, int width, int height) override;
+	void drawMenuBarBackground (Graphics &, int width, int height, bool isMouseOverBar, MenuBarComponent &menuBar) override;
 	
 	void drawTreeviewPlusMinusBox (Graphics &, int x, int y, int w, int h, bool isPlus, bool isMouseOver) override;
 	void drawTreeviewPlusMinusBox (Graphics &, const Rectangle< float > &area, Colour backgroundColour, bool isOpen, bool isMouseOver) override;
+	bool areLinesDrawnForTreeView (TreeView&) override;
+	int getTreeViewIndentSize (TreeView&) override;
 
-	int getDefaultScrollbarWidth ();
+	int getDefaultScrollbarWidth () override;
 
 private:
     Image backgroundTexture;
