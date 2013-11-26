@@ -12,6 +12,7 @@
 #define __MAINWINDOW_H_F0B8E400__
 
 #include "MainWindow/MainLayout.h"
+#include "../Styles/BaseOnly/BaseOnly.h"
 #include "../Styles/DuskMap/DuskMap.h"
 
 class MainWindow    : public DocumentWindow
@@ -36,8 +37,11 @@ public:
 
 	ApplicationCommandManager commandManager;
 
+	DuskMapLookAndFeel duskMapLookAndFeel;
+	BaseOnlyLookAndFeel baseOnlyLookAndFeel;
+
 private:
-	ScopedPointer <LookAndFeel> lookAndFeel;
+	//ScopedPointer <DuskMapLookAndFeel> duskMapLookAndFeel;
     ScopedPointer <MainLayout> mainLayout;
 
 	#if JUCE_OPENGL

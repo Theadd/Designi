@@ -17,10 +17,7 @@ MainWindow::MainWindow()  : DocumentWindow ("Designi : JUCE GUI Designer",
                                         Colours::lightgrey,
                                         DocumentWindow::allButtons)
 {
-
-	setLookAndFeel(lookAndFeel = new DuskMapLookAndFeel());
-
-	
+	LookAndFeel::setDefaultLookAndFeel (&duskMapLookAndFeel);
 
     setBounds(55, 35, 900, 720);
     //setColour(DocumentWindow::backgroundColourId, Colour::fromString("FF202A32"));
@@ -74,7 +71,6 @@ MainWindow::~MainWindow()
     // manager.
     //clearContentComponent();
 	mainLayout = nullptr;
-	lookAndFeel = nullptr;
 	DBG("END ~MainWindow()");
 }
 

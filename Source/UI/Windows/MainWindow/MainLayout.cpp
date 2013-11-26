@@ -591,6 +591,7 @@ void MainLayout::getCommandInfo (CommandID commandID, ApplicationCommandInfo& re
 	const String viewCategory ("View");
 	const String windowCategory ("Window");
 	const String helpCategory ("Help");
+	const String displayCategory ("GUI Display Options");
 
 
 	switch (commandID)
@@ -778,19 +779,19 @@ void MainLayout::getCommandInfo (CommandID commandID, ApplicationCommandInfo& re
 		result.addDefaultKeypress (KeyPress::F2Key, 0);
 		break;
 	case baseOnlyLnF:
-		result.setInfo (translate("BaseOnly Style"), "", viewCategory, 0);
+		result.setInfo (translate("BaseOnly Style"), "", displayCategory, 0);
 		result.setTicked (false);
 		break;
 	case duskMapLnF:
-		result.setInfo (translate("DuskMap Style"), "", viewCategory, 0);
+		result.setInfo (translate("DuskMap Style"), "", displayCategory, 0);
 		result.setTicked (false);
 		break;
 	case softwareRenderer:
-		result.setInfo (translate("Software Renderer"), "", viewCategory, 0);
+		result.setInfo (translate("Software Renderer"), "", displayCategory, 0);
 		result.setTicked (false);
 		break;
 	case openGLRenderer:
-		result.setInfo (translate("OpenGL Renderer"), "", viewCategory, 0);
+		result.setInfo (translate("OpenGL Renderer"), "", displayCategory, 0);
 		result.setTicked (false);
 		break;
 	case englishLang:
@@ -904,8 +905,10 @@ bool MainLayout::perform (const InvocationInfo& info)
 		JUCEDesignerApp::getApp().toggleComponentInspector();
 		break;
 	case baseOnlyLnF:
+		LookAndFeel::setDefaultLookAndFeel (&mainWindow.baseOnlyLookAndFeel);
 		break;
 	case duskMapLnF:
+		LookAndFeel::setDefaultLookAndFeel (&mainWindow.duskMapLookAndFeel);
 		break;
 	case softwareRenderer:
 		mainWindow.setRenderingEngine (0);

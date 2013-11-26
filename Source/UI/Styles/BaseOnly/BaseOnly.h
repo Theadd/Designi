@@ -8,8 +8,8 @@
   ==============================================================================
 */
 
-#ifndef __DUSKMAP_H_4A610CFE__
-#define __DUSKMAP_H_4A610CFE__
+#ifndef __BASEONLY_H_4A610CFE__
+#define __BASEONLY_H_4A610CFE__
 
 #include "../ExtendedLookAndFeel.h"
 
@@ -25,4 +25,4 @@ private:
 };
 
 
-#endif  // __DUSKMAP_H_4A610CFE__
+#endif  // __BASEONLY_H_4A610CFE__
