@@ -145,6 +145,11 @@ public:
 		modifiers				= 0x220B,
 		help					= 0x220C,
 		componentInspector		= 0x220F,
+			//GUI Display Options
+			baseOnlyLnF			= 0x2220,
+			duskMapLnF			= 0x2221,
+			softwareRenderer	= 0x2222,
+			openGLRenderer		= 0x2223,
 			//Language
 			englishLang			= 0x2210,
 			spanishLang			= 0x2211,
@@ -179,6 +184,8 @@ private:
 	OwnedArray <DocumentEditor> editors;
 
 	InnerPanel* getInnerPanelForDocument(OpenDocumentManager::Document* document);
+
+	
 	
 };
 

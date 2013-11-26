@@ -184,6 +184,7 @@
     <MODULE id="juce_gui_audio" showAllCode="1" useLocalCopy="1"/>
     <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="1"/>
     <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="1"/>
+    <MODULES id="juce_opengl" showAllCode="1" useLocalCopy="1"/>
   </MODULES>
   <EXPORTFORMATS>
     <VS2010 targetFolder="Builds/VisualStudio2010" libraryType="1" extraCompilerFlags=""
@@ -203,6 +204,7 @@
         <MODULEPATH id="juce_data_structures" path="JuceLibraryCode/modules"/>
         <MODULEPATH id="juce_cryptography" path="JuceLibraryCode/modules"/>
         <MODULEPATH id="juce_core" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_opengl" path="JuceLibraryCode/modules"/>
       </MODULEPATHS>
     </VS2010>
     <LINUX_MAKE targetFolder="Builds/Linux" smallIcon="kZm6RI" bigIcon="kZm6RI">
@@ -221,6 +223,7 @@
         <MODULEPATH id="juce_data_structures" path="JuceLibraryCode/modules"/>
         <MODULEPATH id="juce_cryptography" path="JuceLibraryCode/modules"/>
         <MODULEPATH id="juce_core" path="JuceLibraryCode/modules"/>
+        <MODULEPATH id="juce_opengl" path="JuceLibraryCode/modules"/>
       </MODULEPATHS>
     </LINUX_MAKE>
   </EXPORTFORMATS>

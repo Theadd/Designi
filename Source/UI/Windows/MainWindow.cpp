@@ -121,3 +121,50 @@ void MainWindow::mouseDoubleClick (const MouseEvent& event)
     if (event.eventComponent == this)
         DocumentWindow::mouseDoubleClick(event);
 }
+
+static const char* openGLRendererName = "OpenGL Renderer";
+
+StringArray MainWindow::getRenderingEngines() const
+{
+    StringArray renderingEngines;
+
+    if (ComponentPeer* peer = getPeer())
+        renderingEngines = peer->getAvailableRenderingEngines();
+
+   #if JUCE_OPENGL
+    renderingEngines.add (openGLRendererName);
+   #endif
+
+    return renderingEngines;
+}
+
+void MainWindow::setRenderingEngine (int index)
+{
+    DBG ("setRenderingEngine: "+getRenderingEngines()[index]);
+
+   #if JUCE_OPENGL
+    if (getRenderingEngines()[index] == openGLRendererName)
+    {
+        openGLContext.attachTo (*getTopLevelComponent());
+        return;
+    }
+
+    openGLContext.detach();
+   #endif
+
+    if (ComponentPeer* peer = getPeer())
+        peer->setCurrentRenderingEngine (index);
+}
+
+int MainWindow::getActiveRenderingEngine() const
+{
+   #if JUCE_OPENGL
+    if (openGLContext.isAttached())
+        return getRenderingEngines().indexOf (openGLRendererName);
+   #endif
+
+    if (ComponentPeer* peer = getPeer())
+        return peer->getCurrentRenderingEngine();
+
+    return 0;
+}

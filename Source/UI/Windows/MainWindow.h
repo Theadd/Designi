@@ -30,11 +30,20 @@ public:
 
     void mouseDoubleClick (const MouseEvent& event);
 
+	StringArray getRenderingEngines() const;
+    int getActiveRenderingEngine() const;
+    void setRenderingEngine (int index);
+
 	ApplicationCommandManager commandManager;
 
 private:
 	ScopedPointer <LookAndFeel> lookAndFeel;
     ScopedPointer <MainLayout> mainLayout;
+
+	#if JUCE_OPENGL
+     OpenGLContext openGLContext;
+	#endif
+
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainWindow)
 };
 

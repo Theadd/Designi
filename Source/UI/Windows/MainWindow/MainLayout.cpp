@@ -523,6 +523,18 @@ PopupMenu MainLayout::getMenuForIndex (int menuIndex, const String& /*menuName*/
 		menu.addCommandItem (commandManager, help);
 		menu.addSeparator();
 		menu.addCommandItem (commandManager, componentInspector);
+		//GUI Display Options: baseOnlyLnF, duskMapLnF, softwareRenderer, openGLRenderer,
+		menu.addSeparator();
+
+			PopupMenu displaySubMenu;
+			displaySubMenu.addCommandItem (commandManager, baseOnlyLnF);
+			displaySubMenu.addCommandItem (commandManager, duskMapLnF);
+			displaySubMenu.addSeparator();
+			displaySubMenu.addCommandItem (commandManager, softwareRenderer);
+			displaySubMenu.addCommandItem (commandManager, openGLRenderer);
+			
+
+			menu.addSubMenu (translate("GUI Display Options"), displaySubMenu);
 		menu.addSeparator();
 
 			PopupMenu languageSubMenu;
@@ -567,7 +579,7 @@ ApplicationCommandTarget* MainLayout::getNextCommandTarget()
 void MainLayout::getAllCommands (Array <CommandID>& commands)
 {
 	// this returns the set of all commands that this target can perform..
-	const CommandID ids[] = {newProject, newDesign, openProject, openRecentProject, closeProject, save, saveAs, saveAll, print, preferences, showFindPanel, findSelection, findNext, findPrevious, leftPanel, rightPanel, fileToolbar, clipboardToolbar, historyToolbar, drawableToolbar, toolbarOrientation, toolbarCustomize, fileBrowser, navigator, properties, toolbox, modifiers, help, componentInspector, englishLang, spanishLang, catalanLang, webpage, about};
+	const CommandID ids[] = {newProject, newDesign, openProject, openRecentProject, closeProject, save, saveAs, saveAll, print, preferences, showFindPanel, findSelection, findNext, findPrevious, leftPanel, rightPanel, fileToolbar, clipboardToolbar, historyToolbar, drawableToolbar, toolbarOrientation, toolbarCustomize, fileBrowser, navigator, properties, toolbox, modifiers, help, componentInspector,baseOnlyLnF, duskMapLnF, softwareRenderer, openGLRenderer, englishLang, spanishLang, catalanLang, webpage, about};
 
 	commands.addArray (ids, numElementsInArray (ids));
 }
@@ -765,6 +777,22 @@ void MainLayout::getCommandInfo (CommandID commandID, ApplicationCommandInfo& re
 		result.setActive ((floatingComponentOverlay != nullptr) ? true : false);
 		result.addDefaultKeypress (KeyPress::F2Key, 0);
 		break;
+	case baseOnlyLnF:
+		result.setInfo (translate("BaseOnly Style"), "", viewCategory, 0);
+		result.setTicked (false);
+		break;
+	case duskMapLnF:
+		result.setInfo (translate("DuskMap Style"), "", viewCategory, 0);
+		result.setTicked (false);
+		break;
+	case softwareRenderer:
+		result.setInfo (translate("Software Renderer"), "", viewCategory, 0);
+		result.setTicked (false);
+		break;
+	case openGLRenderer:
+		result.setInfo (translate("OpenGL Renderer"), "", viewCategory, 0);
+		result.setTicked (false);
+		break;
 	case englishLang:
 		result.setInfo (translate("English"), "", viewCategory, ApplicationCommandInfo::hiddenFromKeyEditor);
 		result.setTicked ((JUCEDesignerApp::getApp().getLanguage().isEmpty() ? true : false));
@@ -874,6 +902,16 @@ bool MainLayout::perform (const InvocationInfo& info)
 	case componentInspector:
 		//floatingComponentOverlay->setVisible(!floatingComponentOverlay->isVisible());
 		JUCEDesignerApp::getApp().toggleComponentInspector();
+		break;
+	case baseOnlyLnF:
+		break;
+	case duskMapLnF:
+		break;
+	case softwareRenderer:
+		mainWindow.setRenderingEngine (0);
+		break;
+	case openGLRenderer:
+		mainWindow.setRenderingEngine (1);
 		break;
 	case englishLang:
 		JUCEDesignerApp::getApp().setLanguage("");
